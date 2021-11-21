@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Prerequisities &#8212; pyarchinit 4 documentazione</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/translations.js"></script>
+    <link rel="author" title="A proposito di questi documenti" href="about.html" />
+    <link rel="index" title="Indice" href="genindex.html" />
+    <link rel="search" title="Cerca" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="prerequisities">
+<h1>Prerequisities<a class="headerlink" href="#prerequisities" title="Link a questa intestazione">¶</a></h1>
+<hr class="docutils" />
+<p>## ATTENZIONE ATTUALMENTE (SETTEMBRE 2021) PYARCHINIT NON E” COMPATIBILE CON SPATIALITE 5 E I NUOVI REPOSITORY E VERSIONI DI QGIS 3.16 e 3.20. E” NECESSARIO INSTALLARE LE VECCHIE VERSIONI TRAMITE OSGEO4w64bit. IN CASO DI PROBLEMI SCRIVETECI SU TELEGRAM &#64;pyarchinit_group</p>
+<p>## Installing adding pyarchinit repository into QGIS</p>
+<p># Video per installazione plugin -&gt; [Video](<a class="reference external" href="https://www.adarteinfo.it/archivio/pyarchinit-download/install.gif">https://www.adarteinfo.it/archivio/pyarchinit-download/install.gif</a>)</p>
+<p>Into QGIS add this link for the master version:
+<a class="reference external" href="http://pyarchinit.org/pyarchinit.xml">http://pyarchinit.org/pyarchinit.xml</a></p>
+<p>Testing version #mich (no debugged):
+<a class="reference external" href="http://pyarchinit.org/pyarchinit2em.xml">http://pyarchinit.org/pyarchinit2em.xml</a></p>
+<p>## Installing from zip</p>
+<p>### Linux/Windows/MacOS
+1. Download the zip archive from github
+2. Install the python packages requirements (see [Dependencies](#dependencies) paragraph)
+3. Open QGIS and then from Plugin manager use Install from ZIP to install the plugin</p>
+<p><strong>Note:</strong> _While installing a message box could be prompted to warn you about missing python packages required from the plugin._</p>
+<p><strong>Note2:</strong> _Under Windows is necessary to start QGIS as Administrator when you install the plugin for the first time in order to install all the dependencies properly._</p>
+<p><strong>Note3:</strong> _If you use PostgreSQL, we raccomend to install PostgreSQL &gt;=9.6_</p>
+<p><strong>Note4:</strong> _If you have already an pyarchinit db, use «update posgres» or «update sqlite» tool in pyarchinit configuration  form to update  your db to the new release._</p>
+<p><strong>Note5:</strong> _If you have already installed pyarchinit before of the 01/02/2019, to install the new version, delete the file config.cfg in pyarchinit_DB_folder and restart as admin._</p>
+<p>#### Dependencies
+* SQLAlchemy
+* reportlab
+* PypeR (for R)
+* [R Software](<a class="reference external" href="https://www.r-project.org/">https://www.r-project.org/</a>)
+* [Graphviz Visualization Software](<a class="reference external" href="https://www.graphviz.org/)*(see">https://www.graphviz.org/)*(see</a> note)
+* [graphviz python module](<a class="reference external" href="https://github.com/xflr6/graphviz">https://github.com/xflr6/graphviz</a>)
+* matplotlib
+* pdf2docx
+* pysftp</p>
+<p><strong>Note6:</strong> _Indtruction to install Graphviz on Windows OS (first installation)_
+- Download zip file of the [last release of Graphviz (2.44.1)](<a class="reference external" href="https://www2.graphviz.org/Packages/stable/windows/10/msbuild/Release/Win32/graphviz-2.44.1-win32.zip">https://www2.graphviz.org/Packages/stable/windows/10/msbuild/Release/Win32/graphviz-2.44.1-win32.zip</a>)
+- unzip file and save it in some location ( example in C:/) and enjoy.</p>
+<p>_If you have already installed a previus version of Graphviz, uninstall it before to continue with new version, if not you can’t set the path of the new version of Graphviz into <a href="#id1"><span class="problematic" id="id2">pyarchinit_</span></a></p>
+<p>The dependencies can be installed using the [modules_installer.py](/scripts/modules_installer.py) by running it from within a python shell:</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span> <span class="pre">modules_installer.py`</span></code></p>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">pyarchinit</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigazione</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prerequisities.html">Prerequisities</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Ricerca veloce</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Vai" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Ad Arte srl.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/preprequisities.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
