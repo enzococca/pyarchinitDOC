@@ -30,8 +30,6 @@ I cambiamenti che hanno interessato la nuova release di pyArchInit sono:
 
     *Harris Matrix per Extended Matrix*
 
-    *Importazione dati*
-
 
 
 
