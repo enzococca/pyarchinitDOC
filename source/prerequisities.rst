@@ -6,7 +6,7 @@ Prerequisiti
 
 	**Dipendenze python:**
 		
-			SQLAlchemy==1.3.23
+			SQLAlchemy
 			
 			SQLAlchemy-Utils
 			
