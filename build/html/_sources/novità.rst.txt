@@ -6,25 +6,33 @@ Novità
 
 I cambiamenti che hanno interessato la nuova release di pyArchInit sono:
 
-	*Scheda Print Map*
-	 
-	*Scheda Impacchetta per Geopackage*
-	 
-	*Funzione MeveCost*
-	 
-	*Funzione conversione in Spatialite5*
-	 
-	*Funzione importazione layer vettoriali*
-	
-	*Raggruppamenti Layer*
-	 
-	*WMS vincoli archeologici, catasto e BaseMap(Google e Wikimidia)*
-	 
-	*Cambio colore del background delle schede*
-	 
-	*Inserimento layer stratigrafia verticale*
-	 
-	
+    *Scheda Print Map*
+
+    *Scheda Impacchetta per Geopackage*
+
+    *Funzione MeveCost*
+
+    *Funzione conversione in Spatialite5*
+
+    *Funzione importazione layer vettoriali*
+
+    *Raggruppamenti Layer*
+
+    *WMS vincoli archeologici filtrati per comune*
+
+    *WMS catasto e BaseMap(Google e Wikimidia)*
+
+    *Cambio colore del background delle schede*
+
+    *Inserimento layer stratigrafia verticale*
+
+    *Geocding: ricerca indirizzi*
+
+    *Harris Matrix per Extended Matrix*
+
+    *Importazione dati*
+
+
 
 
 Scheda Print Map 
@@ -32,9 +40,11 @@ Scheda Print Map
 .. image:: ./_images/print_map.png
    :align: center
    
-La scheda Print Map nasce con l'intento di facilitare e automatizzare l'esportazione  delle mappe,di scavo o survey, al fine di redigere, in modo standarzizzato la documentazione.
-La scheda si presenta con dei template pronti all'uso in differenti formati e scale di visualizzazione. Inoltre sono abilitate a prendere le info dal db di pyarchinit. Questa scheda permette anche di 
-personalizzare e creare nuovi template. Per approfondimenti si rimanda alla sezione Schede plugin.
+La scheda Print Map nasce con l'intento di facilitare e automatizzare l'esportazione  delle mappe di scavo o survey, al
+fine di redigere, in modo standarzizzato la documentazione. La scheda si presenta con dei template pronti all'uso in
+differenti formati e scale di visualizzazione. Inoltre sono abilitate a prendere le info dal db di pyarchinit. Questa
+scheda permette anche di personalizzare e creare nuovi template. Per approfondimenti si rimanda alla sezione **Schede
+plugin**.
 
 .. video:: ./_images/print_map.mp4
    :width: 500
@@ -47,8 +57,8 @@ Scheda Impacchetta per Geopackage
 .. image:: ./_images/gpkg.png
    :align: center
 
-La scheda Impacchetta per Geopackage impacchetta i layer selezionati (sia vettori che raster) nel Layer panel in un file Geopackage. 
-Per il funzionamento e maggiori dettagli si rimanda alla sezione Schede Plugin
+Questa scheda permette di impacchettare i layer selezionati  nel Layer panel(sia vettori che raster) in un file Geopackage.
+Per il funzionamento e maggiori dettagli si rimanda alla sezione **Schede Plugin**
 
 .. video:: ./_images/gpkg.mp4
    :width: 500
@@ -88,21 +98,72 @@ Funzione importazione layer vettoriali
 .. image:: ./_images/iconConn.png
    :align: center
 
+
+La nuova struttura *Importazione Dati* all'interno dei DB di pyarchinit è stata migliorata. Ora è possibile
+importare anche le geometrie e sono visuaizzate in automatiche il nome dei campi e l'attributo.
+
+.. video:: ./_images/importdata.mp4
+   :width: 500
+   :height: 300
+
 Raggruppamenti Layer
 ====================
 .. image:: ./_images/Layer_plus.png
    :align: center
 
-Aggiunti wms vincoli archeologici, catasto e BaseMap(Google e Wikimidia)
-======================================================================== 
+Dalla scheda Sito quando vengo richiamati i layer per disegnare , essi sono raggruppati e ordinati in gruppi nel layer panel
+
+.. video:: ./_images/rag.mp4
+   :width: 500
+   :height: 300
+
+WMS vincoli archeologici filtrati per comune
+========================================================================
 .. image:: ./_images/radar.png
    :align: center
 
+Dalla scheda sito si può richiamare il wms dei vincoli in rete sula base del comune di apparteneza
+
+.. video:: ./_images/vincoli.mp4
+   :width: 500
+   :height: 300
+
+WMS catasto e BaseMap(Google e Wikimidia)
+========================================================================
+.. image:: ./_images/basemap.png
+   :align: center
+
+Dalla scheda sito si possono richiamare il wms catastale e due basemap diggole e wikimidia
+
+.. video:: ./_images/catasto.mp4
+   :width: 500
+   :height: 300
+
 Cambio colore del background delle schede
 ========================================== 
-
+é stato cambiato il background delle schede per una migliore visualizzazione
 
 Inserimento layer stratigrafia Verticale
 =========================================
+In questa nuova versione sono stati inseriti due nuovi layer che gestiscono la startigrafia verticale:
+*pyunitastratigrafiche_usm* e *pyquote_usm*. Essi hanno anche delle view indipendenti che possono essere richiamate dalla
+scheda US-USM
 
+Geocoding: ricerca indirizzi
+=========================================
+Nella scheda Sito è stato aggiunto una barra di ricerca d'indirizzi sulla base di OpenStreetMap.
+una volta ricercato l'idirizzo desiderato, verrà aggiunto un layer puntuale nel map canvas
+
+.. video:: ./_images/geocoding.mp4
+   :width: 500
+   :height: 300
+
+Herris matrix per Extended Matrix Tool
+=========================================
+questa nuova funzione permette di esportare un matrix di Harris in un graphml gestibile con yED ed è associato ad un template
+il graphml prodotto è compatibile con l'Extended Matrix Tool
+
+.. video:: ./_images/matrix.mp4
+   :width: 500
+   :height: 300
 
