@@ -27,6 +27,8 @@ Dipendenze
 
         pysftp
 
+        totalopenstation
+
 .. note::
 
     **Istruzioni per installare Graphviz su Windows OS (prima installazione)**

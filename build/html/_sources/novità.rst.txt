@@ -30,6 +30,8 @@ I cambiamenti che hanno interessato la nuova release di pyArchInit sono:
 
     *Harris Matrix per Extended Matrix*
 
+    *Totalopenstaion2pyarchinit*
+
 
 
 
@@ -165,3 +167,13 @@ il graphml prodotto è compatibile con l'Extended Matrix Tool
    :width: 500
    :height: 300
 
+Totalopenstation2pyarchinit
+=========================================
+.. image:: ./_images/tops.png
+   :align: center
+Questa scheda permette d'importare i dati grezzi di diverse stazioni totali nei layer pyrchinit_ quote, pyarchinit riferimenti
+e pyarchinit campionature
+
+.. video:: ./_images/tops.mp4
+   :width: 500
+   :height: 300
