@@ -20,26 +20,27 @@ I cambiamenti che hanno interessato la nuova release di pyArchInit sono:
 
     *WMS vincoli archeologici filtrati per comune*
 
-    *WMS catasto e BaseMap(Google e Wikimidia)*
+    *WFS Toponomastica, WMS IGM 25000, WMS catasto e BaseMap(Google e Wikimidia)*
 
     *Cambio colore del background delle schede*
 
     *Inserimento layer stratigrafia verticale*
 
-    *Geocding: ricerca indirizzi*
+    *Geocoding: ricerca indirizzi*
 
     *Harris Matrix per Extended Matrix*
 
     *Totalopenstaion2pyarchinit*
 
+**************************************************************************
 
 
 
-Scheda Print Map 
-================ 
+Scheda Print Map
+====================================
 .. image:: ./_images/print_map.png
    :align: center
-   
+
 La scheda Print Map nasce con l'intento di facilitare e automatizzare l'esportazione  delle mappe di scavo o survey, al
 fine di redigere, in modo standarzizzato la documentazione. La scheda si presenta con dei template pronti all'uso in
 differenti formati e scale di visualizzazione. Inoltre sono abilitate a prendere le info dal db di pyarchinit. Questa
@@ -49,8 +50,9 @@ plugin**.
 .. video:: ./_images/print_map.mp4
    :width: 500
    :height: 300
-   
 
+
+**************************************************************************
 
 Scheda Impacchetta per Geopackage
 ================================= 
@@ -64,6 +66,8 @@ Per il funzionamento e maggiori dettagli si rimanda alla sezione **Schede Plugin
    :width: 500
    :height: 300
    
+
+**********************************************************************************
 
 Funzione MeveCost
 ================= 
@@ -79,7 +83,9 @@ iniziale e (opzionalmente) una posizione di destinazione.Per il funzionamento e 
    :width: 500
    :height: 300
    
-   
+
+**************************************************************************
+
 Funzione conversione in Spatialite5
 ===================================
 .. image:: ./_images/toolbox.png
@@ -92,6 +98,8 @@ Per il funzionamento e maggiori dettagli si rimanda alla sezione Funzioni
    :width: 500
    :height: 300
    
+
+**************************************************************************
 
 Funzione importazione layer vettoriali 
 ====================================== 
@@ -106,6 +114,9 @@ importare anche le geometrie e sono visuaizzate in automatiche il nome dei campi
    :width: 500
    :height: 300
 
+
+**************************************************************************
+
 Raggruppamenti Layer
 ====================
 .. image:: ./_images/Layer_plus.png
@@ -116,6 +127,9 @@ Dalla scheda Sito quando vengo richiamati i layer per disegnare , essi sono ragg
 .. video:: ./_images/rag.mp4
    :width: 500
    :height: 300
+
+
+**************************************************************************
 
 WMS vincoli archeologici filtrati per comune
 ========================================================================
@@ -128,26 +142,39 @@ Dalla scheda sito si può richiamare il wms dei vincoli in rete sula base del co
    :width: 500
    :height: 300
 
-WMS catasto e BaseMap(Google e Wikimidia)
+**************************************************************************
+
+
+WFS Toponomastica, WMS IGM 25000, WMS catasto e BaseMap(Google e Wikimidia)
 ========================================================================
 .. image:: ./_images/basemap.png
    :align: center
 
-Dalla scheda sito si possono richiamare il wms catastale e due basemap diggole e wikimidia
+Dalla scheda sito si possono richiamare il wfs toponomastica ricavato dal IGM 25000, il wms igm 25000,wms catastale e
+due basemap di Google e Wikimidia
 
 .. video:: ./_images/catasto.mp4
    :width: 500
    :height: 300
 
+**************************************************************************
+
+
 Cambio colore del background delle schede
 ========================================== 
 é stato cambiato il background delle schede per una migliore visualizzazione
+
+**************************************************************************
+
 
 Inserimento layer stratigrafia Verticale
 =========================================
 In questa nuova versione sono stati inseriti due nuovi layer che gestiscono la startigrafia verticale:
 *pyunitastratigrafiche_usm* e *pyquote_usm*. Essi hanno anche delle view indipendenti che possono essere richiamate dalla
 scheda US-USM
+
+
+**************************************************************************
 
 Geocoding: ricerca indirizzi
 =========================================
@@ -158,6 +185,9 @@ una volta ricercato l'idirizzo desiderato, verrà aggiunto un layer puntuale nel
    :width: 500
    :height: 300
 
+
+**************************************************************************
+
 Herris matrix per Extended Matrix Tool
 =========================================
 questa nuova funzione permette di esportare un matrix di Harris in un graphml gestibile con yED ed è associato ad un template
@@ -167,11 +197,15 @@ il graphml prodotto è compatibile con l'Extended Matrix Tool
    :width: 500
    :height: 300
 
+
+**************************************************************************
+
 Totalopenstation2pyarchinit
 =========================================
 .. image:: ./_images/tops.png
    :align: center
-Questa scheda permette d'importare i dati grezzi di diverse stazioni totali nei layer pyrchinit_ quote, pyarchinit riferimenti
+
+Questa scheda permette d'importare i dati grezzi di diverse stazioni totali nei layer pyrchinit_quote, pyarchinit riferimenti
 e pyarchinit campionature
 
 .. video:: ./_images/tops.mp4
