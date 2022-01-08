@@ -31,12 +31,24 @@ Dipendenze
 
 .. note::
 
-    **Istruzioni per installare Graphviz su Windows OS (prima installazione)**
+    **Istruzioni per installare Graphviz (prima installazione)**
 
-        Scarica il file zip dell'ultima versione di Graphviz (2.46)
-        decomprimi il file e salvalo in qualche posizione (ad esempio in C:/).
-        Se hai già installato una versione precedente di Graphviz, disinstallala prima di continuare con la nuova versione, altrimenti
-        non puoi impostare il percorso della nuova versione di Graphviz in pyarchinit
+        **Windows:** Scarica l'eseguibile dell'ultima versione di Graphviz (2.x) e installalo.
+
+            *Se hai già installato una versione precedente di Graphviz, disinstallala prima di continuare con la nuova
+            versione, altrimenti  non puoi impostare il percorso della nuova versione di Graphviz in pyarchinit*
+
+        **Mac:** Installa graphviz via Homebrew o via Macport
+
+            *brew install graphviz" o trimite Macport*
+
+            *sudo port install graphviz*
+
+        **Linux:** Installa graphviz via terminale
+
+            *sudo apt install graphviz*
+
+
 
 Le dipendenze possono essere installate anche usando il modules_installer.py eseguendolo da una shell python:
 
@@ -45,9 +57,13 @@ Le dipendenze possono essere installate anche usando il modules_installer.py ese
 Intallazione da zip
 ======================================
 
-Scaricare l'archivio zip da github
+Scaricare l'archivio zip da github https://github.com/pyarchinit/pyarchinit
 Installare i requisiti dei pacchetti python (vedere il paragrafo Dipendenze)
 Aprire QGIS e poi da Plugin manager usare Install from ZIP per installare il plugin
+
+.. note::
+    Per i collaboratori della ditta adArte si consiglia di scaricare la versione dal sito github
+    https://github.com/adartesrlrimini/pyarchinit
 
 .. warning::
     **Durante la prima installazione comparirà un messaggio per avvertire della mancanza di pacchetti**
@@ -57,9 +73,6 @@ Aprire QGIS e poi da Plugin manager usare Install from ZIP per installare il plu
     **installa il plugin per la prima volta al fine di installare correttamente tutte le dipendenze.**
 
     **Se usi PostgreSQL, ti consigliamo di installare PostgreSQL >=9.6**
-
-    **Se avete già un db pyarchinit, usate lo strumento "update posgres" o "update sqlite" nel modulo di configurazione**
-    **di pyarchinit per aggiornare il vostro db alla nuova versione.**
 
     **Se avete già un db pyarchinit, usate lo strumento "update posgres" o "update sqlite" nel modulo di configurazione**
     **di pyarchinit per aggiornare il vostro db alla nuova versione, e poi lo strumento di conversione se il vostro db**

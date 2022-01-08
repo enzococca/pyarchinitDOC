@@ -17,7 +17,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'pyArchInit'
+project = 'pyArchInit 4.0'
 copyright = '2021, AdArte srl'
 author = 'Enzo Cocca & Luca Mandolesi'
 

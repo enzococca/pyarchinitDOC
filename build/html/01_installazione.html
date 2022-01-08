@@ -191,12 +191,22 @@
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
-<p><strong>Istruzioni per installare Graphviz su Windows OS (prima installazione)</strong></p>
+<p><strong>Istruzioni per installare Graphviz (prima installazione)</strong></p>
 <blockquote>
-<div><p>Scarica il file zip dell’ultima versione di Graphviz (2.46)
-decomprimi il file e salvalo in qualche posizione (ad esempio in C:/).
-Se hai già installato una versione precedente di Graphviz, disinstallala prima di continuare con la nuova versione, altrimenti
-non puoi impostare il percorso della nuova versione di Graphviz in pyarchinit</p>
+<div><p><strong>Windows:</strong> Scarica l’eseguibile dell’ultima versione di Graphviz (2.x) e installalo.</p>
+<blockquote>
+<div><p><em>Se hai già installato una versione precedente di Graphviz, disinstallala prima di continuare con la nuova
+versione, altrimenti  non puoi impostare il percorso della nuova versione di Graphviz in pyarchinit</em></p>
+</div></blockquote>
+<p><strong>Mac:</strong> Installa graphviz via Homebrew o via Macport</p>
+<blockquote>
+<div><p><em>brew install graphviz» o trimite Macport</em></p>
+<p><em>sudo port install graphviz</em></p>
+</div></blockquote>
+<p><strong>Linux:</strong> Installa graphviz via terminale</p>
+<blockquote>
+<div><p><em>sudo apt install graphviz</em></p>
+</div></blockquote>
 </div></blockquote>
 </div>
 <p>Le dipendenze possono essere installate anche usando il modules_installer.py eseguendolo da una shell python:</p>
@@ -204,9 +214,14 @@ non puoi impostare il percorso della nuova versione di Graphviz in pyarchinit</p
 </div>
 <div class="section" id="intallazione-da-zip">
 <h2>Intallazione da zip<a class="headerlink" href="#intallazione-da-zip" title="Link a questa intestazione">¶</a></h2>
-<p>Scaricare l’archivio zip da github
+<p>Scaricare l’archivio zip da github <a class="reference external" href="https://github.com/pyarchinit/pyarchinit">https://github.com/pyarchinit/pyarchinit</a>
 Installare i requisiti dei pacchetti python (vedere il paragrafo Dipendenze)
 Aprire QGIS e poi da Plugin manager usare Install from ZIP per installare il plugin</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Per i collaboratori della ditta adArte si consiglia di scaricare la versione dal sito github
+<a class="reference external" href="https://github.com/adartesrlrimini/pyarchinit">https://github.com/adartesrlrimini/pyarchinit</a></p>
+</div>
 <div class="admonition warning">
 <p class="admonition-title">Avvertimento</p>
 <p><strong>Durante la prima installazione comparirà un messaggio per avvertire della mancanza di pacchetti</strong>
@@ -214,8 +229,6 @@ Aprire QGIS e poi da Plugin manager usare Install from ZIP per installare il plu
 <p><strong>Sotto Windows è necessario avviare QGIS come Amministratore (se usi usa la versione standalone), quando si</strong>
 <strong>installa il plugin per la prima volta al fine di installare correttamente tutte le dipendenze.</strong></p>
 <p><strong>Se usi PostgreSQL, ti consigliamo di installare PostgreSQL &gt;=9.6</strong></p>
-<p><strong>Se avete già un db pyarchinit, usate lo strumento «update posgres» o «update sqlite» nel modulo di configurazione</strong>
-<strong>di pyarchinit per aggiornare il vostro db alla nuova versione.</strong></p>
 <p><strong>Se avete già un db pyarchinit, usate lo strumento «update posgres» o «update sqlite» nel modulo di configurazione</strong>
 <strong>di pyarchinit per aggiornare il vostro db alla nuova versione, e poi lo strumento di conversione se il vostro db</strong>
 <strong>non è aggiornato alla versione 5 di spatialite</strong></p>
