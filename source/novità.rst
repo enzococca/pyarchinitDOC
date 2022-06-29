@@ -146,7 +146,7 @@ Dalla scheda sito si può richiamare il wms dei vincoli in rete sula base del co
 
 
 WFS Toponomastica, WMS IGM 25000, WMS catasto e BaseMap(Google e Wikimidia)
-========================================================================
+===========================================================================
 .. image:: ./_images/basemap.png
    :align: center
 
