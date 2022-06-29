@@ -20,6 +20,7 @@ pyArchInit Documentazione
    03_le_schede.rst
    04_funzioni.rst
    05_esempi_di_applicazione.rst
+   06_esempi_di_applicazione_A.rst
 
 .. image:: ./_images/logo_2.png
 	:align: center
