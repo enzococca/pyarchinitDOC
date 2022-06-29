@@ -1,8 +1,12 @@
-.. image:: ./_images/logo_3.png
+.. image:: ./_images/logo_3.pngclea
    :align: right
    
 1.Installazione
 #####################################################
+
+Esistono due modi per installare pyArchInit.
+
+La prima, la più semplice, consiste nell'inserire un semplice link nelle impostazioni dei plugin di QGIS.
 
 Dipendenze
 ======================================
