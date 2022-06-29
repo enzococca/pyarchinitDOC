@@ -4,6 +4,11 @@
 1.Installazione
 #####################################################
 
+Esistono due modi per installare pyArchInit.
+
+La prima, la più semplice, consiste nell'inserire un semplice link nelle impostazioni dei plugin di QGIS.
+
+
 Dipendenze
 ======================================
 
