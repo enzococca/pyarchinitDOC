@@ -1,4 +1,4 @@
-.. image:: ./_images/logo_3.pngclea
+.. image:: ./_images/logo_3.png
    :align: right
    
 1.Installazione
