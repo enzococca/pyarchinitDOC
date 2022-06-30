@@ -13,7 +13,9 @@ http://pyarchinit.org/pyarchinit.xml
     **Ridorda!**
     Ricordati di avviare QGIS come amministratore.
 
-Il link si trova nella pagina ufficiale di pyArchInit https://github.com/pyarchinit/pyarchinit su GitHub.
+Il link si trova nella pagina ufficiale di `pyArchInit`_ su GitHub.
+
+.. _pyArchInit: https://github.com/pyarchinit/pyarchinit 
 
 
 Nella *Barra dei Menu* andare su *plugin* e cliccare su **Gestisci ed Installa Plugin**. 
