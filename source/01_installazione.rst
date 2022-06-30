@@ -6,20 +6,13 @@
 
 Esistono due modi per installare pyArchInit.
 
-La prima, la più semplice, consiste nell'inserire il seguente link nel manager dei plugin di QGIS:
-http://pyarchinit.org/pyarchinit.xml
-
-
-La seconda, installando il plugin da un file ZIP, per cui si rimanda alla sezione **Installazione da ZIP**.
-
-
-.. note::
-    **Ridorda!**
-    Ricordati di avviare QGIS come amministratore.
-
-Il link si trova nella pagina ufficiale di `pyArchInit`_ su GitHub.
+**La prima** consiste nell'inserire il seguente link nel manager dei plugin di QGIS (Consulta la pagina ufficiale di `pyArchInit`_ su GitHub.):
 
 .. _pyArchInit: https://github.com/pyarchinit/pyarchinit 
+
+http://pyarchinit.org/pyarchinit.xml
+
+**La seconda**, installando il plugin da un file ZIP, per cui si rimanda alla sezione **Installazione da ZIP**.
 
 
 Nella *Barra dei Menu* andare su *plugin* e cliccare su **Gestisci ed Installa Plugin**. 
