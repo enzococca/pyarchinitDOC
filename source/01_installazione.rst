@@ -64,7 +64,9 @@ Dipendenze
 
     **Istruzioni per installare Graphviz (prima installazione)**
 
-        **Windows:** Scarica l'eseguibile dell'ultima versione di Graphviz (2.x) e installalo.
+        **Windows:** Scarica l'eseguibile dell'ultima versione di `Graphviz`_ (2.x) e installalo.
+
+            .. _Graphviz: https://graphviz.org/download/
 
             *Se hai già installato una versione precedente di Graphviz, disinstallala prima di continuare con la nuova
             versione, altrimenti  non puoi impostare il percorso della nuova versione di Graphviz in pyarchinit*
