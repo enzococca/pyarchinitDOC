@@ -188,7 +188,7 @@ una volta ricercato l'idirizzo desiderato, verrà aggiunto un layer puntuale nel
 
 **************************************************************************
 
-Herris matrix per Extended Matrix Tool
+Harris matrix per Extended Matrix Tool
 =========================================
 questa nuova funzione permette di esportare un matrix di Harris in un graphml gestibile con yED ed è associato ad un template
 il graphml prodotto è compatibile con l'Extended Matrix Tool
