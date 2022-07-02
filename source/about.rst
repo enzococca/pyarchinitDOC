@@ -51,6 +51,8 @@ About
 			
 			Università di Pisa - Villa dei Vetti o anche dell'Oratorio a Capraia e Limite, professor Federico Cantini
 
+			Università di Bologna - Scavo necropoli picena "I Pini di Sirolo" (AN)
+
 
 	**Per contribuire allo sviluppo:**
 
