@@ -9,12 +9,14 @@
 6.1.Moduli
 =======================================
 
-=======================================
+
 6.1.1.Utility
 =======================================
 
+
+
 6.1.1.1.Classe pyarchinit_exp_USsheet_pdf
-=======================================
+=========================================
 
 
 .. automodule:: modules.utility.pyarchinit_exp_USsheet_pdf
@@ -39,7 +41,7 @@
        :members:
 
 6.1.1.2.Calsse Pyarchinit_OS_Utility
-====================================================
+====================================
 
 .. automodule:: modules.utility.pyarchinit_OS_utility
    :members:
@@ -47,8 +49,8 @@
    .. autoclass:: Pyarchinit_OS_Utility
       :members:
 
-6.1.1.3.Classe Utility**
-=====================================================
+6.1.1.3.Classe Utility
+======================
 
 .. automodule:: modules.db.pyarchinit_utility
    :members:
@@ -56,18 +58,21 @@
    .. autoclass:: Utility
       :members:
 
-=======================================
-6.1.2.DB
-======================================
+
 
 =======================================
-6.1.2.1.Calsse pyarchinit_db_manager**
-======================================
+6.1.2.DB
+=======================================
+
+
+6.1.2.1.Calsse pyarchinit_db_manager
+====================================
 .. automodule:: modules.db.pyarchinit_db_manager
    :members:
 
    .. autoclass:: Pyarchinit_db_management
       :members:
+
 
 6.1.2.2.Classe pyarchinit_db_update
 =========================================
