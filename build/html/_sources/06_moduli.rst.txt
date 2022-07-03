@@ -2,22 +2,16 @@
 
 
 6.Moduli pyArchInit: Classi e Funzioni
---------------------------------------
+**************************************
 
 
 =======================================
 6.1.Moduli
 =======================================
-
-
 6.1.1.Utility
 =======================================
-
-
-
-6.1.1.1.Classe pyarchinit_exp_USsheet_pdf
+a).Classe pyarchinit_exp_USsheet_pdf
 =========================================
-
 
 .. automodule:: modules.utility.pyarchinit_exp_USsheet_pdf
    :members:
@@ -40,7 +34,7 @@
     .. autoclass:: FOTO_index_pdf_sheet_2
        :members:
 
-6.1.1.2.Calsse Pyarchinit_OS_Utility
+b).Classe Pyarchinit_OS_Utility
 ====================================
 
 .. automodule:: modules.utility.pyarchinit_OS_utility
@@ -49,7 +43,7 @@
    .. autoclass:: Pyarchinit_OS_Utility
       :members:
 
-6.1.1.3.Classe Utility
+c).Classe Utility
 ======================
 
 .. automodule:: modules.db.pyarchinit_utility
