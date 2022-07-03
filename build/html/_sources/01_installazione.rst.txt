@@ -4,6 +4,34 @@
 1.Installazione
 #####################################################
 
+Esistono due modi per installare pyArchInit.
+
+**La prima** consiste nell'inserire il seguente link nel manager dei plugin di QGIS (Consulta la pagina ufficiale di `pyArchInit`_ su GitHub.):
+
+.. _pyArchInit: https://github.com/pyarchinit/pyarchinit 
+
+http://pyarchinit.org/pyarchinit.xml
+
+**La seconda**, installando il plugin da un file ZIP, per cui si rimanda alla sezione **Installazione da ZIP**.
+
+
+Nella *Barra dei Menu* andare su *plugin* e cliccare su **Gestisci ed Installa Plugin**. 
+Dalla finsestra che si aprirà, andare su **Impostazioni**
+
+.. image:: ./_images/img_pluginmanager1.png
+    :align: center
+
+A questo punto cliccare il tasto **Aggiungi**
+
+.. image:: ./_images/img_pluginmanager2.png
+    :align: center
+
+Inserire il nome *pyArchInit* e copiare in URL il link riportato sopra. Infine, premere su **OK** e chiudere il **Manager dei Plugin**
+
+.. image:: ./_images/img_pluginmanager3.png
+    :align: center
+
+
 Dipendenze
 ======================================
 
@@ -33,7 +61,9 @@ Dipendenze
 
     **Istruzioni per installare Graphviz (prima installazione)**
 
-        **Windows:** Scarica l'eseguibile dell'ultima versione di Graphviz (2.x) e installalo.
+        **Windows:** Scarica l'eseguibile dell'ultima versione di `Graphviz`_ (2.x) e installalo.
+
+            .. _Graphviz: https://graphviz.org/download/
 
             *Se hai già installato una versione precedente di Graphviz, disinstallala prima di continuare con la nuova
             versione, altrimenti  non puoi impostare il percorso della nuova versione di Graphviz in pyarchinit*

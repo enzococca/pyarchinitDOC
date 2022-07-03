@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="it" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>searchLayers &mdash; pyArchInit 4.0 4 documentazione</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="author" title="A proposito di questi documenti" href="../about.html" />
+    <link rel="index" title="Indice" href="../genindex.html" />
+    <link rel="search" title="Cerca" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> pyArchInit 4.0
+            <img src="../_static/pyarchinit_logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Cerca documenti" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Menu di navigazione">
+              <p class="caption" role="heading"><span class="caption-text">Contenuti:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../prerequisities.html">Prerequisiti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../novit%C3%A0.html">Novità</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_installazione.html">1.Installazione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_il_plugin.html">2 Il Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_le_schede.html">3.Le schede</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_funzioni.html">4.Funzioni</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_esempi_di_applicazione.html">5.Esempi di Applicazione</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Menu navigazione dispositivi mobili" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">pyArchInit 4.0</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Naviga tra le pagine">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Codice del modulo</a> &raquo;</li>
+      <li>searchLayers</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Codice sorgente per searchLayers</h1><div class="highlight"><pre>
+<span></span><span class="ch">#! /usr/bin/env python</span>
+<span class="c1"># -*- coding: utf 8 -*-</span>
+
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">webbrowser</span>
+
+<span class="c1">#from .searchDialog import LayerSearchDialog</span>
+
+<div class="viewcode-block" id="SearchLayers"><a class="viewcode-back" href="../index.html#searchLayers.SearchLayers">[documenti]</a><span class="k">class</span> <span class="nc">SearchLayers</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;SearchLayers tests fun_to_test&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iface</span><span class="p">):</span>
+        <span class="n">iface</span><span class="o">=</span><span class="n">iface</span>
+        <span class="c1">#self.iface = iface</span>
+        <span class="c1">#self.searchDialog = None</span>
+        
+<div class="viewcode-block" id="SearchLayers.initGui"><a class="viewcode-back" href="../index.html#searchLayers.SearchLayers.initGui">[documenti]</a>    <span class="k">def</span> <span class="nf">initGui</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Create the menu items in the Plugin menu and attach the icon to the toolbar&#39;&#39;&#39;</span></div></div>
+
+        <span class="c1"># icon = QIcon(os.path.dirname(__file__) + &quot;/icon.png&quot;)</span>
+        <span class="c1"># self.searchAction = QAction(icon, &quot;Ricerca Globale&quot;, self.iface.mainWindow())</span>
+        <span class="c1">#self.searchAction.setObjectName(&#39;searchLayers&#39;)</span>
+        <span class="c1">#self.searchAction.triggered.connect(self.showSearchDialog)</span>
+        <span class="c1"># self.iface.addToolBarIcon(self.searchAction)</span>
+        <span class="c1"># self.iface.addPluginToMenu(&quot;Search Layers&quot;, self.searchAction)</span>
+
+        <span class="c1"># Help</span>
+        <span class="c1"># icon = QIcon(os.path.dirname(__file__) + &#39;/help.png&#39;)</span>
+        <span class="c1"># self.helpAction = QAction(icon, &quot;Help&quot;, self.iface.mainWindow())</span>
+        <span class="c1"># self.helpAction.setObjectName(&#39;searchLayersHelp&#39;)</span>
+        <span class="c1"># self.helpAction.triggered.connect(self.help)</span>
+        <span class="c1"># self.iface.addPluginToMenu(&#39;Search Layers&#39;, self.helpAction)</span>
+
+    <span class="c1"># def unload(self):</span>
+        <span class="c1"># self.iface.removePluginMenu(&#39;Search Layers&#39;, self.searchAction)</span>
+        <span class="c1"># self.iface.removePluginMenu(&#39;Search Layers&#39;, self.helpAction)</span>
+        <span class="c1"># self.iface.removeToolBarIcon(self.searchAction)</span>
+    
+    <span class="c1">#def showSearchDialog(self):</span>
+        <span class="c1">#if self.searchDialog is None:</span>
+            <span class="c1"># All the work is done in the LayerSearchDialog</span>
+            <span class="c1">#self.searchDialog = LayerSearchDialog(self.iface, self.iface.mainWindow())</span>
+        <span class="c1">#self.searchDialog.show()</span>
+        
+    <span class="c1"># def help(self):</span>
+        <span class="c1"># &#39;&#39;&#39;Display a help page&#39;&#39;&#39;</span>
+        <span class="c1"># url = QUrl.fromLocalFile(os.path.dirname(__file__) + &quot;/index.html&quot;).toString()</span>
+        <span class="c1"># webbrowser.open(url, new=2)</span>
+        
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, AdArte srl.</p>
+  </div>
+
+  Realizzato con <a href="https://www.sphinx-doc.org/">Sphinx</a> e il tema
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    fornito da <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

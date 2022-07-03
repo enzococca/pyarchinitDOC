@@ -3,7 +3,7 @@
 pushd %~dp0
 
 REM Command file for Sphinx documentation
-
+set PYTHONPATH=C:\OSGeo4W\apps\qgis\python
 if "%SPHINXBUILD%" == "" (
 	set SPHINXBUILD=sphinx-build
 )

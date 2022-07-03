@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="it" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>modules.db.pyarchinit_db_update &mdash; pyArchInit 4.0 4 documentazione</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/translations.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="author" title="A proposito di questi documenti" href="../../../about.html" />
+    <link rel="index" title="Indice" href="../../../genindex.html" />
+    <link rel="search" title="Cerca" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> pyArchInit 4.0
+            <img src="../../../_static/pyarchinit_logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Cerca documenti" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Menu di navigazione">
+              <p class="caption" role="heading"><span class="caption-text">Contenuti:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../prerequisities.html">Prerequisiti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../novit%C3%A0.html">Novità</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../01_installazione.html">1.Installazione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../02_il_plugin.html">2 Il Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../03_le_schede.html">3.Le schede</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../04_funzioni.html">4.Funzioni</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../05_esempi_di_applicazione.html">5.Esempi di Applicazione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../06_moduli.html">pyArchInit Classi e Funzioni</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Menu navigazione dispositivi mobili" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pyArchInit 4.0</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Naviga tra le pagine">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Codice del modulo</a> &raquo;</li>
+      <li>modules.db.pyarchinit_db_update</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Codice sorgente per modules.db.pyarchinit_db_update</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="kn">import</span> <span class="nb">object</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="kn">import</span> <span class="nb">str</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">Table</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.engine</span> <span class="kn">import</span> <span class="n">create_engine</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.sql.schema</span> <span class="kn">import</span> <span class="n">MetaData</span>
+
+<span class="kn">from</span> <span class="nn">modules.db.pyarchinit_conn_strings</span> <span class="kn">import</span> <span class="n">Connection</span>
+
+
+<div class="viewcode-block" id="DB_update"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_db_update.DB_update">[documenti]</a><span class="k">class</span> <span class="nc">DB_update</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="c1"># connection string postgres&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">conn_str</span><span class="p">):</span>
+        <span class="c1"># create engine and metadata</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">conn_str</span><span class="p">,</span> <span class="n">echo</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="n">MetaData</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+
+<div class="viewcode-block" id="DB_update.update_table"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_db_update.DB_update.update_table">[documenti]</a>    <span class="k">def</span> <span class="nf">update_table</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;invetario_materiali_table&quot;&quot;&quot;</span>
+
+        <span class="n">table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="s2">&quot;inventario_materiali_table&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">,</span> <span class="n">autoload</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">table_column_names_list</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">table_column_names_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;stato_conservazione&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+                <span class="s2">&quot;ALTER TABLE inventario_materiali_table ADD COLUMN stato_conservazione varchar DEFAULT &#39;&#39;&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;datazione_reperto&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+                <span class="s2">&quot;ALTER TABLE inventario_materiali_table ADD COLUMN datazione_reperto varchar(30) DEFAULT &#39;inserisci un valore&#39;&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;elementi_reperto&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE inventario_materiali_table ADD COLUMN elementi_reperto text&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;misurazioni&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE inventario_materiali_table ADD COLUMN misurazioni text&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;rif_biblio&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE inventario_materiali_table ADD COLUMN rif_biblio text&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;tecnologie&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE inventario_materiali_table ADD COLUMN tecnologie text&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;forme_minime&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE inventario_materiali_table ADD COLUMN forme_minime integer DEFAULT 0&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;forme_massime&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE inventario_materiali_table ADD COLUMN forme_massime integer DEFAULT 0&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;totale_frammenti&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE inventario_materiali_table ADD COLUMN totale_frammenti integer DEFAULT 0&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;corpo_ceramico&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE inventario_materiali_table ADD COLUMN corpo_ceramico varchar(20)&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;update inventario_materiali_table set corpo_ceramico = &#39;&#39;&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;rivestimento&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE inventario_materiali_table ADD COLUMN rivestimento varchar(20)&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;update inventario_materiali_table set rivestimento = &#39;&#39;&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;diametro_orlo&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+                <span class="s2">&quot;ALTER TABLE inventario_materiali_table ADD COLUMN diametro_orlo Numeric(7,3) DEFAULT 0&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;peso&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE inventario_materiali_table ADD COLUMN peso Numeric(9,3) DEFAULT 0&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;tipo&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE inventario_materiali_table ADD COLUMN tipo varchar(20)&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;update inventario_materiali_table set tipo = &#39;&#39;&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;eve_orlo&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE inventario_materiali_table ADD COLUMN eve_orlo Numeric(7,3) DEFAULT 0&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;repertato&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE inventario_materiali_table ADD COLUMN repertato varchar(3)&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;update inventario_materiali_table set repertato = &#39;&#39;No&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;diagnostico&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE inventario_materiali_table ADD COLUMN diagnostico varchar(3)&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;update inventario_materiali_table set diagnostico = &#39;&#39;No&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;n_reperto&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE inventario_materiali_table ADD COLUMN n_reperto INTEGER&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;tipo_contenitore&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE inventario_materiali_table ADD COLUMN tipo_contenitore varchar DEFAULT &#39;&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;struttura&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE inventario_materiali_table ADD COLUMN struttura text&quot;</span><span class="p">)</span>
+         
+        
+        
+        
+        
+        
+        <span class="c1">####site_table</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="s2">&quot;site_table&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">,</span> <span class="n">autoload</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">table_column_names_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">table_column_names_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;provincia&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE site_table ADD COLUMN provincia varchar DEFAULT &#39;inserici un valore&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;definizione_sito&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+                <span class="s2">&quot;ALTER TABLE site_table ADD COLUMN definizione_sito varchar DEFAULT &#39;inserici un valore&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;sito_path&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE site_table ADD COLUMN sito_path varchar DEFAULT &#39;inserisci path&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;find_check&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE site_table ADD COLUMN find_check INTEGER DEFAULT 0&quot;</span><span class="p">)</span>
+
+        <span class="c1">####US_table</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="s2">&quot;us_table&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">,</span> <span class="n">autoload</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">table_column_names_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">table_column_names_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+        
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;cont_per&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN cont_per varchar DEFAULT&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;documentazione&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN documentazione varchar&quot;</span><span class="p">)</span>
+
+            <span class="c1"># nuovi campi per USM 1/9/2016 generati correttamente</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;unita_tipo&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN unita_tipo varchar DEFAULT &#39;US&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;settore&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN settore text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;quad_par&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN quad_par text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;ambient&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN ambient text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;saggio&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN saggio text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;elem_datanti&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN elem_datanti text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;funz_statica&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN funz_statica text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;lavorazione&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN lavorazione text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;spess_giunti&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN spess_giunti text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;letti_posa&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN letti_posa text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;alt_mod&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN alt_mod text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;un_ed_riass&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN un_ed_riass text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;reimp&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN reimp text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;posa_opera&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN posa_opera text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;quota_min_usm&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN quota_min_usm NUMERIC(6,2)&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;quota_max_usm&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN quota_max_usm NUMERIC(6,2)&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;cons_legante&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN cons_legante text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;col_legante&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN col_legante text DEFAULT &#39;[]&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;aggreg_legante&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN aggreg_legante text DEFAULT &#39;[]&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;con_text_mat&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN con_text_mat text DEFAULT &#39;[]&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;col_materiale&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN col_materiale text DEFAULT &#39;[]&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;inclusi_materiali_usm&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN inclusi_materiali_usm text DEFAULT &#39;[]&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;n_catalogo_generale&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN n_catalogo_generale text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;n_catalogo_interno&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN n_catalogo_interno text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;n_catalogo_internazionale&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN n_catalogo_internazionale text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;soprintendenza&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN soprintendenza text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;quota_relativa&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN quota_relativa NUMERIC(6,2)&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;quota_abs&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN quota_abs   NUMERIC(6,2)&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;ref_tm&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN ref_tm text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;ref_ra&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN ref_ra text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;ref_n&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN ref_n text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;posizione&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN posizione text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;criteri_distinzione&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN criteri_distinzione text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;modo_formazione&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN modo_formazione text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;componenti_organici&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN componenti_organici text DEFAULT &#39;[]&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;componenti_inorganici&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN componenti_inorganici text DEFAULT &#39;[]&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;lunghezza_max&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN lunghezza_max NUMERIC(6,2)&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;altezza_max&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN altezza_max NUMERIC(6,2)&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;altezza_min&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN altezza_min NUMERIC(6,2)&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;profondita_max&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN profondita_max NUMERIC(6,2)&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;profondita_min&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN profondita_min NUMERIC(6,2)&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;larghezza_media&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN larghezza_media NUMERIC(6,2)&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;quota_max_abs&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN quota_max_abs NUMERIC(6,2)&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;quota_max_rel&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN quota_max_rel NUMERIC(6,2)&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;quota_min_abs&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN quota_min_abs NUMERIC(6,2)&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;quota_min_rel&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN quota_min_rel NUMERIC(6,2)&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;osservazioni&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN osservazioni text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;datazione&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN datazione text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;flottazione&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN flottazione text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;setacciatura&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN setacciatura text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;affidabilita&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN affidabilita text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;direttore_us&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN direttore_us text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;responsabile_us&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN responsabile_us text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;cod_ente_schedatore&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN cod_ente_schedatore text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;data_rilevazione&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN data_rilevazione text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;data_rielaborazione&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN data_rielaborazione text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;lunghezza_usm&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN lunghezza_usm NUMERIC(6,2)&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;altezza_usm&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN altezza_usm NUMERIC(6,2)&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;spessore_usm&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN spessore_usm NUMERIC(6,2)&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;tecnica_muraria_usm&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN tecnica_muraria_usm text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;modulo_usm&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN modulo_usm text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;campioni_malta_usm&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN campioni_malta_usm text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;campioni_mattone_usm&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN campioni_mattone_usm text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;campioni_pietra_usm&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN campioni_pietra_usm text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;provenienza_materiali_usm&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN provenienza_materiali_usm text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;criteri_distinzione_usm&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN criteri_distinzione_usm text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;uso_primario_usm&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN uso_primario_usm text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;doc_usv&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN doc_usv text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+        
+        <span class="c1">#############nuovi##############################################################</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;tipologia_opera&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN tipologia_opera text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;sezione_muraria&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN sezione_muraria text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;superficie_analizzata&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN superficie_analizzata text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;orientamento&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN orientamento text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;materiali_lat&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN materiali_lat text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;lavorazione_lat&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN lavorazione_lat text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;consistenza_lat&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN consistenza_lat text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;forma_lat&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN forma_lat text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;colore_lat&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN colore_lat text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;impasto_lat&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN impasto_lat text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+        
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;forma_p&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN forma_p text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;colore_p&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN colore_p text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;taglio_p&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN taglio_p text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;posa_opera_p&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN posa_opera_p text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;inerti_usm&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN inerti_usm text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;tipo_legante_usm&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN tipo_legante_usm text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;rifinitura_usm&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN rifinitura_usm text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;materiale_p&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN materiale_p text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;consistenza_p&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN consistenza_p text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>                    
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;rapporti2&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE us_table ADD COLUMN rapporti2 text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+        
+        <span class="c1"># try:</span>
+            <span class="c1"># self.engine.execute(&quot;ALTER TABLE us_table ADD CONSTRAINT ID_us_unico UNIQUE (unita_tipo);&quot;)</span>
+        <span class="c1"># except:</span>
+            <span class="c1"># pass</span>
+        <span class="c1">####pyarchinit_thesaurus_sigle</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="s2">&quot;pyarchinit_thesaurus_sigle&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">,</span> <span class="n">autoload</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">table_column_names_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">table_column_names_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;lingua&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE pyarchinit_thesaurus_sigle ADD COLUMN lingua text DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+
+
+
+        <span class="c1">####periodizzazione_table</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="s2">&quot;periodizzazione_table&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">,</span> <span class="n">autoload</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">table_column_names_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">table_column_names_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;cont_per&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE periodizzazione_table ADD COLUMN cont_per integer DEFAULT &#39;&#39; &quot;</span><span class="p">)</span>
+        <span class="c1"># if not table_column_names_list.__contains__(&#39;area&#39;):</span>
+            <span class="c1"># self.engine.execute(&quot;ALTER TABLE periodizzazione_table ADD COLUMN area integer&quot;)</span>
+        
+        <span class="c1">####tomba_table</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="s2">&quot;tomba_table&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">,</span> <span class="n">autoload</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">table_column_names_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">table_column_names_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;periodo_iniziale&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE tomba_table ADD COLUMN periodo_iniziale integer&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;fase_iniziale&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE tomba_table ADD COLUMN fase_iniziale integer&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;periodo_finale&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE tomba_table ADD COLUMN periodo_finale integer&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;fase_finale&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE tomba_table ADD COLUMN fase_finale integer&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;datazione_estesa&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE tomba_table ADD COLUMN datazione_estesa text&quot;</span><span class="p">)</span>
+
+        <span class="c1">####individui_table</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="s2">&quot;individui_table&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">,</span> <span class="n">autoload</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">table_column_names_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">table_column_names_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;sigla_struttura&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE individui_table ADD COLUMN sigla_struttura text&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;nr_struttura&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE individui_table ADD COLUMN nr_struttura text&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;completo_si_no&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE individui_table ADD COLUMN completo_si_no varchar&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;disturbato_si_no&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE individui_table ADD COLUMN disturbato_si_no varchar&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;in_connessione_si_no&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE individui_table ADD COLUMN in_connessione_si_no varchar&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;lunghezza_scheletro&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE individui_table ADD COLUMN lunghezza_scheletro NUMERIC(6,2)&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;posizione_scheletro&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE individui_table ADD COLUMN posizione_scheletro varchar&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;posizione_cranio&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE individui_table ADD COLUMN posizione_cranio varchar&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;posizione_arti_superiori&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE individui_table ADD COLUMN posizione_arti_superiori varchar&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;posizione_arti_inferiori&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE individui_table ADD COLUMN posizione_arti_inferiori varchar&quot;</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;orientamento_asse&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE individui_table ADD COLUMN orientamento_asse text&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;orientamento_azimut&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE individui_table ADD COLUMN orientamento_azimut text&quot;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;nr_struttura&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE individui_table ALTER COLUMN nr_struttura  TYPE text&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;orientamento_azimut&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE individui_table ALTER COLUMN orientamento_azimut TYPE text&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;us&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE individui_table ALTER COLUMN us TYPE text&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;eta_min&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE individui_table ALTER COLUMN eta_min TYPE text&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;eta_max&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE individui_table ALTER COLUMN eta_max TYPE text&quot;</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+        
+        
+        
+        <span class="c1">####periodizzazione_table</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="s2">&quot;periodizzazione_table&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">,</span> <span class="n">autoload</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">table_column_names_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">table_column_names_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+        <span class="k">try</span><span class="p">:</span> 
+            <span class="k">if</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;fase&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE periodizzazione_table ALTER COLUMN fase TYPE text&quot;</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="c1">####aggiornamento tabelle geografiche</span>
+        <span class="c1">####pyunitastratigrafiche</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="s2">&quot;pyunitastratigrafiche&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">,</span> <span class="n">autoload</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">table_column_names_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">table_column_names_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+        <span class="c1"># if table_column_names_list.__contains__(&#39;rilievo_orginale&#39;):</span>
+            <span class="c1"># self.engine.execute(&quot;ALTER TABLE pyunitastratigrafiche RENAME COLUMN rilievo_orginale TO rilievo_originale&quot;)   </span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;coord&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE pyunitastratigrafiche ADD COLUMN coord text&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;unita_tipo_s&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE pyunitastratigrafiche ADD COLUMN unita_tipo_s text&quot;</span><span class="p">)</span>
+        <span class="c1"># if table_column_names_list.__contains__(&#39;id&#39;):</span>
+            <span class="c1"># self.engine.execute(&quot;ALTER TABLE pyunitastratigrafiche RENAME COLUMN id TO gid&quot;)</span>
+
+        <span class="n">table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="s2">&quot;pyunitastratigrafiche_usm&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">,</span> <span class="n">autoload</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">table_column_names_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">table_column_names_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;unita_tipo_s&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE pyunitastratigrafiche_usm ADD COLUMN unita_tipo_s text&quot;</span><span class="p">)</span>
+       
+        
+        <span class="n">table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="s2">&quot;pyarchinit_quote_usm&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">,</span> <span class="n">autoload</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">table_column_names_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">table_column_names_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;unita_tipo_q&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE pyarchinit_quote_usm ADD COLUMN unita_tipo_q text&quot;</span><span class="p">)</span>
+       
+        
+        <span class="n">table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="s2">&quot;pyarchinit_quote&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">,</span> <span class="n">autoload</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">table_column_names_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">table_column_names_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;unita_tipo_q&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE pyarchinit_quote ADD COLUMN unita_tipo_q text&quot;</span><span class="p">)</span>
+        
+        <span class="n">table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="s2">&quot;pyarchinit_strutture_ipotesi&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">,</span> <span class="n">autoload</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">table_column_names_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">table_column_names_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;sigla_strut&#39;</span><span class="p">):</span>
+        
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span> <span class="s2">&quot;ALTER TABLE pyarchinit_strutture_ipotesi ADD COLUMN sigla_strut varchar(3) DEFAULT &#39;NoD&#39;&quot;</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;nr_strut&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE pyarchinit_strutture_ipotesi ADD COLUMN nr_strut integer DEFAULT 0 &quot;</span><span class="p">)</span>
+        
+       
+        <span class="n">table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="s2">&quot;pyarchinit_sezioni&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">,</span> <span class="n">autoload</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">table_column_names_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">table_column_names_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+                
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;tipo_doc&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE pyarchinit_sezioni  ADD COLUMN tipo_doc text&quot;</span><span class="p">)</span>   
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_column_names_list</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;nome_doc&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE pyarchinit_sezioni  ADD COLUMN nome_doc text&quot;</span><span class="p">)</span></div></div>
+        
+      
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, AdArte srl.</p>
+  </div>
+
+  Realizzato con <a href="https://www.sphinx-doc.org/">Sphinx</a> e il tema
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    fornito da <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

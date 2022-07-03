@@ -54,6 +54,8 @@
 <li class="toctree-l1"><a class="reference internal" href="03_le_schede.html">3.Le schede</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04_funzioni.html">4.Funzioni</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_esempi_di_applicazione.html">5.Esempi di Applicazione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_moduli.html">6.Moduli pyArchInit: Classi e Funzioni</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_moduli.html#classe-pyarchinit-exp-ussheet-pdf">6.1.1.Classe pyarchinit_exp_USsheet_pdf</a></li>
 </ul>
 
         </div>
@@ -83,6 +85,17 @@
   <img alt="_images/logo_3.png" class="align-right" src="_images/logo_3.png" />
 <section id="installazione">
 <h1>1.Installazione<a class="headerlink" href="#installazione" title="Link a questa intestazione"></a></h1>
+<p>Esistono due modi per installare pyArchInit.</p>
+<p><strong>La prima</strong> consiste nell’inserire il seguente link nel manager dei plugin di QGIS (Consulta la pagina ufficiale di <a class="reference external" href="https://github.com/pyarchinit/pyarchinit">pyArchInit</a> su GitHub.):</p>
+<p><a class="reference external" href="http://pyarchinit.org/pyarchinit.xml">http://pyarchinit.org/pyarchinit.xml</a></p>
+<p><strong>La seconda</strong>, installando il plugin da un file ZIP, per cui si rimanda alla sezione <strong>Installazione da ZIP</strong>.</p>
+<p>Nella <em>Barra dei Menu</em> andare su <em>plugin</em> e cliccare su <strong>Gestisci ed Installa Plugin</strong>.
+Dalla finsestra che si aprirà, andare su <strong>Impostazioni</strong></p>
+<img alt="_images/img_pluginmanager1.png" class="align-center" src="_images/img_pluginmanager1.png" />
+<p>A questo punto cliccare il tasto <strong>Aggiungi</strong></p>
+<img alt="_images/img_pluginmanager2.png" class="align-center" src="_images/img_pluginmanager2.png" />
+<p>Inserire il nome <em>pyArchInit</em> e copiare in URL il link riportato sopra. Infine, premere su <strong>OK</strong> e chiudere il <strong>Manager dei Plugin</strong></p>
+<img alt="_images/img_pluginmanager3.png" class="align-center" src="_images/img_pluginmanager3.png" />
 <section id="dipendenze">
 <h2>Dipendenze<a class="headerlink" href="#dipendenze" title="Link a questa intestazione"></a></h2>
 <p>Dipendenze</p>
@@ -102,7 +115,7 @@
 <p class="admonition-title">Nota</p>
 <p><strong>Istruzioni per installare Graphviz (prima installazione)</strong></p>
 <blockquote>
-<div><p><strong>Windows:</strong> Scarica l’eseguibile dell’ultima versione di Graphviz (2.x) e installalo.</p>
+<div><p><strong>Windows:</strong> Scarica l’eseguibile dell’ultima versione di <a class="reference external" href="https://graphviz.org/download/">Graphviz</a> (2.x) e installalo.</p>
 <blockquote>
 <div><p><em>Se hai già installato una versione precedente di Graphviz, disinstallala prima di continuare con la nuova
 versione, altrimenti  non puoi impostare il percorso della nuova versione di Graphviz in pyarchinit</em></p>

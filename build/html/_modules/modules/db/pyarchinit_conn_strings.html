@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="it" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>modules.db.pyarchinit_conn_strings &mdash; pyArchInit 4.0 4 documentazione</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/translations.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="author" title="A proposito di questi documenti" href="../../../about.html" />
+    <link rel="index" title="Indice" href="../../../genindex.html" />
+    <link rel="search" title="Cerca" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> pyArchInit 4.0
+            <img src="../../../_static/pyarchinit_logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Cerca documenti" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Menu di navigazione">
+              <p class="caption" role="heading"><span class="caption-text">Contenuti:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../prerequisities.html">Prerequisiti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../novit%C3%A0.html">Novità</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../01_installazione.html">1.Installazione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../02_il_plugin.html">2 Il Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../03_le_schede.html">3.Le schede</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../04_funzioni.html">4.Funzioni</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../05_esempi_di_applicazione.html">5.Esempi di Applicazione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../06_moduli.html">pyArchInit Classi e Funzioni</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Menu navigazione dispositivi mobili" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pyArchInit 4.0</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Naviga tra le pagine">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Codice del modulo</a> &raquo;</li>
+      <li>modules.db.pyarchinit_conn_strings</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Codice sorgente per modules.db.pyarchinit_conn_strings</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="kn">import</span> <span class="nb">object</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
+<span class="kn">from</span> <span class="nn">..utility.settings</span> <span class="kn">import</span> <span class="n">Settings</span>
+<span class="kn">from</span> <span class="nn">..utility.pyarchinit_OS_utility</span> <span class="kn">import</span> <span class="n">Pyarchinit_OS_Utility</span>
+<span class="kn">from</span> <span class="nn">qgis.PyQt.QtWidgets</span> <span class="kn">import</span> <span class="n">QDialog</span><span class="p">,</span> <span class="n">QMessageBox</span>
+
+<div class="viewcode-block" id="Connection"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_conn_strings.Connection">[documenti]</a><span class="k">class</span> <span class="nc">Connection</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">HOME</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;PYARCHINIT_HOME&#39;</span><span class="p">]</span>
+    <span class="n">RESOURCES_PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">pardir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">pardir</span><span class="p">,</span> <span class="s1">&#39;resources&#39;</span><span class="p">)</span>
+
+    <span class="n">OS_UTILITY</span> <span class="o">=</span> <span class="n">Pyarchinit_OS_Utility</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">conn_str</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        
+        
+        <span class="n">cfg_rel_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">,</span> <span class="s1">&#39;pyarchinit_DB_folder&#39;</span><span class="p">,</span> <span class="s1">&#39;config.cfg&#39;</span><span class="p">)</span>
+        <span class="n">file_path</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">HOME</span><span class="p">,</span> <span class="n">cfg_rel_path</span><span class="p">)</span>
+        <span class="n">conf</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">settings</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">settings</span><span class="o">.</span><span class="n">set_configuration</span><span class="p">()</span>
+        <span class="n">conf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>  
+        <span class="n">conn_str_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;server&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="o">.</span><span class="n">SERVER</span><span class="p">,</span>
+                     <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="o">.</span><span class="n">USER</span><span class="p">,</span>
+                     <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="o">.</span><span class="n">HOST</span><span class="p">,</span>
+                     <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="o">.</span><span class="n">PORT</span><span class="p">,</span>
+                     <span class="s2">&quot;db_name&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="o">.</span><span class="n">DATABASE</span><span class="p">,</span>
+                     <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="o">.</span><span class="n">PASSWORD</span><span class="p">}</span>
+        
+        <span class="k">if</span> <span class="n">conn_str_dict</span><span class="p">[</span><span class="s2">&quot;server&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;postgres&#39;</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                
+                <span class="n">conn_str</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">://</span><span class="si">%s</span><span class="s2">:</span><span class="si">%s</span><span class="s2">@</span><span class="si">%s</span><span class="s2">:</span><span class="si">%s</span><span class="s2">/</span><span class="si">%s%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span>
+                <span class="s2">&quot;postgresql&quot;</span><span class="p">,</span> <span class="n">conn_str_dict</span><span class="p">[</span><span class="s2">&quot;user&quot;</span><span class="p">],</span> <span class="n">conn_str_dict</span><span class="p">[</span><span class="s2">&quot;password&quot;</span><span class="p">],</span> <span class="n">conn_str_dict</span><span class="p">[</span><span class="s2">&quot;host&quot;</span><span class="p">],</span>
+                <span class="n">conn_str_dict</span><span class="p">[</span><span class="s2">&quot;port&quot;</span><span class="p">],</span> <span class="n">conn_str_dict</span><span class="p">[</span><span class="s2">&quot;db_name&quot;</span><span class="p">],</span> <span class="s2">&quot;?sslmode=allow&quot;</span><span class="p">)</span>
+                <span class="n">test</span><span class="o">=</span><span class="kc">True</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">QMessageBox</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;Attenzione&quot;</span><span class="p">,</span> <span class="s1">&#39;Problema&#39;</span><span class="p">,</span> <span class="n">QMessageBox</span><span class="o">.</span><span class="n">Ok</span><span class="p">)</span>
+                <span class="n">conn_str</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">://</span><span class="si">%s</span><span class="s2">:</span><span class="si">%s</span><span class="s2">@</span><span class="si">%s</span><span class="s2">:</span><span class="si">%d</span><span class="s2">/</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span>
+                <span class="s2">&quot;postgresql&quot;</span><span class="p">,</span> <span class="n">conn_str_dict</span><span class="p">[</span><span class="s2">&quot;user&quot;</span><span class="p">],</span> <span class="n">conn_str_dict</span><span class="p">[</span><span class="s2">&quot;password&quot;</span><span class="p">],</span> <span class="n">conn_str_dict</span><span class="p">[</span><span class="s2">&quot;host&quot;</span><span class="p">],</span>
+                <span class="n">conn_str_dict</span><span class="p">[</span><span class="s2">&quot;port&quot;</span><span class="p">],</span> <span class="n">conn_str_dict</span><span class="p">[</span><span class="s2">&quot;db_name&quot;</span><span class="p">])</span>
+           
+        <span class="k">elif</span> <span class="n">conn_str_dict</span><span class="p">[</span><span class="s2">&quot;server&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;sqlite&#39;</span><span class="p">:</span>
+            <span class="n">sqlite_DB_path</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">HOME</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">,</span>
+                                           <span class="s2">&quot;pyarchinit_DB_folder&quot;</span><span class="p">)</span>
+            <span class="n">dbname_abs</span> <span class="o">=</span> <span class="n">sqlite_DB_path</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="n">conn_str_dict</span><span class="p">[</span><span class="s2">&quot;db_name&quot;</span><span class="p">]</span>
+            <span class="n">conn_str</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">:///</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">conn_str_dict</span><span class="p">[</span><span class="s2">&quot;server&quot;</span><span class="p">],</span> <span class="n">dbname_abs</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">conn_str</span> <span class="o">=</span> <span class="kc">None</span>
+    
+        <span class="k">return</span> <span class="n">conn_str</span>
+        
+    <span class="k">def</span> <span class="nf">databasename</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">cfg_rel_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">,</span> <span class="s1">&#39;pyarchinit_DB_folder&#39;</span><span class="p">,</span> <span class="s1">&#39;config.cfg&#39;</span><span class="p">)</span>
+        <span class="n">file_path</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">HOME</span><span class="p">,</span> <span class="n">cfg_rel_path</span><span class="p">)</span>
+        <span class="n">conf</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">settings</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">settings</span><span class="o">.</span><span class="n">set_configuration</span><span class="p">()</span>
+        <span class="n">conf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">dbname</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;db_name&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="o">.</span><span class="n">DATABASE</span><span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">dbname</span>
+    <span class="k">def</span> <span class="nf">datauser</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">cfg_rel_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">,</span> <span class="s1">&#39;pyarchinit_DB_folder&#39;</span><span class="p">,</span> <span class="s1">&#39;config.cfg&#39;</span><span class="p">)</span>
+        <span class="n">file_path</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">HOME</span><span class="p">,</span> <span class="n">cfg_rel_path</span><span class="p">)</span>
+        <span class="n">conf</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">settings</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">settings</span><span class="o">.</span><span class="n">set_configuration</span><span class="p">()</span>
+        <span class="n">conf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="o">.</span><span class="n">USER</span><span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">user</span>
+    <span class="k">def</span> <span class="nf">datahost</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">cfg_rel_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">,</span> <span class="s1">&#39;pyarchinit_DB_folder&#39;</span><span class="p">,</span> <span class="s1">&#39;config.cfg&#39;</span><span class="p">)</span>
+        <span class="n">file_path</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">HOME</span><span class="p">,</span> <span class="n">cfg_rel_path</span><span class="p">)</span>
+        <span class="n">conf</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">settings</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">settings</span><span class="o">.</span><span class="n">set_configuration</span><span class="p">()</span>
+        <span class="n">conf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">host</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="o">.</span><span class="n">HOST</span><span class="p">}</span>
+        <span class="k">return</span> <span class="n">host</span>
+    <span class="k">def</span> <span class="nf">dataport</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">cfg_rel_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">,</span> <span class="s1">&#39;pyarchinit_DB_folder&#39;</span><span class="p">,</span> <span class="s1">&#39;config.cfg&#39;</span><span class="p">)</span>
+        <span class="n">file_path</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">HOME</span><span class="p">,</span> <span class="n">cfg_rel_path</span><span class="p">)</span>
+        <span class="n">conf</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">settings</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">settings</span><span class="o">.</span><span class="n">set_configuration</span><span class="p">()</span>
+        <span class="n">conf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">port</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="o">.</span><span class="n">PORT</span><span class="p">}</span>
+        <span class="k">return</span> <span class="n">port</span>
+    
+    <span class="k">def</span> <span class="nf">datapassword</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        
+        <span class="n">cfg_rel_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">,</span> <span class="s1">&#39;pyarchinit_DB_folder&#39;</span><span class="p">,</span> <span class="s1">&#39;config.cfg&#39;</span><span class="p">)</span>
+        <span class="n">file_path</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">HOME</span><span class="p">,</span> <span class="n">cfg_rel_path</span><span class="p">)</span>
+        <span class="n">conf</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">settings</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">settings</span><span class="o">.</span><span class="n">set_configuration</span><span class="p">()</span>
+        <span class="n">conf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">password</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="o">.</span><span class="n">PASSWORD</span><span class="p">}</span>
+        <span class="k">return</span> <span class="n">password</span>
+        
+    <span class="k">def</span> <span class="nf">thumb_path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">cfg_rel_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">,</span> <span class="s1">&#39;pyarchinit_DB_folder&#39;</span><span class="p">,</span> <span class="s1">&#39;config.cfg&#39;</span><span class="p">)</span>
+        <span class="n">file_path</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">HOME</span><span class="p">,</span> <span class="n">cfg_rel_path</span><span class="p">)</span>
+        <span class="n">conf</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">settings</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">settings</span><span class="o">.</span><span class="n">set_configuration</span><span class="p">()</span>
+        <span class="n">conf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">thumb_path</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;thumb_path&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="o">.</span><span class="n">THUMB_PATH</span><span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">thumb_path</span>
+    
+    <span class="k">def</span> <span class="nf">thumb_resize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">cfg_rel_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">,</span> <span class="s1">&#39;pyarchinit_DB_folder&#39;</span><span class="p">,</span> <span class="s1">&#39;config.cfg&#39;</span><span class="p">)</span>
+        <span class="n">file_path</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">HOME</span><span class="p">,</span> <span class="n">cfg_rel_path</span><span class="p">)</span>
+        <span class="n">conf</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">settings</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">settings</span><span class="o">.</span><span class="n">set_configuration</span><span class="p">()</span>
+        <span class="n">conf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">thumb_resize</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;thumb_resize&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="o">.</span><span class="n">THUMB_RESIZE</span><span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">thumb_resize</span>
+    <span class="k">def</span> <span class="nf">sito_set</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">cfg_rel_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">,</span> <span class="s1">&#39;pyarchinit_DB_folder&#39;</span><span class="p">,</span> <span class="s1">&#39;config.cfg&#39;</span><span class="p">)</span>
+        <span class="n">file_path</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">HOME</span><span class="p">,</span> <span class="n">cfg_rel_path</span><span class="p">)</span>
+        <span class="n">conf</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">settings</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">settings</span><span class="o">.</span><span class="n">set_configuration</span><span class="p">()</span>
+        <span class="n">conf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">sito_set</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;sito_set&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="o">.</span><span class="n">SITE_SET</span><span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">sito_set</span>
+    <span class="k">def</span> <span class="nf">logo_path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">cfg_rel_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">,</span> <span class="s1">&#39;pyarchinit_DB_folder&#39;</span><span class="p">,</span> <span class="s1">&#39;config.cfg&#39;</span><span class="p">)</span>
+        <span class="n">file_path</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">HOME</span><span class="p">,</span> <span class="n">cfg_rel_path</span><span class="p">)</span>
+        <span class="n">conf</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">settings</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">settings</span><span class="o">.</span><span class="n">set_configuration</span><span class="p">()</span>
+        <span class="n">conf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">logo</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;logo&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="o">.</span><span class="n">LOGO</span><span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">logo</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, AdArte srl.</p>
+  </div>
+
+  Realizzato con <a href="https://www.sphinx-doc.org/">Sphinx</a> e il tema
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    fornito da <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

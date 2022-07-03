@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="it" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>6.Moduli pyArchInit: Classi e Funzioni &mdash; pyArchInit 4.0 4 documentazione</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/translations.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="A proposito di questi documenti" href="about.html" />
+    <link rel="index" title="Indice" href="genindex.html" />
+    <link rel="search" title="Cerca" href="search.html" />
+    <link rel="prev" title="5.Esempi di Applicazione" href="05_esempi_di_applicazione.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> pyArchInit 4.0
+            <img src="_static/pyarchinit_logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Cerca documenti" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Menu di navigazione">
+              <p class="caption" role="heading"><span class="caption-text">Contenuti:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prerequisities.html">Prerequisiti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="novit%C3%A0.html">Novità</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_installazione.html">1.Installazione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_il_plugin.html">2 Il Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_le_schede.html">3.Le schede</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_funzioni.html">4.Funzioni</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_esempi_di_applicazione.html">5.Esempi di Applicazione</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">6.Moduli pyArchInit: Classi e Funzioni</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#classe-pyarchinit-exp-ussheet-pdf">6.1.1.Classe pyarchinit_exp_USsheet_pdf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-modules.utility.pyarchinit_OS_utility"><strong>Calsse Pyarchinit_OS_Utility</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-modules.db.pyarchinit_utility"><strong>Classe Utility</strong></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#db">DB</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-modules.db.pyarchinit_db_manager"><strong>Calsse pyarchinit_db_manager</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-modules.db.pyarchinit_db_update"><strong>Calsse DB Update</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-modules.db.pyarchinit_conn_strings"><strong>Calsse Connection</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-modules.db.db_createdump"><strong>Calsse Create dump</strong></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tabs">Tabs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id7"><strong>Calsse Create dump</strong></a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Menu navigazione dispositivi mobili" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pyArchInit 4.0</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Naviga tra le pagine">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>6.Moduli pyArchInit: Classi e Funzioni</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/06_moduli.rst.txt" rel="nofollow"> Visualizza sorgente pagina</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="moduli-pyarchinit-classi-e-funzioni">
+<h1>6.Moduli pyArchInit: Classi e Funzioni<a class="headerlink" href="#moduli-pyarchinit-classi-e-funzioni" title="Link a questa intestazione"></a></h1>
+<section id="classe-pyarchinit-exp-ussheet-pdf">
+<h2>6.1.1.Classe pyarchinit_exp_USsheet_pdf<a class="headerlink" href="#classe-pyarchinit-exp-ussheet-pdf" title="Link a questa intestazione"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="modules.utility.pyarchinit_exp_USsheet_pdf.NumberedCanvas_USindex">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.utility.pyarchinit_exp_USsheet_pdf.</span></span><span class="sig-name descname"><span class="pre">NumberedCanvas_USindex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/utility/pyarchinit_exp_USsheet_pdf.html#NumberedCanvas_USindex"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.utility.pyarchinit_exp_USsheet_pdf.NumberedCanvas_USindex" title="Link a questa definizione"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="modules.utility.pyarchinit_exp_USsheet_pdf.NumberedCanvas_USindex.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/utility/pyarchinit_exp_USsheet_pdf.html#NumberedCanvas_USindex.save"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.utility.pyarchinit_exp_USsheet_pdf.NumberedCanvas_USindex.save" title="Link a questa definizione"></a></dt>
+<dd><p>add page info to each page (page x of y)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.utility.pyarchinit_exp_USsheet_pdf.NumberedCanvas_USindex.showPage">
+<span class="sig-name descname"><span class="pre">showPage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/utility/pyarchinit_exp_USsheet_pdf.html#NumberedCanvas_USindex.showPage"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.utility.pyarchinit_exp_USsheet_pdf.NumberedCanvas_USindex.showPage" title="Link a questa definizione"></a></dt>
+<dd><p>Close the current page and possibly start on a new page.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modules.utility.pyarchinit_exp_USsheet_pdf.NumberedCanvas_USsheet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.utility.pyarchinit_exp_USsheet_pdf.</span></span><span class="sig-name descname"><span class="pre">NumberedCanvas_USsheet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/utility/pyarchinit_exp_USsheet_pdf.html#NumberedCanvas_USsheet"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.utility.pyarchinit_exp_USsheet_pdf.NumberedCanvas_USsheet" title="Link a questa definizione"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="modules.utility.pyarchinit_exp_USsheet_pdf.NumberedCanvas_USsheet.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/utility/pyarchinit_exp_USsheet_pdf.html#NumberedCanvas_USsheet.save"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.utility.pyarchinit_exp_USsheet_pdf.NumberedCanvas_USsheet.save" title="Link a questa definizione"></a></dt>
+<dd><p>add page info to each page (page x of y)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.utility.pyarchinit_exp_USsheet_pdf.NumberedCanvas_USsheet.showPage">
+<span class="sig-name descname"><span class="pre">showPage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/utility/pyarchinit_exp_USsheet_pdf.html#NumberedCanvas_USsheet.showPage"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.utility.pyarchinit_exp_USsheet_pdf.NumberedCanvas_USsheet.showPage" title="Link a questa definizione"></a></dt>
+<dd><p>Close the current page and possibly start on a new page.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-modules.utility.pyarchinit_OS_utility">
+<span id="calsse-pyarchinit-os-utility"></span><h2><strong>Calsse Pyarchinit_OS_Utility</strong><a class="headerlink" href="#module-modules.utility.pyarchinit_OS_utility" title="Link a questa intestazione"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="modules.utility.pyarchinit_OS_utility.Pyarchinit_OS_Utility">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.utility.pyarchinit_OS_utility.</span></span><span class="sig-name descname"><span class="pre">Pyarchinit_OS_Utility</span></span><a class="reference internal" href="_modules/modules/utility/pyarchinit_OS_utility.html#Pyarchinit_OS_Utility"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.utility.pyarchinit_OS_utility.Pyarchinit_OS_Utility" title="Link a questa definizione"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="modules.utility.pyarchinit_OS_utility.Pyarchinit_OS_Utility.checkGraphvizInstallation">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">checkGraphvizInstallation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/utility/pyarchinit_OS_utility.html#Pyarchinit_OS_Utility.checkGraphvizInstallation"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.utility.pyarchinit_OS_utility.Pyarchinit_OS_Utility.checkGraphvizInstallation" title="Link a questa definizione"></a></dt>
+<dd><p>Return True if Graphviz is installed</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.utility.pyarchinit_OS_utility.Pyarchinit_OS_Utility.checkPostgresInstallation">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">checkPostgresInstallation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/utility/pyarchinit_OS_utility.html#Pyarchinit_OS_Utility.checkPostgresInstallation"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.utility.pyarchinit_OS_utility.Pyarchinit_OS_Utility.checkPostgresInstallation" title="Link a questa definizione"></a></dt>
+<dd><p>Return True if Postgres is installed</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.utility.pyarchinit_OS_utility.Pyarchinit_OS_Utility.copy_file">
+<span class="sig-name descname"><span class="pre">copy_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/utility/pyarchinit_OS_utility.html#Pyarchinit_OS_Utility.copy_file"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.utility.pyarchinit_OS_utility.Pyarchinit_OS_Utility.copy_file" title="Link a questa definizione"></a></dt>
+<dd><p>Copy file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parametri</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>str</strong> – <ul>
+<li><p>file path</p></li>
+</ul>
+</p></li>
+<li><p><strong>str</strong> – <ul>
+<li><p>destination file</p></li>
+</ul>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.utility.pyarchinit_OS_utility.Pyarchinit_OS_Utility.create_dir">
+<span class="sig-name descname"><span class="pre">create_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/utility/pyarchinit_OS_utility.html#Pyarchinit_OS_Utility.create_dir"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.utility.pyarchinit_OS_utility.Pyarchinit_OS_Utility.create_dir" title="Link a questa definizione"></a></dt>
+<dd><p>Create directory</p>
+<p>:param  str  - path directory</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.utility.pyarchinit_OS_utility.Pyarchinit_OS_Utility.isMac">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">isMac</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/utility/pyarchinit_OS_utility.html#Pyarchinit_OS_Utility.isMac"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.utility.pyarchinit_OS_utility.Pyarchinit_OS_Utility.isMac" title="Link a questa definizione"></a></dt>
+<dd><p>Return True if platform is mac</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.utility.pyarchinit_OS_utility.Pyarchinit_OS_Utility.isWindows">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">isWindows</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/utility/pyarchinit_OS_utility.html#Pyarchinit_OS_Utility.isWindows"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.utility.pyarchinit_OS_utility.Pyarchinit_OS_Utility.isWindows" title="Link a questa definizione"></a></dt>
+<dd><p>Return True if platform is Windows</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="id0">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.utility.pyarchinit_OS_utility.</span></span><span class="sig-name descname"><span class="pre">Pyarchinit_OS_Utility</span></span><a class="reference internal" href="_modules/modules/utility/pyarchinit_OS_utility.html#Pyarchinit_OS_Utility"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#id0" title="Link a questa definizione"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="id1">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">checkGraphvizInstallation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/utility/pyarchinit_OS_utility.html#Pyarchinit_OS_Utility.checkGraphvizInstallation"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#id1" title="Link a questa definizione"></a></dt>
+<dd><p>Return True if Graphviz is installed</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id2">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">checkPostgresInstallation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/utility/pyarchinit_OS_utility.html#Pyarchinit_OS_Utility.checkPostgresInstallation"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#id2" title="Link a questa definizione"></a></dt>
+<dd><p>Return True if Postgres is installed</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">copy_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/utility/pyarchinit_OS_utility.html#Pyarchinit_OS_Utility.copy_file"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#id3" title="Link a questa definizione"></a></dt>
+<dd><p>Copy file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parametri</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>str</strong> – <ul>
+<li><p>file path</p></li>
+</ul>
+</p></li>
+<li><p><strong>str</strong> – <ul>
+<li><p>destination file</p></li>
+</ul>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id4">
+<span class="sig-name descname"><span class="pre">create_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/utility/pyarchinit_OS_utility.html#Pyarchinit_OS_Utility.create_dir"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#id4" title="Link a questa definizione"></a></dt>
+<dd><p>Create directory</p>
+<p>:param  str  - path directory</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id5">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">isMac</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/utility/pyarchinit_OS_utility.html#Pyarchinit_OS_Utility.isMac"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#id5" title="Link a questa definizione"></a></dt>
+<dd><p>Return True if platform is mac</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id6">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">isWindows</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/utility/pyarchinit_OS_utility.html#Pyarchinit_OS_Utility.isWindows"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#id6" title="Link a questa definizione"></a></dt>
+<dd><p>Return True if platform is Windows</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-modules.db.pyarchinit_utility">
+<span id="classe-utility"></span><h2><strong>Classe Utility</strong><a class="headerlink" href="#module-modules.db.pyarchinit_utility" title="Link a questa intestazione"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_utility.Utility">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.db.pyarchinit_utility.</span></span><span class="sig-name descname"><span class="pre">Utility</span></span><a class="reference internal" href="_modules/modules/db/pyarchinit_utility.html#Utility"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_utility.Utility" title="Link a questa definizione"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_utility.Utility.add_item_to_dict">
+<span class="sig-name descname"><span class="pre">add_item_to_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_utility.html#Utility.add_item_to_dict"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_utility.Utility.add_item_to_dict" title="Link a questa definizione"></a></dt>
+<dd><p>receive a dict and a list containt tuple with key,value
+and add them to dict</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_utility.Utility.count_list_eq_v">
+<span class="sig-name descname"><span class="pre">count_list_eq_v</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_utility.html#Utility.count_list_eq_v"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_utility.Utility.count_list_eq_v" title="Link a questa definizione"></a></dt>
+<dd><p>take a list and a value. If the number of occurens of a
+items inside the list is equal to v value, put the singol value
+into list_res as a list. Return a list of lists</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_utility.Utility.find_list_in_dict">
+<span class="sig-name descname"><span class="pre">find_list_in_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_utility.html#Utility.find_list_in_dict"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_utility.Utility.find_list_in_dict" title="Link a questa definizione"></a></dt>
+<dd><p>recives a dict and if contains a list of lists and
+delete the item from the dict.
+Return a tuple containin the new dict and a list of
+tuples wich contain the keys and the values</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_utility.Utility.list_col_index_value">
+<span class="sig-name descname"><span class="pre">list_col_index_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_utility.html#Utility.list_col_index_value"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_utility.Utility.list_col_index_value" title="Link a questa definizione"></a></dt>
+<dd><p>return two lists into one tupla,
+takin” two list with same lenght and lookin for the occurrences.
+for every occurrences between v_1 and v_2 the v_2 value it’s charged
+into mod_value and its position in list it’s put into list_index.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_utility.Utility.list_tup_2_list">
+<span class="sig-name descname"><span class="pre">list_tup_2_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_utility.html#Utility.list_tup_2_list"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_utility.Utility.list_tup_2_list" title="Link a questa definizione"></a></dt>
+<dd><p>take a list of tuples ad return a list of lists</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_utility.Utility.pos_none_in_list">
+<span class="sig-name descname"><span class="pre">pos_none_in_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_utility.html#Utility.pos_none_in_list"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_utility.Utility.pos_none_in_list" title="Link a questa definizione"></a></dt>
+<dd><p>take a list of values and return the position number of the values
+equal to “None”</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_utility.Utility.select_in_list">
+<span class="sig-name descname"><span class="pre">select_in_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_utility.html#Utility.select_in_list"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_utility.Utility.select_in_list" title="Link a questa definizione"></a></dt>
+<dd><p>take a list of lists or value and return the in a list of lists
+the value taken by the value of p.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_utility.Utility.tup_2_list">
+<span class="sig-name descname"><span class="pre">tup_2_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_utility.html#Utility.tup_2_list"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_utility.Utility.tup_2_list" title="Link a questa definizione"></a></dt>
+<dd><p>take a tuple of strings, and return a list of lists of the values.
+if s is set, add the value to the strings. If i is set return only the
+value in the i position</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_utility.Utility.tup_2_list_II">
+<span class="sig-name descname"><span class="pre">tup_2_list_II</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_utility.html#Utility.tup_2_list_II"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_utility.Utility.tup_2_list_II" title="Link a questa definizione"></a></dt>
+<dd><p>take a list of tuples ad return a list of lists</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_utility.Utility.tup_2_list_III">
+<span class="sig-name descname"><span class="pre">tup_2_list_III</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_utility.html#Utility.tup_2_list_III"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_utility.Utility.tup_2_list_III" title="Link a questa definizione"></a></dt>
+<dd><p>take a list of tuples ad return a list of values</p>
+</dd></dl>
+
+</dd></dl>
+
+<section id="db">
+<h3>DB<a class="headerlink" href="#db" title="Link a questa intestazione"></a></h3>
+</section>
+</section>
+<section id="module-modules.db.pyarchinit_db_manager">
+<span id="calsse-pyarchinit-db-manager"></span><h2><strong>Calsse pyarchinit_db_manager</strong><a class="headerlink" href="#module-modules.db.pyarchinit_db_manager" title="Link a questa intestazione"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.db.pyarchinit_db_manager.</span></span><span class="sig-name descname"><span class="pre">Pyarchinit_db_management</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management" title="Link a questa definizione"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.fields_list">
+<span class="sig-name descname"><span class="pre">fields_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.fields_list"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.fields_list" title="Link a questa definizione"></a></dt>
+<dd><p>return the list of columns in a table. If s is set a int,
+return only one column</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.group_by">
+<span class="sig-name descname"><span class="pre">group_by</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CD</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.group_by"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.group_by" title="Link a questa definizione"></a></dt>
+<dd><p>Group by the values by table name - string, field name - string, table class DB from mapper - string</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_campioni_values">
+<span class="sig-name descname"><span class="pre">insert_campioni_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_campioni_values"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_campioni_values" title="Link a questa definizione"></a></dt>
+<dd><p>Istanzia la classe CAMPIONI da pyarchinit_db_mapper</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_media2entity_values">
+<span class="sig-name descname"><span class="pre">insert_media2entity_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_media2entity_values"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_media2entity_values" title="Link a questa definizione"></a></dt>
+<dd><p>Istanzia la classe MEDIATOENTITY da pyarchinit_db_mapper</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_media2entity_view_values">
+<span class="sig-name descname"><span class="pre">insert_media2entity_view_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_media2entity_view_values"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_media2entity_view_values" title="Link a questa definizione"></a></dt>
+<dd><p>Istanzia la classe MEDIATOENTITY da pyarchinit_db_mapper</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_media_values">
+<span class="sig-name descname"><span class="pre">insert_media_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_media_values"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_media_values" title="Link a questa definizione"></a></dt>
+<dd><p>Istanzia la classe MEDIA da pyarchinit_db_mapper</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_mediathumb_values">
+<span class="sig-name descname"><span class="pre">insert_mediathumb_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_mediathumb_values"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_mediathumb_values" title="Link a questa definizione"></a></dt>
+<dd><p>Istanzia la classe MEDIA da pyarchinit_db_mapper</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pdf_administrator_values">
+<span class="sig-name descname"><span class="pre">insert_pdf_administrator_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_pdf_administrator_values"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pdf_administrator_values" title="Link a questa definizione"></a></dt>
+<dd><p>Istanzia la classe PDF_ADMINISTRATOR da pyarchinit_db_mapper</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_periodizzazione_values">
+<span class="sig-name descname"><span class="pre">insert_periodizzazione_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_periodizzazione_values"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_periodizzazione_values" title="Link a questa definizione"></a></dt>
+<dd><p>Istanzia la classe Periodizzazione da pyarchinit_db_mapper</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_site_values">
+<span class="sig-name descname"><span class="pre">insert_site_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_site_values"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_site_values" title="Link a questa definizione"></a></dt>
+<dd><p>Istanzia la classe SITE da pyarchinit_db_mapper</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_struttura_values">
+<span class="sig-name descname"><span class="pre">insert_struttura_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_struttura_values"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_struttura_values" title="Link a questa definizione"></a></dt>
+<dd><p>Istanzia la classe Struttura da pyarchinit_db_mapper</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_ut_values">
+<span class="sig-name descname"><span class="pre">insert_ut_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_ut_values"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_ut_values" title="Link a questa definizione"></a></dt>
+<dd><p>Istanzia la classe UT da pyarchinit_db_mapper</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values">
+<span class="sig-name descname"><span class="pre">insert_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_values"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values" title="Link a questa definizione"></a></dt>
+<dd><p>Istanzia la classe US da pyarchinit_db_mapper</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_Lapidei">
+<span class="sig-name descname"><span class="pre">insert_values_Lapidei</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_values_Lapidei"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_Lapidei" title="Link a questa definizione"></a></dt>
+<dd><p>Istanzia la classe Inventario_Lapidei da pyarchinit_db_mapper</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_archeozoology">
+<span class="sig-name descname"><span class="pre">insert_values_archeozoology</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_values_archeozoology"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_archeozoology" title="Link a questa definizione"></a></dt>
+<dd><p>Istanzia la classe ARCHEOZOOLOGY da pyarchinit_db_mapper</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_campioni">
+<span class="sig-name descname"><span class="pre">insert_values_campioni</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_values_campioni"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_campioni" title="Link a questa definizione"></a></dt>
+<dd><p>Istanzia la classe CAMPIONI da pyarchinit_db_mapper</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_deteta">
+<span class="sig-name descname"><span class="pre">insert_values_deteta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_values_deteta"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_deteta" title="Link a questa definizione"></a></dt>
+<dd><p>Istanzia la classe DETETA da pyarchinit_db_mapper</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_detsesso">
+<span class="sig-name descname"><span class="pre">insert_values_detsesso</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_values_detsesso"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_detsesso" title="Link a questa definizione"></a></dt>
+<dd><p>Istanzia la classe DETSESSO da pyarchinit_db_mapper</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_documentazione">
+<span class="sig-name descname"><span class="pre">insert_values_documentazione</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_values_documentazione"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_documentazione" title="Link a questa definizione"></a></dt>
+<dd><p>Istanzia la classe DOCUMENTAZIONE da pyarchinit_db_mapper</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_ind">
+<span class="sig-name descname"><span class="pre">insert_values_ind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_values_ind"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_ind" title="Link a questa definizione"></a></dt>
+<dd><p>Istanzia la classe SCHEDAIND da pyarchinit_db_mapper</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_reperti">
+<span class="sig-name descname"><span class="pre">insert_values_reperti</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_values_reperti"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_reperti" title="Link a questa definizione"></a></dt>
+<dd><p>Istanzia la classe Reperti da pyarchinit_db_mapper</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_thesaurus">
+<span class="sig-name descname"><span class="pre">insert_values_thesaurus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_values_thesaurus"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_thesaurus" title="Link a questa definizione"></a></dt>
+<dd><p>Istanzia la classe PYARCHINIT_THESAURUS_SIGLE da pyarchinit_db_mapper</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_tomba">
+<span class="sig-name descname"><span class="pre">insert_values_tomba</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_values_tomba"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_tomba" title="Link a questa definizione"></a></dt>
+<dd><p>Istanzia la classe TOMBA da pyarchinit_db_mapper</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_class_str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_table_str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns_name_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values_update_list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.update"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.update" title="Link a questa definizione"></a></dt>
+<dd><p>Receives 5 values then putted in a list. The values must be passed
+in this order: table name-&gt;string, column_name_where-&gt;list containin”
+one value
+(“site_table”, “id_sito”, [1], [“sito”, “nazione”, “regione”, “comune”, “descrizione”, “provincia”], [“Sito archeologico 1”, “Italiauiodsds”, “Emilia-Romagna”, “Riminijk”, “Sito di epoca altomedievale….23”, “Riminikljlks”])
+self.set_update = arg
+#self.connection()
+table = Table(self.set_update[0], self.metadata, autoload=True)
+changes_dict= {}
+u = Utility()
+set_update_4 = u.deunicode_list(self.set_update[4])</p>
+<p>u.add_item_to_dict(changes_dict,zip(self.set_update[3], set_update_4))</p>
+<p>f = open(«test_update.txt», «w»)
+f.write(str(self.set_update))
+f.close()</p>
+<dl>
+<dt>exec_str = (“%s%s%s%s%s%s%s”) % («table.update(table.c.»,</dt><dd><blockquote>
+<div><p>self.set_update[1],</p>
+</div></blockquote>
+<p>» == “»,
+self.set_update[2][0],
+«”).execute(«,
+changes_dict ,»)»)</p>
+</dd>
+</dl>
+<p>#session.query(SITE).filter(and_(SITE.id_sito == “1”)).update(values = {SITE.sito:»updatetest»})</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.update_for">
+<span class="sig-name descname"><span class="pre">update_for</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.update_for"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.update_for" title="Link a questa definizione"></a></dt>
+<dd><p>table = Table(“us_table_toimp”, self.metadata, autoload=True)
+s = table.select(table.c.id_us &gt; 0)
+res_list = self.run(s)
+cont = 11900
+for i in res_list:</p>
+<blockquote>
+<div><p>self.update(“US_toimp”, “id_us”, [i], [“id_us”], [cont])
+cont = cont+1</p>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-modules.db.pyarchinit_db_update">
+<span id="calsse-db-update"></span><h2><strong>Calsse DB Update</strong><a class="headerlink" href="#module-modules.db.pyarchinit_db_update" title="Link a questa intestazione"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_db_update.DB_update">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.db.pyarchinit_db_update.</span></span><span class="sig-name descname"><span class="pre">DB_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">conn_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_update.html#DB_update"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_update.DB_update" title="Link a questa definizione"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_db_update.DB_update.update_table">
+<span class="sig-name descname"><span class="pre">update_table</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_update.html#DB_update.update_table"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_update.DB_update.update_table" title="Link a questa definizione"></a></dt>
+<dd><p>invetario_materiali_table</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-modules.db.pyarchinit_conn_strings">
+<span id="calsse-connection"></span><h2><strong>Calsse Connection</strong><a class="headerlink" href="#module-modules.db.pyarchinit_conn_strings" title="Link a questa intestazione"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="modules.db.pyarchinit_conn_strings.Connection">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.db.pyarchinit_conn_strings.</span></span><span class="sig-name descname"><span class="pre">Connection</span></span><a class="reference internal" href="_modules/modules/db/pyarchinit_conn_strings.html#Connection"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_conn_strings.Connection" title="Link a questa definizione"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-modules.db.db_createdump">
+<span id="calsse-create-dump"></span><h2><strong>Calsse Create dump</strong><a class="headerlink" href="#module-modules.db.db_createdump" title="Link a questa intestazione"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="modules.db.db_createdump.SchemaDump">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.db.db_createdump.</span></span><span class="sig-name descname"><span class="pre">SchemaDump</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema_file_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/db_createdump.html#SchemaDump"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.db_createdump.SchemaDump" title="Link a questa definizione"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modules.db.db_createdump.RestoreSchema">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.db.db_createdump.</span></span><span class="sig-name descname"><span class="pre">RestoreSchema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema_file_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/db_createdump.html#RestoreSchema"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.db_createdump.RestoreSchema" title="Link a questa definizione"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modules.db.db_createdump.CreateDatabase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.db.db_createdump.</span></span><span class="sig-name descname"><span class="pre">CreateDatabase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db_host</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db_port</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db_user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db_passwd</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/db_createdump.html#CreateDatabase"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.db_createdump.CreateDatabase" title="Link a questa definizione"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modules.db.db_createdump.DropDatabase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.db.db_createdump.</span></span><span class="sig-name descname"><span class="pre">DropDatabase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_url</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/db_createdump.html#DropDatabase"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.db_createdump.DropDatabase" title="Link a questa definizione"></a></dt>
+<dd></dd></dl>
+
+<section id="tabs">
+<h3>Tabs<a class="headerlink" href="#tabs" title="Link a questa intestazione"></a></h3>
+</section>
+</section>
+<section id="id7">
+<h2><strong>Calsse Create dump</strong><a class="headerlink" href="#id7" title="Link a questa intestazione"></a></h2>
+<span class="target" id="module-tabs.US_USM"></span><dl class="py class">
+<dt class="sig sig-object py" id="tabs.US_USM.pyarchinit_US">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tabs.US_USM.</span></span><span class="sig-name descname"><span class="pre">pyarchinit_US</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iface</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tabs/US_USM.html#pyarchinit_US"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#tabs.US_USM.pyarchinit_US" title="Link a questa definizione"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="id8">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tabs.US_USM.</span></span><span class="sig-name descname"><span class="pre">pyarchinit_US</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iface</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tabs/US_USM.html#pyarchinit_US"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#id8" title="Link a questa definizione"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="tabs.US_USM.pyarchinit_US.insert_new_row">
+<span class="sig-name descname"><span class="pre">insert_new_row</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tabs/US_USM.html#pyarchinit_US.insert_new_row"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#tabs.US_USM.pyarchinit_US.insert_new_row" title="Link a questa definizione"></a></dt>
+<dd><p>insert new row into a table based on table_name</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tabs.US_USM.pyarchinit_US.on_pushButton_fix_pressed">
+<span class="sig-name descname"><span class="pre">on_pushButton_fix_pressed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tabs/US_USM.html#pyarchinit_US.on_pushButton_fix_pressed"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#tabs.US_USM.pyarchinit_US.on_pushButton_fix_pressed" title="Link a questa definizione"></a></dt>
+<dd><p>Itera su tutti i record</p>
+<p>seleziona  una tupla della tableWidget rapporti</p>
+<p>richiama la funziona check_listoflist()
+per fissare l’errore</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tabs.US_USM.pyarchinit_US.on_pushButton_showLayer_pressed">
+<span class="sig-name descname"><span class="pre">on_pushButton_showLayer_pressed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tabs/US_USM.html#pyarchinit_US.on_pushButton_showLayer_pressed"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#tabs.US_USM.pyarchinit_US.on_pushButton_showLayer_pressed" title="Link a questa definizione"></a></dt>
+<dd><dl class="simple">
+<dt>for sing_us in range(len(self.DATA_LIST)):</dt><dd><p>sing_layer = [self.DATA_LIST[sing_us]]
+self.pyQGIS.charge_vector_layers(sing_layer)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tabs.US_USM.pyarchinit_US.remove_row">
+<span class="sig-name descname"><span class="pre">remove_row</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tabs/US_USM.html#pyarchinit_US.remove_row"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#tabs.US_USM.pyarchinit_US.remove_row" title="Link a questa definizione"></a></dt>
+<dd><p>insert new row into a table based on table_name</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tabs.US_USM.pyarchinit_US.search_rapp">
+<span class="sig-name descname"><span class="pre">search_rapp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tabs/US_USM.html#pyarchinit_US.search_rapp"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#tabs.US_USM.pyarchinit_US.search_rapp" title="Link a questa definizione"></a></dt>
+<dd><p>search rapp</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tabs.US_USM.pyarchinit_US.tableInsertData">
+<span class="sig-name descname"><span class="pre">tableInsertData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tabs/US_USM.html#pyarchinit_US.tableInsertData"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#tabs.US_USM.pyarchinit_US.tableInsertData" title="Link a questa definizione"></a></dt>
+<dd><p>Set the value into alls Grid</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Piè di pagina">
+        <a href="05_esempi_di_applicazione.html" class="btn btn-neutral float-left" title="5.Esempi di Applicazione" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Precedente</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, AdArte srl.</p>
+  </div>
+
+  Realizzato con <a href="https://www.sphinx-doc.org/">Sphinx</a> e il tema
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    fornito da <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
