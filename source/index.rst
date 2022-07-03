@@ -9,7 +9,7 @@ pyArchInit Documentazione
 ======================================
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 6
    :caption: Contenuti:
 
    about.rst
