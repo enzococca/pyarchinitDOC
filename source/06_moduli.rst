@@ -12,7 +12,7 @@
 6.1.1.Utility
 =======================================
 
-6.1.1.Classe pyarchinit_exp_USsheet_pdf
+6.1.1.1.Classe pyarchinit_exp_USsheet_pdf
 =======================================
 
 
@@ -37,7 +37,7 @@
     .. autoclass:: FOTO_index_pdf_sheet_2
        :members:
 
-**Calsse Pyarchinit_OS_Utility**
+6.1.1.2.Calsse Pyarchinit_OS_Utility
 ====================================================
 
 .. automodule:: modules.utility.pyarchinit_OS_utility
@@ -46,7 +46,7 @@
    .. autoclass:: Pyarchinit_OS_Utility
       :members:
 
-**Classe Utility**
+6.1.1.3.Classe Utility**
 =====================================================
 
 .. automodule:: modules.db.pyarchinit_utility
@@ -56,10 +56,10 @@
       :members:
 
 ======================================
-DB
+6.1.2.DB
 ======================================
 
-**Calsse pyarchinit_db_manager**
+6.1.2.1.Calsse pyarchinit_db_manager**
 ======================================
 .. automodule:: modules.db.pyarchinit_db_manager
    :members:
@@ -67,7 +67,7 @@ DB
    .. autoclass:: Pyarchinit_db_management
       :members:
 
-**Calsse DB Update**
+6.1.2.2.Classe pyarchinit_db_update
 =========================================
 
 .. automodule:: modules.db.pyarchinit_db_update
@@ -78,7 +78,7 @@ DB
 
 
 
-**Calsse Connection**
+6.1.2.3.Classe pyarchinit_conn_strings
 ===============================================
 
 .. automodule:: modules.db.pyarchinit_conn_strings
@@ -87,7 +87,7 @@ DB
    .. autoclass:: Connection
       :members:
 
-**Calsse Create dump**
+6.1.2.4.Classe db_createdump
 ==============================================
 
 .. automodule:: modules.db.db_createdump
@@ -106,10 +106,10 @@ DB
       :members:
 
 ==========================================
-Tabs
+6.2.Tabs
 ==========================================
 
-**Calsse Create dump**
+6.2.1.Classe US_USM
 ==========================================
 
 .. automodule:: tabs.US_USM
