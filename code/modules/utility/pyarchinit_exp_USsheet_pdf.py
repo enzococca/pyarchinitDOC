@@ -35,7 +35,9 @@ from ..db.pyarchinit_conn_strings import Connection
 from .pyarchinit_OS_utility import *
 from PIL import Image as giggino
 from reportlab.lib.utils import ImageReader
+
 class NumberedCanvas_USsheet(canvas.Canvas):
+
     def __init__(self, *args, **kwargs):
         canvas.Canvas.__init__(self, *args, **kwargs)
         self._saved_page_states = []
@@ -63,6 +65,7 @@ class NumberedCanvas_USsheet(canvas.Canvas):
 
 
 class NumberedCanvas_USindex(canvas.Canvas):
+
     def __init__(self, *args, **kwargs):
         canvas.Canvas.__init__(self, *args, **kwargs)
         self._saved_page_states = []
@@ -90,7 +93,7 @@ class NumberedCanvas_USindex(canvas.Canvas):
 
 
 class single_US_pdf_sheet(object):
-    # rapporti stratigrafici
+
     si_lega_a = ''
     uguale_a = ''
     copre = ''

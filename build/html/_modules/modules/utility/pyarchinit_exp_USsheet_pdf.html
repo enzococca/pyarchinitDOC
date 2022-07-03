@@ -47,7 +47,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../03_le_schede.html">3.Le schede</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../04_funzioni.html">4.Funzioni</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../05_esempi_di_applicazione.html">5.Esempi di Applicazione</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../06_moduli.html">pyArchInit Classi e Funzioni</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../06_moduli.html">6.Moduli pyArchInit: Classi e Funzioni</a></li>
 </ul>
 
         </div>
@@ -112,7 +112,9 @@
 <span class="kn">from</span> <span class="nn">.pyarchinit_OS_utility</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span> <span class="k">as</span> <span class="n">giggino</span>
 <span class="kn">from</span> <span class="nn">reportlab.lib.utils</span> <span class="kn">import</span> <span class="n">ImageReader</span>
+
 <div class="viewcode-block" id="NumberedCanvas_USsheet"><a class="viewcode-back" href="../../../06_moduli.html#modules.utility.pyarchinit_exp_USsheet_pdf.NumberedCanvas_USsheet">[documenti]</a><span class="k">class</span> <span class="nc">NumberedCanvas_USsheet</span><span class="p">(</span><span class="n">canvas</span><span class="o">.</span><span class="n">Canvas</span><span class="p">):</span>
+
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">canvas</span><span class="o">.</span><span class="n">Canvas</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_saved_page_states</span> <span class="o">=</span> <span class="p">[]</span>
@@ -140,6 +142,7 @@
 
 
 <div class="viewcode-block" id="NumberedCanvas_USindex"><a class="viewcode-back" href="../../../06_moduli.html#modules.utility.pyarchinit_exp_USsheet_pdf.NumberedCanvas_USindex">[documenti]</a><span class="k">class</span> <span class="nc">NumberedCanvas_USindex</span><span class="p">(</span><span class="n">canvas</span><span class="o">.</span><span class="n">Canvas</span><span class="p">):</span>
+
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">canvas</span><span class="o">.</span><span class="n">Canvas</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_saved_page_states</span> <span class="o">=</span> <span class="p">[]</span>
@@ -167,7 +170,7 @@
 
 
 <span class="k">class</span> <span class="nc">single_US_pdf_sheet</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="c1"># rapporti stratigrafici</span>
+
     <span class="n">si_lega_a</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="n">uguale_a</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="n">copre</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>

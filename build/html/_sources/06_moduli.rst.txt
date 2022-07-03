@@ -2,40 +2,25 @@
 
 
 6.Moduli pyArchInit: Classi e Funzioni
-**************************************
+--------------------------------------
 
 
 =======================================
 6.1.Moduli
 =======================================
-6.1.1.Utility
-=======================================
-a).Classe pyarchinit_exp_USsheet_pdf
-=========================================
+
+6.1.2.utility
+======================================
 
 .. automodule:: modules.utility.pyarchinit_exp_USsheet_pdf
    :members:
 
-    .. autoclass:: NumberedCanvas_USsheet
-       :members:
 
-    .. autoclass:: US_index_pdf_sheet
-       :members:
 
-    .. autoclass:: single_US_pdf_sheet
-       :members:
 
-    .. autoclass:: generate_US_pdf
-      :members:
 
-    .. autoclass:: FOTO_index_pdf_sheet
-      :members:
-
-    .. autoclass:: FOTO_index_pdf_sheet_2
-       :members:
-
-b).Classe Pyarchinit_OS_Utility
-====================================
+Classe Pyarchinit_OS_Utility
+====================================================
 
 .. automodule:: modules.utility.pyarchinit_OS_utility
    :members:
@@ -43,8 +28,9 @@ b).Classe Pyarchinit_OS_Utility
    .. autoclass:: Pyarchinit_OS_Utility
       :members:
 
-c).Classe Utility
-======================
+
+Classe Utility
+=====================================================
 
 .. automodule:: modules.db.pyarchinit_utility
    :members:
@@ -53,20 +39,16 @@ c).Classe Utility
       :members:
 
 
-
-=======================================
 6.1.2.DB
-=======================================
+======================================
 
-
-6.1.2.1.Calsse pyarchinit_db_manager
-====================================
+Calsse pyarchinit_db_manager**
+======================================
 .. automodule:: modules.db.pyarchinit_db_manager
    :members:
 
    .. autoclass:: Pyarchinit_db_management
       :members:
-
 
 6.1.2.2.Classe pyarchinit_db_update
 =========================================
@@ -79,7 +61,7 @@ c).Classe Utility
 
 
 
-6.1.2.3.Classe pyarchinit_conn_strings
+Classe pyarchinit_conn_strings
 ===============================================
 
 .. automodule:: modules.db.pyarchinit_conn_strings
@@ -88,7 +70,7 @@ c).Classe Utility
    .. autoclass:: Connection
       :members:
 
-6.1.2.4.Classe db_createdump
+Classe db_createdump
 ==============================================
 
 .. automodule:: modules.db.db_createdump
@@ -110,7 +92,7 @@ c).Classe Utility
 6.2.Tabs
 ==========================================
 
-6.2.1.Classe US_USM
+Classe US_USM
 ==========================================
 
 .. automodule:: tabs.US_USM
