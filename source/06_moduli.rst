@@ -2,15 +2,13 @@
 
 
 6.Moduli pyArchInit: Classi e Funzioni
---------------------------------------
+**************************************
 
 
 =======================================
 6.1.Moduli
 =======================================
 
-Classe pyarchinit_exp_USsheet_pdf
-====================================================
 
 .. automodule:: modules.utility.pyarchinit_exp_USsheet_pdf
    :members:
@@ -33,8 +31,6 @@ Classe pyarchinit_exp_USsheet_pdf
     .. autoclass:: FOTO_index_pdf_sheet_2
        :members:
 
-Classe Pyarchinit_OS_Utility
-====================================================
 
 .. automodule:: modules.utility.pyarchinit_OS_utility
    :members:
@@ -42,8 +38,7 @@ Classe Pyarchinit_OS_Utility
    .. autoclass:: Pyarchinit_OS_Utility
       :members:
 
-Classe Utility
-=====================================================
+
 
 .. automodule:: modules.db.pyarchinit_utility
    :members:
@@ -52,16 +47,12 @@ Classe Utility
       :members:
 
 
-Classe pyarchinit_db_manager**
-======================================
 .. automodule:: modules.db.pyarchinit_db_manager
    :members:
 
    .. autoclass:: Pyarchinit_db_management
       :members:
 
-Classe pyarchinit_db_update
-=========================================
 
 .. automodule:: modules.db.pyarchinit_db_update
    :members:
@@ -69,17 +60,12 @@ Classe pyarchinit_db_update
    .. autoclass:: DB_update
       :members:
 
-Classe pyarchinit_conn_strings
-===============================================
-
 .. automodule:: modules.db.pyarchinit_conn_strings
    :members:
 
    .. autoclass:: Connection
       :members:
 
-Classe db_createdump
-==============================================
 
 .. automodule:: modules.db.db_createdump
    :members:
@@ -96,12 +82,6 @@ Classe db_createdump
    .. autoclass:: DropDatabase
       :members:
 
-==========================================
-6.2.Tabs
-==========================================
-
-Classe US_USM
-==========================================
 
 .. automodule:: tabs.US_USM
    :members:
