@@ -2,9 +2,9 @@
 
 Moduli pyArchInit: Classi e Funzioni
 **************************************
-
-In questa sezione si descivono le funzioni e alcune delle classi presenti in pyarchinit
-che possano aiutare allo sviluppo e implementazione del codice.
+.. important::
+    In questa sezione si descivono le funzioni e alcune delle classi presenti in pyarchinit
+    che possano aiutare allo sviluppo e implementazione del codice.
 
 
 .. automodule:: __init__
