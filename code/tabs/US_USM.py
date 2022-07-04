@@ -22,17 +22,6 @@ from lxml import etree
 import cv2
 from distutils.dir_util import copy_tree
 from random import randrange as rand
-from PyQt5 import QtCore, QtGui, QtWidgets
-from qgis import processing
-from qgis.PyQt.QtCore import *
-from qgis.PyQt.QtGui import QColor, QIcon
-from qgis.PyQt.QtWidgets import *
-from qgis.PyQt.uic import loadUiType
-from qgis.core import *
-from qgis.gui import QgsMapCanvas, QgsMapToolPan
-from qgis.PyQt.QtSql import QSqlDatabase, QSqlTableModel
-import re
-
 
 
 class pyarchinit_US(QDialog):

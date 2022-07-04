@@ -6,7 +6,6 @@ from builtins import object
 import traceback
 from ..utility.settings import Settings
 from ..utility.pyarchinit_OS_utility import Pyarchinit_OS_Utility
-from qgis.PyQt.QtWidgets import QDialog, QMessageBox
 
 class Connection(object):
     HOME = os.environ['PYARCHINIT_HOME']

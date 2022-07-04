@@ -17,9 +17,7 @@ from geoalchemy2 import *
 from sqlalchemy.engine import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.sql.schema import MetaData
-from qgis.core import *
-from qgis.utils import iface
-from qgis.PyQt.QtWidgets import QMessageBox
+
 from modules.utility.pyarchinit_OS_utility import Pyarchinit_OS_Utility
 from sqlalchemy.dialects import postgresql
 from sqlalchemy.dialects.postgresql import insert
