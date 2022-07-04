@@ -98,38 +98,7 @@ html_static_path = ['_static']
 
 # -- Options for LaTeX output ---------------------------------------------
 
-latex_elements = {
-    # The paper size ('letterpaper' or 'a4paper').
-    'papersize': 'a4paper',
 
-    # The font size ('10pt', '11pt' or '12pt').
-    'pointsize': '11pt',
-
-    # Latex figure (float) alignment
-    #'figure_align': 'htbp',
-
-    # Don't mangle with UTF-8 chars
-    'inputenc': '',
-    'utf8extra': '',
-
-    # Set document margins
-    'sphinxsetup': '''
-        hmargin=0.1in, vmargin=1in,
-        parsedliteralwraps=true,
-        verbatimhintsturnover=false,
-    ''',
-
-    # Additional stuff for the LaTeX preamble.
-    'preamble': '''
-	% Prevent column squeezing of tabulary.
-	\\setlength{\\tymin}{20em}
-        % Use some font with UTF-8 support with XeLaTeX
-        \\usepackage{fontspec}
-        \\setsansfont{DejaVu Sans}
-        \\setromanfont{DejaVu Serif}
-        \\setmonofont{DejaVu Sans Mono}
-     ''',
-}
 latex_documents = [
     (master_doc, 'versione_01.tex', u'versione\\_01 Documentation',
      u'abc', 'manual'),]
