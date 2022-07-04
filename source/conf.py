@@ -131,5 +131,28 @@ latex_elements = {
      ''',
 }
 latex_documents = [
-    (master_doc, 'versione_01.tex', u'versione\\_01 Documentation',
-     u'abc', 'manual'),]
+    (master_doc, 'pyarchinit.tex', 'Pyarchinit Plugin Document',
+     'Enzo Cocca', 'manual'),]
+
+
+# -- Options for manual page output ---------------------------------------
+
+# One entry per manual page. List of tuples
+# (source start file, name, description, authors, manual section).
+man_pages = [
+    (master_doc, 'pyarchinit', 'Pyarchinit Plugin Document',
+     [author], 1)
+]
+
+
+
+# -- Options for Texinfo output -------------------------------------------
+
+# Grouping the document tree into Texinfo files. List of tuples
+# (source start file, target name, title, author,
+#  dir menu entry, description, category)
+texinfo_documents = [
+  (master_doc, 'Pyarchinit', 'Pyarchinit Plugin Document',
+   author, 'Pyarchinitplugin', 'One line description of project.',
+   'Miscellaneous'),
+]
