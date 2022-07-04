@@ -10,88 +10,52 @@
 =======================================
 
 
-.. automodule:: modules.utility.pyarchinit_exp_USsheet_pdf
 
-    .. autoclass:: NumberedCanvas_USsheet
-       :members:
-
-    .. autoclass:: US_index_pdf_sheet
-       :members:
-
-    .. autoclass:: single_US_pdf_sheet
-       :members:
-
-    .. autoclass:: generate_US_pdf
-       :members:
-
-    .. autoclass:: FOTO_index_pdf_sheet
-       :members:
-
-    .. autoclass:: FOTO_index_pdf_sheet_2
-       :members:
-
-
-.. automodule:: modules.utility.pyarchinit_OS_utility
+.. autoclass:: modules.utility.pyarchinit_exp_USsheet_pdf.NumberedCanvas_USsheet
    :members:
-   :noindex:
-
-   .. autoclass:: Pyarchinit_OS_Utility
-      :members:
 
 
+.. autoclass:: modules.utility.Pyarchinit_OS_Utility.Pyarchinit_OS_Utility
+  :members:
 
-.. automodule:: modules.db.pyarchinit_utility
-   :members:
-   :noindex:
-
-   .. autoclass:: Utility
-      :members:
+.. autoclass:: modules.db.pyarchinit_utility.Utility
+  :members:
 
 
-.. automodule:: modules.db.pyarchinit_db_manager
-   :members:
-   :noindex:
-
-   .. autoclass:: Pyarchinit_db_management
-      :members:
 
 
-.. automodule:: modules.db.pyarchinit_db_update
-   :members:
-   :noindex:
+.. autoclass:: modules.db.pyarchinit_db_manager.Pyarchinit_db_management
+  :members:
 
-   .. autoclass:: DB_update
-      :members:
 
-.. automodule:: modules.db.pyarchinit_conn_strings
-   :members:
-   :noindex:
 
-   .. autoclass:: Connection
-      :members:
+
+.. autoclass:: modules.db.pyarchinit_db_update.DB_update
+  :members:
+
+
+.. autoclass:: modules.db.pyarchinit_conn_strings.Connection
+  :members:
 
 
 .. automodule:: modules.db.db_createdump
    :members:
    :noindex:
 
-   .. autoclass:: SchemaDump
-      :members:
+.. autoclass:: modules.db.db_createdump.SchemaDump
+  :members:
 
-   .. autoclass:: RestoreSchema
-      :members:
+.. autoclass:: modules.db.db_createdump.RestoreSchema
+  :members:
 
-   .. autoclass:: CreateDatabase
-      :members:
+.. autoclass:: modules.db.db_createdump.CreateDatabase
+  :members:
 
-   .. autoclass:: DropDatabase
-      :members:
+.. autoclass:: modules.db.db_createdump.DropDatabase
+  :members:
 
 
-.. automodule:: tabs.US_USM
-   :members:
-   :noindex:
 
-   .. autoclass:: pyarchinit_US
-      :members:
+.. autoclass:: tabs.US_USM.pyarchinit_US
+  :members:
 
