@@ -47,9 +47,7 @@ differenti formati e scale di visualizzazione. Inoltre sono abilitate a prendere
 scheda permette anche di personalizzare e creare nuovi template. Per approfondimenti si rimanda alla sezione **Schede
 plugin**.
 
-.. video:: ./_images/print_map.mp4
-   :width: 500
-   :height: 300
+
 
 
 **************************************************************************
@@ -62,9 +60,7 @@ Scheda Impacchetta per Geopackage
 Questa scheda permette di impacchettare i layer selezionati  nel Layer panel(sia vettori che raster) in un file Geopackage.
 Per il funzionamento e maggiori dettagli si rimanda alla sezione **Schede Plugin**
 
-.. video:: ./_images/gpkg.mp4
-   :width: 500
-   :height: 300
+
    
 
 **********************************************************************************
@@ -94,9 +90,7 @@ Funzione conversione in Spatialite5
 Questa funzione permette di convertire in un colpo un db spatialite 3 o 4 di pyarchinit in spatialite 5
 Per il funzionamento e maggiori dettagli si rimanda alla sezione Funzioni
 
-.. video:: ./_images/spatialite_convert.mp4
-   :width: 500
-   :height: 300
+
    
 
 **************************************************************************
@@ -110,9 +104,7 @@ Funzione importazione layer vettoriali
 La nuova struttura *Importazione Dati* all'interno dei DB di pyarchinit è stata migliorata. Ora è possibile
 importare anche le geometrie e sono visuaizzate in automatiche il nome dei campi e l'attributo.
 
-.. video:: ./_images/importdata.mp4
-   :width: 500
-   :height: 300
+
 
 
 **************************************************************************
@@ -124,9 +116,6 @@ Raggruppamenti Layer
 
 Dalla scheda Sito quando vengo richiamati i layer per disegnare , essi sono raggruppati e ordinati in gruppi nel layer panel
 
-.. video:: ./_images/rag.mp4
-   :width: 500
-   :height: 300
 
 
 **************************************************************************
@@ -138,9 +127,7 @@ WMS vincoli archeologici filtrati per comune
 
 Dalla scheda sito si può richiamare il wms dei vincoli in rete sula base del comune di apparteneza
 
-.. video:: ./_images/vincoli.mp4
-   :width: 500
-   :height: 300
+
 
 **************************************************************************
 
@@ -153,9 +140,7 @@ WFS Toponomastica, WMS IGM 25000, WMS catasto e BaseMap(Google e Wikimidia)
 Dalla scheda sito si possono richiamare il wfs toponomastica ricavato dal IGM 25000, il wms igm 25000,wms catastale e
 due basemap di Google e Wikimidia
 
-.. video:: ./_images/catasto.mp4
-   :width: 500
-   :height: 300
+
 
 **************************************************************************
 
@@ -181,9 +166,6 @@ Geocoding: ricerca indirizzi
 Nella scheda Sito è stato aggiunto una barra di ricerca d'indirizzi sulla base di OpenStreetMap.
 una volta ricercato l'idirizzo desiderato, verrà aggiunto un layer puntuale nel map canvas
 
-.. video:: ./_images/geocoding.mp4
-   :width: 500
-   :height: 300
 
 
 **************************************************************************
@@ -193,9 +175,6 @@ Harris matrix per Extended Matrix Tool
 questa nuova funzione permette di esportare un matrix di Harris in un graphml gestibile con yED ed è associato ad un template
 il graphml prodotto è compatibile con l'Extended Matrix Tool
 
-.. video:: ./_images/matrix.mp4
-   :width: 500
-   :height: 300
 
 
 **************************************************************************
@@ -208,6 +187,3 @@ Totalopenstation2pyarchinit
 Questa scheda permette d'importare i dati grezzi di diverse stazioni totali nei layer pyrchinit_quote, pyarchinit riferimenti
 e pyarchinit campionature
 
-.. video:: ./_images/tops.mp4
-   :width: 500
-   :height: 300
