@@ -75,10 +75,6 @@ Fornisce la possibilità di calcolare la superficie non isotropa dei costi accum
 funzioni di costo relative al movimento umano che possono essere selezionate dall'utente. Richiede solo un modello digitale del terreno, una posizione 
 iniziale e (opzionalmente) una posizione di destinazione.Per il funzionamento e maggiori dettagli si rimanda alla sezione Funzioni
 
-.. video:: ./_images/movecost.mp4
-   :width: 500
-   :height: 300
-   
 
 **************************************************************************
 

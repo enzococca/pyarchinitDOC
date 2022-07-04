@@ -100,5 +100,5 @@ html_static_path = ['_static']
 
 
 latex_documents = [
-    (master_doc, 'versione_01.tex', u'versione\\_01 Documentation',
-     u'abc', 'manual'),]
+    (master_doc, 'versione_01.tex', u'Pyarchinit\\_01 Documentation',
+     u'Enzo Cocca', 'manual'),]
