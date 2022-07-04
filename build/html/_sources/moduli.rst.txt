@@ -26,7 +26,7 @@ pyarchinit_utility
 =======================================
 
 .. automodule:: modules.db.pyarchinit_utility
-   :noindex:
+
 
     .. autoclass:: Utility
        :members:
