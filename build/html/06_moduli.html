@@ -50,7 +50,7 @@
 <li class="toctree-l1"><a class="reference internal" href="04_funzioni.html">4.Funzioni</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_esempi_di_applicazione.html">5.Esempi di Applicazione</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">6.Moduli pyArchInit: Classi e Funzioni</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#moduli">6.1.Moduli</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-modules.utility.pyarchinit_OS_utility">6.1.Moduli</a></li>
 </ul>
 </li>
 </ul>
@@ -81,9 +81,65 @@
              
   <span class="target" id="module-__init__"></span><section id="moduli-pyarchinit-classi-e-funzioni">
 <h1>6.Moduli pyArchInit: Classi e Funzioni<a class="headerlink" href="#moduli-pyarchinit-classi-e-funzioni" title="Link a questa intestazione"></a></h1>
-<section id="moduli">
-<h2>6.1.Moduli<a class="headerlink" href="#moduli" title="Link a questa intestazione"></a></h2>
+<section id="module-modules.utility.pyarchinit_OS_utility">
+<span id="moduli"></span><h2>6.1.Moduli<a class="headerlink" href="#module-modules.utility.pyarchinit_OS_utility" title="Link a questa intestazione"></a></h2>
 <dl class="py class">
+<dt class="sig sig-object py" id="modules.utility.pyarchinit_OS_utility.Pyarchinit_OS_Utility">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.utility.pyarchinit_OS_utility.</span></span><span class="sig-name descname"><span class="pre">Pyarchinit_OS_Utility</span></span><a class="reference internal" href="_modules/modules/utility/pyarchinit_OS_utility.html#Pyarchinit_OS_Utility"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.utility.pyarchinit_OS_utility.Pyarchinit_OS_Utility" title="Link a questa definizione"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="modules.utility.pyarchinit_OS_utility.Pyarchinit_OS_Utility.checkGraphvizInstallation">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">checkGraphvizInstallation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/utility/pyarchinit_OS_utility.html#Pyarchinit_OS_Utility.checkGraphvizInstallation"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.utility.pyarchinit_OS_utility.Pyarchinit_OS_Utility.checkGraphvizInstallation" title="Link a questa definizione"></a></dt>
+<dd><p>Return True if Graphviz is installed</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.utility.pyarchinit_OS_utility.Pyarchinit_OS_Utility.checkPostgresInstallation">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">checkPostgresInstallation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/utility/pyarchinit_OS_utility.html#Pyarchinit_OS_Utility.checkPostgresInstallation"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.utility.pyarchinit_OS_utility.Pyarchinit_OS_Utility.checkPostgresInstallation" title="Link a questa definizione"></a></dt>
+<dd><p>Return True if Postgres is installed</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.utility.pyarchinit_OS_utility.Pyarchinit_OS_Utility.copy_file">
+<span class="sig-name descname"><span class="pre">copy_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/utility/pyarchinit_OS_utility.html#Pyarchinit_OS_Utility.copy_file"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.utility.pyarchinit_OS_utility.Pyarchinit_OS_Utility.copy_file" title="Link a questa definizione"></a></dt>
+<dd><p>Copy file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parametri</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>str</strong> – <ul>
+<li><p>file path</p></li>
+</ul>
+</p></li>
+<li><p><strong>str</strong> – <ul>
+<li><p>destination file</p></li>
+</ul>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.utility.pyarchinit_OS_utility.Pyarchinit_OS_Utility.create_dir">
+<span class="sig-name descname"><span class="pre">create_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/utility/pyarchinit_OS_utility.html#Pyarchinit_OS_Utility.create_dir"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.utility.pyarchinit_OS_utility.Pyarchinit_OS_Utility.create_dir" title="Link a questa definizione"></a></dt>
+<dd><p>Create directory</p>
+<p>:param  str  - path directory</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.utility.pyarchinit_OS_utility.Pyarchinit_OS_Utility.isMac">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">isMac</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/utility/pyarchinit_OS_utility.html#Pyarchinit_OS_Utility.isMac"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.utility.pyarchinit_OS_utility.Pyarchinit_OS_Utility.isMac" title="Link a questa definizione"></a></dt>
+<dd><p>Return True if platform is mac</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.utility.pyarchinit_OS_utility.Pyarchinit_OS_Utility.isWindows">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">isWindows</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/utility/pyarchinit_OS_utility.html#Pyarchinit_OS_Utility.isWindows"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.utility.pyarchinit_OS_utility.Pyarchinit_OS_Utility.isWindows" title="Link a questa definizione"></a></dt>
+<dd><p>Return True if platform is Windows</p>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-modules.db.pyarchinit_utility"></span><dl class="py class">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_utility.Utility">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.db.pyarchinit_utility.</span></span><span class="sig-name descname"><span class="pre">Utility</span></span><a class="reference internal" href="_modules/modules/db/pyarchinit_utility.html#Utility"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_utility.Utility" title="Link a questa definizione"></a></dt>
 <dd><dl class="py method">
@@ -160,26 +216,6 @@ value in the i position</p>
 </dd></dl>
 
 </dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="modules.db.db_createdump.SchemaDump">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.db.db_createdump.</span></span><span class="sig-name descname"><span class="pre">SchemaDump</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema_file_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/db_createdump.html#SchemaDump"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.db_createdump.SchemaDump" title="Link a questa definizione"></a></dt>
-<dd></dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="modules.db.db_createdump.RestoreSchema">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.db.db_createdump.</span></span><span class="sig-name descname"><span class="pre">RestoreSchema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema_file_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/db_createdump.html#RestoreSchema"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.db_createdump.RestoreSchema" title="Link a questa definizione"></a></dt>
-<dd></dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="modules.db.db_createdump.CreateDatabase">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.db.db_createdump.</span></span><span class="sig-name descname"><span class="pre">CreateDatabase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db_host</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db_port</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db_user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db_passwd</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/db_createdump.html#CreateDatabase"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.db_createdump.CreateDatabase" title="Link a questa definizione"></a></dt>
-<dd></dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="modules.db.db_createdump.DropDatabase">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.db.db_createdump.</span></span><span class="sig-name descname"><span class="pre">DropDatabase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_url</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/db_createdump.html#DropDatabase"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.db_createdump.DropDatabase" title="Link a questa definizione"></a></dt>
-<dd></dd></dl>
 
 </section>
 </section>
