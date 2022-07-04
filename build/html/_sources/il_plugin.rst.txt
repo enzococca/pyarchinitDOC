@@ -1,7 +1,7 @@
 .. image:: ./_images/logo_3.png
    :align: right
    
-2 Il Plugin
+Il Plugin
 --------------------------------
 
 Il progetto pyArchInit nasce nel 2005 per la sperimentazione dell'uso del Free Open Source Software

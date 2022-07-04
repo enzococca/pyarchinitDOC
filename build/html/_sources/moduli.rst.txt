@@ -1,12 +1,12 @@
 .. automodule:: __init__
 
 
-6.Moduli pyArchInit: Classi e Funzioni
+Moduli pyArchInit: Classi e Funzioni
 **************************************
 
 
 =======================================
-6.1.Moduli
+Moduli
 =======================================
 
 .. automodule:: modules.utility.pyarchinit_OS_utility
