@@ -1135,31 +1135,16 @@ class Pyarchinit_db_management(object):
         session.close()
     def update(self, table_class_str, id_table_str, value_id_list, columns_name_list, values_update_list):
         """
-        Receives 5 values then putted in a list. The values must be passed
-        in this order: table name->string, column_name_where->list containin'
-        one value
-        ('site_table', 'id_sito', [1], ['sito', 'nazione', 'regione', 'comune', 'descrizione', 'provincia'], ['Sito archeologico 1', 'Italiauiodsds', 'Emilia-Romagna', 'Riminijk', 'Sito di epoca altomedievale....23', 'Riminikljlks'])
+        Receives 5 values then putted in a list.
         self.set_update = arg
-        #self.connection()
         table = Table(self.set_update[0], self.metadata, autoload=True)
         changes_dict= {}
         u = Utility()
         set_update_4 = u.deunicode_list(self.set_update[4])
-
         u.add_item_to_dict(changes_dict,zip(self.set_update[3], set_update_4))
 
-        f = open("test_update.txt", "w")
-        f.write(str(self.set_update))
-        f.close()
+        exec_str = ('%s%s%s%s%s%s%s') % ("table.update(table.c.", self.set_update[1], " == '", self.set_update[2][0], "').execute(",changes_dict ,")")
 
-        exec_str = ('%s%s%s%s%s%s%s') % ("table.update(table.c.",
-                                          self.set_update[1],
-                                         " == '",
-                                         self.set_update[2][0],
-                                         "').execute(",
-                                         changes_dict ,")")
-
-        #session.query(SITE).filter(and_(SITE.id_sito == '1')).update(values = {SITE.sito:"updatetest"})
         """
 
         self.table_class_str = table_class_str
@@ -1322,14 +1307,17 @@ class Pyarchinit_db_management(object):
 
     def update_for(self):
         """
-        table = Table('us_table_toimp', self.metadata, autoload=True)
+        table = Table('us_table', self.metadata, autoload=True)
         s = table.select(table.c.id_us > 0)
         res_list = self.run(s)
-        cont = 11900
+        cont = 0
+
         for i in res_list:
-            self.update('US_toimp', 'id_us', [i], ['id_us'], [cont])
+            self.update('US', 'id_us', [i], ['id_us'], [cont])
             cont = cont+1
+
         """
+
         table = Table('inventario_materiali_table_toimp', self.metadata, autoload=True)
         s = table.select(table.c.id_invmat > 0)
         res_list = self.run(s)

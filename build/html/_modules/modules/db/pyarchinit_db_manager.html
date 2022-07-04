@@ -47,7 +47,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../03_le_schede.html">3.Le schede</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../04_funzioni.html">4.Funzioni</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../05_esempi_di_applicazione.html">5.Esempi di Applicazione</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../06_moduli.html">pyArchInit Classi e Funzioni</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../06_moduli.html">6.Moduli pyArchInit: Classi e Funzioni</a></li>
 </ul>
 
         </div>
@@ -1212,31 +1212,16 @@
         <span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 <div class="viewcode-block" id="Pyarchinit_db_management.update"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.update">[documenti]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table_class_str</span><span class="p">,</span> <span class="n">id_table_str</span><span class="p">,</span> <span class="n">value_id_list</span><span class="p">,</span> <span class="n">columns_name_list</span><span class="p">,</span> <span class="n">values_update_list</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Receives 5 values then putted in a list. The values must be passed</span>
-<span class="sd">        in this order: table name-&gt;string, column_name_where-&gt;list containin&#39;</span>
-<span class="sd">        one value</span>
-<span class="sd">        (&#39;site_table&#39;, &#39;id_sito&#39;, [1], [&#39;sito&#39;, &#39;nazione&#39;, &#39;regione&#39;, &#39;comune&#39;, &#39;descrizione&#39;, &#39;provincia&#39;], [&#39;Sito archeologico 1&#39;, &#39;Italiauiodsds&#39;, &#39;Emilia-Romagna&#39;, &#39;Riminijk&#39;, &#39;Sito di epoca altomedievale....23&#39;, &#39;Riminikljlks&#39;])</span>
+<span class="sd">        Receives 5 values then putted in a list.</span>
 <span class="sd">        self.set_update = arg</span>
-<span class="sd">        #self.connection()</span>
 <span class="sd">        table = Table(self.set_update[0], self.metadata, autoload=True)</span>
 <span class="sd">        changes_dict= {}</span>
 <span class="sd">        u = Utility()</span>
 <span class="sd">        set_update_4 = u.deunicode_list(self.set_update[4])</span>
-
 <span class="sd">        u.add_item_to_dict(changes_dict,zip(self.set_update[3], set_update_4))</span>
 
-<span class="sd">        f = open(&quot;test_update.txt&quot;, &quot;w&quot;)</span>
-<span class="sd">        f.write(str(self.set_update))</span>
-<span class="sd">        f.close()</span>
+<span class="sd">        exec_str = (&#39;%s%s%s%s%s%s%s&#39;) % (&quot;table.update(table.c.&quot;, self.set_update[1], &quot; == &#39;&quot;, self.set_update[2][0], &quot;&#39;).execute(&quot;,changes_dict ,&quot;)&quot;)</span>
 
-<span class="sd">        exec_str = (&#39;%s%s%s%s%s%s%s&#39;) % (&quot;table.update(table.c.&quot;,</span>
-<span class="sd">                                          self.set_update[1],</span>
-<span class="sd">                                         &quot; == &#39;&quot;,</span>
-<span class="sd">                                         self.set_update[2][0],</span>
-<span class="sd">                                         &quot;&#39;).execute(&quot;,</span>
-<span class="sd">                                         changes_dict ,&quot;)&quot;)</span>
-
-<span class="sd">        #session.query(SITE).filter(and_(SITE.id_sito == &#39;1&#39;)).update(values = {SITE.sito:&quot;updatetest&quot;})</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">table_class_str</span> <span class="o">=</span> <span class="n">table_class_str</span>
@@ -1399,14 +1384,17 @@
 
 <div class="viewcode-block" id="Pyarchinit_db_management.update_for"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.update_for">[documenti]</a>    <span class="k">def</span> <span class="nf">update_for</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        table = Table(&#39;us_table_toimp&#39;, self.metadata, autoload=True)</span>
+<span class="sd">        table = Table(&#39;us_table&#39;, self.metadata, autoload=True)</span>
 <span class="sd">        s = table.select(table.c.id_us &gt; 0)</span>
 <span class="sd">        res_list = self.run(s)</span>
-<span class="sd">        cont = 11900</span>
+<span class="sd">        cont = 0</span>
+
 <span class="sd">        for i in res_list:</span>
-<span class="sd">            self.update(&#39;US_toimp&#39;, &#39;id_us&#39;, [i], [&#39;id_us&#39;], [cont])</span>
+<span class="sd">            self.update(&#39;US&#39;, &#39;id_us&#39;, [i], [&#39;id_us&#39;], [cont])</span>
 <span class="sd">            cont = cont+1</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="n">table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="s1">&#39;inventario_materiali_table_toimp&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">,</span> <span class="n">autoload</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">s</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">id_invmat</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
         <span class="n">res_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
