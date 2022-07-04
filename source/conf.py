@@ -10,9 +10,13 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-
 import os
 import sys
+import mock
+
+
+
+
 sys.path.insert(0, os.path.abspath('../code/'))
 
 # -- Project information -----------------------------------------------------
@@ -156,3 +160,4 @@ texinfo_documents = [
    author, 'Pyarchinitplugin', 'One line description of project.',
    'Miscellaneous'),
 ]
+
