@@ -14,7 +14,7 @@ che possano aiutare allo sviluppo e implementazione del codice.
 
 
 =======================================
-pyarchinit_OS_utility
+pyarchinit OS utility
 =======================================
 .. note::
     Questa classe presenta alcune funzioni per copiare immagini, file e creare cartelle durante
@@ -25,8 +25,6 @@ pyarchinit_OS_utility
 
    .. autoclass:: Pyarchinit_OS_Utility
        :members:
-
-
 
 
 =======================================
@@ -43,3 +41,15 @@ pyarchinit_utility
     .. autoclass:: Utility
        :members:
 
+=======================================
+pyarchinit installation folder
+=======================================
+.. note::
+    Questa classe presenta due funzioni per installare nel percorso del tuo utente
+    i file di configurazione e le cartelle
+
+.. automodule:: modules.utility.pyarchinit_folder_installation
+   :noindex:
+
+   .. autoclass:: pyarchinit_Folder_installation
+       :members:

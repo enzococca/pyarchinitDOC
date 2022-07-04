@@ -1,22 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-/***************************************************************************
-        pyArchInit Plugin  - A QGIS plugin to manage archaeological dataset
-                             -------------------
-        begin                : 2007-12-01
-        copyright            : (C) 2008 by Luca Mandolesi; Enzo Cocca <enzo.ccc@gmail.com>
-        email                : mandoluca at gmail.com
- ***************************************************************************/
 
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
-"""
 
 import os
 from os import path
@@ -38,7 +21,8 @@ class pyarchinit_Folder_installation(object):
     OS_UTILITY = Pyarchinit_OS_Utility()
 
     def install_dir(self):
-        
+        """Funzione per installare la directory pyarchinit nel tuo utente"""
+
         home_DB_path = '{}{}{}'.format(self.HOME, os.sep, 'pyarchinit_DB_folder')
         self.OS_UTILITY.create_dir(home_DB_path)
 
@@ -162,7 +146,7 @@ class pyarchinit_Folder_installation(object):
 
 
     def installConfigFile(self, path):
-        
+        """Installa la configurazione file"""
         config_copy_from_path_rel = os.path.join(os.sep, 'dbfiles', 'config.cfg')
         config_copy_from_path = '{}{}'.format(self.RESOURCES_PATH, config_copy_from_path_rel)
         config_copy_to_path = '{}{}{}'.format(path, os.sep, 'config.cfg')
