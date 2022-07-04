@@ -15,12 +15,12 @@ pyArchInit Documentazione
    about.rst
    prerequisities.rst
    novità.rst
-   01_installazione.rst
-   02_il_plugin.rst
-   03_le_schede.rst
-   04_funzioni.rst
-   05_esempi_di_applicazione.rst
-   06_moduli.rst
+   installazione.rst
+   il_plugin.rst
+   le_schede.rst
+   funzioni.rst
+   esempi_di_applicazione.rst
+   moduli.rst
 
 .. image:: ./_images/logo_2.png
 	:align: center
