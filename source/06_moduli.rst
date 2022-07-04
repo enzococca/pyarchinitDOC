@@ -42,6 +42,7 @@
 
 .. automodule:: modules.db.pyarchinit_utility
    :members:
+   :noindex:
 
    .. autoclass:: Utility
       :members:
@@ -49,6 +50,7 @@
 
 .. automodule:: modules.db.pyarchinit_db_manager
    :members:
+   :noindex:
 
    .. autoclass:: Pyarchinit_db_management
       :members:
