@@ -13,3 +13,4 @@ xlsxwriter
 pandas
 opencv-python
 pytesseract
+psycopg2

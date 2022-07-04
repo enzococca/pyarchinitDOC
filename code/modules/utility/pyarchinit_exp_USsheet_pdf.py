@@ -21,20 +21,10 @@ from reportlab.platypus.paragraph import Paragraph
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.pdfmetrics import registerFontFamily
 from reportlab.pdfbase.ttfonts import TTFont
-# Registered font family
-pdfmetrics.registerFont(TTFont('Cambria', 'Cambria.ttc'))
-pdfmetrics.registerFont(TTFont('CambriaBd', 'cambriab.ttf'))
-pdfmetrics.registerFont(TTFont('CambriaI', 'cambriai.ttf'))
-pdfmetrics.registerFont(TTFont('CambriaZ', 'cambriaz.ttf'))
-# #Registered fontfamily
-registerFontFamily('Cambria',normal='Cambria')
-
 
 
 from ..db.pyarchinit_conn_strings import Connection
 from .pyarchinit_OS_utility import *
-from PIL import Image as giggino
-from reportlab.lib.utils import ImageReader
 
 class NumberedCanvas_USsheet(canvas.Canvas):
 
@@ -59,7 +49,7 @@ class NumberedCanvas_USsheet(canvas.Canvas):
         canvas.Canvas.save(self)
 
     def draw_page_number(self, page_count):
-        self.setFont("Cambria", 5)
+        self.setFont("Helvetica", 5)
         self.drawRightString(200 * mm, 8 * mm,
                              "Pag. %d di %d" % (self._pageNumber, page_count))  # scheda us verticale 200mm x 20 mm
 
@@ -87,7 +77,7 @@ class NumberedCanvas_USindex(canvas.Canvas):
         canvas.Canvas.save(self)
 
     def draw_page_number(self, page_count):
-        self.setFont("Cambria", 5)
+        self.setFont("Helvetica", 5)
         self.drawRightString(270 * mm, 10 * mm,
                              "Pag. %d di %d" % (self._pageNumber, page_count))  # scheda us verticale 200mm x 20 mm
 
@@ -1099,7 +1089,7 @@ class single_US_pdf_sheet(object):
         styNormal.spaceBefore = 20
         styNormal.spaceAfter = 20
         styNormal.fontSize = 7
-        styNormal.fontName='Cambria'
+        styNormal.fontName='Helvetica'
         styNormal.alignment = 0  # LEFT
 
         styleSheet = getSampleStyleSheet()
@@ -1107,7 +1097,7 @@ class single_US_pdf_sheet(object):
         styNormal2.spaceBefore = 20
         styNormal2.spaceAfter = 20
         styNormal2.fontSize = 7
-        styNormal2.fontName='Cambria'
+        styNormal2.fontName='Helvetica'
         styNormal2.alignment = 0  # LEFT
         
         
@@ -1116,7 +1106,7 @@ class single_US_pdf_sheet(object):
         styL.spaceBefore = 20
         styL.spaceAfter = 20
         styL.fontSize = 2
-        styL.fontName='Cambria'
+        styL.fontName='Helvetica'
         styL.alignment = 1
         
         
@@ -1125,7 +1115,7 @@ class single_US_pdf_sheet(object):
         styDescrizione.spaceBefore = 20
         styDescrizione.spaceAfter = 20
         styDescrizione.fontSize = 7
-        styDescrizione.fontName='Cambria'
+        styDescrizione.fontName='Helvetica'
         styDescrizione.alignment = 4  # Justified
 
         styleSheet = getSampleStyleSheet()
@@ -1133,7 +1123,7 @@ class single_US_pdf_sheet(object):
         styUnitaTipo.spaceBefore = 20
         styUnitaTipo.spaceAfter = 20
         styUnitaTipo.fontSize = 14
-        styUnitaTipo.fontName='Cambria'
+        styUnitaTipo.fontName='Helvetica'
         styUnitaTipo.alignment = 1  # CENTER
 
         styleSheet = getSampleStyleSheet()
@@ -1142,7 +1132,7 @@ class single_US_pdf_sheet(object):
         styTitoloComponenti.spaceAfter = 20
         styTitoloComponenti. rowHeights=0.5
         styTitoloComponenti.fontSize = 7
-        styTitoloComponenti.fontName='Cambria'
+        styTitoloComponenti.fontName='Helvetica'
         styTitoloComponenti.alignment = 1  # CENTER
 
         styleSheet = getSampleStyleSheet()
@@ -1150,7 +1140,7 @@ class single_US_pdf_sheet(object):
         styVerticale.spaceBefore = 10
         styVerticale.spaceAfter = 20
         styVerticale.fontSize = 7
-        styVerticale.fontName='Cambria'
+        styVerticale.fontName='Helvetica'
         styVerticale.alignment = 1  # CENTER
         styVerticale.leading=8
 
@@ -1982,7 +1972,7 @@ class single_US_pdf_sheet(object):
         styNormal.spaceBefore = 20
         styNormal.spaceAfter = 20
         styNormal.fontSize = 7
-        styNormal.fontName='Cambria'
+        styNormal.fontName='Helvetica'
         styNormal.alignment = 0  # LEFT
 
         styleSheet = getSampleStyleSheet()
@@ -1990,7 +1980,7 @@ class single_US_pdf_sheet(object):
         styNormal2.spaceBefore = 20
         styNormal2.spaceAfter = 20
         styNormal2.fontSize = 7
-        styNormal2.fontName='Cambria'
+        styNormal2.fontName='Helvetica'
         styNormal2.alignment = 0  # LEFT
         
         
@@ -1999,7 +1989,7 @@ class single_US_pdf_sheet(object):
         styL.spaceBefore = 20
         styL.spaceAfter = 20
         styL.fontSize = 2
-        styL.fontName='Cambria'
+        styL.fontName='Helvetica'
         styL.alignment = 1
         
         
@@ -2008,7 +1998,7 @@ class single_US_pdf_sheet(object):
         styDescrizione.spaceBefore = 20
         styDescrizione.spaceAfter = 20
         styDescrizione.fontSize = 7
-        styDescrizione.fontName='Cambria'
+        styDescrizione.fontName='Helvetica'
         styDescrizione.alignment = 4  # Justified
 
         styleSheet = getSampleStyleSheet()
@@ -2016,7 +2006,7 @@ class single_US_pdf_sheet(object):
         styUnitaTipo.spaceBefore = 20
         styUnitaTipo.spaceAfter = 20
         styUnitaTipo.fontSize = 14
-        styUnitaTipo.fontName='Cambria'
+        styUnitaTipo.fontName='Helvetica'
         styUnitaTipo.alignment = 1  # CENTER
 
         styleSheet = getSampleStyleSheet()
@@ -2025,7 +2015,7 @@ class single_US_pdf_sheet(object):
         styTitoloComponenti.spaceAfter = 20
         styTitoloComponenti. rowHeights=0.5
         styTitoloComponenti.fontSize = 7
-        styTitoloComponenti.fontName='Cambria'
+        styTitoloComponenti.fontName='Helvetica'
         styTitoloComponenti.alignment = 1  # CENTER
 
         styleSheet = getSampleStyleSheet()
@@ -2033,7 +2023,7 @@ class single_US_pdf_sheet(object):
         styVerticale.spaceBefore = 20
         styVerticale.spaceAfter = 20
         styVerticale.fontSize = 7
-        styVerticale.fontName='Cambria'
+        styVerticale.fontName='Helvetica'
         styVerticale.alignment = 1  # CENTER
         styVerticale.leading=8
 
@@ -2870,7 +2860,7 @@ class single_US_pdf_sheet(object):
         styNormal.spaceBefore = 20
         styNormal.spaceAfter = 20
         styNormal.fontSize = 7
-        styNormal.fontName='Cambria'
+        styNormal.fontName='Helvetica'
         styNormal.alignment = 0  # LEFT
 
         styleSheet = getSampleStyleSheet()
@@ -2878,7 +2868,7 @@ class single_US_pdf_sheet(object):
         styNormal2.spaceBefore = 20
         styNormal2.spaceAfter = 20
         styNormal2.fontSize = 7
-        styNormal2.fontName='Cambria'
+        styNormal2.fontName='Helvetica'
         styNormal2.alignment = 0  # LEFT
         
         
@@ -2887,7 +2877,7 @@ class single_US_pdf_sheet(object):
         styL.spaceBefore = 20
         styL.spaceAfter = 20
         styL.fontSize = 2
-        styL.fontName='Cambria'
+        styL.fontName='Helvetica'
         styL.alignment = 1
         
         
@@ -2896,7 +2886,7 @@ class single_US_pdf_sheet(object):
         styDescrizione.spaceBefore = 20
         styDescrizione.spaceAfter = 20
         styDescrizione.fontSize = 7
-        styDescrizione.fontName='Cambria'
+        styDescrizione.fontName='Helvetica'
         styDescrizione.alignment = 4  # Justified
 
         styleSheet = getSampleStyleSheet()
@@ -2904,7 +2894,7 @@ class single_US_pdf_sheet(object):
         styUnitaTipo.spaceBefore = 20
         styUnitaTipo.spaceAfter = 20
         styUnitaTipo.fontSize = 14
-        styUnitaTipo.fontName='Cambria'
+        styUnitaTipo.fontName='Helvetica'
         styUnitaTipo.alignment = 1  # CENTER
 
         styleSheet = getSampleStyleSheet()
@@ -2913,7 +2903,7 @@ class single_US_pdf_sheet(object):
         styTitoloComponenti.spaceAfter = 20
         styTitoloComponenti. rowHeights=0.5
         styTitoloComponenti.fontSize = 7
-        styTitoloComponenti.fontName='Cambria'
+        styTitoloComponenti.fontName='Helvetica'
         styTitoloComponenti.alignment = 1  # CENTER
 
         styleSheet = getSampleStyleSheet()
@@ -2921,7 +2911,7 @@ class single_US_pdf_sheet(object):
         styVerticale.spaceBefore = 20
         styVerticale.spaceAfter = 20
         styVerticale.fontSize = 7
-        styVerticale.fontName='Cambria'
+        styVerticale.fontName='Helvetica'
         styVerticale.alignment = 1  # CENTER
         styVerticale.leading=8
 
@@ -2942,7 +2932,7 @@ class single_US_pdf_sheet(object):
         lst.append(logo)
         if str(self.unita_tipo)== 'SE':
             unita_tipo = Paragraph(str(self.unita_tipo), styUnitaTipo)
-            label_ente_responsabile = Paragraph("<b>CambriaNTWORTLICHE STELLE</b>", styNormal)
+            label_ente_responsabile = Paragraph("<b>HelveticaNTWORTLICHE STELLE</b>", styNormal)
             #label_catalogo_internazionale = Paragraph("<b>N° CATALOGO INTERNAZIONALE</b>", styNormal)
             ente_responsabile = Paragraph(str(self.n_catalogo_generale), styNormal)
             #catalogo_internazionale = Paragraph(str(self.n_catalogo_internazionale), styNormal)
@@ -3109,8 +3099,8 @@ class single_US_pdf_sheet(object):
 
             affidabilita = Paragraph("<b>STRATIGRAPHISCHE SICHERHEIT</b><br/>" + self.affidabilita, styNormal)
             direttore = Paragraph("<b>WISSENSCHAFTLICHER LEITER DER UNTERSUCHUNGEN</b><br/>" + self.direttore_us, styNormal)
-            responsabile2 = Paragraph("<b>CambriaNTWORTLICH FÜR DIE ZUSAMMENSTELLUNG IM FELD</b><br/>" + self.schedatore, styNormal)
-            responsabile = Paragraph("<b>CambriaNTWORTLICH FÜR DIE NACHARBEIT</b><br/>" + self.responsabile_us, styNormal)
+            responsabile2 = Paragraph("<b>HelveticaNTWORTLICH FÜR DIE ZUSAMMENSTELLUNG IM FELD</b><br/>" + self.schedatore, styNormal)
+            responsabile = Paragraph("<b>HelveticaNTWORTLICH FÜR DIE NACHARBEIT</b><br/>" + self.responsabile_us, styNormal)
             data_rilievo = Paragraph("<b>DATUM FELDARBEIT</b><br/>" + self.data_rilevazione, styNormal)
             data_rielaborazione = Paragraph("<b>ÜBERARBEITUNGSDATUM</b><br/>" + self.data_rielaborazione, styNormal)
             attivita = Paragraph("<b>AKTIVITÄTEN</b><br/>" + self.attivita, styNormal)
@@ -3311,7 +3301,7 @@ class single_US_pdf_sheet(object):
             return t
         elif str(self.unita_tipo)=='MSE':
             unita_tipo = Paragraph(str(self.unita_tipo), styUnitaTipo)
-            label_ente_responsabile = Paragraph("<b>CambriaNTWORTLICHE STELLE</b>", styNormal)
+            label_ente_responsabile = Paragraph("<b>HelveticaNTWORTLICHE STELLE</b>", styNormal)
             #label_catalogo_internazionale = Paragraph("<b>N° CATALOGO INTERNAZIONALE</b>", styNormal)
             ente_responsabile = Paragraph(str(self.n_catalogo_generale), styNormal)
             #catalogo_internazionale = Paragraph(str(self.n_catalogo_internazionale), styNormal)
@@ -3387,7 +3377,7 @@ class single_US_pdf_sheet(object):
            
             label_laterizi = Paragraph("<b>LATERIZI</b>", styVerticale)
             materiali = Paragraph("<b>MATERIALIEN</b><br/>", styNormal)
-            lavorazione = Paragraph("<b>CambriaRBEITUNG</b><br/>",  styNormal)
+            lavorazione = Paragraph("<b>HelveticaRBEITUNG</b><br/>",  styNormal)
             consistenza = Paragraph("<b>KONSISTENZ</b><br/>", styNormal)
             forma = Paragraph("<b>FORM</b><br/>", styNormal)
             colore = Paragraph("<b>FARBE</b><br/>", styNormal)
@@ -3473,8 +3463,8 @@ class single_US_pdf_sheet(object):
 
             affidabilita = Paragraph("<b>STRATIGRAPHISCHE SICHERHEIT</b><br/>" + self.affidabilita, styNormal)
             direttore = Paragraph("<b>WISSENSCHAFTLICHER LEITER DER UNTERSUCHUNGEN</b><br/>" + self.direttore_us, styNormal)
-            responsabile2 = Paragraph("<b>CambriaNTWORTLICH FÜR DIE ZUSAMMENSTELLUNG IM FELD</b><br/>" + self.schedatore, styNormal)
-            responsabile = Paragraph("<b>CambriaNTWORTLICH FÜR DIE NACHARBEIT</b><br/>" + self.responsabile_us, styNormal)
+            responsabile2 = Paragraph("<b>HelveticaNTWORTLICH FÜR DIE ZUSAMMENSTELLUNG IM FELD</b><br/>" + self.schedatore, styNormal)
+            responsabile = Paragraph("<b>HelveticaNTWORTLICH FÜR DIE NACHARBEIT</b><br/>" + self.responsabile_us, styNormal)
             data_rilievo = Paragraph("<b>DATUM FELDARBEIT</b><br/>" + self.data_rilevazione, styNormal)
             data_rielaborazione = Paragraph("<b>ÜBERARBEITUNGSDATUM</b><br/>" + self.data_rielaborazione, styNormal)
             attivita = Paragraph("<b>AKTIVITÄTEN</b><br/>" + self.attivita, styNormal)
@@ -4015,7 +4005,7 @@ class US_index_pdf_sheet(object):
         styNormal.spaceAfter = 10
         styNormal.alignment = 0  # LEFT
         styNormal.fontSize = 6
-        styNormal.fontName = 'Cambria'
+        styNormal.fontName = 'Helvetica'
         self.unzip_rapporti_stratigrafici()
 
         area = Paragraph("<b>Area</b><br/>" + str(self.area), styNormal)
@@ -4322,7 +4312,7 @@ class US_index_pdf_sheet(object):
         styNormal.spaceAfter = 20
         styNormal.alignment = 0  # LEFT
         styNormal.fontSize = 7
-        styNormal.fontName = 'Cambria'
+        styNormal.fontName = 'Helvetica'
         self.unzip_rapporti_stratigrafici_en()
 
         area = Paragraph("<b>Area</b><br/>" + str(self.area), styNormal)
@@ -4446,7 +4436,7 @@ class US_index_pdf_sheet(object):
         styNormal.spaceAfter = 20
         styNormal.alignment = 0  # LEFT
         styNormal.fontSize = 7
-        styNormal.fontName = 'Cambria'
+        styNormal.fontName = 'Helvetica'
         self.unzip_rapporti_stratigrafici_de()
 
         area = Paragraph("<b>Bereich</b><br/>" + str(self.area), styNormal)
@@ -4520,7 +4510,7 @@ class FOTO_index_pdf_sheet(object):
         styNormal.spaceAfter = 20
         styNormal.alignment = 0  # LEFT
         styNormal.fontSize = 7
-        styNormal.fontName = 'Cambria'
+        styNormal.fontName = 'Helvetica'
         
 
         conn = Connection()
@@ -4561,7 +4551,7 @@ class FOTO_index_pdf_sheet(object):
         styNormal.spaceAfter = 20
         styNormal.alignment = 0  # LEFT
         styNormal.fontSize = 7
-        styNormal.fontName = 'Cambria'
+        styNormal.fontName = 'Helvetica'
         
 
         conn = Connection()
@@ -4600,7 +4590,7 @@ class FOTO_index_pdf_sheet(object):
         styNormal.spaceAfter = 20
         styNormal.alignment = 0  # LEFT
         styNormal.fontSize = 7
-        styNormal.fontName = 'Cambria'
+        styNormal.fontName = 'Helvetica'
         
 
         conn = Connection()
@@ -4656,7 +4646,7 @@ class FOTO_index_pdf_sheet_2(object):
         styNormal.spaceAfter = 20
         styNormal.alignment = 0  # LEFT
         styNormal.fontSize = 7
-        styNormal.fontName = 'Cambria'
+        styNormal.fontName = 'Helvetica'
         
 
         conn = Connection()
@@ -5000,10 +4990,10 @@ class generate_US_pdf(object):
 
         styleSheet = getSampleStyleSheet()
         styNormal = styleSheet['Normal']
-        styNormal.fontName='Cambria'
+        styNormal.fontName='Helvetica'
         styBackground = ParagraphStyle('background', parent=styNormal, backColor=colors.pink)
         styH1 = styleSheet['Heading3']
-        styH1.fontName='Cambria'
+        styH1.fontName='Helvetica'
         data = self.datestrfdate()
 
         lst = []
@@ -5055,7 +5045,7 @@ class generate_US_pdf(object):
         styNormal = styleSheet['Normal']
         styBackground = ParagraphStyle('background', parent=styNormal, backColor=colors.pink)
         styH1 = styleSheet['Heading3']
-        styH1.fontName='Cambria'
+        styH1.fontName='Helvetica'
         data = self.datestrfdate()
 
         lst = []
@@ -5106,7 +5096,7 @@ class generate_US_pdf(object):
         styNormal = styleSheet['Normal']
         styBackground = ParagraphStyle('background', parent=styNormal, backColor=colors.pink)
         styH1 = styleSheet['Heading3']
-        styH1.fontName='Cambria'
+        styH1.fontName='Helvetica'
         data = self.datestrfdate()
 
         lst = []

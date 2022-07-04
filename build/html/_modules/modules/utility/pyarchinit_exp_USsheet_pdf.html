@@ -98,20 +98,10 @@
 <span class="kn">from</span> <span class="nn">reportlab.pdfbase</span> <span class="kn">import</span> <span class="n">pdfmetrics</span>
 <span class="kn">from</span> <span class="nn">reportlab.pdfbase.pdfmetrics</span> <span class="kn">import</span> <span class="n">registerFontFamily</span>
 <span class="kn">from</span> <span class="nn">reportlab.pdfbase.ttfonts</span> <span class="kn">import</span> <span class="n">TTFont</span>
-<span class="c1"># Registered font family</span>
-<span class="n">pdfmetrics</span><span class="o">.</span><span class="n">registerFont</span><span class="p">(</span><span class="n">TTFont</span><span class="p">(</span><span class="s1">&#39;Cambria&#39;</span><span class="p">,</span> <span class="s1">&#39;Cambria.ttc&#39;</span><span class="p">))</span>
-<span class="n">pdfmetrics</span><span class="o">.</span><span class="n">registerFont</span><span class="p">(</span><span class="n">TTFont</span><span class="p">(</span><span class="s1">&#39;CambriaBd&#39;</span><span class="p">,</span> <span class="s1">&#39;cambriab.ttf&#39;</span><span class="p">))</span>
-<span class="n">pdfmetrics</span><span class="o">.</span><span class="n">registerFont</span><span class="p">(</span><span class="n">TTFont</span><span class="p">(</span><span class="s1">&#39;CambriaI&#39;</span><span class="p">,</span> <span class="s1">&#39;cambriai.ttf&#39;</span><span class="p">))</span>
-<span class="n">pdfmetrics</span><span class="o">.</span><span class="n">registerFont</span><span class="p">(</span><span class="n">TTFont</span><span class="p">(</span><span class="s1">&#39;CambriaZ&#39;</span><span class="p">,</span> <span class="s1">&#39;cambriaz.ttf&#39;</span><span class="p">))</span>
-<span class="c1"># #Registered fontfamily</span>
-<span class="n">registerFontFamily</span><span class="p">(</span><span class="s1">&#39;Cambria&#39;</span><span class="p">,</span><span class="n">normal</span><span class="o">=</span><span class="s1">&#39;Cambria&#39;</span><span class="p">)</span>
-
 
 
 <span class="kn">from</span> <span class="nn">..db.pyarchinit_conn_strings</span> <span class="kn">import</span> <span class="n">Connection</span>
 <span class="kn">from</span> <span class="nn">.pyarchinit_OS_utility</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span> <span class="k">as</span> <span class="n">giggino</span>
-<span class="kn">from</span> <span class="nn">reportlab.lib.utils</span> <span class="kn">import</span> <span class="n">ImageReader</span>
 
 <div class="viewcode-block" id="NumberedCanvas_USsheet"><a class="viewcode-back" href="../../../06_moduli.html#modules.utility.pyarchinit_exp_USsheet_pdf.NumberedCanvas_USsheet">[documenti]</a><span class="k">class</span> <span class="nc">NumberedCanvas_USsheet</span><span class="p">(</span><span class="n">canvas</span><span class="o">.</span><span class="n">Canvas</span><span class="p">):</span>
 
@@ -136,12 +126,12 @@
         <span class="n">canvas</span><span class="o">.</span><span class="n">Canvas</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">draw_page_number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">page_count</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="s2">&quot;Cambria&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="s2">&quot;Helvetica&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">drawRightString</span><span class="p">(</span><span class="mi">200</span> <span class="o">*</span> <span class="n">mm</span><span class="p">,</span> <span class="mi">8</span> <span class="o">*</span> <span class="n">mm</span><span class="p">,</span>
                              <span class="s2">&quot;Pag. </span><span class="si">%d</span><span class="s2"> di </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pageNumber</span><span class="p">,</span> <span class="n">page_count</span><span class="p">))</span>  <span class="c1"># scheda us verticale 200mm x 20 mm</span></div>
 
 
-<div class="viewcode-block" id="NumberedCanvas_USindex"><a class="viewcode-back" href="../../../06_moduli.html#modules.utility.pyarchinit_exp_USsheet_pdf.NumberedCanvas_USindex">[documenti]</a><span class="k">class</span> <span class="nc">NumberedCanvas_USindex</span><span class="p">(</span><span class="n">canvas</span><span class="o">.</span><span class="n">Canvas</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">NumberedCanvas_USindex</span><span class="p">(</span><span class="n">canvas</span><span class="o">.</span><span class="n">Canvas</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">canvas</span><span class="o">.</span><span class="n">Canvas</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -150,26 +140,26 @@
     <span class="k">def</span> <span class="nf">define_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">page_position</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
 
-<div class="viewcode-block" id="NumberedCanvas_USindex.showPage"><a class="viewcode-back" href="../../../06_moduli.html#modules.utility.pyarchinit_exp_USsheet_pdf.NumberedCanvas_USindex.showPage">[documenti]</a>    <span class="k">def</span> <span class="nf">showPage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">showPage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_saved_page_states</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_startPage</span><span class="p">()</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_startPage</span><span class="p">()</span>
 
-<div class="viewcode-block" id="NumberedCanvas_USindex.save"><a class="viewcode-back" href="../../../06_moduli.html#modules.utility.pyarchinit_exp_USsheet_pdf.NumberedCanvas_USindex.save">[documenti]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;add page info to each page (page x of y)&quot;&quot;&quot;</span>
         <span class="n">num_pages</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_saved_page_states</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_saved_page_states</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">draw_page_number</span><span class="p">(</span><span class="n">num_pages</span><span class="p">)</span>
             <span class="n">canvas</span><span class="o">.</span><span class="n">Canvas</span><span class="o">.</span><span class="n">showPage</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="n">canvas</span><span class="o">.</span><span class="n">Canvas</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+        <span class="n">canvas</span><span class="o">.</span><span class="n">Canvas</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">draw_page_number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">page_count</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="s2">&quot;Cambria&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="s2">&quot;Helvetica&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">drawRightString</span><span class="p">(</span><span class="mi">270</span> <span class="o">*</span> <span class="n">mm</span><span class="p">,</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">mm</span><span class="p">,</span>
-                             <span class="s2">&quot;Pag. </span><span class="si">%d</span><span class="s2"> di </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pageNumber</span><span class="p">,</span> <span class="n">page_count</span><span class="p">))</span>  <span class="c1"># scheda us verticale 200mm x 20 mm</span></div>
+                             <span class="s2">&quot;Pag. </span><span class="si">%d</span><span class="s2"> di </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pageNumber</span><span class="p">,</span> <span class="n">page_count</span><span class="p">))</span>  <span class="c1"># scheda us verticale 200mm x 20 mm</span>
 
 
-<span class="k">class</span> <span class="nc">single_US_pdf_sheet</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="single_US_pdf_sheet"><a class="viewcode-back" href="../../../06_moduli.html#modules.utility.pyarchinit_exp_USsheet_pdf.single_US_pdf_sheet">[documenti]</a><span class="k">class</span> <span class="nc">single_US_pdf_sheet</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
     <span class="n">si_lega_a</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="n">uguale_a</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
@@ -1176,7 +1166,7 @@
         <span class="n">styNormal</span><span class="o">.</span><span class="n">spaceBefore</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styNormal</span><span class="o">.</span><span class="n">spaceAfter</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styNormal</span><span class="o">.</span><span class="n">fontSize</span> <span class="o">=</span> <span class="mi">7</span>
-        <span class="n">styNormal</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Cambria&#39;</span>
+        <span class="n">styNormal</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Helvetica&#39;</span>
         <span class="n">styNormal</span><span class="o">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># LEFT</span>
 
         <span class="n">styleSheet</span> <span class="o">=</span> <span class="n">getSampleStyleSheet</span><span class="p">()</span>
@@ -1184,7 +1174,7 @@
         <span class="n">styNormal2</span><span class="o">.</span><span class="n">spaceBefore</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styNormal2</span><span class="o">.</span><span class="n">spaceAfter</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styNormal2</span><span class="o">.</span><span class="n">fontSize</span> <span class="o">=</span> <span class="mi">7</span>
-        <span class="n">styNormal2</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Cambria&#39;</span>
+        <span class="n">styNormal2</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Helvetica&#39;</span>
         <span class="n">styNormal2</span><span class="o">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># LEFT</span>
         
         
@@ -1193,7 +1183,7 @@
         <span class="n">styL</span><span class="o">.</span><span class="n">spaceBefore</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styL</span><span class="o">.</span><span class="n">spaceAfter</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styL</span><span class="o">.</span><span class="n">fontSize</span> <span class="o">=</span> <span class="mi">2</span>
-        <span class="n">styL</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Cambria&#39;</span>
+        <span class="n">styL</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Helvetica&#39;</span>
         <span class="n">styL</span><span class="o">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="mi">1</span>
         
         
@@ -1202,7 +1192,7 @@
         <span class="n">styDescrizione</span><span class="o">.</span><span class="n">spaceBefore</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styDescrizione</span><span class="o">.</span><span class="n">spaceAfter</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styDescrizione</span><span class="o">.</span><span class="n">fontSize</span> <span class="o">=</span> <span class="mi">7</span>
-        <span class="n">styDescrizione</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Cambria&#39;</span>
+        <span class="n">styDescrizione</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Helvetica&#39;</span>
         <span class="n">styDescrizione</span><span class="o">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="mi">4</span>  <span class="c1"># Justified</span>
 
         <span class="n">styleSheet</span> <span class="o">=</span> <span class="n">getSampleStyleSheet</span><span class="p">()</span>
@@ -1210,7 +1200,7 @@
         <span class="n">styUnitaTipo</span><span class="o">.</span><span class="n">spaceBefore</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styUnitaTipo</span><span class="o">.</span><span class="n">spaceAfter</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styUnitaTipo</span><span class="o">.</span><span class="n">fontSize</span> <span class="o">=</span> <span class="mi">14</span>
-        <span class="n">styUnitaTipo</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Cambria&#39;</span>
+        <span class="n">styUnitaTipo</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Helvetica&#39;</span>
         <span class="n">styUnitaTipo</span><span class="o">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># CENTER</span>
 
         <span class="n">styleSheet</span> <span class="o">=</span> <span class="n">getSampleStyleSheet</span><span class="p">()</span>
@@ -1219,7 +1209,7 @@
         <span class="n">styTitoloComponenti</span><span class="o">.</span><span class="n">spaceAfter</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styTitoloComponenti</span><span class="o">.</span> <span class="n">rowHeights</span><span class="o">=</span><span class="mf">0.5</span>
         <span class="n">styTitoloComponenti</span><span class="o">.</span><span class="n">fontSize</span> <span class="o">=</span> <span class="mi">7</span>
-        <span class="n">styTitoloComponenti</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Cambria&#39;</span>
+        <span class="n">styTitoloComponenti</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Helvetica&#39;</span>
         <span class="n">styTitoloComponenti</span><span class="o">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># CENTER</span>
 
         <span class="n">styleSheet</span> <span class="o">=</span> <span class="n">getSampleStyleSheet</span><span class="p">()</span>
@@ -1227,7 +1217,7 @@
         <span class="n">styVerticale</span><span class="o">.</span><span class="n">spaceBefore</span> <span class="o">=</span> <span class="mi">10</span>
         <span class="n">styVerticale</span><span class="o">.</span><span class="n">spaceAfter</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styVerticale</span><span class="o">.</span><span class="n">fontSize</span> <span class="o">=</span> <span class="mi">7</span>
-        <span class="n">styVerticale</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Cambria&#39;</span>
+        <span class="n">styVerticale</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Helvetica&#39;</span>
         <span class="n">styVerticale</span><span class="o">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># CENTER</span>
         <span class="n">styVerticale</span><span class="o">.</span><span class="n">leading</span><span class="o">=</span><span class="mi">8</span>
 
@@ -2059,7 +2049,7 @@
         <span class="n">styNormal</span><span class="o">.</span><span class="n">spaceBefore</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styNormal</span><span class="o">.</span><span class="n">spaceAfter</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styNormal</span><span class="o">.</span><span class="n">fontSize</span> <span class="o">=</span> <span class="mi">7</span>
-        <span class="n">styNormal</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Cambria&#39;</span>
+        <span class="n">styNormal</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Helvetica&#39;</span>
         <span class="n">styNormal</span><span class="o">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># LEFT</span>
 
         <span class="n">styleSheet</span> <span class="o">=</span> <span class="n">getSampleStyleSheet</span><span class="p">()</span>
@@ -2067,7 +2057,7 @@
         <span class="n">styNormal2</span><span class="o">.</span><span class="n">spaceBefore</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styNormal2</span><span class="o">.</span><span class="n">spaceAfter</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styNormal2</span><span class="o">.</span><span class="n">fontSize</span> <span class="o">=</span> <span class="mi">7</span>
-        <span class="n">styNormal2</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Cambria&#39;</span>
+        <span class="n">styNormal2</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Helvetica&#39;</span>
         <span class="n">styNormal2</span><span class="o">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># LEFT</span>
         
         
@@ -2076,7 +2066,7 @@
         <span class="n">styL</span><span class="o">.</span><span class="n">spaceBefore</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styL</span><span class="o">.</span><span class="n">spaceAfter</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styL</span><span class="o">.</span><span class="n">fontSize</span> <span class="o">=</span> <span class="mi">2</span>
-        <span class="n">styL</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Cambria&#39;</span>
+        <span class="n">styL</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Helvetica&#39;</span>
         <span class="n">styL</span><span class="o">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="mi">1</span>
         
         
@@ -2085,7 +2075,7 @@
         <span class="n">styDescrizione</span><span class="o">.</span><span class="n">spaceBefore</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styDescrizione</span><span class="o">.</span><span class="n">spaceAfter</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styDescrizione</span><span class="o">.</span><span class="n">fontSize</span> <span class="o">=</span> <span class="mi">7</span>
-        <span class="n">styDescrizione</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Cambria&#39;</span>
+        <span class="n">styDescrizione</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Helvetica&#39;</span>
         <span class="n">styDescrizione</span><span class="o">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="mi">4</span>  <span class="c1"># Justified</span>
 
         <span class="n">styleSheet</span> <span class="o">=</span> <span class="n">getSampleStyleSheet</span><span class="p">()</span>
@@ -2093,7 +2083,7 @@
         <span class="n">styUnitaTipo</span><span class="o">.</span><span class="n">spaceBefore</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styUnitaTipo</span><span class="o">.</span><span class="n">spaceAfter</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styUnitaTipo</span><span class="o">.</span><span class="n">fontSize</span> <span class="o">=</span> <span class="mi">14</span>
-        <span class="n">styUnitaTipo</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Cambria&#39;</span>
+        <span class="n">styUnitaTipo</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Helvetica&#39;</span>
         <span class="n">styUnitaTipo</span><span class="o">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># CENTER</span>
 
         <span class="n">styleSheet</span> <span class="o">=</span> <span class="n">getSampleStyleSheet</span><span class="p">()</span>
@@ -2102,7 +2092,7 @@
         <span class="n">styTitoloComponenti</span><span class="o">.</span><span class="n">spaceAfter</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styTitoloComponenti</span><span class="o">.</span> <span class="n">rowHeights</span><span class="o">=</span><span class="mf">0.5</span>
         <span class="n">styTitoloComponenti</span><span class="o">.</span><span class="n">fontSize</span> <span class="o">=</span> <span class="mi">7</span>
-        <span class="n">styTitoloComponenti</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Cambria&#39;</span>
+        <span class="n">styTitoloComponenti</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Helvetica&#39;</span>
         <span class="n">styTitoloComponenti</span><span class="o">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># CENTER</span>
 
         <span class="n">styleSheet</span> <span class="o">=</span> <span class="n">getSampleStyleSheet</span><span class="p">()</span>
@@ -2110,7 +2100,7 @@
         <span class="n">styVerticale</span><span class="o">.</span><span class="n">spaceBefore</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styVerticale</span><span class="o">.</span><span class="n">spaceAfter</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styVerticale</span><span class="o">.</span><span class="n">fontSize</span> <span class="o">=</span> <span class="mi">7</span>
-        <span class="n">styVerticale</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Cambria&#39;</span>
+        <span class="n">styVerticale</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Helvetica&#39;</span>
         <span class="n">styVerticale</span><span class="o">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># CENTER</span>
         <span class="n">styVerticale</span><span class="o">.</span><span class="n">leading</span><span class="o">=</span><span class="mi">8</span>
 
@@ -2947,7 +2937,7 @@
         <span class="n">styNormal</span><span class="o">.</span><span class="n">spaceBefore</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styNormal</span><span class="o">.</span><span class="n">spaceAfter</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styNormal</span><span class="o">.</span><span class="n">fontSize</span> <span class="o">=</span> <span class="mi">7</span>
-        <span class="n">styNormal</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Cambria&#39;</span>
+        <span class="n">styNormal</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Helvetica&#39;</span>
         <span class="n">styNormal</span><span class="o">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># LEFT</span>
 
         <span class="n">styleSheet</span> <span class="o">=</span> <span class="n">getSampleStyleSheet</span><span class="p">()</span>
@@ -2955,7 +2945,7 @@
         <span class="n">styNormal2</span><span class="o">.</span><span class="n">spaceBefore</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styNormal2</span><span class="o">.</span><span class="n">spaceAfter</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styNormal2</span><span class="o">.</span><span class="n">fontSize</span> <span class="o">=</span> <span class="mi">7</span>
-        <span class="n">styNormal2</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Cambria&#39;</span>
+        <span class="n">styNormal2</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Helvetica&#39;</span>
         <span class="n">styNormal2</span><span class="o">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># LEFT</span>
         
         
@@ -2964,7 +2954,7 @@
         <span class="n">styL</span><span class="o">.</span><span class="n">spaceBefore</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styL</span><span class="o">.</span><span class="n">spaceAfter</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styL</span><span class="o">.</span><span class="n">fontSize</span> <span class="o">=</span> <span class="mi">2</span>
-        <span class="n">styL</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Cambria&#39;</span>
+        <span class="n">styL</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Helvetica&#39;</span>
         <span class="n">styL</span><span class="o">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="mi">1</span>
         
         
@@ -2973,7 +2963,7 @@
         <span class="n">styDescrizione</span><span class="o">.</span><span class="n">spaceBefore</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styDescrizione</span><span class="o">.</span><span class="n">spaceAfter</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styDescrizione</span><span class="o">.</span><span class="n">fontSize</span> <span class="o">=</span> <span class="mi">7</span>
-        <span class="n">styDescrizione</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Cambria&#39;</span>
+        <span class="n">styDescrizione</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Helvetica&#39;</span>
         <span class="n">styDescrizione</span><span class="o">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="mi">4</span>  <span class="c1"># Justified</span>
 
         <span class="n">styleSheet</span> <span class="o">=</span> <span class="n">getSampleStyleSheet</span><span class="p">()</span>
@@ -2981,7 +2971,7 @@
         <span class="n">styUnitaTipo</span><span class="o">.</span><span class="n">spaceBefore</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styUnitaTipo</span><span class="o">.</span><span class="n">spaceAfter</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styUnitaTipo</span><span class="o">.</span><span class="n">fontSize</span> <span class="o">=</span> <span class="mi">14</span>
-        <span class="n">styUnitaTipo</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Cambria&#39;</span>
+        <span class="n">styUnitaTipo</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Helvetica&#39;</span>
         <span class="n">styUnitaTipo</span><span class="o">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># CENTER</span>
 
         <span class="n">styleSheet</span> <span class="o">=</span> <span class="n">getSampleStyleSheet</span><span class="p">()</span>
@@ -2990,7 +2980,7 @@
         <span class="n">styTitoloComponenti</span><span class="o">.</span><span class="n">spaceAfter</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styTitoloComponenti</span><span class="o">.</span> <span class="n">rowHeights</span><span class="o">=</span><span class="mf">0.5</span>
         <span class="n">styTitoloComponenti</span><span class="o">.</span><span class="n">fontSize</span> <span class="o">=</span> <span class="mi">7</span>
-        <span class="n">styTitoloComponenti</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Cambria&#39;</span>
+        <span class="n">styTitoloComponenti</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Helvetica&#39;</span>
         <span class="n">styTitoloComponenti</span><span class="o">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># CENTER</span>
 
         <span class="n">styleSheet</span> <span class="o">=</span> <span class="n">getSampleStyleSheet</span><span class="p">()</span>
@@ -2998,7 +2988,7 @@
         <span class="n">styVerticale</span><span class="o">.</span><span class="n">spaceBefore</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styVerticale</span><span class="o">.</span><span class="n">spaceAfter</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styVerticale</span><span class="o">.</span><span class="n">fontSize</span> <span class="o">=</span> <span class="mi">7</span>
-        <span class="n">styVerticale</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Cambria&#39;</span>
+        <span class="n">styVerticale</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Helvetica&#39;</span>
         <span class="n">styVerticale</span><span class="o">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># CENTER</span>
         <span class="n">styVerticale</span><span class="o">.</span><span class="n">leading</span><span class="o">=</span><span class="mi">8</span>
 
@@ -3019,7 +3009,7 @@
         <span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">logo</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unita_tipo</span><span class="p">)</span><span class="o">==</span> <span class="s1">&#39;SE&#39;</span><span class="p">:</span>
             <span class="n">unita_tipo</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unita_tipo</span><span class="p">),</span> <span class="n">styUnitaTipo</span><span class="p">)</span>
-            <span class="n">label_ente_responsabile</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;CambriaNTWORTLICHE STELLE&lt;/b&gt;&quot;</span><span class="p">,</span> <span class="n">styNormal</span><span class="p">)</span>
+            <span class="n">label_ente_responsabile</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;HelveticaNTWORTLICHE STELLE&lt;/b&gt;&quot;</span><span class="p">,</span> <span class="n">styNormal</span><span class="p">)</span>
             <span class="c1">#label_catalogo_internazionale = Paragraph(&quot;&lt;b&gt;N° CATALOGO INTERNAZIONALE&lt;/b&gt;&quot;, styNormal)</span>
             <span class="n">ente_responsabile</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_catalogo_generale</span><span class="p">),</span> <span class="n">styNormal</span><span class="p">)</span>
             <span class="c1">#catalogo_internazionale = Paragraph(str(self.n_catalogo_internazionale), styNormal)</span>
@@ -3186,8 +3176,8 @@
 
             <span class="n">affidabilita</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;STRATIGRAPHISCHE SICHERHEIT&lt;/b&gt;&lt;br/&gt;&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">affidabilita</span><span class="p">,</span> <span class="n">styNormal</span><span class="p">)</span>
             <span class="n">direttore</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;WISSENSCHAFTLICHER LEITER DER UNTERSUCHUNGEN&lt;/b&gt;&lt;br/&gt;&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">direttore_us</span><span class="p">,</span> <span class="n">styNormal</span><span class="p">)</span>
-            <span class="n">responsabile2</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;CambriaNTWORTLICH FÜR DIE ZUSAMMENSTELLUNG IM FELD&lt;/b&gt;&lt;br/&gt;&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">schedatore</span><span class="p">,</span> <span class="n">styNormal</span><span class="p">)</span>
-            <span class="n">responsabile</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;CambriaNTWORTLICH FÜR DIE NACHARBEIT&lt;/b&gt;&lt;br/&gt;&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">responsabile_us</span><span class="p">,</span> <span class="n">styNormal</span><span class="p">)</span>
+            <span class="n">responsabile2</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;HelveticaNTWORTLICH FÜR DIE ZUSAMMENSTELLUNG IM FELD&lt;/b&gt;&lt;br/&gt;&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">schedatore</span><span class="p">,</span> <span class="n">styNormal</span><span class="p">)</span>
+            <span class="n">responsabile</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;HelveticaNTWORTLICH FÜR DIE NACHARBEIT&lt;/b&gt;&lt;br/&gt;&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">responsabile_us</span><span class="p">,</span> <span class="n">styNormal</span><span class="p">)</span>
             <span class="n">data_rilievo</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;DATUM FELDARBEIT&lt;/b&gt;&lt;br/&gt;&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_rilevazione</span><span class="p">,</span> <span class="n">styNormal</span><span class="p">)</span>
             <span class="n">data_rielaborazione</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;ÜBERARBEITUNGSDATUM&lt;/b&gt;&lt;br/&gt;&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_rielaborazione</span><span class="p">,</span> <span class="n">styNormal</span><span class="p">)</span>
             <span class="n">attivita</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;AKTIVITÄTEN&lt;/b&gt;&lt;br/&gt;&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">attivita</span><span class="p">,</span> <span class="n">styNormal</span><span class="p">)</span>
@@ -3388,7 +3378,7 @@
             <span class="k">return</span> <span class="n">t</span>
         <span class="k">elif</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unita_tipo</span><span class="p">)</span><span class="o">==</span><span class="s1">&#39;MSE&#39;</span><span class="p">:</span>
             <span class="n">unita_tipo</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unita_tipo</span><span class="p">),</span> <span class="n">styUnitaTipo</span><span class="p">)</span>
-            <span class="n">label_ente_responsabile</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;CambriaNTWORTLICHE STELLE&lt;/b&gt;&quot;</span><span class="p">,</span> <span class="n">styNormal</span><span class="p">)</span>
+            <span class="n">label_ente_responsabile</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;HelveticaNTWORTLICHE STELLE&lt;/b&gt;&quot;</span><span class="p">,</span> <span class="n">styNormal</span><span class="p">)</span>
             <span class="c1">#label_catalogo_internazionale = Paragraph(&quot;&lt;b&gt;N° CATALOGO INTERNAZIONALE&lt;/b&gt;&quot;, styNormal)</span>
             <span class="n">ente_responsabile</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_catalogo_generale</span><span class="p">),</span> <span class="n">styNormal</span><span class="p">)</span>
             <span class="c1">#catalogo_internazionale = Paragraph(str(self.n_catalogo_internazionale), styNormal)</span>
@@ -3464,7 +3454,7 @@
            
             <span class="n">label_laterizi</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;LATERIZI&lt;/b&gt;&quot;</span><span class="p">,</span> <span class="n">styVerticale</span><span class="p">)</span>
             <span class="n">materiali</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;MATERIALIEN&lt;/b&gt;&lt;br/&gt;&quot;</span><span class="p">,</span> <span class="n">styNormal</span><span class="p">)</span>
-            <span class="n">lavorazione</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;CambriaRBEITUNG&lt;/b&gt;&lt;br/&gt;&quot;</span><span class="p">,</span>  <span class="n">styNormal</span><span class="p">)</span>
+            <span class="n">lavorazione</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;HelveticaRBEITUNG&lt;/b&gt;&lt;br/&gt;&quot;</span><span class="p">,</span>  <span class="n">styNormal</span><span class="p">)</span>
             <span class="n">consistenza</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;KONSISTENZ&lt;/b&gt;&lt;br/&gt;&quot;</span><span class="p">,</span> <span class="n">styNormal</span><span class="p">)</span>
             <span class="n">forma</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;FORM&lt;/b&gt;&lt;br/&gt;&quot;</span><span class="p">,</span> <span class="n">styNormal</span><span class="p">)</span>
             <span class="n">colore</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;FARBE&lt;/b&gt;&lt;br/&gt;&quot;</span><span class="p">,</span> <span class="n">styNormal</span><span class="p">)</span>
@@ -3550,8 +3540,8 @@
 
             <span class="n">affidabilita</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;STRATIGRAPHISCHE SICHERHEIT&lt;/b&gt;&lt;br/&gt;&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">affidabilita</span><span class="p">,</span> <span class="n">styNormal</span><span class="p">)</span>
             <span class="n">direttore</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;WISSENSCHAFTLICHER LEITER DER UNTERSUCHUNGEN&lt;/b&gt;&lt;br/&gt;&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">direttore_us</span><span class="p">,</span> <span class="n">styNormal</span><span class="p">)</span>
-            <span class="n">responsabile2</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;CambriaNTWORTLICH FÜR DIE ZUSAMMENSTELLUNG IM FELD&lt;/b&gt;&lt;br/&gt;&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">schedatore</span><span class="p">,</span> <span class="n">styNormal</span><span class="p">)</span>
-            <span class="n">responsabile</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;CambriaNTWORTLICH FÜR DIE NACHARBEIT&lt;/b&gt;&lt;br/&gt;&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">responsabile_us</span><span class="p">,</span> <span class="n">styNormal</span><span class="p">)</span>
+            <span class="n">responsabile2</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;HelveticaNTWORTLICH FÜR DIE ZUSAMMENSTELLUNG IM FELD&lt;/b&gt;&lt;br/&gt;&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">schedatore</span><span class="p">,</span> <span class="n">styNormal</span><span class="p">)</span>
+            <span class="n">responsabile</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;HelveticaNTWORTLICH FÜR DIE NACHARBEIT&lt;/b&gt;&lt;br/&gt;&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">responsabile_us</span><span class="p">,</span> <span class="n">styNormal</span><span class="p">)</span>
             <span class="n">data_rilievo</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;DATUM FELDARBEIT&lt;/b&gt;&lt;br/&gt;&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_rilevazione</span><span class="p">,</span> <span class="n">styNormal</span><span class="p">)</span>
             <span class="n">data_rielaborazione</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;ÜBERARBEITUNGSDATUM&lt;/b&gt;&lt;br/&gt;&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_rielaborazione</span><span class="p">,</span> <span class="n">styNormal</span><span class="p">)</span>
             <span class="n">attivita</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;AKTIVITÄTEN&lt;/b&gt;&lt;br/&gt;&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">attivita</span><span class="p">,</span> <span class="n">styNormal</span><span class="p">)</span>
@@ -3819,10 +3809,10 @@
 
             <span class="n">t</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="n">cell_schema</span><span class="p">,</span> <span class="n">colWidths</span><span class="o">=</span><span class="n">colWidths</span><span class="p">,</span> <span class="n">rowHeights</span><span class="o">=</span><span class="n">rowHeights</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">table_style</span><span class="p">)</span>
 
-            <span class="k">return</span> <span class="n">t</span>
+            <span class="k">return</span> <span class="n">t</span></div>
     
     
-<span class="k">class</span> <span class="nc">US_index_pdf_sheet</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="US_index_pdf_sheet"><a class="viewcode-back" href="../../../06_moduli.html#modules.utility.pyarchinit_exp_USsheet_pdf.US_index_pdf_sheet">[documenti]</a><span class="k">class</span> <span class="nc">US_index_pdf_sheet</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="n">si_lega_a</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="n">uguale_a</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="n">copre</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
@@ -4092,7 +4082,7 @@
         <span class="n">styNormal</span><span class="o">.</span><span class="n">spaceAfter</span> <span class="o">=</span> <span class="mi">10</span>
         <span class="n">styNormal</span><span class="o">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># LEFT</span>
         <span class="n">styNormal</span><span class="o">.</span><span class="n">fontSize</span> <span class="o">=</span> <span class="mi">6</span>
-        <span class="n">styNormal</span><span class="o">.</span><span class="n">fontName</span> <span class="o">=</span> <span class="s1">&#39;Cambria&#39;</span>
+        <span class="n">styNormal</span><span class="o">.</span><span class="n">fontName</span> <span class="o">=</span> <span class="s1">&#39;Helvetica&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">unzip_rapporti_stratigrafici</span><span class="p">()</span>
 
         <span class="n">area</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;Area&lt;/b&gt;&lt;br/&gt;&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">area</span><span class="p">),</span> <span class="n">styNormal</span><span class="p">)</span>
@@ -4399,7 +4389,7 @@
         <span class="n">styNormal</span><span class="o">.</span><span class="n">spaceAfter</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styNormal</span><span class="o">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># LEFT</span>
         <span class="n">styNormal</span><span class="o">.</span><span class="n">fontSize</span> <span class="o">=</span> <span class="mi">7</span>
-        <span class="n">styNormal</span><span class="o">.</span><span class="n">fontName</span> <span class="o">=</span> <span class="s1">&#39;Cambria&#39;</span>
+        <span class="n">styNormal</span><span class="o">.</span><span class="n">fontName</span> <span class="o">=</span> <span class="s1">&#39;Helvetica&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">unzip_rapporti_stratigrafici_en</span><span class="p">()</span>
 
         <span class="n">area</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;Area&lt;/b&gt;&lt;br/&gt;&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">area</span><span class="p">),</span> <span class="n">styNormal</span><span class="p">)</span>
@@ -4523,7 +4513,7 @@
         <span class="n">styNormal</span><span class="o">.</span><span class="n">spaceAfter</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styNormal</span><span class="o">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># LEFT</span>
         <span class="n">styNormal</span><span class="o">.</span><span class="n">fontSize</span> <span class="o">=</span> <span class="mi">7</span>
-        <span class="n">styNormal</span><span class="o">.</span><span class="n">fontName</span> <span class="o">=</span> <span class="s1">&#39;Cambria&#39;</span>
+        <span class="n">styNormal</span><span class="o">.</span><span class="n">fontName</span> <span class="o">=</span> <span class="s1">&#39;Helvetica&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">unzip_rapporti_stratigrafici_de</span><span class="p">()</span>
 
         <span class="n">area</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;Bereich&lt;/b&gt;&lt;br/&gt;&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">area</span><span class="p">),</span> <span class="n">styNormal</span><span class="p">)</span>
@@ -4576,9 +4566,9 @@
         <span class="n">styles</span> <span class="o">=</span> <span class="n">TableStyle</span><span class="p">([(</span><span class="s1">&#39;GRID&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">colors</span><span class="o">.</span><span class="n">black</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;VALIGN&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;TOP&#39;</span><span class="p">)</span>
                              <span class="p">])</span>  <span class="c1"># finale</span>
 
-        <span class="k">return</span> <span class="n">styles</span>
+        <span class="k">return</span> <span class="n">styles</span></div>
 
-<span class="k">class</span> <span class="nc">FOTO_index_pdf_sheet</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="FOTO_index_pdf_sheet"><a class="viewcode-back" href="../../../06_moduli.html#modules.utility.pyarchinit_exp_USsheet_pdf.FOTO_index_pdf_sheet">[documenti]</a><span class="k">class</span> <span class="nc">FOTO_index_pdf_sheet</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
@@ -4597,7 +4587,7 @@
         <span class="n">styNormal</span><span class="o">.</span><span class="n">spaceAfter</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styNormal</span><span class="o">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># LEFT</span>
         <span class="n">styNormal</span><span class="o">.</span><span class="n">fontSize</span> <span class="o">=</span> <span class="mi">7</span>
-        <span class="n">styNormal</span><span class="o">.</span><span class="n">fontName</span> <span class="o">=</span> <span class="s1">&#39;Cambria&#39;</span>
+        <span class="n">styNormal</span><span class="o">.</span><span class="n">fontName</span> <span class="o">=</span> <span class="s1">&#39;Helvetica&#39;</span>
         
 
         <span class="n">conn</span> <span class="o">=</span> <span class="n">Connection</span><span class="p">()</span>
@@ -4638,7 +4628,7 @@
         <span class="n">styNormal</span><span class="o">.</span><span class="n">spaceAfter</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styNormal</span><span class="o">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># LEFT</span>
         <span class="n">styNormal</span><span class="o">.</span><span class="n">fontSize</span> <span class="o">=</span> <span class="mi">7</span>
-        <span class="n">styNormal</span><span class="o">.</span><span class="n">fontName</span> <span class="o">=</span> <span class="s1">&#39;Cambria&#39;</span>
+        <span class="n">styNormal</span><span class="o">.</span><span class="n">fontName</span> <span class="o">=</span> <span class="s1">&#39;Helvetica&#39;</span>
         
 
         <span class="n">conn</span> <span class="o">=</span> <span class="n">Connection</span><span class="p">()</span>
@@ -4677,7 +4667,7 @@
         <span class="n">styNormal</span><span class="o">.</span><span class="n">spaceAfter</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styNormal</span><span class="o">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># LEFT</span>
         <span class="n">styNormal</span><span class="o">.</span><span class="n">fontSize</span> <span class="o">=</span> <span class="mi">7</span>
-        <span class="n">styNormal</span><span class="o">.</span><span class="n">fontName</span> <span class="o">=</span> <span class="s1">&#39;Cambria&#39;</span>
+        <span class="n">styNormal</span><span class="o">.</span><span class="n">fontName</span> <span class="o">=</span> <span class="s1">&#39;Helvetica&#39;</span>
         
 
         <span class="n">conn</span> <span class="o">=</span> <span class="n">Connection</span><span class="p">()</span>
@@ -4713,8 +4703,8 @@
         <span class="n">styles</span> <span class="o">=</span> <span class="n">TableStyle</span><span class="p">([(</span><span class="s1">&#39;GRID&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">colors</span><span class="o">.</span><span class="n">black</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;VALIGN&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;TOP&#39;</span><span class="p">)</span>
                              <span class="p">])</span>  <span class="c1"># finale</span>
 
-        <span class="k">return</span> <span class="n">styles</span>
-<span class="k">class</span> <span class="nc">FOTO_index_pdf_sheet_2</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">styles</span></div>
+<div class="viewcode-block" id="FOTO_index_pdf_sheet_2"><a class="viewcode-back" href="../../../06_moduli.html#modules.utility.pyarchinit_exp_USsheet_pdf.FOTO_index_pdf_sheet_2">[documenti]</a><span class="k">class</span> <span class="nc">FOTO_index_pdf_sheet_2</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
@@ -4733,7 +4723,7 @@
         <span class="n">styNormal</span><span class="o">.</span><span class="n">spaceAfter</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="n">styNormal</span><span class="o">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># LEFT</span>
         <span class="n">styNormal</span><span class="o">.</span><span class="n">fontSize</span> <span class="o">=</span> <span class="mi">7</span>
-        <span class="n">styNormal</span><span class="o">.</span><span class="n">fontName</span> <span class="o">=</span> <span class="s1">&#39;Cambria&#39;</span>
+        <span class="n">styNormal</span><span class="o">.</span><span class="n">fontName</span> <span class="o">=</span> <span class="s1">&#39;Helvetica&#39;</span>
         
 
         <span class="n">conn</span> <span class="o">=</span> <span class="n">Connection</span><span class="p">()</span>
@@ -4846,9 +4836,9 @@
         <span class="n">styles</span> <span class="o">=</span> <span class="n">TableStyle</span><span class="p">([(</span><span class="s1">&#39;GRID&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">colors</span><span class="o">.</span><span class="n">black</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;VALIGN&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;TOP&#39;</span><span class="p">)</span>
                              <span class="p">])</span>  <span class="c1"># finale</span>
 
-        <span class="k">return</span> <span class="n">styles</span>    
+        <span class="k">return</span> <span class="n">styles</span>    </div>
         
-<span class="k">class</span> <span class="nc">generate_US_pdf</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="generate_US_pdf"><a class="viewcode-back" href="../../../06_moduli.html#modules.utility.pyarchinit_exp_USsheet_pdf.generate_US_pdf">[documenti]</a><span class="k">class</span> <span class="nc">generate_US_pdf</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="n">HOME</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;PYARCHINIT_HOME&#39;</span><span class="p">]</span>
 
     <span class="n">PDF_path</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">HOME</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">,</span> <span class="s2">&quot;pyarchinit_PDF_folder&quot;</span><span class="p">)</span>
@@ -5077,10 +5067,10 @@
 
         <span class="n">styleSheet</span> <span class="o">=</span> <span class="n">getSampleStyleSheet</span><span class="p">()</span>
         <span class="n">styNormal</span> <span class="o">=</span> <span class="n">styleSheet</span><span class="p">[</span><span class="s1">&#39;Normal&#39;</span><span class="p">]</span>
-        <span class="n">styNormal</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Cambria&#39;</span>
+        <span class="n">styNormal</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Helvetica&#39;</span>
         <span class="n">styBackground</span> <span class="o">=</span> <span class="n">ParagraphStyle</span><span class="p">(</span><span class="s1">&#39;background&#39;</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">styNormal</span><span class="p">,</span> <span class="n">backColor</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">pink</span><span class="p">)</span>
         <span class="n">styH1</span> <span class="o">=</span> <span class="n">styleSheet</span><span class="p">[</span><span class="s1">&#39;Heading3&#39;</span><span class="p">]</span>
-        <span class="n">styH1</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Cambria&#39;</span>
+        <span class="n">styH1</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Helvetica&#39;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">datestrfdate</span><span class="p">()</span>
 
         <span class="n">lst</span> <span class="o">=</span> <span class="p">[]</span>
@@ -5132,7 +5122,7 @@
         <span class="n">styNormal</span> <span class="o">=</span> <span class="n">styleSheet</span><span class="p">[</span><span class="s1">&#39;Normal&#39;</span><span class="p">]</span>
         <span class="n">styBackground</span> <span class="o">=</span> <span class="n">ParagraphStyle</span><span class="p">(</span><span class="s1">&#39;background&#39;</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">styNormal</span><span class="p">,</span> <span class="n">backColor</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">pink</span><span class="p">)</span>
         <span class="n">styH1</span> <span class="o">=</span> <span class="n">styleSheet</span><span class="p">[</span><span class="s1">&#39;Heading3&#39;</span><span class="p">]</span>
-        <span class="n">styH1</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Cambria&#39;</span>
+        <span class="n">styH1</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Helvetica&#39;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">datestrfdate</span><span class="p">()</span>
 
         <span class="n">lst</span> <span class="o">=</span> <span class="p">[]</span>
@@ -5183,7 +5173,7 @@
         <span class="n">styNormal</span> <span class="o">=</span> <span class="n">styleSheet</span><span class="p">[</span><span class="s1">&#39;Normal&#39;</span><span class="p">]</span>
         <span class="n">styBackground</span> <span class="o">=</span> <span class="n">ParagraphStyle</span><span class="p">(</span><span class="s1">&#39;background&#39;</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">styNormal</span><span class="p">,</span> <span class="n">backColor</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">pink</span><span class="p">)</span>
         <span class="n">styH1</span> <span class="o">=</span> <span class="n">styleSheet</span><span class="p">[</span><span class="s1">&#39;Heading3&#39;</span><span class="p">]</span>
-        <span class="n">styH1</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Cambria&#39;</span>
+        <span class="n">styH1</span><span class="o">.</span><span class="n">fontName</span><span class="o">=</span><span class="s1">&#39;Helvetica&#39;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">datestrfdate</span><span class="p">()</span>
 
         <span class="n">lst</span> <span class="o">=</span> <span class="p">[]</span>
@@ -5525,7 +5515,7 @@
         <span class="n">doc</span> <span class="o">=</span> <span class="n">SimpleDocTemplate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">pagesize</span><span class="o">=</span><span class="n">A4</span><span class="p">)</span>
         <span class="n">doc</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">canvasmaker</span><span class="o">=</span><span class="n">NumberedCanvas_USsheet</span><span class="p">)</span>
 
-        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
     
     
 
