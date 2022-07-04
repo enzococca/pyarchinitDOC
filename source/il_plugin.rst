@@ -1,8 +1,9 @@
 .. image:: ./_images/logo_3.png
    :align: right
-   
+
+========================
 Il Plugin
---------------------------------
+========================
 
 Il progetto pyArchInit nasce nel 2005 per la sperimentazione dell'uso del Free Open Source Software
 (d'ora in poi citato come FOSS) in campo archeologico.
@@ -31,7 +32,7 @@ pyArchInit è un software FOSS, che si appoggia a sua volta su software FOSS, pr
 con codice sorgente aperto e ridistribuito liberamente all'esterno della comunità di sviluppo.
 
 
-2.1 Struttura plugin
+Struttura plugin
 ________________________________
 
 Il plugin è stato studiato per avere una struttura flessibile in cui ogni parte può essere sostituita, riparata o
@@ -42,7 +43,7 @@ Provare a spiegare come sia il flusso dei dati per ogni file o per ogni funzione
 altra sede le spiegazioni tecniche di come funziona il plugin.
 
 
-2.2 Toolbar
+Toolbar
 ________________________________
 
 Breve introduzione valida per tutte le schede contrassegnate nel riquadro rosso.
