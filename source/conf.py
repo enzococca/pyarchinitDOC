@@ -32,7 +32,7 @@ master_doc = 'index'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 # Add the extension
-extensions = [
+extensions = ['sphinx_design',
    'sphinx.ext.autosectionlabel','sphinxcontrib.video','sphinx.ext.autosummary','sphinx.ext.autodoc', 'sphinx.ext.doctest',
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
