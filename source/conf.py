@@ -217,7 +217,7 @@ latex_elements = {
             \vspace{0mm}
             \Large \textbf{{Enzo Cocca}}
 
-            \small Created on : Giugno, 2022
+            \small Created on : giugno, 2022
 
             \vspace*{0mm}
             \small  Last updated : \MonthYearFormat\today
