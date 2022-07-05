@@ -168,10 +168,10 @@ latex_elements = {
         %\fancyhead[LE]{\small \nouppercase{\leftmark}}
 
         %% for oneside: change footer at right side. If you want to use Left and right then use same as header defined above.
-        \fancyfoot[R]{\ifthenelse{\isodd{\value{page}}}{{\tiny Meher Krishna Patel} }{\href{http://pythondsp.readthedocs.io/en/latest/pythondsp/toc.html}{\tiny PythonDSP}}}
+        \fancyfoot[R]{\ifthenelse{\isodd{\value{page}}}{{\tiny Enzo Cocca} }{\href{http://pythondsp.readthedocs.io/en/latest/pythondsp/toc.html}{\tiny PythonDSP}}}
 
         %%% Alternating Footer for two side
-        %\fancyfoot[RO, RE]{\scriptsize Meher Krishna Patel (mekrip@gmail.com)}
+        %\fancyfoot[RO, RE]{\scriptsize Enzo cocca (enzo.ccc@gmail.com}
 
         %%% page number
         \fancyfoot[CO, CE]{\thepage}
@@ -225,7 +225,7 @@ latex_elements = {
 
             %% \vfill adds at the bottom
             \vfill
-            \small \textit{More documents are freely available at }{\href{http://pythondsp.readthedocs.io/en/latest/pythondsp/toc.html}{PythonDSP}}
+            \small \textit{Il codice è visualizzabile in }{\href{https://github.com/pyarchinit/pyarchinit}{pyarchinit}}
         \end{titlepage}
 
         \clearpage
@@ -257,7 +257,7 @@ latex_documents = [
     (master_doc, 'pyarchinit_01.tex', u'Manuale Pyarchinit4',
      u'Enzo Cocca', 'manual'),]
 # Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {'https://docs.python.org/': None}
+intersphinx_mapping = {'https://https://github.com/pyarchinit/': None}
 
 def setup(app):
     app.add_css_file('style.css')  # remove line numbers
