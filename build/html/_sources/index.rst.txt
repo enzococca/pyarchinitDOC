@@ -26,7 +26,7 @@ pyArchInit Documentazione
 	:align: center
 
 Indice and capitoli
-==================
+====================
 
 * :ref:`genindex`
 * :ref:`modindex`
