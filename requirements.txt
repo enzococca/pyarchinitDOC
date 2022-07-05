@@ -1,3 +1,4 @@
+sphinx_design
 sphinxcontrib.video
 sphinx_rtd_theme
 SQLAlchemy==1.4.27
