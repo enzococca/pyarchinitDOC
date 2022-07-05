@@ -1,7 +1,8 @@
 
+
 ************
 Bibliografia
 ************
 
-.. bibliography:: bibtex_filename.bib
+.. bibliography::
    :style: plain

@@ -28,6 +28,9 @@ pyArchInit Documentazione
 
 
 
+
+
+
 .. image:: ./_images/logo_2.png
 	:align: center
 
