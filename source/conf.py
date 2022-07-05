@@ -257,7 +257,7 @@ latex_documents = [
     (master_doc, 'pyarchinit_01.tex', u'Manuale Pyarchinit4',
      u'Enzo Cocca', 'manual'),]
 # Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {'https://https://github.com/pyarchinit/': None}
+intersphinx_mapping = {'https://docs.python.org/': None}
 
 def setup(app):
     app.add_css_file('style.css')  # remove line numbers
