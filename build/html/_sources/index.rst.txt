@@ -10,7 +10,9 @@ pyArchInit Documentazione
 
 .. toctree::
    :maxdepth: 3
-   :caption: Contenuti:
+   :numbered:
+   :includehidden:
+   :caption: Contents:
 
    about.rst
    prerequisities.rst
@@ -21,13 +23,13 @@ pyArchInit Documentazione
    funzioni.rst
    esempi_di_applicazione.rst
    moduli.rst
-
+   numfig_index.rst
 .. image:: ./_images/logo_2.png
 	:align: center
 
-Indice and capitoli
-====================
+.. Indice and capitoli
+.. ====================
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+.. * :ref:`genindex`
+.. * :ref:`modindex`
+.. * :ref:`search`
