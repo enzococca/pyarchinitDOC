@@ -9,7 +9,13 @@ import subprocess
 
 
 class Pyarchinit_OS_Utility(object):
-    """Pyarchinit_OS_Utility"""
+    """
+
+    .. module:: argparse_actions
+
+    Pyarchinit_OS_Utility
+
+    """
 
     def create_dir(self, d):
         '''Create directory
