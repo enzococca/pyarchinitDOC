@@ -7,7 +7,7 @@
 
 
 ************
-Bibliography
+Bibliografia
 ************
 
 .. bibliography:: bibtex_filename.bib
