@@ -206,7 +206,7 @@ latex_elements = {
             \centering
 
             \vspace*{40mm} %%% * is used to give space from top
-            \textbf{\Huge {Sphinx format for Latex and HTML}}
+            \textbf{\Huge {Pyarchinit4 manuale}}
 
             \vspace{0mm}
             \begin{figure}[!h]
@@ -215,7 +215,7 @@ latex_elements = {
             \end{figure}
 
             \vspace{0mm}
-            \Large \textbf{{Meher Krishna Patel}}
+            \Large \textbf{{Enzo Cocca}}
 
             \small Created on : Octorber, 2017
 
@@ -260,7 +260,7 @@ latex_documents = [
 intersphinx_mapping = {'https://docs.python.org/': None}
 
 def setup(app):
-    app.add_js_file('custom.css')  # remove line numbers
+    app.add_css_file('style.css')  # remove line numbers
     app.add_js_file('copybutton.js') # show/hide prompt >>>
 
 # use :numref: for references (instead of :ref:)
