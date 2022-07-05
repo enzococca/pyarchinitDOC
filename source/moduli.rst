@@ -13,12 +13,14 @@ Moduli pyArchInit: Classi e Funzioni
 
 
 
-=======================================
+
 pyarchinit OS utility
 =======================================
 .. note::
     Questa classe presenta alcune funzioni per copiare immagini, file e creare cartelle durante
     l'installazione del plugin
+
+-----------------------------------------------------------------------
 
 .. automodule:: modules.utility.pyarchinit_OS_utility
    :noindex:
@@ -27,7 +29,6 @@ pyarchinit OS utility
        :members:
 
 
-=======================================
 pyarchinit_utility
 =======================================
 .. note::
@@ -35,18 +36,23 @@ pyarchinit_utility
     elementi in una lista, cercare liste in un dizionario, indicizzare una colonna in una lista
     convertire tuple in liste.
 
+
+----------------------------------------------------------
+
 .. automodule:: modules.db.pyarchinit_utility
 
 
     .. autoclass:: Utility
        :members:
 
-=======================================
+
 pyarchinit installation folder
 =======================================
 .. note::
     Questa classe presenta due funzioni per installare nel percorso del tuo utente
     i file di configurazione e le cartelle
+
+------------------------------------------------------------------
 
 .. automodule:: modules.utility.pyarchinit_folder_installation
    :noindex:
