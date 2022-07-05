@@ -1,3 +1,4 @@
+sphinxcontrib.bibtex
 sphinx_design
 sphinxcontrib.video
 sphinx_rtd_theme

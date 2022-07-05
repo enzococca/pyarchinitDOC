@@ -24,6 +24,10 @@ pyArchInit Documentazione
    esempi_di_applicazione.rst
    moduli.rst
    numfig_index.rst
+   bibliography.rst
+
+
+
 .. image:: ./_images/logo_2.png
 	:align: center
 

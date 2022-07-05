@@ -25,6 +25,7 @@ author = 'Enzo Cocca & Luca Mandolesi'
 release = '4'
 # The master toctree document.
 master_doc = 'index'
+# The latex index document
 
 # -- General configuration ---------------------------------------------------
 
@@ -32,7 +33,7 @@ master_doc = 'index'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 # Add the extension
-extensions = ['sphinx_design',
+extensions = ['sphinx_design','sphinxcontrib.bibtex',
    'sphinx.ext.autosectionlabel','sphinxcontrib.video','sphinx.ext.autosummary','sphinx.ext.autodoc', 'sphinx.ext.doctest',
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
@@ -42,7 +43,7 @@ extensions = ['sphinx_design',
     'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
     'sphinx.ext.napoleon',]
-
+bibtex_bibfiles = ['bibtex_filename.bib']
 # Napoleon settings
 napoleon_google_docstring = True
 napoleon_numpy_docstring = True
