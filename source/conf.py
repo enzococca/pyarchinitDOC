@@ -209,7 +209,7 @@ latex_elements = {
             \textbf{\Huge {Pyarchinit4 manuale}}
 
             \vspace{0mm}
-            \begin{logo}[!h]
+            \begin{figure}[!h]
                 \centering
                 \includegraphics[scale=0.3]{pyarchinit_logo.png}
             \end{figure}
@@ -217,7 +217,7 @@ latex_elements = {
             \vspace{0mm}
             \Large \textbf{{Enzo Cocca}}
 
-            \small Created on : Giunoo, 2022
+            \small Created on : Giugno, 2022
 
             \vspace*{0mm}
             \small  Last updated : \MonthYearFormat\today
