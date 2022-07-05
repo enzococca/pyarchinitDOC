@@ -211,7 +211,7 @@ latex_elements = {
             \vspace{0mm}
             \begin{figure}[!h]
                 \centering
-                \includegraphics[scale=0.1]{pyarchinit_logo.png}
+                \includegraphics[scale=0.9]{pyarchinit_logo.png}
             \end{figure}
 
             \vspace{0mm}
