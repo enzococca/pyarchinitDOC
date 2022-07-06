@@ -1,8 +1,14 @@
+.. raw:: latex
 
+   \cleardoublepage
+   \begingroup
+   \renewcommand\chapter[1]{\endgroup}
+   \phantomsection
 
 ************
-Bibliografia
+Bibliography
 ************
 
-.. bibliography::
+.. bibliography:: bibtex_filename.bib
+   :all:
    :style: plain

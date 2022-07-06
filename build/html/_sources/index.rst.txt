@@ -32,7 +32,7 @@ pyArchInit Documentazione
 
 
 .. image:: ./_images/logo_2.png
-	:align: center
+   :align: center
 
 .. Indice and capitoli
 .. ====================
