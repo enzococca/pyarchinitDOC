@@ -202,8 +202,8 @@ Funzione inserimento rapporti stratigrafici inverso
 L'utente potrà scegliere durante l'inserimento dei rapporti stratigrafici, se vorrà inserire il rapporto inverso.
 Questa funzione ha tre particolarità:
 
-    crea una nuova scheda se la scheda non esiste ed inserisce il rapporto inverso
+    #. crea una nuova scheda se la scheda non esiste ed inserisce il rapporto inverso
 
-    se la scheda esiste ma non esiste il rapporto inverso, verrà aggiungto
+    #. se la scheda esiste ma non esiste il rapporto inverso, verrà aggiungto
 
-    se la scheda esiste e anche il rapporto inverso, il rapporto inverso verrà aggiornato
+    #. se la scheda esiste e anche il rapporto inverso, il rapporto inverso verrà aggiornato
