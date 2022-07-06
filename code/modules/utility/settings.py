@@ -12,7 +12,7 @@ from .pyarchinit_OS_utility import Pyarchinit_OS_Utility
 
 
 class Settings(object):
-    """Configurazione DataBase"""
+    """Configurazione DataBase
     SERVER = ""
     HOST = ""
     DATABASE = ""
@@ -57,7 +57,7 @@ class Settings(object):
         conf.read(1)
         conf.write(b"','LOGO' : 'insert path for the image logo'}")
     
-    conf.close()
+    conf.close()"""
 
     def __init__(self, s):
 
