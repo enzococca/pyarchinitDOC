@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="it" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>modules.utility.settings &mdash; pyArchInit 4.0 4 documentazione</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/style.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+        <script src="../../../_static/translations.js"></script>
+        <script src="../../../_static/design-tabs.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="author" title="A proposito di questi documenti" href="../../../about.html" />
+    <link rel="index" title="Indice" href="../../../genindex.html" />
+    <link rel="search" title="Cerca" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> pyArchInit 4.0
+            <img src="../../../_static/pyarchinit_logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Cerca documenti" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Menu di navigazione">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">1. About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../prerequisities.html">2. Prerequisiti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../novit%C3%A0.html">3. Novità</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installazione.html">4. Installazione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../il_plugin.html">5. Il Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../le_schede.html">6. Le schede</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../funzioni.html">7. Funzioni</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../esempi_di_applicazione.html">8. Esempi di Applicazione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../moduli.html">9. Moduli pyArchInit: Classi e Funzioni</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fig.html">10. Figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../list.html">11. Liste</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bibliography.html">12. Bibliografia</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Menu navigazione dispositivi mobili" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pyArchInit 4.0</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Naviga tra le pagine">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Codice del modulo</a> &raquo;</li>
+      <li>modules.utility.settings</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Codice sorgente per modules.utility.settings</h1><div class="highlight"><pre>
+<span></span><span class="ch">#! /usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="kn">import</span> <span class="nb">object</span>
+<span class="c1">#from qgis.PyQt.QtWidgets import *</span>
+<span class="c1">#from qgis.core import QgsMessageLog, Qgis, QgsSettings</span>
+<span class="kn">from</span> <span class="nn">.pyarchinit_OS_utility</span> <span class="kn">import</span> <span class="n">Pyarchinit_OS_Utility</span>
+
+
+<div class="viewcode-block" id="Settings"><a class="viewcode-back" href="../../../moduli.html#modules.utility.settings.Settings">[documenti]</a><span class="k">class</span> <span class="nc">Settings</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Configurazione DataBase&quot;&quot;&quot;</span>
+    <span class="n">SERVER</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">HOST</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">DATABASE</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">PASSWORD</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">PORT</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">USER</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">THUMB_PATH</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">THUMB_RESIZE</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">SITE_SET</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">LOGO</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">RESOURCES_PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">pardir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">pardir</span><span class="p">,</span> <span class="s1">&#39;resources&#39;</span><span class="p">)</span>
+    <span class="n">OS_UTILITY</span> <span class="o">=</span> <span class="n">Pyarchinit_OS_Utility</span><span class="p">()</span>
+    <span class="n">HOME</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;PYARCHINIT_HOME&#39;</span><span class="p">]</span>
+    <span class="n">path_rel</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">,</span> <span class="n">HOME</span><span class="p">,</span> <span class="s1">&#39;pyarchinit_DB_folder&#39;</span><span class="p">,</span> <span class="s1">&#39;config.cfg&#39;</span><span class="p">)</span>
+    
+    <span class="n">conf</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span> <span class="n">path_rel</span><span class="p">,</span> <span class="s2">&quot;rb+&quot;</span><span class="p">)</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+    <span class="n">text</span> <span class="o">=</span> <span class="p">(</span><span class="sa">b</span><span class="s1">&#39;THUMB_RESIZE&#39;</span><span class="p">)</span>
+    <span class="n">text_a</span> <span class="o">=</span> <span class="p">(</span><span class="sa">b</span><span class="s1">&#39;SITE_SET&#39;</span><span class="p">)</span>
+    <span class="n">text_b</span> <span class="o">=</span> <span class="p">(</span><span class="sa">b</span><span class="s1">&#39;LOGO&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">conf</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">conf</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">conf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;&#39;,&#39;THUMB_RESIZE&#39; : &#39;insert path for the image resized&#39;&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">text_a</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">conf</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">conf</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">conf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;&#39;,&#39;SITE_SET&#39; : &#39;&quot;</span><span class="p">)</span>
+        
+    <span class="k">if</span> <span class="n">text_b</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">conf</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">conf</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">conf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;&#39;,&#39;LOGO&#39; : &#39;insert path for the image logo&#39;}&quot;</span><span class="p">)</span>
+    
+    <span class="n">conf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Settings.set_configuration"><a class="viewcode-back" href="../../../moduli.html#modules.utility.settings.Settings.set_configuration">[documenti]</a>    <span class="k">def</span> <span class="nf">set_configuration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Configurazione database&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SERVER</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="s1">&#39;SERVER&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">HOST</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="s1">&#39;HOST&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">DATABASE</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="s1">&#39;DATABASE&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">PASSWORD</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="s1">&#39;PASSWORD&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">PORT</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="s1">&#39;PORT&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">USER</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="s1">&#39;USER&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">THUMB_PATH</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="s1">&#39;THUMB_PATH&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">THUMB_RESIZE</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="s1">&#39;THUMB_RESIZE&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SITE_SET</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="s1">&#39;SITE_SET&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">LOGO</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="s1">&#39;LOGO&#39;</span><span class="p">]</span>
+        <span class="n">PLUGIN_PATH</span> <span class="o">=</span> <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, AdArte srl.</p>
+  </div>
+
+  Realizzato con <a href="https://www.sphinx-doc.org/">Sphinx</a> e il tema
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    fornito da <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
