@@ -6,13 +6,13 @@ import os
 import traceback
 import sys
 from builtins import object
-from qgis.PyQt.QtWidgets import *
+#from qgis.PyQt.QtWidgets import *
 from qgis.core import QgsMessageLog, Qgis, QgsSettings
-from .pyarchinit_OS_utility import Pyarchinit_OS_Utility
+from pyarchinit_OS_utility import Pyarchinit_OS_Utility
 
 
 class Settings(object):
-     
+    """Configurazione DataBase"""
     SERVER = ""
     HOST = ""
     DATABASE = ""
@@ -64,7 +64,7 @@ class Settings(object):
         self.configuration = eval(s)
 
     def set_configuration(self):
-
+        """Configurazione database"""
         self.SERVER = self.configuration['SERVER']
         self.HOST = self.configuration['HOST']
         self.DATABASE = self.configuration['DATABASE']

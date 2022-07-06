@@ -59,3 +59,16 @@ pyarchinit installation folder
 
    .. autoclass:: pyarchinit_Folder_installation
        :members:
+
+
+settings
+=======================================
+.. note::
+    Questa classe presenta due funzioni di settaggio
+
+------------------------------------------------------------------
+
+.. automodule:: modules.utility.settings
+
+   .. autoclass:: Settings
+       :members:
