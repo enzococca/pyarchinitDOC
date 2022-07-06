@@ -23,7 +23,7 @@ pyarchinit OS utility
 -----------------------------------------------------------------------
 
 .. automodule:: modules.utility.pyarchinit_OS_utility
-   :noindex:
+
 
    .. autoclass:: Pyarchinit_OS_Utility
        :members:
@@ -55,7 +55,7 @@ pyarchinit installation folder
 ------------------------------------------------------------------
 
 .. automodule:: modules.utility.pyarchinit_folder_installation
-   :noindex:
+
 
    .. autoclass:: pyarchinit_Folder_installation
        :members:
