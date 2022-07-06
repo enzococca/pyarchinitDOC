@@ -17,15 +17,15 @@ from PyQt5 import QtXml
 # Support for QDate, QDateTime and QTime.
 import datetime
 
-# Convenient type aliases.
-PYQT_SIGNAL = typing.Union[QtCore.pyqtSignal, QtCore.pyqtBoundSignal]
-PYQT_SLOT = typing.Union[typing.Callable[..., None], QtCore.pyqtBoundSignal]
+# # Convenient type aliases.
+# PYQT_SIGNAL = typing.Union[QtCore.pyqtSignal, QtCore.pyqtBoundSignal]
+# PYQT_SLOT = typing.Union[typing.Callable[..., None], QtCore.pyqtBoundSignal]
 
-# Convenient aliases for complicated OpenGL types.
-PYQT_OPENGL_ARRAY = typing.Union[typing.Sequence[int], typing.Sequence[float],
-        PyQt5.sip.Buffer, None]
-PYQT_OPENGL_BOUND_ARRAY = typing.Union[typing.Sequence[int],
-        typing.Sequence[float], PyQt5.sip.Buffer, int, None]
+# # Convenient aliases for complicated OpenGL types.
+# PYQT_OPENGL_ARRAY = typing.Union[typing.Sequence[int], typing.Sequence[float],
+        # PyQt5.sip.Buffer, None]
+# PYQT_OPENGL_BOUND_ARRAY = typing.Union[typing.Sequence[int],
+        # typing.Sequence[float], PyQt5.sip.Buffer, int, None]
 
 
 class SmartgroupTable(int):
