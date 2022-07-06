@@ -116,8 +116,10 @@ Dalla scheda Sito quando vengo richiamati i layer per disegnare , essi sono ragg
 
 **************************************************************************
 
+
+
 WMS vincoli archeologici filtrati per comune
-========================================================================
+============================================
 .. image:: ./_images/radar.png
    :align: center
 

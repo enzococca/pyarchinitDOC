@@ -60,7 +60,7 @@ extensions = ['sphinx_design','sphinxcontrib.bibtex',
     'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
     'sphinx.ext.napoleon',]
-bibtex_bibfiles = ['bibtex_filename.bib']
+bibtex_bibfiles = ['biblio_pyarchinit.bib']
 # Napoleon settings
 napoleon_google_docstring = True
 napoleon_numpy_docstring = True
