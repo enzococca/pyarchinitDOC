@@ -6,7 +6,7 @@
 import typing
 
 import PyQt5.sip
-
+from PyQt5 import *
 from PyQt5 import QtPositioning
 from PyQt5 import QtWidgets
 from PyQt5 import QtPrintSupport
