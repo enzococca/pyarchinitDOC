@@ -13,19 +13,33 @@ from .pyarchinit_OS_utility import Pyarchinit_OS_Utility
 
 class Settings(object):
     """Configurazione DataBase
+
     SERVER = ""
+
     HOST = ""
+
     DATABASE = ""
+
     PASSWORD = ""
+
     PORT = ""
+
     USER = ""
+
     THUMB_PATH = ""
+
     THUMB_RESIZE = ""
+
     SITE_SET = ""
+
     LOGO = ""
+
     RESOURCES_PATH = os.path.join(os.path.dirname(__file__), os.pardir, os.pardir, 'resources')
+
     OS_UTILITY = Pyarchinit_OS_Utility()
+
     HOME = os.environ['PYARCHINIT_HOME']
+
     path_rel = os.path.join(os.sep, HOME, 'pyarchinit_DB_folder', 'config.cfg')
     
     conf = open( path_rel, "rb+")
@@ -33,7 +47,9 @@ class Settings(object):
     data = conf.read()
 
     text = (b'THUMB_RESIZE')
+
     text_a = (b'SITE_SET')
+
     text_b = (b'LOGO')
 
     if text in data:

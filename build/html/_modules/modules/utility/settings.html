@@ -98,19 +98,33 @@
 
 <div class="viewcode-block" id="Settings"><a class="viewcode-back" href="../../../moduli.html#modules.utility.settings.Settings">[documenti]</a><span class="k">class</span> <span class="nc">Settings</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Configurazione DataBase</span>
+
 <span class="sd">    SERVER = &quot;&quot;</span>
+
 <span class="sd">    HOST = &quot;&quot;</span>
+
 <span class="sd">    DATABASE = &quot;&quot;</span>
+
 <span class="sd">    PASSWORD = &quot;&quot;</span>
+
 <span class="sd">    PORT = &quot;&quot;</span>
+
 <span class="sd">    USER = &quot;&quot;</span>
+
 <span class="sd">    THUMB_PATH = &quot;&quot;</span>
+
 <span class="sd">    THUMB_RESIZE = &quot;&quot;</span>
+
 <span class="sd">    SITE_SET = &quot;&quot;</span>
+
 <span class="sd">    LOGO = &quot;&quot;</span>
+
 <span class="sd">    RESOURCES_PATH = os.path.join(os.path.dirname(__file__), os.pardir, os.pardir, &#39;resources&#39;)</span>
+
 <span class="sd">    OS_UTILITY = Pyarchinit_OS_Utility()</span>
+
 <span class="sd">    HOME = os.environ[&#39;PYARCHINIT_HOME&#39;]</span>
+
 <span class="sd">    path_rel = os.path.join(os.sep, HOME, &#39;pyarchinit_DB_folder&#39;, &#39;config.cfg&#39;)</span>
 <span class="sd">    </span>
 <span class="sd">    conf = open( path_rel, &quot;rb+&quot;)</span>
@@ -118,7 +132,9 @@
 <span class="sd">    data = conf.read()</span>
 
 <span class="sd">    text = (b&#39;THUMB_RESIZE&#39;)</span>
+
 <span class="sd">    text_a = (b&#39;SITE_SET&#39;)</span>
+
 <span class="sd">    text_b = (b&#39;LOGO&#39;)</span>
 
 <span class="sd">    if text in data:</span>

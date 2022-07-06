@@ -288,26 +288,26 @@ i file di configurazione e le cartelle</p>
 <span class="target" id="module-modules.utility.settings"></span><dl class="py class">
 <dt class="sig sig-object py" id="modules.utility.settings.Settings">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Settings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/utility/settings.html#Settings"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.utility.settings.Settings" title="Link a questa definizione"></a></dt>
-<dd><p>Configurazione DataBase
-SERVER = «»
-HOST = «»
-DATABASE = «»
-PASSWORD = «»
-PORT = «»
-USER = «»
-THUMB_PATH = «»
-THUMB_RESIZE = «»
-SITE_SET = «»
-LOGO = «»
-RESOURCES_PATH = os.path.join(os.path.dirname(__file__), os.pardir, os.pardir, “resources”)
-OS_UTILITY = Pyarchinit_OS_Utility()
-HOME = os.environ[“PYARCHINIT_HOME”]
-path_rel = os.path.join(os.sep, HOME, “pyarchinit_DB_folder”, “config.cfg”)</p>
+<dd><p>Configurazione DataBase</p>
+<p>SERVER = «»</p>
+<p>HOST = «»</p>
+<p>DATABASE = «»</p>
+<p>PASSWORD = «»</p>
+<p>PORT = «»</p>
+<p>USER = «»</p>
+<p>THUMB_PATH = «»</p>
+<p>THUMB_RESIZE = «»</p>
+<p>SITE_SET = «»</p>
+<p>LOGO = «»</p>
+<p>RESOURCES_PATH = os.path.join(os.path.dirname(__file__), os.pardir, os.pardir, “resources”)</p>
+<p>OS_UTILITY = Pyarchinit_OS_Utility()</p>
+<p>HOME = os.environ[“PYARCHINIT_HOME”]</p>
+<p>path_rel = os.path.join(os.sep, HOME, “pyarchinit_DB_folder”, “config.cfg”)</p>
 <p>conf = open( path_rel, «rb+»)</p>
 <p>data = conf.read()</p>
-<p>text = (b’THUMB_RESIZE”)
-text_a = (b’SITE_SET”)
-text_b = (b’LOGO”)</p>
+<p>text = (b’THUMB_RESIZE”)</p>
+<p>text_a = (b’SITE_SET”)</p>
+<p>text_b = (b’LOGO”)</p>
 <dl class="simple">
 <dt>if text in data:</dt><dd><p>pass</p>
 </dd>
