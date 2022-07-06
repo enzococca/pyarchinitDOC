@@ -17,3 +17,4 @@ opencv-python
 pytesseract
 psycopg2
 pyqt5
+qscintilla
