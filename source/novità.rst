@@ -12,7 +12,7 @@ I cambiamenti che hanno interessato la nuova release di pyArchInit sono:
 
     *Funzione MeveCost*
 
-    *Funzione conversione in Spatialite5*
+    *Funzione conversione in Spatialite 5*
 
     *Funzione importazione layer vettoriali*
 
@@ -31,6 +31,13 @@ I cambiamenti che hanno interessato la nuova release di pyArchInit sono:
     *Harris Matrix per Extended Matrix*
 
     *Totalopenstaion2pyarchinit*
+
+    *Controllo rapporti stratigrafici*
+
+    *Inserimento rapporti inverso*
+
+.. note::
+    Queste nuove caratteristiche sono state inserite tra il 2021 e il 2022
 
 **************************************************************************
 
@@ -83,7 +90,7 @@ Funzione conversione in Spatialite5
 .. image:: ./_images/toolbox.png
    :align: center
 
-Questa funzione permette di convertire in un colpo un db spatialite 3 o 4 di pyarchinit in spatialite 5
+Questa funzione permette di convertire un db spatialite 3 o 4 di pyarchinit in spatialite 5
 Per il funzionamento e maggiori dettagli si rimanda alla sezione Funzioni
 
 
@@ -93,9 +100,6 @@ Per il funzionamento e maggiori dettagli si rimanda alla sezione Funzioni
 
 Funzione importazione layer vettoriali 
 ====================================== 
-.. image:: ./_images/iconConn.png
-   :align: center
-
 
 La nuova struttura *Importazione Dati* all'interno dei DB di pyarchinit è stata migliorata. Ora è possibile
 importare anche le geometrie e sono visuaizzate in automatiche il nome dei campi e l'attributo.
@@ -185,3 +189,21 @@ Totalopenstation2pyarchinit
 Questa scheda permette d'importare i dati grezzi di diverse stazioni totali nei layer pyrchinit_quote, pyarchinit riferimenti
 e pyarchinit campionature
 
+Controllo rapporti stratigrafici
+======================================
+
+Sono state inserite nuovi tipi di controllo per i rapporti stratigrafici, in particolare la funzione controlla anche
+sulla base del periodo e dell'unità tipo
+
+
+Funzione inserimento rapporti stratigrafici inverso
+===================================================
+
+L'utente potrà scegliere durante l'inserimento dei rapporti stratigrafici, se vorrà inserire il rapporto inverso.
+Questa funzione ha tre particolarità:
+
+    crea una nuova scheda se la scheda non esiste ed inserisce il rapporto inverso
+
+    se la scheda esiste ma non esiste il rapporto inverso, verrà aggiungto
+
+    se la scheda esiste e anche il rapporto inverso, il rapporto inverso verrà aggiornato

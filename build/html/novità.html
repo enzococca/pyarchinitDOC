@@ -63,6 +63,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#geocoding-ricerca-indirizzi">3.11. Geocoding: ricerca indirizzi</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#harris-matrix-per-extended-matrix-tool">3.12. Harris matrix per Extended Matrix Tool</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#totalopenstation2pyarchinit">3.13. Totalopenstation2pyarchinit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#controllo-rapporti-stratigrafici">3.14. Controllo rapporti stratigrafici</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#funzione-inserimento-rapporti-stratigrafici-inverso">3.15. Funzione inserimento rapporti stratigrafici inverso</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="installazione.html">4. Installazione</a></li>
@@ -108,7 +110,7 @@
 <div><p><em>Scheda Print Map</em></p>
 <p><em>Scheda Impacchetta per Geopackage</em></p>
 <p><em>Funzione MeveCost</em></p>
-<p><em>Funzione conversione in Spatialite5</em></p>
+<p><em>Funzione conversione in Spatialite 5</em></p>
 <p><em>Funzione importazione layer vettoriali</em></p>
 <p><em>Raggruppamenti Layer</em></p>
 <p><em>WMS vincoli archeologici filtrati per comune</em></p>
@@ -118,7 +120,13 @@
 <p><em>Geocoding: ricerca indirizzi</em></p>
 <p><em>Harris Matrix per Extended Matrix</em></p>
 <p><em>Totalopenstaion2pyarchinit</em></p>
+<p><em>Controllo rapporti stratigrafici</em></p>
+<p><em>Inserimento rapporti inverso</em></p>
 </div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Queste nuove caratteristiche sono state inserite tra il 2021 e il 2022</p>
+</div>
 <hr class="docutils" />
 <section id="scheda-print-map">
 <h2><span class="section-number">3.1. </span>Scheda Print Map<a class="headerlink" href="#scheda-print-map" title="Link a questa intestazione"></a></h2>
@@ -149,13 +157,12 @@ iniziale e (opzionalmente) una posizione di destinazione.Per il funzionamento e 
 <section id="funzione-conversione-in-spatialite5">
 <h2><span class="section-number">3.4. </span>Funzione conversione in Spatialite5<a class="headerlink" href="#funzione-conversione-in-spatialite5" title="Link a questa intestazione"></a></h2>
 <img alt="_images/toolbox.png" class="align-center" src="_images/toolbox.png" />
-<p>Questa funzione permette di convertire in un colpo un db spatialite 3 o 4 di pyarchinit in spatialite 5
+<p>Questa funzione permette di convertire un db spatialite 3 o 4 di pyarchinit in spatialite 5
 Per il funzionamento e maggiori dettagli si rimanda alla sezione Funzioni</p>
 </section>
 <hr class="docutils" />
 <section id="funzione-importazione-layer-vettoriali">
 <h2><span class="section-number">3.5. </span>Funzione importazione layer vettoriali<a class="headerlink" href="#funzione-importazione-layer-vettoriali" title="Link a questa intestazione"></a></h2>
-<img alt="_images/iconConn.png" class="align-center" src="_images/iconConn.png" />
 <p>La nuova struttura <em>Importazione Dati</em> all’interno dei DB di pyarchinit è stata migliorata. Ora è possibile
 importare anche le geometrie e sono visuaizzate in automatiche il nome dei campi e l’attributo.</p>
 </section>
@@ -208,6 +215,21 @@ il graphml prodotto è compatibile con l’Extended Matrix Tool</p>
 <img alt="_images/tops.png" class="align-center" src="_images/tops.png" />
 <p>Questa scheda permette d’importare i dati grezzi di diverse stazioni totali nei layer pyrchinit_quote, pyarchinit riferimenti
 e pyarchinit campionature</p>
+</section>
+<section id="controllo-rapporti-stratigrafici">
+<h2><span class="section-number">3.14. </span>Controllo rapporti stratigrafici<a class="headerlink" href="#controllo-rapporti-stratigrafici" title="Link a questa intestazione"></a></h2>
+<p>Sono state inserite nuovi tipi di controllo per i rapporti stratigrafici, in particolare la funzione controlla anche
+sulla base del periodo e dell’unità tipo</p>
+</section>
+<section id="funzione-inserimento-rapporti-stratigrafici-inverso">
+<h2><span class="section-number">3.15. </span>Funzione inserimento rapporti stratigrafici inverso<a class="headerlink" href="#funzione-inserimento-rapporti-stratigrafici-inverso" title="Link a questa intestazione"></a></h2>
+<p>L’utente potrà scegliere durante l’inserimento dei rapporti stratigrafici, se vorrà inserire il rapporto inverso.
+Questa funzione ha tre particolarità:</p>
+<blockquote>
+<div><p>crea una nuova scheda se la scheda non esiste ed inserisce il rapporto inverso</p>
+<p>se la scheda esiste ma non esiste il rapporto inverso, verrà aggiungto</p>
+<p>se la scheda esiste e anche il rapporto inverso, il rapporto inverso verrà aggiornato</p>
+</div></blockquote>
 </section>
 </section>
 
