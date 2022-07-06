@@ -11,4 +11,5 @@ Bibliography
 
 .. bibliography:: bibtex_filename.bib
    :all:
+   :list: bullet
    :style: plain

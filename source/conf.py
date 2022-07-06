@@ -10,6 +10,23 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
+#import pybtex.plugin
+#rom pybtex.style.formatting.unsrt import Style as UnsrtStyle
+#from pybtex.style.labels.alpha import LabelStyle as AlphaLabelStyle
+#from pybtex.plugin import register_plugin
+#from pybtex.style.labels import BaseLabelStyle
+#from pybtex.style.template import words
+
+# a simple label style which uses the bibtex keys for labels
+#bibtex_default_style = 'apastyle'
+#class NoWebRefStyle(UnsrtStyle):
+#    def format_web_refs(self, e):
+#        # the following is just one simple way to return an empty node
+#        return words['']
+
+
+#pybtex.plugin.register_plugin(
+#    'pybtex.style.formatting', 'apastyle', NoWebRefStyle)
 
 import os
 import sys
