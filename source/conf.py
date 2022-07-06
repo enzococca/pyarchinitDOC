@@ -237,7 +237,7 @@ latex_elements = {
             \end{figure}
 
             \vspace{0mm}
-            \Large \textbf{{Enzo Cocca}}
+            \Large \textbf{{Edit by Enzo Cocca & Luca Mandolesi}}
 
             \small Created on : giugno, 2022
 

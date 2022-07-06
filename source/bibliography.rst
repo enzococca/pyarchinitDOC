@@ -11,5 +11,4 @@ Bibliografia
 
 .. bibliography:: biblio_pyarchinit.bib
    :all:
-   :list: bullet
    :style: plain
