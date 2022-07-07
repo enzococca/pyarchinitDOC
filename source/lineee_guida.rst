@@ -11,6 +11,7 @@ puoi iniziare a scrivere qui
 
 capitolo
 ========
+
     .. _ancora_il_capitolo:
 
 puoi iniziare a scrivere qui
@@ -79,3 +80,25 @@ puoi iniziare a scrivere qui
 
     .. [#] questa è la nota apiè di pagina.
 
+**Inserisci le figure e le immagini**
+
+Le figure e le immagini  vanno salvate nella cartella ./_images
+
+    *per inserire una immagine*
+        ..
+        .. image:: ./_images/pyarchinit_logo.png
+            :width: 10 cm
+            :align: center
+
+    *per inserire una figura*
+
+        .. _figura_[#]:
+
+        .. only:: html
+
+
+        .. figure:: ./_images/pyarchinit_logo.png
+            :width: 10 cm
+            :align: center
+
+            : Logo Pyarchinit
