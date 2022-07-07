@@ -84,13 +84,18 @@ puoi iniziare a scrivere qui
 
 Le figure e le immagini  vanno salvate nella cartella ./_images
 
-    *per inserire una immagine*
+*per inserire una immagine*::
+
         ..
         .. image:: ./_images/pyarchinit_logo.png
             :width: 10 cm
             :align: center
 
-    *per inserire una figura*
+.. image:: ./_images/pyarchinit_logo.png
+    :width: 10 cm
+    :align: center
+
+*per inserire una figura*::
 
         .. _figura_[#]:
 
@@ -101,4 +106,15 @@ Le figure e le immagini  vanno salvate nella cartella ./_images
             :width: 10 cm
             :align: center
 
-            : Logo Pyarchinit
+            : Logo Pyarchinit.
+
+.. _figura_[#]:
+
+.. only:: html
+
+
+.. figure:: ./_images/pyarchinit_logo.png
+    :width: 10 cm
+    :align: center
+
+    : Logo Pyarchinit.
