@@ -25,6 +25,7 @@ pyArchInit Documentazione
    moduli.rst
    numfig_index.rst
    bibliography.rst
+   lineee_guida.rst
 
 
 
