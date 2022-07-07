@@ -72,7 +72,6 @@ puoi iniziare a scrivere qui
     vedi capitolo ancora_il_capitolo_.
 
 
-    [1]. qualcosa
 
 **Note a piè di pagina:**
 
