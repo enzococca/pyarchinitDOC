@@ -12,6 +12,7 @@ puoi iniziare a scrivere qui
 capitolo
 ========
     .. _ancora_il_capitolo:
+
 puoi iniziare a scrivere qui
 
 sezione
@@ -71,7 +72,11 @@ puoi iniziare a scrivere qui
     vedi capitolo ancora_il_capitolo_.
 
 
+    [1]. qualcosa
+
 **Note a piè di pagina:**
 
-    scrivi qualcosa [1]_
+    scrivi qualcosa che dovrà andare come nota a piè di pagina [#]_
+
+    .. [#] questa è la nota apiè di pagina.
 
