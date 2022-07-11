@@ -147,7 +147,7 @@ Scheda Download Excel
 
 
 Scheda Time Manager
-=========-------
+===================
 
 .. image:: ./_images/iconTimeControll.png
    :align: center
