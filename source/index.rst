@@ -21,7 +21,7 @@ pyArchInit Documentazione
    il_plugin.rst
    le_schede.rst
    funzioni.rst
-   esempi_di_applicazione.rst
+   come_documentare.rst
    moduli.rst
    numfig_index.rst
    bibliography.rst
