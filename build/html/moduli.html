@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>9. Moduli pyArchInit: Classi e Funzioni &mdash; pyArchInit 4.0 4 documentazione</title>
+  <title>14. Moduli pyArchInit: Classi e Funzioni &mdash; pyArchInit 4.0 4 documentazione</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/style.css" type="text/css" />
@@ -26,7 +26,7 @@
     <link rel="index" title="Indice" href="genindex.html" />
     <link rel="search" title="Cerca" href="search.html" />
     <link rel="next" title="&lt;no title&gt;" href="numfig_index.html" />
-    <link rel="prev" title="8. Esempi di Applicazione" href="esempi_di_applicazione.html" /> 
+    <link rel="prev" title="8. Come documentare" href="come_documentare.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -54,17 +54,23 @@
 <li class="toctree-l1"><a class="reference internal" href="il_plugin.html">5. Il Plugin</a></li>
 <li class="toctree-l1"><a class="reference internal" href="le_schede.html">6. Le schede</a></li>
 <li class="toctree-l1"><a class="reference internal" href="funzioni.html">7. Funzioni</a></li>
-<li class="toctree-l1"><a class="reference internal" href="esempi_di_applicazione.html">8. Esempi di Applicazione</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">9. Moduli pyArchInit: Classi e Funzioni</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#pyarchinit-os-utility">9.1. pyarchinit OS utility</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pyarchinit-utility">9.2. pyarchinit_utility</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pyarchinit-installation-folder">9.3. pyarchinit installation folder</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#settings">9.4. settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="come_documentare.html">8. Come documentare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="come_documentare.html#realizzare-una-carta-archeologica">9. Realizzare una carta archeologica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="come_documentare.html#gestire-la-ricognizione-archeologica">10. Gestire la ricognizione Archeologica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="come_documentare.html#schedare-materiali-dal-magazzino-e-dalla-bibliografia">11. Schedare materiali: dal magazzino e dalla bibliografia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="come_documentare.html#documentare-i-complessi-architettonici">12. Documentare i complessi architettonici</a></li>
+<li class="toctree-l1"><a class="reference internal" href="come_documentare.html#documentare-i-contesti-stratigrafici">13. 4.5 Documentare i contesti stratigrafici</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">14. Moduli pyArchInit: Classi e Funzioni</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pyarchinit-os-utility">14.1. pyarchinit OS utility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyarchinit-utility">14.2. pyarchinit_utility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyarchinit-installation-folder">14.3. pyarchinit installation folder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#settings">14.4. settings</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="fig.html">10. Figures</a></li>
-<li class="toctree-l1"><a class="reference internal" href="list.html">11. Liste</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bibliography.html">12. Bibliografia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fig.html">15. Figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="list.html">16. Liste</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">17. Bibliografia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lineee_guida.html">18. Linee guida</a></li>
 </ul>
 
         </div>
@@ -81,7 +87,7 @@
           <div role="navigation" aria-label="Naviga tra le pagine">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li><span class="section-number">9. </span>Moduli pyArchInit: Classi e Funzioni</li>
+      <li><span class="section-number">14. </span>Moduli pyArchInit: Classi e Funzioni</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/moduli.rst.txt" rel="nofollow"> Visualizza sorgente pagina</a>
       </li>
@@ -92,14 +98,14 @@
            <div itemprop="articleBody">
              
   <section id="moduli-pyarchinit-classi-e-funzioni">
-<h1><span class="section-number">9. </span>Moduli pyArchInit: Classi e Funzioni<a class="headerlink" href="#moduli-pyarchinit-classi-e-funzioni" title="Link a questa intestazione"></a></h1>
+<h1><span class="section-number">14. </span>Moduli pyArchInit: Classi e Funzioni<a class="headerlink" href="#moduli-pyarchinit-classi-e-funzioni" title="Link a questa intestazione"></a></h1>
 <div class="admonition important">
 <p class="admonition-title">Importante</p>
 <p>In questa sezione si descivono le funzioni e alcune delle classi presenti in pyarchinit
 che possano aiutare allo sviluppo e implementazione del codice.</p>
 </div>
 <section id="pyarchinit-os-utility">
-<h2><span class="section-number">9.1. </span>pyarchinit OS utility<a class="headerlink" href="#pyarchinit-os-utility" title="Link a questa intestazione"></a></h2>
+<h2><span class="section-number">14.1. </span>pyarchinit OS utility<a class="headerlink" href="#pyarchinit-os-utility" title="Link a questa intestazione"></a></h2>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
 <p>Questa classe presenta alcune funzioni per copiare immagini, file e creare cartelle durante
@@ -165,7 +171,7 @@ l’installazione del plugin</p>
 
 </section>
 <section id="pyarchinit-utility">
-<h2><span class="section-number">9.2. </span>pyarchinit_utility<a class="headerlink" href="#pyarchinit-utility" title="Link a questa intestazione"></a></h2>
+<h2><span class="section-number">14.2. </span>pyarchinit_utility<a class="headerlink" href="#pyarchinit-utility" title="Link a questa intestazione"></a></h2>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
 <p>Questa classe presenta funzioni utili per aggiungere elementi ad un dizionario, contare
@@ -253,7 +259,7 @@ value in the i position</p>
 
 </section>
 <section id="pyarchinit-installation-folder">
-<h2><span class="section-number">9.3. </span>pyarchinit installation folder<a class="headerlink" href="#pyarchinit-installation-folder" title="Link a questa intestazione"></a></h2>
+<h2><span class="section-number">14.3. </span>pyarchinit installation folder<a class="headerlink" href="#pyarchinit-installation-folder" title="Link a questa intestazione"></a></h2>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
 <p>Questa classe presenta due funzioni per installare nel percorso del tuo utente
@@ -279,7 +285,7 @@ i file di configurazione e le cartelle</p>
 
 </section>
 <section id="settings">
-<h2><span class="section-number">9.4. </span>settings<a class="headerlink" href="#settings" title="Link a questa intestazione"></a></h2>
+<h2><span class="section-number">14.4. </span>settings<a class="headerlink" href="#settings" title="Link a questa intestazione"></a></h2>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
 <p>Questa classe presenta due funzioni di settaggio</p>
@@ -344,7 +350,7 @@ conf.write(b»”,”LOGO” : “insert path for the image logo”}»)</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Piè di pagina">
-        <a href="esempi_di_applicazione.html" class="btn btn-neutral float-left" title="8. Esempi di Applicazione" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Precedente</a>
+        <a href="come_documentare.html" class="btn btn-neutral float-left" title="8. Come documentare" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Precedente</a>
         <a href="numfig_index.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Prossimo <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
