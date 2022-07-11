@@ -67,13 +67,12 @@
 <li class="toctree-l2"><a class="reference internal" href="#scheda-esportazione-pdf">6.12. Scheda Esportazione PDF</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#scheda-esportazione-immagini">6.13. Scheda Esportazione Immagini</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#scheda-download-excel">6.14. Scheda Download Excel</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#scheda-time-manager">6.15. Scheda Time Manager</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#scheda-importazioni-dati-tops">6.16. Scheda Importazioni dati TOPS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#scheda-crea-la-tua-mappa">6.17. Scheda Crea la tua Mappa</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#scheda-impacchetta-per-geopackage">6.18. Scheda Impacchetta per Geopackage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#scheda-configurazione-plugin">6.19. Scheda Configurazione plugin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#scheda-thesaurus-sigle">6.20. Scheda Thesaurus Sigle</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#scheda-gestione-db">6.21. Scheda Gestione DB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scheda-importazioni-dati-tops">6.15. Scheda Importazioni dati TOPS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scheda-crea-la-tua-mappa">6.16. Scheda Crea la tua Mappa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scheda-impacchetta-per-geopackage">6.17. Scheda Impacchetta per Geopackage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scheda-configurazione-plugin">6.18. Scheda Configurazione plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scheda-thesaurus-sigle">6.19. Scheda Thesaurus Sigle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scheda-gestione-db">6.20. Scheda Gestione DB</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="funzioni.html">7. Funzioni</a></li>
@@ -82,6 +81,7 @@
 <li class="toctree-l1"><a class="reference internal" href="fig.html">10. Figures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="list.html">11. Liste</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bibliography.html">12. Bibliografia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lineee_guida.html">13. Linee guida</a></li>
 </ul>
 
         </div>
@@ -111,9 +111,44 @@
   <img alt="_images/logo_3.png" class="align-right" src="_images/logo_3.png" />
 <section id="le-schede">
 <h1><span class="section-number">6. </span>Le schede<a class="headerlink" href="#le-schede" title="Link a questa intestazione"></a></h1>
+<p>Il plugin offre una serie di interfacce grafiche per il data entry delle informazioni alfanumeriche provenienti da contesti archeologici e un pacchetto di layers tabellari postgres/postgis per la localizzazione del dato georeferenziato.</p>
+<p>Il plugin ha sostanzialmente 4 ambienti gestionali:
+data entry del dato alfanumerico tramite interfacce grafiche;
+layer tabellari per il disegno degli elementi cartografici;
+view sql per il join dei dati alfanumerici con i dati cartografici;
+serie di tools per le chiamate dinamiche in tempo reale dei dati e l’elaborazione di piante topografiche.</p>
+<p>Le tabelle per il data entry sono:</p>
+<ul class="simple">
+<li><p>Scheda Sito</p></li>
+<li><p>Scheda Periodizzazione</p></li>
+<li><p>Scheda Struttura</p></li>
+<li><p>Scheda US-USM</p></li>
+<li><p>Scheda Inventario Reperti</p></li>
+<li><p>Scheda Campioni</p></li>
+<li><p>Scheda Tafonomica</p></li>
+<li><p>Scheda Individuo</p></li>
+<li><p>Scheda Determinazione del sesso</p></li>
+<li><p>Scheda Determinazione dell’età</p></li>
+<li><p>Scheda di Catalogazione dei media</p></li>
+<li><p>Scheda di gestione della documentazione</p></li>
+<li><p>Scheda di gestione dei thesaurus</p></li>
+</ul>
+<p>I tools per la gestione e controllo dei dati:</p>
+<ul class="simple">
+<li><p>Sistema di controllo del tempo</p></li>
+<li><p>Sistema di esportazione delle directory per i media</p></li>
+<li><p>Sistema centralizzato di esportazione PDF</p></li>
+<li><p>Sistema di ricerca immagini simili</p></li>
+<li><p>Configurazione del database</p></li>
+<li><p>Info sul plugin</p></li>
+<li><p>Sistema di caricamento e backup del database</p></li>
+<li><p>Sistema di impacchettamento in geopackage</p></li>
+<li><p>Sistema di creazione mappe</p></li>
+<li><p>Sistema di scaricamento dati Stazione Totale(TOPS)</p></li>
+</ul>
 <section id="scheda-sito">
 <h2><span class="section-number">6.1. </span>Scheda Sito<a class="headerlink" href="#scheda-sito" title="Link a questa intestazione"></a></h2>
-<img alt="_images/iconSite.png" class="align-center" src="_images/iconSite.png" />
+<a class="reference internal image-reference" href="_images/iconSite.png"><img alt="_images/iconSite.png" class="align-center" src="_images/iconSite.png" style="width: 3cm;" /></a>
 </section>
 <section id="scheda-us-usm">
 <h2><span class="section-number">6.2. </span>Scheda US-USM<a class="headerlink" href="#scheda-us-usm" title="Link a questa intestazione"></a></h2>
@@ -166,33 +201,32 @@
 <section id="scheda-download-excel">
 <h2><span class="section-number">6.14. </span>Scheda Download Excel<a class="headerlink" href="#scheda-download-excel" title="Link a questa intestazione"></a></h2>
 <img alt="_images/excel-export.png" class="align-center" src="_images/excel-export.png" />
-</section>
-<section id="scheda-time-manager">
-<h2><span class="section-number">6.15. </span>Scheda Time Manager<a class="headerlink" href="#scheda-time-manager" title="Link a questa intestazione"></a></h2>
+<p>Scheda Time Manager
+=========——-</p>
 <img alt="_images/iconTimeControll.png" class="align-center" src="_images/iconTimeControll.png" />
 </section>
 <section id="scheda-importazioni-dati-tops">
-<h2><span class="section-number">6.16. </span>Scheda Importazioni dati TOPS<a class="headerlink" href="#scheda-importazioni-dati-tops" title="Link a questa intestazione"></a></h2>
+<h2><span class="section-number">6.15. </span>Scheda Importazioni dati TOPS<a class="headerlink" href="#scheda-importazioni-dati-tops" title="Link a questa intestazione"></a></h2>
 <img alt="_images/tops.png" class="align-center" src="_images/tops.png" />
 </section>
 <section id="scheda-crea-la-tua-mappa">
-<h2><span class="section-number">6.17. </span>Scheda Crea la tua Mappa<a class="headerlink" href="#scheda-crea-la-tua-mappa" title="Link a questa intestazione"></a></h2>
+<h2><span class="section-number">6.16. </span>Scheda Crea la tua Mappa<a class="headerlink" href="#scheda-crea-la-tua-mappa" title="Link a questa intestazione"></a></h2>
 <img alt="_images/print_map.png" class="align-center" src="_images/print_map.png" />
 </section>
 <section id="scheda-impacchetta-per-geopackage">
-<h2><span class="section-number">6.18. </span>Scheda Impacchetta per Geopackage<a class="headerlink" href="#scheda-impacchetta-per-geopackage" title="Link a questa intestazione"></a></h2>
+<h2><span class="section-number">6.17. </span>Scheda Impacchetta per Geopackage<a class="headerlink" href="#scheda-impacchetta-per-geopackage" title="Link a questa intestazione"></a></h2>
 <img alt="_images/gpkg.png" class="align-center" src="_images/gpkg.png" />
 </section>
 <section id="scheda-configurazione-plugin">
-<h2><span class="section-number">6.19. </span>Scheda Configurazione plugin<a class="headerlink" href="#scheda-configurazione-plugin" title="Link a questa intestazione"></a></h2>
+<h2><span class="section-number">6.18. </span>Scheda Configurazione plugin<a class="headerlink" href="#scheda-configurazione-plugin" title="Link a questa intestazione"></a></h2>
 <img alt="_images/iconConn.png" class="align-center" src="_images/iconConn.png" />
 </section>
 <section id="scheda-thesaurus-sigle">
-<h2><span class="section-number">6.20. </span>Scheda Thesaurus Sigle<a class="headerlink" href="#scheda-thesaurus-sigle" title="Link a questa intestazione"></a></h2>
+<h2><span class="section-number">6.19. </span>Scheda Thesaurus Sigle<a class="headerlink" href="#scheda-thesaurus-sigle" title="Link a questa intestazione"></a></h2>
 <img alt="_images/thesaurusicon.png" class="align-center" src="_images/thesaurusicon.png" />
 </section>
 <section id="scheda-gestione-db">
-<h2><span class="section-number">6.21. </span>Scheda Gestione DB<a class="headerlink" href="#scheda-gestione-db" title="Link a questa intestazione"></a></h2>
+<h2><span class="section-number">6.20. </span>Scheda Gestione DB<a class="headerlink" href="#scheda-gestione-db" title="Link a questa intestazione"></a></h2>
 <img alt="_images/backup.png" class="align-center" src="_images/backup.png" />
 </section>
 </section>

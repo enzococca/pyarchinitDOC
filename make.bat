@@ -1,4 +1,4 @@
-@ECHO OFF
+pip@ECHO OFF
 
 pushd %~dp0
 

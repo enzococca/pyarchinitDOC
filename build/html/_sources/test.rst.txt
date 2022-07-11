@@ -1,0 +1,20 @@
+****************
+Titolo del testo
+****************
+
+capitolo
+=========
+ questo è il mio **primo capitolo** *inizio*
+
+* primo elenco
+* secondo elenco
+
+#. primo elenco
+#. secondo elenco
+
+
+sezioni
+-------
+
+sottosezioni
+++++++++++++
