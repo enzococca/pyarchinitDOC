@@ -29,31 +29,31 @@ Apertura delle schede US da selezione su base GIS
 
 Sul livello pyarchinit_US_view eseguire una selezione nella porzione di scavo che desiderate.
 
-.. image:: ./_images/img_3231f.PNG
+.. image:: ./_images/img_3231f.png
    :align: center
 
 
 Oppure, aprite la tabella del livello e utilizzate il query builder di Qgis per realizzare la ricerca che desiderate: in questo caso abbiamo selezionato uno scavo archeologico e tutte le US che per definizione stratigrafica riportano la dicitura: “struttura in muratura”.
 
-.. image:: ./_images/img_3231g.PNG
+.. image:: ./_images/img_3231g.png
    :align: center
 
 
-.. image:: ./_images/img_3231h.PNG
+.. image:: ./_images/img_3231h.png
    :align: center
 
 
-.. image:: ./_images/img_3231i.PNG
+.. image:: ./_images/img_3231i.png
    :align: center
 
 
 Aprite la scheda US di pyArchInit e andate alla sezione Tools. A questo punto cliccate sul pulsante “Show selected Features”. La scheda aprirà i records corrispondenti alla selezione.
 
-.. image:: ./_images/img_3231l.PNG
+.. image:: ./_images/img_3231l.png
    :align: center
 
 
-.. image:: ./_images/img_3231m.PNG
+.. image:: ./_images/img_3231m.png
    :align: center
 
 Visualizzazione su base GIS dell'US corrente
@@ -61,17 +61,17 @@ Visualizzazione su base GIS dell'US corrente
 
 Quando ci si è posizionati sull'US che si desidera visualizzare, andare nella sezione tools e cliccare sul pulsante "Disegna US”.
 
-.. image:: ./_images/img_3231n.PNG
+.. image:: ./_images/img_3231n.png
    :align: center
 
 
-.. image:: ./_images/img_3231na.PNG
+.. image:: ./_images/img_3231na.png
    :align: center
 
 
 In Qgis verrà disegnata l'US corrispondente.
 
-.. image:: ./_images/img_3231o.PNG
+.. image:: ./_images/img_3231o.png
    :align: center
 
 
@@ -93,7 +93,7 @@ Dalla scheda US è possibile creare il codice di periodizzazione dell'US.
 Come spiegato nel capitolo inerente alla scheda di Periodizzazione e nella parte della scheda US riguardante la periodizzazione, una volta assegnato un periodo/fase iniziale all'US e un eventuale periodo finale, basta cliccare nella sezione Tools il pulsante “Crea codice Periodo”.
 
 
-.. image:: ./_images/img_3231p.PNG
+.. image:: ./_images/img_3231p.png
    :align: left
    :scale: 70 %
 
@@ -110,7 +110,7 @@ Periodo		Fase	Codice
 
 Risultato: 2/3/4
 
-.. image:: ./_images/img_3231q.PNG
+.. image:: ./_images/img_3231q.png
    :align: center
 
 
@@ -120,7 +120,7 @@ richiamo delle piante di fase, attraverso una sintassi specifica:
 
 cont_per = '3' OR cont_per LIKE '3/%' OR cont_per LIKE '%/3' OR cont_per LIKE '%/3/%'
 
-.. image:: ./_images/img_3231r.PNG
+.. image:: ./_images/img_3231r.png
    :align: center
 
 
@@ -133,7 +133,7 @@ ai periodi successivi;
 periodi precedenti;
 4. cont_per LIKE '%/valore/%': trova tutte le US che afferiscono ad un periodo intermedio tra un periodo iniziale e uno finale.
 
-.. image:: ./_images/img_3231r1.PNG
+.. image:: ./_images/img_3231r1.png
    :align: center
 
 Sistema di generazione di piante composite a partire dalle query della scheda US
@@ -141,24 +141,24 @@ Sistema di generazione di piante composite a partire dalle query della scheda US
 
 1. Andate nella sezione Tools della scheda US e cliccare sul pulsante “Visualizzazione GIS”; apparirà un messaggio che vi informa che le vostre ricerche saranno trasformate in piante di scavo.
 
-.. image:: ./_images/img_3231a.PNG
+.. image:: ./_images/img_3231a.png
    :align: center
 
 2. Dopo aver cliccato su “New Search” impostate una ricerca (in questo caso cerchiamo la struttura TB01 – una tomba, di uno scavo di Ravenna).
 
-.. image:: ./_images/img_3231b.PNG
+.. image:: ./_images/img_3231b.png
    :align: center
 
 
 3. Lanciate la ricerca cliccando su “Search!!!”.
 
-.. image:: ./_images/img_3231c.PNG
+.. image:: ./_images/img_3231c.png
    :align: center
 
 
 4. Sul GIS vengono caricate le US corrispondenti alla ricerca, caratterizzate in base agli stili pre-impostati di Qgis (vedi capitolo sugli stili); nella scheda US invece sono disponibili i singoli record.
 
-.. image:: ./_images/img_3231d.PNG
+.. image:: ./_images/img_3231d.png
    :align: center
 
 
@@ -218,17 +218,17 @@ Sito: 'Via Cignani, 18 Rimini ', #Area: '1', US: 128 - 'Riempimento': lo strato 
 
 Il sistema funziona per una singola accoppiata Sito - Area di scavo. Per lanciarlo non è necessario fare una query, ma è stata creato un sistema con 2 liste a tendina, sito e area, nella sezione Tools (NB: cliccando sull'icona con la doppia scheda è possibie "staccare" la finestra e usarla in maniera indipendente dalla scheda US)
 
-.. image:: ./_images/img_3231u.PNG
+.. image:: ./_images/img_3231u.png
    :align: center
 
 A questo punto basta selezionare Sito e Area di scavo e lanciare il comando Check Go!!!
 
-.. image:: ./_images/img_3231u1.PNG
+.. image:: ./_images/img_3231u1.png
    :align: center
 
 A questo punto basta andare ad aprire i relativi files e iniziare a verificare i rapporti. E' possibile per fare questo anche tenersi aperto il matrix interattivo per disegnare le US su Qgis. Nell'esempio sotto riportato, Abbiamo verificato perchè il sistema ci riporta l'errore US6 Gli si appoggia US12. Accendendo su Qgis le US possiamo verificare che vi sia adiacenza topografica, quindi il rapporto è possibile, mentre aprendo la scheda US di US12, vediamo che è stato inserito il medesimo rapporto US12 Gli si appoggia US6. A questo punto solo l'archeologo è in grado di capire come risolvere il paradosso e da cosa può dipendere.
 
-.. image:: ./_images/img_3231u2.PNG
+.. image:: ./_images/img_3231u2.png
    :align: center
 
 TODO
@@ -237,26 +237,26 @@ Aggiungere il sistema di controllo topografico dei rapporti
 Esportazione del matrix 'quasi' di Harris
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 
-È possibile realizzare dei diagrammi stratigrafici che espongano la successione stratigrafica di qualsiasi istanza del database dopo una ricerca. Il sistema esporta due formati: un'immagine raster in .PNG e un vettoriale .svg modificabile. L'aspetto del matrix ovviamente tende ad essere ordinato quante meno US sono presenti. Tuttavia un primo tentativo di migliorare l'aspetto del diagramma ottenuto è stato rappresentato dall'aggiunta del raggruppamento per insiemi delle US basate sulla periodizzazione.
+È possibile realizzare dei diagrammi stratigrafici che espongano la successione stratigrafica di qualsiasi istanza del database dopo una ricerca. Il sistema esporta due formati: un'immagine raster in .png e un vettoriale .svg modificabile. L'aspetto del matrix ovviamente tende ad essere ordinato quante meno US sono presenti. Tuttavia un primo tentativo di migliorare l'aspetto del diagramma ottenuto è stato rappresentato dall'aggiunta del raggruppamento per insiemi delle US basate sulla periodizzazione.
 Dopo aver realizzato una ricerca sulla scheda US cliccare sul pulsante “Export Matrix”. Il matrix viene salvato all'interno della cartella pyarchinit_Matrix_folder all'interno del vostro utente.
 
 Nell'esempio seguente mostriamo due semplici passaggi per avere pianta di struttura e matrix in 2 semplici passaggi:
 
 1. Nella scheda US con il visualizzatore delle geometrie attivo cerchiamo l'ED01 del nostro scavo. In automatico su Qgis appare la pianta e nelle schede US appaiono solo i record corrispondenti ad ED01.
 
-.. image:: ./_images/img_3231v.PNG
+.. image:: ./_images/img_3231v.png
    :align: center
 
 
 2. Andare nella sezione Tools e cliccare su “Export Matrix”
 
-.. image:: ./_images/img_3231v1.PNG
+.. image:: ./_images/img_3231v1.png
    :align: center
 
 
-3. Viene esportato il matrix in formato .PNG e .svg e si trovano all'interno della cartella pyarchinit_Matrix_folder sotto al vostro Utente.
+3. Viene esportato il matrix in formato .png e .svg e si trovano all'interno della cartella pyarchinit_Matrix_folder sotto al vostro Utente.
 
-.. image:: ./_images/img_3231v2.PNG
+.. image:: ./_images/img_3231v2.png
    :align: center
 
 
@@ -292,13 +292,13 @@ Questo permetterà alla View SQL di visualizzare su base GIS le geometrie degli 
 
 Il sistema funziona per singola Area di scavo. Quindi è necessario prima di tutto eseguire una ricerca che richiamo solo un'area di scavo di un sito. Dopo aver cliccato su nuova ricerca, basta inserire nome del sito e numero di Area.
 
-.. image:: ./_images/img_3231s.PNG
+.. image:: ./_images/img_3231s.png
    :align: center
 
 
 A questo punto sarà necessario nella sezione Tools cliccare su “Ordine Stratigrafico”.
 
-.. image:: ./_images/img_3231t.PNG
+.. image:: ./_images/img_3231t.png
    :align: center
 
 NOTA BENE: Il sistema funziona solo se due condizioni sono verificate
@@ -307,20 +307,20 @@ NOTA BENE: Il sistema funziona solo se due condizioni sono verificate
 
 Il sistema manda invia all'utente una serie di messaggi (utilizzati per il debug del sistema), tra cui la richiesta di eseguire il matrix per verificare eventuali paradossi nella stratigrafia come US più antiche che coprono US più recenti.
 
-.. image:: ./_images/img_3231t1.PNG
+.. image:: ./_images/img_3231t1.png
    :align: center
 
 
-.. image:: ./_images/img_3231t2.PNG
+.. image:: ./_images/img_3231t2.png
    :align: center
 
 
 Lanciando il matrix sarà possibile verificare la correttezza dei rapporti tramite l'immagine esportata nella cartella pyarchinit_Matrix_folder che si trova sotto al vostro Utente, e richiamare dal Matrix interattivo le US cliccando sul singolo numero, per poter verificare sovrapposizioni corrette, a quale US si fa riferimento, ecc..
 
-.. image:: ./_images/img_3231t3.PNG
+.. image:: ./_images/img_3231t3.png
    :align: center
 
-.. image:: ./_images/img_3231t4.PNG
+.. image:: ./_images/img_3231t4.png
    :align: center
 
 Al messaggio "Inizio Sistema order layer" dare OK; "Uscita dal sistema order layer", dare OK ed attendere, senza impegnare il PC in altre operazioni. A volte possono servire anche 15 minuti per grandi scavi ( ma ne vale la pena!!!).
@@ -328,7 +328,7 @@ Al messaggio "Inizio Sistema order layer" dare OK; "Uscita dal sistema order lay
 E' necessario attendere il messaggio "SISEMA DI ORDINAMENTO TERMINATO".
 
 
-.. image:: ./_images/img_3231t5.PNG
+.. image:: ./_images/img_3231t5.png
    :align: center
 
 
@@ -337,20 +337,20 @@ ATTENZIONE!!! Per motivi prettamente informatici, il sistema ricarica tutte le U
 
 Se qualcosa fosse andato storto e per essere sicuri che il vostro scavo sia documentato in maniera corretta, è possibile verificare una serie di report che vengono estratti dal sistema di ordinamento. Si trovano all'interno di pyArchinIt Report_Folder sotto al vostro Utente.
 
-.. image:: ./_images/img_3231t5a.PNG
+.. image:: ./_images/img_3231t5a.png
    :align: center
 
 
 Ecco come appare il layer di inserimento delle Unità Stratigrafiche (pyunitastrigrafiche) alla fine della digitalizzazione di tutte le US.
 
 
-.. image:: ./_images/img_3231t6.PNG
+.. image:: ./_images/img_3231t6.png
    :align: center
 
 Ecco Il layer di visualizzazione delle Unità Stratigrafiche (pyarchinit_us_view) dopo la generazione dell'ordine stratigrafico pronto per essere esportato.
 
 
-.. image:: ./_images/img_3231t7.PNG
+.. image:: ./_images/img_3231t7.png
    :align: center
 
 
@@ -366,12 +366,12 @@ Le modalità per esportare le schede sono molteplici. E' possibile fare una rice
 Nell'esempio sottostante abbiamo cercato in scheda l'ED01 di un nostro scavo, selezionato a video le US che ci interessavano e aperto le schede US. Infine le abbiamo ordinate per numero di US.
 
 
-.. image:: ./_images/img_3231z.PNG
+.. image:: ./_images/img_3231z.png
    :align: center
 
 
 Ora basta andare in sezione Tools -> Esportazione ed esportare Schede e Indice.
 
 
-.. image:: ./_images/img_3231z1.PNG
+.. image:: ./_images/img_3231z1.png
    :align: center
