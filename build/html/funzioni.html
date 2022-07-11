@@ -293,7 +293,7 @@ periodi precedenti;
 </figcaption>
 </figure>
 <ol class="arabic simple" start="4">
-<li><p>Sul GIS vengono caricate le US corrispondenti alla ricerca, caratterizzate in base agli stili pre^impostati di Qgis (vedi capitolo sugli stili); nella scheda US invece sono disponibili i singoli record.</p></li>
+<li><p>Sul GIS vengono caricate le US corrispondenti alla ricerca, caratterizzate in base agli stili pre-impostati di Qgis (vedi capitolo sugli stili); nella scheda US invece sono disponibili i singoli record.</p></li>
 </ol>
 <figure class="align-center" id="id17">
 <img alt="_images/img_3231d.png" src="_images/img_3231d.png" />
@@ -320,7 +320,7 @@ periodi precedenti;
 <li><p>US più antiche che ricevono un rapporto di sovrapposizione temporale rispetto ad US più recenti. Esempio: un muro di epoca romana che copre una pavimentazione medievale.</p></li>
 <li><p>Medesimo rapporto fisico inserito nelle due US coinvolte: 1 copre 2, 2 copre 1.</p></li>
 </ol>
-<p>Le casistiche sopradescritte dipendono in prevalenza da errori di immissione o banalmente di distrazione. E” stato osservato come in scavi da 30 US e circa 100 rapporti stratigrafici, in media emergano, anche dopo un ricontrollo autoptico, tra uno e 3^4 errori.</p>
+<p>Le casistiche sopradescritte dipendono in prevalenza da errori di immissione o banalmente di distrazione. E” stato osservato come in scavi da 30 US e circa 100 rapporti stratigrafici, in media emergano, anche dopo un ricontrollo autoptico, tra uno e 3-4 errori.</p>
 <p>La strada scelta al momento da pyArchInit è quella di non correggere in automatico gli errori, dato che non è possibile evincere in automatico dove risieda l’errore. Per esempio potrei avere un problema di assenza di reciproci (caso 9), ma l’assenza potrebbe dipendere o da una dimenticanza nell’inserire i rapporti o da una effettiva non necessità di inserimento dovuta all’assenza di rapporti topografici (caso 8).</p>
 <p>Per questi motivi  al momento viene generato un semplice report di testo in cui si segnala se la scheda corrispondente esiste (caso 10) o se il rapporto stratigrafico è rispettato (caso 9).</p>
 <p>Riportiamo di seguito un esempio di controllo lanciato su uno scavo a fine giornata.
@@ -331,14 +331,14 @@ Vengono generati 2 report:</p>
 </ol>
 <p>I report sono esportati nella cartella pyarchinit_report_forlder che si trova sotto al vostro Utente e si chiama rapporti_us.txt :</p>
 <p>rapporti_us.txt
-Report controllo Rapporti Stratigrafici ^ Sito: Via Cignani, 18 Rimini
+Report controllo Rapporti Stratigrafici - Sito: Via Cignani, 18 Rimini
 Sito: “Via Cignani, 18 Rimini “, #Area: “1”, #US: 2 Coperto da US: 15: Rapporto non verificato
 Sito: “Via Cignani, 18 Rimini “, #Area: “1”, #US: 2 Taglia US: 16: Rapporto non verificato
 Sito: “Via Cignani, 18 Rimini “, #Area: “1”, #US: 1007 Taglia US: 977: Scheda US non esistente
 Sito: “Via Cignani, 18 Rimini “, #Area: “1”, #US: 256 Riempie US: 255: Scheda US non esistente</p>
 <p>def_strat_a_rapporti_US.txt
-Sito: “Via Cignani, 18 Rimini “, #Area: “1”, US: 128 ^ “Riempimento”: lo strato Si lega a US: 127 ^ “Strato di argilla”</p>
-<p>Il sistema funziona per una singola accoppiata Sito ^ Area di scavo. Per lanciarlo non è necessario fare una query, ma è stata creato un sistema con 2 liste a tendina, sito e area, nella sezione Tools (NB: cliccando sull’icona con la doppia scheda è possibie «staccare» la finestra e usarla in maniera indipendente dalla scheda US)</p>
+Sito: “Via Cignani, 18 Rimini “, #Area: “1”, US: 128 - “Riempimento”: lo strato Si lega a US: 127 - “Strato di argilla”</p>
+<p>Il sistema funziona per una singola accoppiata Sito - Area di scavo. Per lanciarlo non è necessario fare una query, ma è stata creato un sistema con 2 liste a tendina, sito e area, nella sezione Tools (NB: cliccando sull’icona con la doppia scheda è possibie «staccare» la finestra e usarla in maniera indipendente dalla scheda US)</p>
 <p>A questo punto basta selezionare Sito e Area di scavo e lanciare il comando Check Go!!!</p>
 <p>A questo punto basta andare ad aprire i relativi files e iniziare a verificare i rapporti. E” possibile per fare questo anche tenersi aperto il matrix interattivo per disegnare le US su Qgis. Nell’esempio sotto riportato, Abbiamo verificato perchè il sistema ci riporta l’errore US6 Gli si appoggia US12. Accendendo su Qgis le US possiamo verificare che vi sia adiacenza topografica, quindi il rapporto è possibile, mentre aprendo la scheda US di US12, vediamo che è stato inserito il medesimo rapporto US12 Gli si appoggia US6. A questo punto solo l’archeologo è in grado di capire come risolvere il paradosso e da cosa può dipendere.</p>
 </section>
@@ -353,7 +353,7 @@ Dopo aver realizzato una ricerca sulla scheda US cliccare sul pulsante “Export
 <li><p>Viene esportato il matrix in formato .png e .svg e si trovano all’interno della cartella pyarchinit_Matrix_folder sotto al vostro Utente.</p></li>
 </ol>
 <p>I files possono essere gestiti sia tramite GIMP che Inkscape, mentre, seguendo il blog a questo indirizzo è possibile trasformare il Matrix in un grafico interattivo tramite Yed.</p>
-<p>Vai alla pagina del Blog <a class="reference external" href="http://pyarchinit.blogspot.it/2015/04/this^afternoon^im^thinking^about^issues.html">a link</a>.</p>
+<p>Vai alla pagina del Blog <a class="reference external" href="http://pyarchinit.blogspot.it/2015/04/this-afternoon-im-thinking-about-issues.html">a link</a>.</p>
 </section>
 <section id="creazione-dell-indice-di-ordine-di-successione-stratigrafica">
 <h2><span class="section-number">7.8. </span>Creazione dell’indice di ordine di successione stratigrafica<a class="headerlink" href="#creazione-dell-indice-di-ordine-di-successione-stratigrafica" title="Link a questa intestazione"></a></h2>
@@ -412,7 +412,7 @@ Per esempio, se 1 copre 2, 2 copre 3 e 4, ma 3 e 4 non hanno rapporti tra di lor
 <p>È possibile esportare sia le singole schede che l’indice delle US basandosi su qualsiasi ricerca o criterio di ordinamento. Alcuni dati vengono presi direttamente dalla us_table, mentre altri, come la quota minima e massima, sono ricavati per relazione dalle features dei layers.</p>
 <p>Le modalità per esportare le schede sono molteplici. E” possibile fare una ricerca in scheda, oppure una ricerca sui layer in Qgis e visualizzare le US corrispondenti in scheda ed esportarle. I criteri di esportazione sono pressochè illimitati, potendo cercare su vari campi ed ordinare le schede in base a più modalità. Per esempio si potrebbero cercare tutte le schede relative al Medioevo ed esportare tutte le US ordinate per scavo e tipo di defizione. Un medesimo set di dati può essere esportato secondo ordinamenti differenti, dando la possibilità di creare elenchi consultabili secondo vari criteri.</p>
 <p>Nell’esempio sottostante abbiamo cercato in scheda l’ED01 di un nostro scavo, selezionato a video le US che ci interessavano e aperto le schede US. Infine le abbiamo ordinate per numero di US.</p>
-<p>Ora basta andare in sezione Tools ^&gt; Esportazione ed esportare Schede e Indice.</p>
+<p>Ora basta andare in sezione Tools -&gt; Esportazione ed esportare Schede e Indice.</p>
 </section>
 </section>
 
