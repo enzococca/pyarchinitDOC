@@ -155,13 +155,13 @@ Sarà assegnato il valore del codice periodo dalla periodizzazione finale all'in
 
 .. table::
 
-    ========	=====	=======
-    Periodo		Fase	Codice
-    ========	=====	=======
-    2			 1		 2
-    2			 2		 3
-    2			 3		 4
-    ========	=====	=======
+    ======= ===== =======
+    Periodo  Fase Codice
+    ======= ===== =======
+    2		1	  2
+    2		2	  3
+    2		3	  4
+    ======= ===== =======
 
 test::
 
