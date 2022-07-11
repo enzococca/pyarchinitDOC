@@ -60,22 +60,17 @@
 <li class="toctree-l2"><a class="reference internal" href="#creazione-in-automatico-del-codice-di-periodizzazione-dell-us">7.4. Creazione in automatico del codice di periodizzazione dell’US</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#sistema-di-generazione-di-piante-composite-a-partire-dalle-query-della-scheda-us">7.5. Sistema di generazione di piante composite a partire dalle query della scheda US</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#controllo-automatico-dei-rapporti-stratigrafici">7.6. Controllo automatico dei rapporti stratigrafici</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#esportazione-del-matrix-quasi-di-harris">7.7. Esportazione del matrix “quasi” di Harris</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#esportazione-del-matrix-di-harris">7.7. Esportazione del matrix di Harris</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#creazione-dell-indice-di-ordine-di-successione-stratigrafica">7.8. Creazione dell’indice di ordine di successione stratigrafica</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#esportazione-schede-e-indice-delle-us-in-formato-pdf">7.9. Esportazione schede e indice delle US in formato PDF</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="come_documentare.html">8. Come documentare</a></li>
-<li class="toctree-l1"><a class="reference internal" href="come_documentare.html#realizzare-una-carta-archeologica">9. Realizzare una carta archeologica</a></li>
-<li class="toctree-l1"><a class="reference internal" href="come_documentare.html#gestire-la-ricognizione-archeologica">10. Gestire la ricognizione Archeologica</a></li>
-<li class="toctree-l1"><a class="reference internal" href="come_documentare.html#schedare-materiali-dal-magazzino-e-dalla-bibliografia">11. Schedare materiali: dal magazzino e dalla bibliografia</a></li>
-<li class="toctree-l1"><a class="reference internal" href="come_documentare.html#documentare-i-complessi-architettonici">12. Documentare i complessi architettonici</a></li>
-<li class="toctree-l1"><a class="reference internal" href="come_documentare.html#documentare-i-contesti-stratigrafici">13. 4.5 Documentare i contesti stratigrafici</a></li>
-<li class="toctree-l1"><a class="reference internal" href="moduli.html">14. Moduli pyArchInit: Classi e Funzioni</a></li>
-<li class="toctree-l1"><a class="reference internal" href="fig.html">15. Figures</a></li>
-<li class="toctree-l1"><a class="reference internal" href="list.html">16. Liste</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bibliography.html">17. Bibliografia</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lineee_guida.html">18. Linee guida</a></li>
+<li class="toctree-l1"><a class="reference internal" href="moduli.html">9. Moduli pyArchInit: Classi e Funzioni</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fig.html">10. Figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="list.html">11. Liste</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">12. Bibliografia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lineee_guida.html">13. Linee guida</a></li>
 </ul>
 
         </div>
@@ -102,7 +97,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <img alt="_images/logo_3.png" class="align-right" src="_images/logo_3.png" />
+  <figure class="align-right">
+<img alt="_images/logo_3.png" src="_images/logo_3.png" />
+</figure>
 <section id="funzioni">
 <h1><span class="section-number">7. </span>Funzioni<a class="headerlink" href="#funzioni" title="Link a questa intestazione"></a></h1>
 <p>La scheda US possiede una serie di funzioni che vanno ad automatizzare alcune delle operazioni che si compiono nel corso della catastazione ed elaborazione dei dati archeologici al fine di aumentare il controllo sull’integrità del dato e la validità dell’output. Al momento per la scheda US sono disponibili le seguenti funzioni:</p>
@@ -125,22 +122,67 @@ Per generare piante composite, pyArchInit prevede una generazione in automatico 
 <section id="apertura-delle-schede-us-da-selezione-su-base-gis">
 <h2><span class="section-number">7.1. </span>Apertura delle schede US da selezione su base GIS<a class="headerlink" href="#apertura-delle-schede-us-da-selezione-su-base-gis" title="Link a questa intestazione"></a></h2>
 <p>Sul livello pyarchinit_US_view eseguire una selezione nella porzione di scavo che desiderate.</p>
-<img alt="_images/img_3231f.png" class="align-center" src="_images/img_3231f.png" />
+<figure class="align-center" id="id1">
+<img alt="_images/img_3231f.png" src="_images/img_3231f.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 7.1 </span><span class="caption-text">:descrizione</span><a class="headerlink" href="#id1" title="Link a questa immagine"></a></p>
+</figcaption>
+</figure>
 <p>Oppure, aprite la tabella del livello e utilizzate il query builder di Qgis per realizzare la ricerca che desiderate: in questo caso abbiamo selezionato uno scavo archeologico e tutte le US che per definizione stratigrafica riportano la dicitura: “struttura in muratura”.</p>
-<img alt="_images/img_3231g.png" class="align-center" src="_images/img_3231g.png" />
-<img alt="_images/img_3231h.png" class="align-center" src="_images/img_3231h.png" />
-<img alt="_images/img_3231i.png" class="align-center" src="_images/img_3231i.png" />
+<figure class="align-center" id="id2">
+<img alt="_images/img_3231g.png" src="_images/img_3231g.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 7.2 </span><span class="caption-text">:descrizione</span><a class="headerlink" href="#id2" title="Link a questa immagine"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id3">
+<img alt="_images/img_3231h.png" src="_images/img_3231h.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 7.3 </span><span class="caption-text">:descrizione</span><a class="headerlink" href="#id3" title="Link a questa immagine"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id4">
+<img alt="_images/img_3231i.png" src="_images/img_3231i.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 7.4 </span><span class="caption-text">:descrizione</span><a class="headerlink" href="#id4" title="Link a questa immagine"></a></p>
+</figcaption>
+</figure>
 <p>Aprite la scheda US di pyArchInit e andate alla sezione Tools. A questo punto cliccate sul pulsante “Show selected Features”. La scheda aprirà i records corrispondenti alla selezione.</p>
-<img alt="_images/img_3231l.png" class="align-center" src="_images/img_3231l.png" />
-<img alt="_images/img_3231m.png" class="align-center" src="_images/img_3231m.png" />
+<figure class="align-center" id="id5">
+<img alt="_images/img_3231l.png" src="_images/img_3231l.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 7.5 </span><span class="caption-text">:descrizione</span><a class="headerlink" href="#id5" title="Link a questa immagine"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id6">
+<img alt="_images/img_3231m.png" src="_images/img_3231m.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 7.6 </span><span class="caption-text">:descrizione</span><a class="headerlink" href="#id6" title="Link a questa immagine"></a></p>
+</figcaption>
+</figure>
 </section>
 <section id="visualizzazione-su-base-gis-dell-us-corrente">
 <h2><span class="section-number">7.2. </span>Visualizzazione su base GIS dell’US corrente<a class="headerlink" href="#visualizzazione-su-base-gis-dell-us-corrente" title="Link a questa intestazione"></a></h2>
 <p>Quando ci si è posizionati sull’US che si desidera visualizzare, andare nella sezione tools e cliccare sul pulsante «Disegna US”.</p>
-<img alt="_images/img_3231n.png" class="align-center" src="_images/img_3231n.png" />
-<img alt="_images/img_3231na.png" class="align-center" src="_images/img_3231na.png" />
+<figure class="align-center" id="id7">
+<img alt="_images/img_3231n.png" src="_images/img_3231n.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 7.7 </span><span class="caption-text">:descrizione</span><a class="headerlink" href="#id7" title="Link a questa immagine"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id8">
+<img alt="_images/img_3231na.png" src="_images/img_3231na.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 7.8 </span><span class="caption-text">:descrizione</span><a class="headerlink" href="#id8" title="Link a questa immagine"></a></p>
+</figcaption>
+</figure>
 <p>In Qgis verrà disegnata l’US corrispondente.</p>
-<img alt="_images/img_3231o.png" class="align-center" src="_images/img_3231o.png" />
+<figure class="align-center" id="id9">
+<img alt="_images/img_3231o.png" src="_images/img_3231o.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 7.9 </span><span class="caption-text">:descrizione</span><a class="headerlink" href="#id9" title="Link a questa immagine"></a></p>
+</figcaption>
+</figure>
 <p>!!! ATTENZIONE !!! AL MOMENTO QUESTO SISTEMA NON FUNZIONA PIU” PER MODIFICA DELLE API DI QGIS!!!</p>
 </section>
 <section id="visualizzazione-della-pianta-all-interno-della-scheda-us">
@@ -151,8 +193,15 @@ Per generare piante composite, pyArchInit prevede una generazione in automatico 
 <section id="creazione-in-automatico-del-codice-di-periodizzazione-dell-us">
 <h2><span class="section-number">7.4. </span>Creazione in automatico del codice di periodizzazione dell’US<a class="headerlink" href="#creazione-in-automatico-del-codice-di-periodizzazione-dell-us" title="Link a questa intestazione"></a></h2>
 <p>Dalla scheda US è possibile creare il codice di periodizzazione dell’US.</p>
-<p>Come spiegato nel capitolo inerente alla scheda di Periodizzazione e nella parte della scheda US riguardante la periodizzazione, una volta assegnato un periodo/fase iniziale all’US e un eventuale periodo finale, basta cliccare nella sezione Tools il pulsante “Crea codice Periodo”.</p>
-<a class="reference internal image-reference" href="_images/img_3231p.png"><img alt="_images/img_3231p.png" class="align-left" src="_images/img_3231p.png" style="width: 462.7px; height: 29.4px;" /></a>
+<p>Come spiegato nel capitolo inerente alla scheda di Periodizzazione e nella parte della scheda US riguardante la periodizzazione,
+una volta assegnato un periodo/fase iniziale all’US e un eventuale periodo finale, basta cliccare nella sezione Tools il
+pulsante “Crea codice Periodo”.</p>
+<figure class="align-center" id="id10">
+<img alt="_images/img_3231p.png" src="_images/img_3231p.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 7.10 </span><span class="caption-text">:descrizione</span><a class="headerlink" href="#id10" title="Link a questa immagine"></a></p>
+</figcaption>
+</figure>
 <p>Sarà assegnato il valore del codice periodo dalla periodizzazione finale all’iniziale, divisi da uno slash per motivi prettamente informatici. Se uno strato vive dal periodo 2.1 fino al 2.3, il codice di periodizzazione sarà: 2/3/4</p>
 <table class="docutils align-default">
 <colgroup>
@@ -162,8 +211,8 @@ Per generare piante composite, pyArchInit prevede una generazione in automatico 
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Periodo</p></th>
-<th class="head"><p>Fase</p></th>
-<th class="head"><p>Codice</p></th>
+<th class="head"></th>
+<th class="head"><p>Fase    Codice</p></th>
 </tr>
 </thead>
 <tbody>
@@ -181,12 +230,25 @@ Per generare piante composite, pyArchInit prevede una generazione in automatico 
 </tr>
 </tbody>
 </table>
-<p>Risultato: 2/3/4</p>
-<img alt="_images/img_3231q.png" class="align-center" src="_images/img_3231q.png" />
+<p>test:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Risultato</span><span class="p">:</span> <span class="mi">2</span><span class="o">/</span><span class="mi">3</span><span class="o">/</span><span class="mi">4</span>
+</pre></div>
+</div>
+<figure class="align-center" id="id11">
+<img alt="_images/img_3231q.png" src="_images/img_3231q.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 7.11 </span><span class="caption-text">:descrizione</span><a class="headerlink" href="#id11" title="Link a questa immagine"></a></p>
+</figcaption>
+</figure>
 <p>La sintassi del valore inserito nel campo, serve a pyArchInit per poter realizzare le query di
 richiamo delle piante di fase, attraverso una sintassi specifica:</p>
 <p>cont_per = “3” OR cont_per LIKE “3/%” OR cont_per LIKE “%/3” OR cont_per LIKE “%/3/%”</p>
-<img alt="_images/img_3231r.png" class="align-center" src="_images/img_3231r.png" />
+<figure class="align-center" id="id12">
+<img alt="_images/img_3231r.png" src="_images/img_3231r.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 7.12 </span><span class="caption-text">:descrizione</span><a class="headerlink" href="#id12" title="Link a questa immagine"></a></p>
+</figcaption>
+</figure>
 <p>Sul campo cont_per viene cercato il codice di periodizzazione in quattro modalità:</p>
 <p>1. cont_per = valore: trova tutte le US che vivono solo nel periodo preso in esame;
 cont_per LIKE “valore/%”: trova tutte le US che iniziano in un certo periodo e arrivano fino
@@ -194,26 +256,51 @@ ai periodi successivi;
 3. cont_per LIKE “%/valore”: trova tutte le US che finiscono in un certo periodo e iniziano nei
 periodi precedenti;
 4. cont_per LIKE “%/valore/%”: trova tutte le US che afferiscono ad un periodo intermedio tra un periodo iniziale e uno finale.</p>
-<img alt="_images/img_3231r1.png" class="align-center" src="_images/img_3231r1.png" />
+<figure class="align-center" id="id13">
+<img alt="_images/img_3231r1.png" src="_images/img_3231r1.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 7.13 </span><span class="caption-text">:descrizione</span><a class="headerlink" href="#id13" title="Link a questa immagine"></a></p>
+</figcaption>
+</figure>
 </section>
 <section id="sistema-di-generazione-di-piante-composite-a-partire-dalle-query-della-scheda-us">
 <h2><span class="section-number">7.5. </span>Sistema di generazione di piante composite a partire dalle query della scheda US<a class="headerlink" href="#sistema-di-generazione-di-piante-composite-a-partire-dalle-query-della-scheda-us" title="Link a questa intestazione"></a></h2>
 <ol class="arabic simple">
 <li><p>Andate nella sezione Tools della scheda US e cliccare sul pulsante “Visualizzazione GIS”; apparirà un messaggio che vi informa che le vostre ricerche saranno trasformate in piante di scavo.</p></li>
 </ol>
-<img alt="_images/img_3231a.png" class="align-center" src="_images/img_3231a.png" />
+<figure class="align-center" id="id14">
+<img alt="_images/img_3231a.png" src="_images/img_3231a.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 7.14 </span><span class="caption-text">:descrizione</span><a class="headerlink" href="#id14" title="Link a questa immagine"></a></p>
+</figcaption>
+</figure>
 <ol class="arabic simple" start="2">
 <li><p>Dopo aver cliccato su “New Search” impostate una ricerca (in questo caso cerchiamo la struttura TB01 – una tomba, di uno scavo di Ravenna).</p></li>
 </ol>
-<img alt="_images/img_3231b.png" class="align-center" src="_images/img_3231b.png" />
+<figure class="align-center" id="id15">
+<img alt="_images/img_3231b.png" src="_images/img_3231b.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 7.15 </span><span class="caption-text">:descrizione</span><a class="headerlink" href="#id15" title="Link a questa immagine"></a></p>
+</figcaption>
+</figure>
 <ol class="arabic simple" start="3">
 <li><p>Lanciate la ricerca cliccando su “Search!!!”.</p></li>
 </ol>
-<img alt="_images/img_3231c.png" class="align-center" src="_images/img_3231c.png" />
+<figure class="align-center" id="id16">
+<img alt="_images/img_3231c.png" src="_images/img_3231c.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 7.16 </span><span class="caption-text">:descrizione</span><a class="headerlink" href="#id16" title="Link a questa immagine"></a></p>
+</figcaption>
+</figure>
 <ol class="arabic simple" start="4">
-<li><p>Sul GIS vengono caricate le US corrispondenti alla ricerca, caratterizzate in base agli stili pre-impostati di Qgis (vedi capitolo sugli stili); nella scheda US invece sono disponibili i singoli record.</p></li>
+<li><p>Sul GIS vengono caricate le US corrispondenti alla ricerca, caratterizzate in base agli stili pre^impostati di Qgis (vedi capitolo sugli stili); nella scheda US invece sono disponibili i singoli record.</p></li>
 </ol>
-<img alt="_images/img_3231d.png" class="align-center" src="_images/img_3231d.png" />
+<figure class="align-center" id="id17">
+<img alt="_images/img_3231d.png" src="_images/img_3231d.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 7.17 </span><span class="caption-text">:descrizione</span><a class="headerlink" href="#id17" title="Link a questa immagine"></a></p>
+</figcaption>
+</figure>
 </section>
 <section id="controllo-automatico-dei-rapporti-stratigrafici">
 <h2><span class="section-number">7.6. </span>Controllo automatico dei rapporti stratigrafici<a class="headerlink" href="#controllo-automatico-dei-rapporti-stratigrafici" title="Link a questa intestazione"></a></h2>
@@ -233,7 +320,7 @@ periodi precedenti;
 <li><p>US più antiche che ricevono un rapporto di sovrapposizione temporale rispetto ad US più recenti. Esempio: un muro di epoca romana che copre una pavimentazione medievale.</p></li>
 <li><p>Medesimo rapporto fisico inserito nelle due US coinvolte: 1 copre 2, 2 copre 1.</p></li>
 </ol>
-<p>Le casistiche sopradescritte dipendono in prevalenza da errori di immissione o banalmente di distrazione. E” stato osservato come in scavi da 30 US e circa 100 rapporti stratigrafici, in media emergano, anche dopo un ricontrollo autoptico, tra uno e 3-4 errori.</p>
+<p>Le casistiche sopradescritte dipendono in prevalenza da errori di immissione o banalmente di distrazione. E” stato osservato come in scavi da 30 US e circa 100 rapporti stratigrafici, in media emergano, anche dopo un ricontrollo autoptico, tra uno e 3^4 errori.</p>
 <p>La strada scelta al momento da pyArchInit è quella di non correggere in automatico gli errori, dato che non è possibile evincere in automatico dove risieda l’errore. Per esempio potrei avere un problema di assenza di reciproci (caso 9), ma l’assenza potrebbe dipendere o da una dimenticanza nell’inserire i rapporti o da una effettiva non necessità di inserimento dovuta all’assenza di rapporti topografici (caso 8).</p>
 <p>Per questi motivi  al momento viene generato un semplice report di testo in cui si segnala se la scheda corrispondente esiste (caso 10) o se il rapporto stratigrafico è rispettato (caso 9).</p>
 <p>Riportiamo di seguito un esempio di controllo lanciato su uno scavo a fine giornata.
@@ -244,19 +331,19 @@ Vengono generati 2 report:</p>
 </ol>
 <p>I report sono esportati nella cartella pyarchinit_report_forlder che si trova sotto al vostro Utente e si chiama rapporti_us.txt :</p>
 <p>rapporti_us.txt
-Report controllo Rapporti Stratigrafici - Sito: Via Cignani, 18 Rimini
+Report controllo Rapporti Stratigrafici ^ Sito: Via Cignani, 18 Rimini
 Sito: “Via Cignani, 18 Rimini “, #Area: “1”, #US: 2 Coperto da US: 15: Rapporto non verificato
 Sito: “Via Cignani, 18 Rimini “, #Area: “1”, #US: 2 Taglia US: 16: Rapporto non verificato
 Sito: “Via Cignani, 18 Rimini “, #Area: “1”, #US: 1007 Taglia US: 977: Scheda US non esistente
 Sito: “Via Cignani, 18 Rimini “, #Area: “1”, #US: 256 Riempie US: 255: Scheda US non esistente</p>
 <p>def_strat_a_rapporti_US.txt
-Sito: “Via Cignani, 18 Rimini “, #Area: “1”, US: 128 - “Riempimento”: lo strato Si lega a US: 127 - “Strato di argilla”</p>
-<p>Il sistema funziona per una singola accoppiata Sito - Area di scavo. Per lanciarlo non è necessario fare una query, ma è stata creato un sistema con 2 liste a tendina, sito e area, nella sezione Tools (NB: cliccando sull’icona con la doppia scheda è possibie «staccare» la finestra e usarla in maniera indipendente dalla scheda US)</p>
+Sito: “Via Cignani, 18 Rimini “, #Area: “1”, US: 128 ^ “Riempimento”: lo strato Si lega a US: 127 ^ “Strato di argilla”</p>
+<p>Il sistema funziona per una singola accoppiata Sito ^ Area di scavo. Per lanciarlo non è necessario fare una query, ma è stata creato un sistema con 2 liste a tendina, sito e area, nella sezione Tools (NB: cliccando sull’icona con la doppia scheda è possibie «staccare» la finestra e usarla in maniera indipendente dalla scheda US)</p>
 <p>A questo punto basta selezionare Sito e Area di scavo e lanciare il comando Check Go!!!</p>
 <p>A questo punto basta andare ad aprire i relativi files e iniziare a verificare i rapporti. E” possibile per fare questo anche tenersi aperto il matrix interattivo per disegnare le US su Qgis. Nell’esempio sotto riportato, Abbiamo verificato perchè il sistema ci riporta l’errore US6 Gli si appoggia US12. Accendendo su Qgis le US possiamo verificare che vi sia adiacenza topografica, quindi il rapporto è possibile, mentre aprendo la scheda US di US12, vediamo che è stato inserito il medesimo rapporto US12 Gli si appoggia US6. A questo punto solo l’archeologo è in grado di capire come risolvere il paradosso e da cosa può dipendere.</p>
 </section>
-<section id="esportazione-del-matrix-quasi-di-harris">
-<h2><span class="section-number">7.7. </span>Esportazione del matrix “quasi” di Harris<a class="headerlink" href="#esportazione-del-matrix-quasi-di-harris" title="Link a questa intestazione"></a></h2>
+<section id="esportazione-del-matrix-di-harris">
+<h2><span class="section-number">7.7. </span>Esportazione del matrix di Harris<a class="headerlink" href="#esportazione-del-matrix-di-harris" title="Link a questa intestazione"></a></h2>
 <p>È possibile realizzare dei diagrammi stratigrafici che espongano la successione stratigrafica di qualsiasi istanza del database dopo una ricerca. Il sistema esporta due formati: un’immagine raster in .png e un vettoriale .svg modificabile. L’aspetto del matrix ovviamente tende ad essere ordinato quante meno US sono presenti. Tuttavia un primo tentativo di migliorare l’aspetto del diagramma ottenuto è stato rappresentato dall’aggiunta del raggruppamento per insiemi delle US basate sulla periodizzazione.
 Dopo aver realizzato una ricerca sulla scheda US cliccare sul pulsante “Export Matrix”. Il matrix viene salvato all’interno della cartella pyarchinit_Matrix_folder all’interno del vostro utente.</p>
 <p>Nell’esempio seguente mostriamo due semplici passaggi per avere pianta di struttura e matrix in 2 semplici passaggi:</p>
@@ -266,7 +353,7 @@ Dopo aver realizzato una ricerca sulla scheda US cliccare sul pulsante “Export
 <li><p>Viene esportato il matrix in formato .png e .svg e si trovano all’interno della cartella pyarchinit_Matrix_folder sotto al vostro Utente.</p></li>
 </ol>
 <p>I files possono essere gestiti sia tramite GIMP che Inkscape, mentre, seguendo il blog a questo indirizzo è possibile trasformare il Matrix in un grafico interattivo tramite Yed.</p>
-<p>Vai alla pagina del Blog <a class="reference external" href="http://pyarchinit.blogspot.it/2015/04/this-afternoon-im-thinking-about-issues.html">a link</a>.</p>
+<p>Vai alla pagina del Blog <a class="reference external" href="http://pyarchinit.blogspot.it/2015/04/this^afternoon^im^thinking^about^issues.html">a link</a>.</p>
 </section>
 <section id="creazione-dell-indice-di-ordine-di-successione-stratigrafica">
 <h2><span class="section-number">7.8. </span>Creazione dell’indice di ordine di successione stratigrafica<a class="headerlink" href="#creazione-dell-indice-di-ordine-di-successione-stratigrafica" title="Link a questa intestazione"></a></h2>
@@ -325,7 +412,7 @@ Per esempio, se 1 copre 2, 2 copre 3 e 4, ma 3 e 4 non hanno rapporti tra di lor
 <p>È possibile esportare sia le singole schede che l’indice delle US basandosi su qualsiasi ricerca o criterio di ordinamento. Alcuni dati vengono presi direttamente dalla us_table, mentre altri, come la quota minima e massima, sono ricavati per relazione dalle features dei layers.</p>
 <p>Le modalità per esportare le schede sono molteplici. E” possibile fare una ricerca in scheda, oppure una ricerca sui layer in Qgis e visualizzare le US corrispondenti in scheda ed esportarle. I criteri di esportazione sono pressochè illimitati, potendo cercare su vari campi ed ordinare le schede in base a più modalità. Per esempio si potrebbero cercare tutte le schede relative al Medioevo ed esportare tutte le US ordinate per scavo e tipo di defizione. Un medesimo set di dati può essere esportato secondo ordinamenti differenti, dando la possibilità di creare elenchi consultabili secondo vari criteri.</p>
 <p>Nell’esempio sottostante abbiamo cercato in scheda l’ED01 di un nostro scavo, selezionato a video le US che ci interessavano e aperto le schede US. Infine le abbiamo ordinate per numero di US.</p>
-<p>Ora basta andare in sezione Tools -&gt; Esportazione ed esportare Schede e Indice.</p>
+<p>Ora basta andare in sezione Tools ^&gt; Esportazione ed esportare Schede e Indice.</p>
 </section>
 </section>
 

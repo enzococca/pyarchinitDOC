@@ -2,7 +2,7 @@
    :align: right
    
 Installazione
-#####################################################
+****************
 
 Esistono due modi per installare pyArchInit.
 

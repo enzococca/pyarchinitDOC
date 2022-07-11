@@ -168,7 +168,7 @@ Le figure e le immagini  vanno salvate nella cartella ./_images
 
             : Logo Pyarchinit.
 
-.. _figura_[#]:
+.. _figura[#]:
 
 .. only:: html
 

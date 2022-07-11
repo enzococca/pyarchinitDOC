@@ -1,8 +1,8 @@
-.. image:: ./_images/logo_3.png
+.. figure:: ./_images/logo_3.png
    :align: right
    
 Funzioni
-***********
+===============
 
 La scheda US possiede una serie di funzioni che vanno ad automatizzare alcune delle operazioni che si compiono nel corso della catastazione ed elaborazione dei dati archeologici al fine di aumentare il controllo sull'integrità del dato e la validità dell'output. Al momento per la scheda US sono disponibili le seguenti funzioni:
 
@@ -26,60 +26,106 @@ Tuttavia Qgis non è in grado di disegnare le US nel loro ordine stratigrafico. 
 Per arrivare ad una schedatura perfetta è bene eseguire il Controllo automatico dei rapporti stratigrafici e generare il Matrix per poter verificare che la schedatura non contenga errori.
 
 Apertura delle schede US da selezione su base GIS
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Sul livello pyarchinit_US_view eseguire una selezione nella porzione di scavo che desiderate.
 
-.. image:: ./_images/img_3231f.png
+
+
+.. only:: html
+
+.. figure:: ./_images/img_3231f.png
    :align: center
 
+   :descrizione
 
 Oppure, aprite la tabella del livello e utilizzate il query builder di Qgis per realizzare la ricerca che desiderate: in questo caso abbiamo selezionato uno scavo archeologico e tutte le US che per definizione stratigrafica riportano la dicitura: “struttura in muratura”.
 
-.. image:: ./_images/img_3231g.png
+
+
+.. only:: html
+
+.. figure:: ./_images/img_3231g.png
    :align: center
 
+   :descrizione
 
-.. image:: ./_images/img_3231h.png
+
+
+.. only:: html
+
+.. figure:: ./_images/img_3231h.png
    :align: center
 
+   :descrizione
 
-.. image:: ./_images/img_3231i.png
+
+
+.. only:: html
+
+.. figure:: ./_images/img_3231i.png
    :align: center
 
+   :descrizione
 
 Aprite la scheda US di pyArchInit e andate alla sezione Tools. A questo punto cliccate sul pulsante “Show selected Features”. La scheda aprirà i records corrispondenti alla selezione.
 
-.. image:: ./_images/img_3231l.png
-   :align: center
 
 
-.. image:: ./_images/img_3231m.png
+.. only:: html
+
+.. figure:: ./_images/img_3231l.png
    :align: center
+
+   :descrizione
+
+
+
+.. only:: html
+
+.. figure:: ./_images/img_3231m.png
+   :align: center
+
+   :descrizione
 
 Visualizzazione su base GIS dell'US corrente
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Quando ci si è posizionati sull'US che si desidera visualizzare, andare nella sezione tools e cliccare sul pulsante "Disegna US”.
 
-.. image:: ./_images/img_3231n.png
+
+.. only:: html
+
+.. figure:: ./_images/img_3231n.png
    :align: center
 
+   :descrizione
 
-.. image:: ./_images/img_3231na.png
+
+
+.. only:: html
+
+.. figure:: ./_images/img_3231na.png
    :align: center
 
+   :descrizione
 
 In Qgis verrà disegnata l'US corrispondente.
 
-.. image:: ./_images/img_3231o.png
+
+
+.. only:: html
+
+.. figure:: ./_images/img_3231o.png
    :align: center
+
+   :descrizione
 
 
 !!! ATTENZIONE !!! AL MOMENTO QUESTO SISTEMA NON FUNZIONA PIU' PER MODIFICA DELLE API DI QGIS!!!
 
 Visualizzazione della pianta all'interno della scheda US
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 È possibile visualizzare la pianta di una US andando nella sezione Tools e cliccando sul pulsante “Preview pianta US” apparirà un messaggio che vi avvertirà che ogni US consultata sarà caricata nell'apposita sezione.
 
@@ -87,33 +133,47 @@ Andando nella sezione “Piante” della scheda US sarà possibile visualizzare 
 
 
 Creazione in automatico del codice di periodizzazione dell'US
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Dalla scheda US è possibile creare il codice di periodizzazione dell'US.
 
-Come spiegato nel capitolo inerente alla scheda di Periodizzazione e nella parte della scheda US riguardante la periodizzazione, una volta assegnato un periodo/fase iniziale all'US e un eventuale periodo finale, basta cliccare nella sezione Tools il pulsante “Crea codice Periodo”.
+Come spiegato nel capitolo inerente alla scheda di Periodizzazione e nella parte della scheda US riguardante la periodizzazione,
+una volta assegnato un periodo/fase iniziale all'US e un eventuale periodo finale, basta cliccare nella sezione Tools il
+pulsante “Crea codice Periodo”.
 
 
-.. image:: ./_images/img_3231p.png
-   :align: left
-   :scale: 70 %
+.. only:: html
 
+.. figure:: ./_images/img_3231p.png
+   :align: center
+
+   :descrizione
 
 Sarà assegnato il valore del codice periodo dalla periodizzazione finale all'iniziale, divisi da uno slash per motivi prettamente informatici. Se uno strato vive dal periodo 2.1 fino al 2.3, il codice di periodizzazione sarà: 2/3/4
 
-========	=====	=======
-Periodo		Fase	Codice
-========	=====	=======
-2			 1		 2
-2			 2		 3
-2			 3		 4
-========	=====	=======
 
-Risultato: 2/3/4
 
-.. image:: ./_images/img_3231q.png
+.. table::
+
+    ========	=====	=======
+    Periodo		Fase	Codice
+    ========	=====	=======
+    2			 1		 2
+    2			 2		 3
+    2			 3		 4
+    ========	=====	=======
+
+test::
+
+    Risultato: 2/3/4
+
+
+.. only:: html
+
+.. figure:: ./_images/img_3231q.png
    :align: center
 
+   :descrizione
 
 
 La sintassi del valore inserito nel campo, serve a pyArchInit per poter realizzare le query di
@@ -121,9 +181,14 @@ richiamo delle piante di fase, attraverso una sintassi specifica:
 
 cont_per = '3' OR cont_per LIKE '3/%' OR cont_per LIKE '%/3' OR cont_per LIKE '%/3/%'
 
-.. image:: ./_images/img_3231r.png
+
+
+.. only:: html
+
+.. figure:: ./_images/img_3231r.png
    :align: center
 
+   :descrizione
 
 Sul campo cont_per viene cercato il codice di periodizzazione in quattro modalità:
 
@@ -134,37 +199,73 @@ ai periodi successivi;
 periodi precedenti;
 4. cont_per LIKE '%/valore/%': trova tutte le US che afferiscono ad un periodo intermedio tra un periodo iniziale e uno finale.
 
-.. image:: ./_images/img_3231r1.png
+
+
+
+.. only:: html
+
+.. figure:: ./_images/img_3231r1.png
    :align: center
 
+   :descrizione
+
 Sistema di generazione di piante composite a partire dalle query della scheda US
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. Andate nella sezione Tools della scheda US e cliccare sul pulsante “Visualizzazione GIS”; apparirà un messaggio che vi informa che le vostre ricerche saranno trasformate in piante di scavo.
 
-.. image:: ./_images/img_3231a.png
+
+
+
+.. only:: html
+
+.. figure:: ./_images/img_3231a.png
    :align: center
+
+   :descrizione
 
 2. Dopo aver cliccato su “New Search” impostate una ricerca (in questo caso cerchiamo la struttura TB01 – una tomba, di uno scavo di Ravenna).
 
-.. image:: ./_images/img_3231b.png
+
+
+
+
+.. only:: html
+
+
+.. figure:: ./_images/img_3231b.png
    :align: center
+
+   :descrizione
 
 
 3. Lanciate la ricerca cliccando su “Search!!!”.
 
-.. image:: ./_images/img_3231c.png
+
+
+
+.. only:: html
+
+.. figure:: ./_images/img_3231c.png
    :align: center
 
+   :descrizione
 
-4. Sul GIS vengono caricate le US corrispondenti alla ricerca, caratterizzate in base agli stili pre-impostati di Qgis (vedi capitolo sugli stili); nella scheda US invece sono disponibili i singoli record.
 
-.. image:: ./_images/img_3231d.png
+4. Sul GIS vengono caricate le US corrispondenti alla ricerca, caratterizzate in base agli stili pre^impostati di Qgis (vedi capitolo sugli stili); nella scheda US invece sono disponibili i singoli record.
+
+
+
+
+.. only:: html
+
+.. figure:: ./_images/img_3231d.png
    :align: center
 
+   :descrizione
 
 Controllo automatico dei rapporti stratigrafici
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Nella sezione Tools, selezionando uno scavo, è possibile eseguire il controllo sui rapporti stratigrafici.
 
@@ -190,7 +291,7 @@ Gli errori nell'inserimento delle US possono essere di vari tipi. Ecco elencate 
 
 12. Medesimo rapporto fisico inserito nelle due US coinvolte: 1 copre 2, 2 copre 1.
 
-Le casistiche sopradescritte dipendono in prevalenza da errori di immissione o banalmente di distrazione. E' stato osservato come in scavi da 30 US e circa 100 rapporti stratigrafici, in media emergano, anche dopo un ricontrollo autoptico, tra uno e 3-4 errori.
+Le casistiche sopradescritte dipendono in prevalenza da errori di immissione o banalmente di distrazione. E' stato osservato come in scavi da 30 US e circa 100 rapporti stratigrafici, in media emergano, anche dopo un ricontrollo autoptico, tra uno e 3^4 errori.
 
 La strada scelta al momento da pyArchInit è quella di non correggere in automatico gli errori, dato che non è possibile evincere in automatico dove risieda l'errore. Per esempio potrei avere un problema di assenza di reciproci (caso 9), ma l'assenza potrebbe dipendere o da una dimenticanza nell'inserire i rapporti o da una effettiva non necessità di inserimento dovuta all'assenza di rapporti topografici (caso 8).
 
@@ -207,17 +308,17 @@ Vengono generati 2 report:
 I report sono esportati nella cartella pyarchinit_report_forlder che si trova sotto al vostro Utente e si chiama rapporti_us.txt :
 
 rapporti_us.txt
-Report controllo Rapporti Stratigrafici - Sito: Via Cignani, 18 Rimini
+Report controllo Rapporti Stratigrafici ^ Sito: Via Cignani, 18 Rimini
 Sito: 'Via Cignani, 18 Rimini ', #Area: '1', #US: 2 Coperto da US: 15: Rapporto non verificato
 Sito: 'Via Cignani, 18 Rimini ', #Area: '1', #US: 2 Taglia US: 16: Rapporto non verificato
 Sito: 'Via Cignani, 18 Rimini ', #Area: '1', #US: 1007 Taglia US: 977: Scheda US non esistente
 Sito: 'Via Cignani, 18 Rimini ', #Area: '1', #US: 256 Riempie US: 255: Scheda US non esistente
 
 def_strat_a_rapporti_US.txt
-Sito: 'Via Cignani, 18 Rimini ', #Area: '1', US: 128 - 'Riempimento': lo strato Si lega a US: 127 - 'Strato di argilla'
+Sito: 'Via Cignani, 18 Rimini ', #Area: '1', US: 128 ^ 'Riempimento': lo strato Si lega a US: 127 ^ 'Strato di argilla'
 
 
-Il sistema funziona per una singola accoppiata Sito - Area di scavo. Per lanciarlo non è necessario fare una query, ma è stata creato un sistema con 2 liste a tendina, sito e area, nella sezione Tools (NB: cliccando sull'icona con la doppia scheda è possibie "staccare" la finestra e usarla in maniera indipendente dalla scheda US)
+Il sistema funziona per una singola accoppiata Sito ^ Area di scavo. Per lanciarlo non è necessario fare una query, ma è stata creato un sistema con 2 liste a tendina, sito e area, nella sezione Tools (NB: cliccando sull'icona con la doppia scheda è possibie "staccare" la finestra e usarla in maniera indipendente dalla scheda US)
 
 
 A questo punto basta selezionare Sito e Area di scavo e lanciare il comando Check Go!!!
@@ -227,8 +328,8 @@ A questo punto basta andare ad aprire i relativi files e iniziare a verificare i
 
 
 
-Esportazione del matrix 'quasi' di Harris
-""""""""""""""""""""""""""""""""""""""""""""""""""""
+Esportazione del matrix di Harris
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 È possibile realizzare dei diagrammi stratigrafici che espongano la successione stratigrafica di qualsiasi istanza del database dopo una ricerca. Il sistema esporta due formati: un'immagine raster in .png e un vettoriale .svg modificabile. L'aspetto del matrix ovviamente tende ad essere ordinato quante meno US sono presenti. Tuttavia un primo tentativo di migliorare l'aspetto del diagramma ottenuto è stato rappresentato dall'aggiunta del raggruppamento per insiemi delle US basate sulla periodizzazione.
 Dopo aver realizzato una ricerca sulla scheda US cliccare sul pulsante “Export Matrix”. Il matrix viene salvato all'interno della cartella pyarchinit_Matrix_folder all'interno del vostro utente.
@@ -252,26 +353,28 @@ I files possono essere gestiti sia tramite GIMP che Inkscape, mentre, seguendo i
 
 Vai alla pagina del Blog `a link`_.
 
-.. _a link: http://pyarchinit.blogspot.it/2015/04/this-afternoon-im-thinking-about-issues.html
+.. _a link: http://pyarchinit.blogspot.it/2015/04/this^afternoon^im^thinking^about^issues.html
 
 
 
 Creazione dell'indice di ordine di successione stratigrafica
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 L'indice di successione stratigrafica è stato ideato per poter ovviare alla visualizzazione del GIS, che sovrappone i poligoni in base al loro ordine di immissione all'interno del database.
 
 L'algoritmo realizzato (al momento altamente in via di sviluppo) crea un ordine di successione stratigrafica basato sui rapporti stratigrafici. Ogni US assume un valore univoco in base alla sua posizione nella stratigrafia e dai rapporti che ha con altre US.
 Per esempio, se 1 copre 2, 2 copre 3 e 4, ma 3 e 4 non hanno rapporti tra di loro lo script genererà i seguenti valori:
 
-=== ============== ====================================
-US  Rapporto       Ordine di successione stratigrafica
-=== ============== ====================================
-1	Copre 2   	   0
-2   Copre 3 e 4    1
-3   Coperto da 2   2
-4   Coperto da 2   3
-=== ============== ====================================
+.. table::
+
+    === ============== ====================================
+    US  Rapporto       Ordine di successione stratigrafica
+    === ============== ====================================
+    1	Copre 2   	   0
+    2   Copre 3 e 4    1
+    3   Coperto da 2   2
+    4   Coperto da 2   3
+    === ============== ====================================
 
 
 Questo permetterà alla View SQL di visualizzare su base GIS le geometrie degli strati nel loro ordine stratigrafico originario, senza doversi preoccupare delle modalità di disegno delle US.
@@ -329,7 +432,7 @@ Ecco Il layer di visualizzazione delle Unità Stratigrafiche (pyarchinit_us_view
 PROBLEMI NOTI: se si lancia il comando e sono presenti paradossi è possibile che il sistema non riuscendo a risolverli vada avanti all'infito. Oppure se si lancia il sistema su più Aree di uno scavo o su più scavi, il sistema va in loop e non c'è modo di abortire il processo. In tutti questi casi è necessario forzare l'arresto di Qgis.
 
 Esportazione schede e indice delle US in formato PDF
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 È possibile esportare sia le singole schede che l'indice delle US basandosi su qualsiasi ricerca o criterio di ordinamento. Alcuni dati vengono presi direttamente dalla us_table, mentre altri, come la quota minima e massima, sono ricavati per relazione dalle features dei layers.
 
@@ -341,5 +444,5 @@ Nell'esempio sottostante abbiamo cercato in scheda l'ED01 di un nostro scavo, se
 
 
 
-Ora basta andare in sezione Tools -> Esportazione ed esportare Schede e Indice.
+Ora basta andare in sezione Tools ^> Esportazione ed esportare Schede e Indice.
 
