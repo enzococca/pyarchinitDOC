@@ -247,13 +247,8 @@ Sito: “Via Cignani, 18 Rimini “, #Area: “1”, #US: 256 Riempie US: 255: S
 <p>def_strat_a_rapporti_US.txt
 Sito: “Via Cignani, 18 Rimini “, #Area: “1”, US: 128 - “Riempimento”: lo strato Si lega a US: 127 - “Strato di argilla”</p>
 <p>Il sistema funziona per una singola accoppiata Sito - Area di scavo. Per lanciarlo non è necessario fare una query, ma è stata creato un sistema con 2 liste a tendina, sito e area, nella sezione Tools (NB: cliccando sull’icona con la doppia scheda è possibie «staccare» la finestra e usarla in maniera indipendente dalla scheda US)</p>
-<img alt="_images/img_3231u.png" class="align-center" src="_images/img_3231u.png" />
 <p>A questo punto basta selezionare Sito e Area di scavo e lanciare il comando Check Go!!!</p>
-<img alt="_images/img_3231u1.png" class="align-center" src="_images/img_3231u1.png" />
 <p>A questo punto basta andare ad aprire i relativi files e iniziare a verificare i rapporti. E” possibile per fare questo anche tenersi aperto il matrix interattivo per disegnare le US su Qgis. Nell’esempio sotto riportato, Abbiamo verificato perchè il sistema ci riporta l’errore US6 Gli si appoggia US12. Accendendo su Qgis le US possiamo verificare che vi sia adiacenza topografica, quindi il rapporto è possibile, mentre aprendo la scheda US di US12, vediamo che è stato inserito il medesimo rapporto US12 Gli si appoggia US6. A questo punto solo l’archeologo è in grado di capire come risolvere il paradosso e da cosa può dipendere.</p>
-<img alt="_images/img_3231u2.png" class="align-center" src="_images/img_3231u2.png" />
-<p>TODO
-Aggiungere il sistema di controllo topografico dei rapporti</p>
 </section>
 <section id="esportazione-del-matrix-quasi-di-harris">
 <h2><span class="section-number">7.7. </span>Esportazione del matrix “quasi” di Harris<a class="headerlink" href="#esportazione-del-matrix-quasi-di-harris" title="Link a questa intestazione"></a></h2>
@@ -262,16 +257,9 @@ Dopo aver realizzato una ricerca sulla scheda US cliccare sul pulsante “Export
 <p>Nell’esempio seguente mostriamo due semplici passaggi per avere pianta di struttura e matrix in 2 semplici passaggi:</p>
 <ol class="arabic simple">
 <li><p>Nella scheda US con il visualizzatore delle geometrie attivo cerchiamo l’ED01 del nostro scavo. In automatico su Qgis appare la pianta e nelle schede US appaiono solo i record corrispondenti ad ED01.</p></li>
-</ol>
-<img alt="_images/img_3231v.png" class="align-center" src="_images/img_3231v.png" />
-<ol class="arabic simple" start="2">
 <li><p>Andare nella sezione Tools e cliccare su “Export Matrix”</p></li>
-</ol>
-<img alt="_images/img_3231v1.png" class="align-center" src="_images/img_3231v1.png" />
-<ol class="arabic simple" start="3">
 <li><p>Viene esportato il matrix in formato .png e .svg e si trovano all’interno della cartella pyarchinit_Matrix_folder sotto al vostro Utente.</p></li>
 </ol>
-<img alt="_images/img_3231v2.png" class="align-center" src="_images/img_3231v2.png" />
 <p>I files possono essere gestiti sia tramite GIMP che Inkscape, mentre, seguendo il blog a questo indirizzo è possibile trasformare il Matrix in un grafico interattivo tramite Yed.</p>
 <p>Vai alla pagina del Blog <a class="reference external" href="http://pyarchinit.blogspot.it/2015/04/this-afternoon-im-thinking-about-issues.html">a link</a>.</p>
 </section>
@@ -313,28 +301,18 @@ Per esempio, se 1 copre 2, 2 copre 3 e 4, ma 3 e 4 non hanno rapporti tra di lor
 </table>
 <p>Questo permetterà alla View SQL di visualizzare su base GIS le geometrie degli strati nel loro ordine stratigrafico originario, senza doversi preoccupare delle modalità di disegno delle US.</p>
 <p>Il sistema funziona per singola Area di scavo. Quindi è necessario prima di tutto eseguire una ricerca che richiamo solo un’area di scavo di un sito. Dopo aver cliccato su nuova ricerca, basta inserire nome del sito e numero di Area.</p>
-<img alt="_images/img_3231s.png" class="align-center" src="_images/img_3231s.png" />
 <p>A questo punto sarà necessario nella sezione Tools cliccare su “Ordine Stratigrafico”.</p>
-<img alt="_images/img_3231t.png" class="align-center" src="_images/img_3231t.png" />
 <p>NOTA BENE: Il sistema funziona solo se due condizioni sono verificate
 * Assenza di errori nell’inserimento dei rapporti stratigrafici
 * Accordo con il valore di loop che esegue il software in fase di analisi dell stratigrafia. Questo è un parametro tecnico ed è settato a livello di codice su 500 Loop; questo implica che una singola US, per ogni singolo rapporto, viene scansionata 500 Volte. Se una US ha più di 500 rapporti, è possibile che il sistema non riesca a completare il ciclo. Al momento è stata testata su scavi aperti di estensione sotto gli 800 mq e in contesti urbani complessi e il sistema ha sempre funzionato. Se si riscontrassero problema, ovvero il sistema non esce dal loop, è necessario modificare il parametro nel codice in python. Dato che dai loop dipende anche la velocità di esecuzione, in futuro si potrebbe aggiungere una casella dove si setta manualmente il numero di loop massimo per singola US. Va considerato che per un pacchetto di circa 40 US in ambito urbano, il sistema richiede circa un minuto di lavoro, che aumenta progressivamente all’aumentare delle US e dei rapporti inseriti.</p>
 <p>Il sistema manda invia all’utente una serie di messaggi (utilizzati per il debug del sistema), tra cui la richiesta di eseguire il matrix per verificare eventuali paradossi nella stratigrafia come US più antiche che coprono US più recenti.</p>
-<img alt="_images/img_3231t1.png" class="align-center" src="_images/img_3231t1.png" />
-<img alt="_images/img_3231t2.png" class="align-center" src="_images/img_3231t2.png" />
 <p>Lanciando il matrix sarà possibile verificare la correttezza dei rapporti tramite l’immagine esportata nella cartella pyarchinit_Matrix_folder che si trova sotto al vostro Utente, e richiamare dal Matrix interattivo le US cliccando sul singolo numero, per poter verificare sovrapposizioni corrette, a quale US si fa riferimento, ecc..</p>
-<img alt="_images/img_3231t3.png" class="align-center" src="_images/img_3231t3.png" />
-<img alt="_images/img_3231t4.png" class="align-center" src="_images/img_3231t4.png" />
 <p>Al messaggio «Inizio Sistema order layer» dare OK; «Uscita dal sistema order layer», dare OK ed attendere, senza impegnare il PC in altre operazioni. A volte possono servire anche 15 minuti per grandi scavi ( ma ne vale la pena!!!).</p>
 <p>E” necessario attendere il messaggio «SISEMA DI ORDINAMENTO TERMINATO».</p>
-<img alt="_images/img_3231t5.png" class="align-center" src="_images/img_3231t5.png" />
 <p>ATTENZIONE!!! Per motivi prettamente informatici, il sistema ricarica tutte le US del Database. Richiamate il vostro set di dati.</p>
 <p>Se qualcosa fosse andato storto e per essere sicuri che il vostro scavo sia documentato in maniera corretta, è possibile verificare una serie di report che vengono estratti dal sistema di ordinamento. Si trovano all’interno di pyArchinIt Report_Folder sotto al vostro Utente.</p>
-<img alt="_images/img_3231t5a.png" class="align-center" src="_images/img_3231t5a.png" />
 <p>Ecco come appare il layer di inserimento delle Unità Stratigrafiche (pyunitastrigrafiche) alla fine della digitalizzazione di tutte le US.</p>
-<img alt="_images/img_3231t6.png" class="align-center" src="_images/img_3231t6.png" />
 <p>Ecco Il layer di visualizzazione delle Unità Stratigrafiche (pyarchinit_us_view) dopo la generazione dell’ordine stratigrafico pronto per essere esportato.</p>
-<img alt="_images/img_3231t7.png" class="align-center" src="_images/img_3231t7.png" />
 <p>PROBLEMI NOTI: se si lancia il comando e sono presenti paradossi è possibile che il sistema non riuscendo a risolverli vada avanti all’infito. Oppure se si lancia il sistema su più Aree di uno scavo o su più scavi, il sistema va in loop e non c’è modo di abortire il processo. In tutti questi casi è necessario forzare l’arresto di Qgis.</p>
 </section>
 <section id="esportazione-schede-e-indice-delle-us-in-formato-pdf">
@@ -342,9 +320,7 @@ Per esempio, se 1 copre 2, 2 copre 3 e 4, ma 3 e 4 non hanno rapporti tra di lor
 <p>È possibile esportare sia le singole schede che l’indice delle US basandosi su qualsiasi ricerca o criterio di ordinamento. Alcuni dati vengono presi direttamente dalla us_table, mentre altri, come la quota minima e massima, sono ricavati per relazione dalle features dei layers.</p>
 <p>Le modalità per esportare le schede sono molteplici. E” possibile fare una ricerca in scheda, oppure una ricerca sui layer in Qgis e visualizzare le US corrispondenti in scheda ed esportarle. I criteri di esportazione sono pressochè illimitati, potendo cercare su vari campi ed ordinare le schede in base a più modalità. Per esempio si potrebbero cercare tutte le schede relative al Medioevo ed esportare tutte le US ordinate per scavo e tipo di defizione. Un medesimo set di dati può essere esportato secondo ordinamenti differenti, dando la possibilità di creare elenchi consultabili secondo vari criteri.</p>
 <p>Nell’esempio sottostante abbiamo cercato in scheda l’ED01 di un nostro scavo, selezionato a video le US che ci interessavano e aperto le schede US. Infine le abbiamo ordinate per numero di US.</p>
-<img alt="_images/img_3231z.png" class="align-center" src="_images/img_3231z.png" />
 <p>Ora basta andare in sezione Tools -&gt; Esportazione ed esportare Schede e Indice.</p>
-<img alt="_images/img_3231z1.png" class="align-center" src="_images/img_3231z1.png" />
 </section>
 </section>
 

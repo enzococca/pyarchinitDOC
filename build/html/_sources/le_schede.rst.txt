@@ -53,8 +53,6 @@ Scheda Sito
 Alla scheda di sito si accede tramite il pulsante della Toolbar di pyArchInit:
 
 
-.. image:: ./_images/img_322button.PNG
-   :align: center
 
 La scheda di sito serve ad impostare il nome del luogo o del progetto in cui si verifica un'indagine. Al momento si tratta di una scheda aperta composta essenzialmente da 7 campi:
 
@@ -66,7 +64,7 @@ La scheda di sito serve ad impostare il nome del luogo o del progetto in cui si 
 * Campo Provincia: lista a tendina aperta gestita dalla GUI con le provincie italiane.
 * Campo Comune: lista a tendina aperta gestita dalla GUI. Nessun valore inserito.
 
-.. image:: ./_images/img_322a.PNG
+.. image:: ./_images/img_322a.png
    :align: center
 
 La scheda possiede una sezione Tools:
@@ -77,7 +75,7 @@ La scheda possiede una sezione Tools:
 * Caricamento del layer puntuale in base ad una ricerca.
 * Generazione arbitraria di schede US impostando il numero di schede da creare, l'area di scavo di riferimento (l'id US è composto inderogabilmente da sito, area, us), un valore di partenza scalato di una unità rispetto al primo che vogliamo far apparire; ad esempio schede da 1 a 10 di Area 2, sarà necessario impostare 10, 2 e come numero di partenza 0.
 
-.. image:: ./_images/img_322b.PNG
+.. image:: ./_images/img_322b.png
    :align: center
 
 
@@ -86,14 +84,14 @@ Scheda US-USM
 
 Alla scheda US/USM si accede tramite il pulsante della Toolbar di pyArchInit:
 
-.. image:: ./_images/img_323button.PNG
+.. image:: ./_images/img_323button.png
    :align: center
 
 La scheda US, è un adattamento della scheda ministeriale emessa dall'ICCD.
 
 È divisa in varie sezioni a seconda della tipologia di dato.
 
-.. image:: ./_images/img_323a.PNG
+.. image:: ./_images/img_323a.png
    :align: center
 
 Nella porzione in alto fissa, sono presenti i campi per l'identificazione dell'US/USM e relativi dati di localizzazione topografica all'interno del sito:
@@ -121,7 +119,7 @@ USM
 
 Sezione dedicata alla descrizione di una Unità Stratigrafica Muraria.
 
- .. image:: ./_images/img_323b.PNG
+ .. image:: ./_images/img_323b.png
    :align: center
 
 * Campo funziona statica: Campo aperto per la segnalazione della funzione statica.
@@ -152,7 +150,7 @@ Sottosezione Caratteristiche dei materiali da costruzione
 
 Dati di scavo, Periodizzazione, Rapporti stratigrafici, Struttura
 
-.. image:: ./_images/img_323c.PNG
+.. image:: ./_images/img_323c.png
    :align: center
 
 Sezione per l'inserimento della Periodizzazione iniziale e finale, attività e sigla della struttura di appartenenza. Qui vengono anche inseriti altri dati come l'anno di scavo e il metodo di scavo utilizzato. Infine, con un formato totalmente innovativo, vengono segnalati i singoli rapporti stratigrafici, presentati in forma di tabella, dove ogni singola riga rappresenta un rapporto stratigrafico. NB: 1 RAPPORTO STRATIGRAFICO 1 RIGA NEL CAMPO.
@@ -177,7 +175,7 @@ Dati fisici e dati schedatura
 
 Sezione per l'inserimento dei dati fisici dell'Unità Stratigrafica quali: formazione, colore, consistenza, stato di conservazione, inclusi e campionature. Sotto viene segnalato lo schedatore e la data di redazione della scheda.
 
-.. image:: ./_images/img_323d.PNG
+.. image:: ./_images/img_323d.png
    :align: center
 
 * Campo formazione: lista a tendina per la segnalazione della formazione dell'US: naturale o antropica.
@@ -191,7 +189,7 @@ Sezione per l'inserimento dei dati fisici dell'Unità Stratigrafica quali: forma
 
 Documentazione
 
-.. image:: ./_images/img_323e.PNG
+.. image:: ./_images/img_323e.png
    :align: center
 
 In questa apposita sezione è possibile segnalare i singoli tipi di documentazione prodotti: piante, sezioni, fotografie, diapositive, ecc.

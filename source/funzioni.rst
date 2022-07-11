@@ -218,21 +218,13 @@ Sito: 'Via Cignani, 18 Rimini ', #Area: '1', US: 128 - 'Riempimento': lo strato 
 
 Il sistema funziona per una singola accoppiata Sito - Area di scavo. Per lanciarlo non è necessario fare una query, ma è stata creato un sistema con 2 liste a tendina, sito e area, nella sezione Tools (NB: cliccando sull'icona con la doppia scheda è possibie "staccare" la finestra e usarla in maniera indipendente dalla scheda US)
 
-.. image:: ./_images/img_3231u.png
-   :align: center
 
 A questo punto basta selezionare Sito e Area di scavo e lanciare il comando Check Go!!!
 
-.. image:: ./_images/img_3231u1.png
-   :align: center
 
 A questo punto basta andare ad aprire i relativi files e iniziare a verificare i rapporti. E' possibile per fare questo anche tenersi aperto il matrix interattivo per disegnare le US su Qgis. Nell'esempio sotto riportato, Abbiamo verificato perchè il sistema ci riporta l'errore US6 Gli si appoggia US12. Accendendo su Qgis le US possiamo verificare che vi sia adiacenza topografica, quindi il rapporto è possibile, mentre aprendo la scheda US di US12, vediamo che è stato inserito il medesimo rapporto US12 Gli si appoggia US6. A questo punto solo l'archeologo è in grado di capire come risolvere il paradosso e da cosa può dipendere.
 
-.. image:: ./_images/img_3231u2.png
-   :align: center
 
-TODO
-Aggiungere il sistema di controllo topografico dei rapporti
 
 Esportazione del matrix 'quasi' di Harris
 """"""""""""""""""""""""""""""""""""""""""""""""""""
@@ -244,20 +236,14 @@ Nell'esempio seguente mostriamo due semplici passaggi per avere pianta di strutt
 
 1. Nella scheda US con il visualizzatore delle geometrie attivo cerchiamo l'ED01 del nostro scavo. In automatico su Qgis appare la pianta e nelle schede US appaiono solo i record corrispondenti ad ED01.
 
-.. image:: ./_images/img_3231v.png
-   :align: center
 
 
 2. Andare nella sezione Tools e cliccare su “Export Matrix”
 
-.. image:: ./_images/img_3231v1.png
-   :align: center
 
 
 3. Viene esportato il matrix in formato .png e .svg e si trovano all'interno della cartella pyarchinit_Matrix_folder sotto al vostro Utente.
 
-.. image:: ./_images/img_3231v2.png
-   :align: center
 
 
 
@@ -292,14 +278,11 @@ Questo permetterà alla View SQL di visualizzare su base GIS le geometrie degli 
 
 Il sistema funziona per singola Area di scavo. Quindi è necessario prima di tutto eseguire una ricerca che richiamo solo un'area di scavo di un sito. Dopo aver cliccato su nuova ricerca, basta inserire nome del sito e numero di Area.
 
-.. image:: ./_images/img_3231s.png
-   :align: center
+
 
 
 A questo punto sarà necessario nella sezione Tools cliccare su “Ordine Stratigrafico”.
 
-.. image:: ./_images/img_3231t.png
-   :align: center
 
 NOTA BENE: Il sistema funziona solo se due condizioni sono verificate
 * Assenza di errori nell'inserimento dei rapporti stratigrafici
@@ -307,29 +290,22 @@ NOTA BENE: Il sistema funziona solo se due condizioni sono verificate
 
 Il sistema manda invia all'utente una serie di messaggi (utilizzati per il debug del sistema), tra cui la richiesta di eseguire il matrix per verificare eventuali paradossi nella stratigrafia come US più antiche che coprono US più recenti.
 
-.. image:: ./_images/img_3231t1.png
-   :align: center
 
 
-.. image:: ./_images/img_3231t2.png
-   :align: center
+
+
 
 
 Lanciando il matrix sarà possibile verificare la correttezza dei rapporti tramite l'immagine esportata nella cartella pyarchinit_Matrix_folder che si trova sotto al vostro Utente, e richiamare dal Matrix interattivo le US cliccando sul singolo numero, per poter verificare sovrapposizioni corrette, a quale US si fa riferimento, ecc..
 
-.. image:: ./_images/img_3231t3.png
-   :align: center
 
-.. image:: ./_images/img_3231t4.png
-   :align: center
+
 
 Al messaggio "Inizio Sistema order layer" dare OK; "Uscita dal sistema order layer", dare OK ed attendere, senza impegnare il PC in altre operazioni. A volte possono servire anche 15 minuti per grandi scavi ( ma ne vale la pena!!!).
 
 E' necessario attendere il messaggio "SISEMA DI ORDINAMENTO TERMINATO".
 
 
-.. image:: ./_images/img_3231t5.png
-   :align: center
 
 
 ATTENZIONE!!! Per motivi prettamente informatici, il sistema ricarica tutte le US del Database. Richiamate il vostro set di dati.
@@ -337,21 +313,16 @@ ATTENZIONE!!! Per motivi prettamente informatici, il sistema ricarica tutte le U
 
 Se qualcosa fosse andato storto e per essere sicuri che il vostro scavo sia documentato in maniera corretta, è possibile verificare una serie di report che vengono estratti dal sistema di ordinamento. Si trovano all'interno di pyArchinIt Report_Folder sotto al vostro Utente.
 
-.. image:: ./_images/img_3231t5a.png
-   :align: center
+
 
 
 Ecco come appare il layer di inserimento delle Unità Stratigrafiche (pyunitastrigrafiche) alla fine della digitalizzazione di tutte le US.
 
 
-.. image:: ./_images/img_3231t6.png
-   :align: center
 
 Ecco Il layer di visualizzazione delle Unità Stratigrafiche (pyarchinit_us_view) dopo la generazione dell'ordine stratigrafico pronto per essere esportato.
 
 
-.. image:: ./_images/img_3231t7.png
-   :align: center
 
 
 PROBLEMI NOTI: se si lancia il comando e sono presenti paradossi è possibile che il sistema non riuscendo a risolverli vada avanti all'infito. Oppure se si lancia il sistema su più Aree di uno scavo o su più scavi, il sistema va in loop e non c'è modo di abortire il processo. In tutti questi casi è necessario forzare l'arresto di Qgis.
@@ -366,12 +337,8 @@ Le modalità per esportare le schede sono molteplici. E' possibile fare una rice
 Nell'esempio sottostante abbiamo cercato in scheda l'ED01 di un nostro scavo, selezionato a video le US che ci interessavano e aperto le schede US. Infine le abbiamo ordinate per numero di US.
 
 
-.. image:: ./_images/img_3231z.png
-   :align: center
+
 
 
 Ora basta andare in sezione Tools -> Esportazione ed esportare Schede e Indice.
 
-
-.. image:: ./_images/img_3231z1.png
-   :align: center
