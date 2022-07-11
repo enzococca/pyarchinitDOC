@@ -2,16 +2,21 @@
    :align: right
    
 Come documentare
-======================
+*********************
 
 
 Realizzare una carta archeologica
 ======================================
 todo..
 
+---------------------------------------------------
+
 Gestire la ricognizione Archeologica
 =========================================
 todo..
+
+---------------------------------------------------
+
 
 Schedare materiali: dal magazzino e dalla bibliografia
 ============================================================
@@ -21,18 +26,24 @@ Documentare i complessi architettonici
 ===========================================
 todo..
 
-4.5 Documentare i contesti stratigrafici
+Documentare i contesti stratigrafici
 =========================================
 todo..
 
+---------------------------------------------------
+
+
 
 Preparare il progetto di Qgis
----------------------------------------
+==================================
 
 Facciamo ora una rapida escursione per poter preparare una base Qgis che accolga i nostri dati sfruttando il dataset di pyArchInit. Non scenderemo nel particolare delle singole funzioni di Qgis, dato che per questo è possibile fare riferimento alla documentazione online di Qgis. Quindi daremo per scontato che abbiate una conoscenza di base di Qgis e delle sue funzioni principali.
 
+---------------------------------------------------
+
+
 Preparare la base GIS
------------------------------------------
+======================
 Per prima cosa si dovrà aprire la base GIS e fare alcuni settaggi che possono essere trovati nelle opzioni di QGis. Il menù può cambiare in base al sistema operativo, ma sostanzialmente le voci rimangono le medesime tra versioni uguali. Lasciamo gli utenti allo studio delle singole opzioni.
 
 Fondamentale comunque è la scelta del sistema di riferimento spaziale: nel nostro caso specifico useremo l’EPSG ID 3004, sia per l’intero progetto Qgis, sia per tutti i layer che saranno caricati, spuntando la flag per la riproiezione al volo di layer caricati con differente CRS.
@@ -46,14 +57,21 @@ Dopo il raggruppamento dei layer avremo una base con questo aspetto:
 Abbiamo creato una cartella “Altri layers” come appoggio per eventuali nuovi layers da utilizzare nel corso del progetto. Se volete createla pure.
 
 
+---------------------------------------------------
+
+
 Aggiungere layers di riferimento
----------------------------------------
+==================================
 È possibile posizionare uno scavo sfruttando sia un rilevatore GPS, che batta uno o più punti fissi nel nostro scavo e che sfrutteremo per georiferire i nostri GCP, oppure basarsi con punti di controllo esterni, come carte catastali già georeferenziate, layer WMS, WFS, ecc..
 In questo caso abbiamo dei punti di controllo a terra presi sul cantiere ma andremo ad aggiungere anche un esempio di layer WMS, in particolare una CTR 1:5000 presa dal sito della regione Emilia Romagna.
 
 
+---------------------------------------------------
+
+
+
 Aggiungere i GCP (Ground Control Points)
------------------------------------------------
+===========================================
 Come già detto, non discuteremo i vari passaggi e metodi per poter rilevare sul campo e importare in pyArchInit i nostri punti di controllo ma vi rimandiamo per il loro uso al paragrafo 3.3.4 sui punti di riferimento.
 
 Qundo importerete in pyarchinit_punti i vostri GCP seguite questo semplice schema di compilazione:
@@ -74,18 +92,27 @@ A questo punto avremo una base come questa in cui è possibile visualizzare i vo
 
 Zoomando, potrete vedere meglio i vostri GCP con le relative etichette.
 
+---------------------------------------------------
+
+
 Aggiungere progetti collaterali con le Linee di riferimento
------------------------------------------------------------------
+=============================================================
 Grazie al layer delle linee di riferimento è possibile aggiungere i progetti collaterali che possono avere interferenze col nostro scavo, o possono aiutarci al posizionamento. Nell’esempio sotto proposto è stato inserito il passaggio di una conduttura con relativo pozzetto di ispezione in base al progetto architettonico.
 
+---------------------------------------------------
+
+
 Aggiungere linee di sezione
-----------------------------------
+===============================
 Appoggiandosi al layer pyarchinit_punti, possiamo aggiungere i punti di sezione, inserendo nel campo def_punto il valore “Punto di sezione” e nel campo id_punto il valore relativo all’ID del punto, che nel nostro caso è il punto A che coincide col GCP M6.
 
 Dopo aver aggiunto anche il punto A1, andremo ad aggiungere nel layer pyarchinit_sezioni la linea di sezione opportunamente caratterizzata con una simbologia adeguata. Noterete che ora nei layer abbiamo due layer, uno per i GCP e uno per i punti di sezione: questi non sono altro che il medesimo layer, pyarchinit_punti, caricato 2 volte in 2 tempi differenti con query sulla def_punto come “GCP” e “Punto di sezione” e rinominati in legenda. In questo modo appariranno a video punti di controllo, punti di sezione e linee di sezione contemporaneamente, mantenendo ognuno il proprio stile ed etichetta di distinzione.
 
+---------------------------------------------------
+
+
 Georeferenziare i rilievi di scavo
------------------------------------------
+===================================
 In questa sezione vedremo brevemente come georeferenziare il vostro rilievo di scavo da un raster (per esempio il classico overlay su lucido). Le procedure per geoereferenziare un raster da dentro Qgis sono ampiamente spiegate nel manuale, ma per comodità dell’utente andremo a riproporre gli step base per poter iniziare a lavorare sul vostro scavo. Diamo quindi per scontato che la vostra documentazione sia stata raccolta sul cantiere secondo le modalità espresse al capitolo in 4.1.
 
 1 - Per prima cosa aprite la vostra base gis caricando i punti di aggancio a terra: GCP:
@@ -98,21 +125,31 @@ In questa sezione vedremo brevemente come georeferenziare il vostro rilievo di s
 
 5 - Potrete quindi sovrapporre tutti i layer vettoriali o raster utili per iniziare la digitalizzazione delle vostre US.
 
-Dalla stratificazione archeologica alla stratigrafia digitale: dati geografici
---------------------------------------------------------------------------------------------
+---------------------------------------------------
 
+
+Dalla stratificazione archeologica alla stratigrafia digitale: dati geografici
+=========================================================================================
 Nel corso di uno scavo archeologico la stratificazione archeologica individuata e divisa in Unità Stratigrafiche viene tradotta in stratigrafia, ovvero una serie di “regole e convenzioni” grafiche che permettono all’archeologo di rileggere a ritroso il percorso di scavo e trasformare il dato di raccolta osservato sul terreno in dati interpretativi. Esamineremo ora nel dettaglio come importare in un progetto di pyArchInit tutti quei dati di tipo geometrico utili a descrivire una US.
+
+
+---------------------------------------------------
+
+
 A proposito delle “regole e convenzioni” di rappresentazione delle US
----------------------------------------------------------------------------------------------
+==========================================================================
 L’archeologia, o meglio lo scavo archeologico nelle scienze archeologiche, sono una disciplina che per sua natura non può sfruttare il principio scientifico della riproducibilità in laboratorio di un esperimento: la stratificazione archeologica, una volta individuata, interpretata, tradotta in disegni, immagini e schede, e scavata, non può essere più indagata perchè distrutta. L’unico modo di rileggere i dati a ritroso è quello di avere una serie di regole e convenzioni per rappresentare la realtà che stiamo scavando. Come spesso ricordato dai manuali di archeologia, il momento della raccolta del dato sul campo è paradossalmente un momento di perdita delle informazioni; limiti delle US, composizione, spessori, eterogeneità delle matrici e degli inclusi, sono tutti fattori intepretativi altamente soggettivi, che difficilmente riescono ad essere gestiti secondo regole preimpostate come invece richiederebbe un metodo di documentazione, sia che questo sfrutti un supporto cartaceo che digitale.
 Detto questo però è da tener presente come l’archeologia si sia sviluppata con le sue metodologie in vari secoli, in cui il bisogno di rappresentare era ed è il medesimo, mentre gli strumenti per farlo si sono evoluti; semplici disegni a matita, acquerelli, dagherrotipi, negativi, diapositive fino alla fotografia digitale e i laser scanner e nel nostro caso GIS che si appoggia a database spaziali, possono far mutare le modalità di rappresentazione grafica. Il disegno archeologico viaggia spesso su due binari a volte paralleli a volte sovrapposti, che sono da un lato la rappresentazione dal vero che seguono regole più o meno codificate e accettate, dall’altro le convenzioni grafiche.
 Un bordo di spessore maggiore su una base cartacea rappresenta il limite di strato, mentre una linea a tratto punto alternati definisce i limiti, mente una linea tratteggiata indica la presenza di una Unità Stratigrafica Negativa. Quindi in una pianta di strato sarà regola fissa rappresentare una US nella sua interezza, mentre per convenzione si dovrà adottare una linea continua o tratteggiata a seconda della tipologia dell’US. Le superfici di strato inoltre possono avere una convenzione di rappresentazione a seconda della natura della matrice, argilla, sabbia, “terra”, carboni, ecc., che dovranno essere rappresentati sullo strato non tanto per segnalarne la posizione esatta ma per dare all’osservatore l’idea della situazione indagata sullo scavo. Altre volte invece, una caratterizzazione di uno strato può richiedere non una texture particolare, ma il disegno degli oggetti che la caratterizzano, collocati nella posizione in cui sono stati rinvenuti: prendiamo ad esempio un battuto in terra, sul quale si è crollato un solaio che ha dato vita ad un incendio: la texture di base del battuto rappresenterà l’argilla di cui è composta la pavimentazione, mentre potremo disegnare dei carboni sulla sua superficie nel punto in cui sono stati individuati al di sotto dell’US di combustione del solaio.
 In una base GIS, in cui il singolo oggetto grafico porta con sè i dati di raccolta conservati in un database, la resa grafica diventa fondamentale per una buona uscita all’esterno del sistema, oserei dire che le regole e le convenzioni grafiche diventano quasi una ridondanza, dal momento ogni geometrie avrà in sè tutte le informazioni raccolte sul campo come natura dell’US e inclusi. In questo sistema quindi l’informazione alfanumerica rimane saldamente ancorata al dato geografico, mettendo in secondo piano la serie di regole e convenzioni di rappresentazione: una US tagliata da un’altra US, potranno essere rappresentate nel medesimo modo, dal momento che nel poligono che rappresenta l’US negativa vi sarà sempre il dato che taglia l’US positiva, ecc. ecc.
 Quindi il primo concetto da capire per realizzare una buona base GIS è avere delle regole e convenzioni a monte utili e fondamentali nella fase di raccolta del dato con metodo cartaceo, che devono poi essere tradotte in dati geometrici e alfanumerici per poterli gestire e rappresentare non necessariamente per ogni progetto nel medesimo modo.
 
+---------------------------------------------------
+
+
 
 Digitalizzare i limiti di scavo
------------------------------------------
+================================
 I limiti di un’area di scavo possono essere definiti a priori dagli archeologi (a volte pessima idea!!!), seguire un particolare andamento della stratigrafia (per esempio un muro che divide in due la zona di indagine) oppure seguire limiti imposti dalla natura dell’indagine: sondaggio, trincea, scavo limitato per modivi edili.
 In ogni caso l’importante è che dentro ad ogni area ricadano le US nel loro complesso, in modo che la medesima US non appartenga a due aree contemporaneamte.
 
@@ -129,8 +166,12 @@ In ogni caso l’importante è che dentro ad ogni area ricadano le US nel loro c
 6 - Ecco come appare il nostro limite di scavo.
 
 
+---------------------------------------------------
+
+
+
 Digitalizzare una US
--------------------------------
+=======================
 Iniziamo ora a vedere passo passo come digitalizzare una Unità Stratigrafica.
 
 1 - Sinceriamoci di aver richiamato dal database (nel nostro caso Spatialite) i layer alfanumerici site_table e pyarchinit_thesaurus_sigle e il layer spaziale pyunitastratigrafiche.
@@ -230,9 +271,14 @@ Per prima cosa ripuliamo il “Costruttore di Interrogazioni” di pyunitastrati
 46 - Selezioniamo ora il layer pyarchinit_quote. Dopo aver modificato i widget di immissione dati come nel caso delle US, mettere in modifica il layer e con lo strumento punto aggiungere la quota.
 
 47 - Ecco come appare l’US ultimata la digitalizzazione e con una ipotetica sovrapposizione con un progetto edile.
-
+
+
+
+---------------------------------------------------
+
+
 Inserire le schede US
---------------------------------
+=========================
 
 1 - Tenendo sotto le vostre piante di scavo e i vostri appunti, iniziate ad inserire le schede US grazie all’apposita interfaccia. In questa fase saranno inseriti tutti i dati riferiti sostanzialmente ai dati di scavo: definizione stratigrafica, descrizione, rapporti stratigrafici, documentazione ecc., lasciando in dietro le interpretazioni come Periodizzazione e Strutture:
 
@@ -243,9 +289,12 @@ Inserire le schede US
 4 - E li abbiamo corretti nelle schede relative. Con il pulsante “vai all’US!” è molto comodo spostarsi attraverso la stratigrafia per verificare la presenza degli errori e ragionare su come correggerli.
 
 5 - Infine abbiamo generato un Matrix per verificare che non vi siano rapporti di ritorno che creino dei paradossi nella stratigrafia a causa di un errato inserimento dei rapporti.
-
+
+---------------------------------------------------
+
+
 Inserire le schede di Struttura
--------------------------------------------
+=================================
 
 1 - Nell’apposita interfaccia Struttura andiamo a realizzare la scheda relativa per raggruppare insieme le US appartenenti ad un’unica struttura. Nella fattispecie l’ED1, una casa medievale composta da almeno 2 fasi diverse di vita che andremo poi a dividere in 2 fasi distinte per poter visualizzare in maniera dinamica i nostri strati.
 
@@ -261,8 +310,11 @@ Visualizziamo infine il risultato sovrapponendo le ipotesi con le US rinvenute..
 5 - Per completare il lavoro possiamo selezionare a schermo le US della struttura dal layer delle view, caricarle dentro alla scheda US ed esportare il matrix della sola struttura.
 
 
+---------------------------------------------------
+
+
 Inserire le schede di Periodizzazione
--------------------------------------------------
+========================================
 Aprire la tabella della Periodizzazione e inserire i periodi che definiscono la scansione temporale.
 In questo esempio abbiamo 2 periodi, uno che rappresenta il medioevo e uno che rappresenta la fase di abbandono di epoca moderna. Infine la periodizzazione medievale è stata divisa in tre fasi: costruzione, ampliamenti, aggiunte.
 
@@ -278,7 +330,10 @@ In seguito possiamo tematizzare a piacimento il layer pyarchinit_us_view appena 
 
 Come abbiamo fatto per le strutture, anche per i periodi di scavo possiamo selezionare la query della scheda di periodizzazione visualizzata sul GIS e caricare le relative schede US; a questo punto esporteremo il matrix relativo alla periodizzazione scelta che risulterà diviso per periodi e fasi.
 
+---------------------------------------------------
+
+
 Output di stampa
--------------------------
+===================
 Alla fine possiamo esportare in formato .png o .pdf dal gestore di stampa, includendo tematismi, etichette o immagini esterne.
 In questo caso abbiamo esportato le piante di fase di una casa medievale con relativo matrix.
