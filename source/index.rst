@@ -6,7 +6,7 @@
 
 
 pyArchInit Documentazione
-======================================
+*************************
 
 .. toctree::
    :maxdepth: 3
@@ -23,7 +23,6 @@ pyArchInit Documentazione
    funzioni.rst
    come_documentare.rst
    moduli.rst
-   numfig_index.rst
    bibliography.rst
    lineee_guida.rst
 
