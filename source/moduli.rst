@@ -72,3 +72,15 @@ settings
 
    .. autoclass:: Settings
        :members:
+
+
+pyarchinit US-USM
+=======================================
+.. note::
+    mettere descrizione
+
+-----------------------------------------------------------------------
+
+.. automodule:: tabs.US_USM
+
+
