@@ -848,8 +848,8 @@ class pyarchinit_US(QDialog, MAIN_DIALOG_CLASS):
     def clean_comments(self,text_to_clean):
             clean_text = text_to_clean.split("##")[0].replace("\n", "")
             return clean_text
-
     def EM_extract_node_name(self, node_element):
+        # Initialize variables to store node information
         is_d4 = False
         is_d5 = False
         node_y_pos = None
@@ -860,47 +860,61 @@ class pyarchinit_US(QDialog, MAIN_DIALOG_CLASS):
         fillcolor = None
         noderel2 = ''
         attrib_ = None
+        # Iterate through all subnodes of the node element
         for subnode in node_element.findall('.//{http://graphml.graphdrawing.org/xmlns}data'):
             attrib = subnode.attrib
+            
+            # Check if the current subnode has key 'd4'
             if attrib == {'{http://www.w3.org/XML/1998/namespace}space': 'preserve', 'key': 'd4'}:
                 is_d4 = True
                 nodeurl = subnode.text
+                
+            # Check if the current subnode has key 'd5'
             if attrib == {'{http://www.w3.org/XML/1998/namespace}space': 'preserve', 'key': 'd5'}:
                 is_d5 = True
                 nodedescription = self.clean_comments(subnode.text)
+                
+            # Check if the current subnode has key 'd6'
             if attrib == {'key': 'd6'}:
+                # Iterate through all NodeLabel elements within the current subnode
                 for USname in subnode.findall('.//{http://www.yworks.com/xml/graphml}NodeLabel'):
                     nodename = self.check_if_empty(USname.text)
+                # Iterate through all Fill elements within the current subnode
                 for fill_color in subnode.findall('.//{http://www.yworks.com/xml/graphml}Fill'):
                     fillcolor = fill_color.attrib['color']
+                # Iterate through all Shape elements within the current subnode
                 for USshape in subnode.findall('.//{http://www.yworks.com/xml/graphml}Shape'):
                     nodeshape = USshape.attrib['type']
-                for geometry in subnode.findall(
-                        './{http://www.yworks.com/xml/graphml}ShapeNode/{http://www.yworks.com/xml/graphml}Geometry'):
-                    # for geometry in subnode.findall('./{http://www.yworks.com/xml/graphml}Geometry'):
+                # Iterate through all Geometry elements within the current subnode
+                for geometry in subnode.findall('./{http://www.yworks.com/xml/graphml}ShapeNode/{http://www.yworks.com/xml/graphml}Geometry'):
                     node_y_pos = geometry.attrib['y']
-
+                    
+        # If the node does not have key 'd4', set nodeurl to '--None--'
         if not is_d4:
             nodeurl = '--None--'
+        # If the node does not have key 'd5', set nodedescription to '--None--'
         if not is_d5:
             nodedescription = '--None--'
-
+            
+        # Return collected node information
         return nodename, nodedescription, nodeurl, nodeshape, node_y_pos, fillcolor
 
 
-    # This is a function that checks if a name is empty
-    # If it is empty, it returns "--None--"
-    # If it is not empty, it returns the name
+    
 
     def check_if_empty(self,name):
-            if name == None:
-                name = "--None--"
-            return name
+        '''This is a function that checks if a name is empty
+        If it is empty, it returns "--None--"
+        If it is not empty, it returns the name'''
+        if name == None:
+            name = "--None--"
+        return name
 
 
-    ###Apri file graphml
-    # This is a function that is called when a button is pressed
+    
+    
     def on_pushButton_graphml2csv_pressed(self):
+        # This is a function that is called when a button is pressed
         # This is a QGIS setting
         s = QgsSettings()
         # This is a path to a folder
@@ -960,83 +974,122 @@ class pyarchinit_US(QDialog, MAIN_DIALOG_CLASS):
             # print(EM_extract_node_name(i)[6])
         csvfile.close()
 
-    # This is a function that is called when a button is pressed.
-    # It opens a file dialog and then reads the file.
-    # It then writes the file to a new file.
-    # It then reads the new file and inserts the data into a database.
+    
 
     def on_pushButton_csv2us_pressed(self):
-        #s = QgsSettings()
-        sqlite_DB_path = '{}{}{}'.format(self.HOME, os.sep,
-                                         "pyarchinit_DB_folder")
+        """
+        This function is responsible for importing data from a CSV file into the 'us_table' of the SQLite database.
+        When the 'csv2us' button is pressed, the user is prompted to select a CSV file with the "Set file name" dialog.
+        The selected file is then opened and read, with the data from the file being inserted into the 'us_table' of the SQLite database.
+        The function starts by defining the path of the SQLite database, using the self.HOME variable and os.sep.
+        Then it opens a QFileDialog to select a CSV file and assigns the file path to the variable 'filename'.
+        It then creates an instance of the 'Connection' class and uses it to get the name of the SQLite database.
+        It creates a connection to the SQLite database using the connect method and assigns it to the 'con' variable.
+        A cursor object is created using the 'con.cursor()' method and assigned to the 'cur' variable.
+        It opens the selected CSV file in read mode, and uses the 'csv.DictReader' class to read the file and convert it into a dictionary object.
+        It then creates a list of tuples, each containing the values for the 'site', 'area', 'us', 'unit_type' and 'i_stratigrafica' columns.
+        It then uses the 'executemany' method of the cursor to insert the data from the list of tuples into the 'us_table' of the SQLite database.
+        The 'commit' method is used to save the changes to the database.
+        In case of any AssertionError, a warning message is displayed using the QMessageBox.warning method.
+        Otherwise, a message saying 'done' is displayed using the QMessageBox.information method.
+        Finally, the connection to the database is closed using the 'con.close()' method.
+        """
+        sqlite_DB_path = '{}{}{}'.format(self.HOME, os.sep, "pyarchinit_DB_folder")
         dbpath = QFileDialog.getOpenFileName(
             self,
             "Set file name",
             '',
             " csv pyarchinit us_table (*.csv)"
         )[0]
-        filename = dbpath  # .split("/")[-1]
-        s = sqlite_DB_path + '/export_csv2us.csv'
+        filename = dbpath
         try:
             conn = Connection()
-            conn_str = conn.conn_str()
             conn_sqlite = conn.databasename()
-
-
-
             con = sq.connect(sqlite_DB_path + os.sep + conn_sqlite["db_name"])
             cur = con.cursor()
-
-
-            with open(filename, 'r') as in_file, open(s, 'r+') as out_file:
-                seen = set()  # set for fast O(1) amortized lookup
-                for line in in_file:
-                    if line in seen:
-                        continue  # skip duplicate
-
-                    seen.add(line)
-                    out_file.write(line)
-                dr = csv.DictReader(out_file)  # comma is default delimiter
+            with open(filename, 'r') as in_file:
+                dr = csv.DictReader(in_file)  # comma is default delimiter
                 to_db = [(i['site'], i['area'], i['us'], i['unit_type'], i['i_stratigrafica']) for i in dr]
-
-            cur.executemany(
-                "INSERT INTO us_table (sito, area, us, unita_tipo,d_interpretativa ) VALUES (?, ?,?,?,?);",
-                to_db)
-            con.commit()
-            con.close()
-
-
+                cur.executemany("INSERT INTO us_table (sito, area, us, unita_tipo,d_interpretativa ) VALUES (?, ?,?,?,?);", to_db)
+                con.commit()
         except AssertionError as e:
             QMessageBox.warning(self, 'error', str(e), QMessageBox.Ok)
         else:
             QMessageBox.information(self, 'error', 'done', QMessageBox.Ok)
-        self.pushButton_view_all.click()
+        finally:
+            con.close()
+        sqlite_DB_path = '{}{}{}'.format(self.HOME, os.sep, "pyarchinit_DB_folder")
+        dbpath = QFileDialog.getOpenFileName(
+            self,
+            "Set file name",
+            '',
+            " csv pyarchinit us_table (*.csv)"
+        )[0]
+        filename = dbpath
+        try:
+            conn = Connection()
+            conn_sqlite = conn.databasename()
+            con = sq.connect(sqlite_DB_path + os.sep + conn_sqlite["db_name"])
+            cur = con.cursor()
+            with open(filename, 'r') as in_file:
+                dr = csv.DictReader(in_file)  # comma is default delimiter
+                to_db = [(i['site'], i['area'], i['us'], i['unit_type'], i['i_stratigrafica']) for i in dr]
+                cur.executemany("INSERT INTO us_table (sito, area, us, unita_tipo,d_interpretativa ) VALUES (?, ?,?,?,?);", to_db)
+                con.commit()
+        except AssertionError as e:
+            QMessageBox.warning(self, 'error', str(e), QMessageBox.Ok)
+        else:
+            QMessageBox.information(self, 'error', 'done', QMessageBox.Ok)
+        finally:
+            con.close()
+    
 
     def on_pushButton_fix_pressed(self):
+        """ This function is called when the user press the fix button.
+        It will first get the current text in comboBox_sito and comboBox_area widgets,
+        and create a search_dict dictionary with 'sito': sito and 'area': area as key-value pairs.
+        Then it queries the database with the search_dict and the MAPPER_TABLE_CLASS and assigns the result to the variable "records"
+        After that, it iterates over the range of the length of "records" and 
+        sets the checkBox_validation_rapp to be checked, selects each row of the tableWidget_rapporti,
+        calls the check_listoflist() function, sets the progressBar_3 to a value based on the current row number and total number of rows,
+        and updates the GUI. Finally, it resets the progressBar_3 to 0.
+        """
         sito = "'"+self.comboBox_sito.currentText()+"'"
         area = "'"+self.comboBox_area.currentText()+"'"
         search_dict = {'sito': sito, 'area': area}
-        records = self.DB_MANAGER.query_bool(search_dict,
-                                             self.MAPPER_TABLE_CLASS)
-                                          
-        #self.on_pushButton_next_rec_pressed()
+        records = self.DB_MANAGER.query_bool(search_dict, self.MAPPER_TABLE_CLASS)                                          
+        
+        # Iterate over the range of the length of "records"
         for rec in range(len(records)):
+            # set the checkBox_validation_rapp to be checked
             self.checkBox_validation_rapp.setChecked(True)
-            #self.on_pushButton_next_rec_pressed()
+                
+            # Iterate over the number of rows in the tableWidget_rapporti
             for row in range(self.tableWidget_rapporti.rowCount()):
-                table_item = self.tableWidget_rapporti.item(row, 1)
-                # row_data = table_item.data(QtCore.Qt.UserRole)
-                # row_id = row_data
+                # select the row
                 self.tableWidget_rapporti.selectRow(row)  
-                
+                    
+            # call the check_listoflist() function
             self.check_listoflist()
-            #self.on_pushButton_next_rec_pressed()
-                
+            
+                    
+            # calculate a value as the current row number divided by the total number of rows in the tableWidget_rapporti times 100 
+            # and set the value of the progressBar_3 to this value
             value = (float(row)/float(self.tableWidget_rapporti.rowCount()))*100
             self.progressBar_3.setValue(value)
+            # call QApplication.processEvents() to update the GUI
             QApplication.processEvents()
-        self.progressBar_3.reset()       
+        # reset the value of the progressBar_3 to 0
+        self.progressBar_3.reset()     
+    
+    
     def unit_type_select(self):
+        """
+        This function creates a dialog box for the user to select a unit type. The available unit types are determined by the value of the variable 'L', which is either 'it' or 'en'.
+        If 'L' is 'it', the available unit types are ('US','USM','USVA','USVB','USVC','USD','CON','VSF','SF','SUS','Combinar','Extractor','DOC','property').
+        If 'L' is 'en', the available unit types are ('SU','WSU','USVA','USVB','USVC','USD','CON','VSF','SF','SUS','Combinar','Extractor','DOC','property').
+        The user's selection is returned as a string.
+        """
         try: 
             dialog = QInputDialog()
             dialog.resize(QtCore.QSize(200, 100))
@@ -1051,48 +1104,47 @@ class pyarchinit_US(QDialog, MAIN_DIALOG_CLASS):
             print(str(e))
     
     def search_rapp(self):
-        # Clear current selection.
-        #self.tableWidget_rapporti.setCurrentItem(None)
-
+        '''
+        The function search_rapp is used to search for a specific value in the tableWidget_rapporti.
+        First, it clears the current selection in the tableWidget_rapporti.
+        It checks if the input variable 's' is empty, if it is then the function exits without searching.
+        Then it uses the findItems method to find all items in the tableWidget_rapporti that match the string '1' and stores the matching items in the list matching_items.
+        If there are any matching items, it sets the first item in the matching_items list as the current item in the tableWidget_rapporti.
+        '''
         if not s:
             # Empty string, don't search.
             return
-
         matching_items = self.tableWidget_rapporti.findItems('1',MatchContains)
-
-
-        # This is a comment
-        # This is another comment
         if matching_items:
             # We have found something.
             item = matching_items[0]  # Take the first.
             self.tableWidget_rapporti.setCurrentItem(item)
 
-
     def check_listoflist(self):
         if self.checkBox_validation_rapp.isChecked():
             try:
                 
-                
+                # Get the table name and the selected row                
                 table_name = "self.tableWidget_rapporti"
                 rowSelected_cmd = ("%s.selectedItems()") % (table_name)
                 rowSelected = eval(rowSelected_cmd)
                 rowIndex = (rowSelected[0].row())
+                
+                # Get the site, area, unit, and US from the current selection
                 sito = str(self.comboBox_sito.currentText())
                 area = str(self.comboBox_area.currentText())
                 us_current=str(self.lineEdit_us.text())
                 print(us_current)
                 unit = str(self.comboBox_unita_tipo.currentText())
                 us_item = self.tableWidget_rapporti.item(rowIndex, 1)
-                us = str(us_item.text())
-                #print(us)
+                us = str(us_item.text())        
                 rapp_item = self.tableWidget_rapporti.item(rowIndex,0)
                 rapp = str(rapp_item.text())
-
                 
-                
+                # Save the report
                 self.save_rapp()
                 
+                # Check the type of report and change the text accordingly
                 if rapp =='Riempito da':
                     rapp='Riempie'             
                 elif rapp =='Tagliato da':
@@ -1124,8 +1176,7 @@ class pyarchinit_US(QDialog, MAIN_DIALOG_CLASS):
                 elif rapp =='Covers':
                     rapp='Covered by' 
                 elif rapp =='Supports':
-                    rapp='Abuts'    
-                
+                    rapp='Abuts'                
                 elif rapp =='>>':
                     rapp='<<'     
                 elif rapp =='<<':
@@ -1134,10 +1185,13 @@ class pyarchinit_US(QDialog, MAIN_DIALOG_CLASS):
                     rapp='<'     
                 elif rapp =='<':
                     rapp='>'
+                    
+                # Create a search dictionary to query the database
                 search_dict = {'sito': "'" + str(sito) + "'",
                                'area': "'" + str(area) + "'",
                                'us': us}
                 u = Utility()
+                
                 search_dict = u.remove_empty_items_fr_dict(search_dict)
                 res = self.DB_MANAGER.query_bool(search_dict, self.MAPPER_TABLE_CLASS)
                 
@@ -1207,6 +1261,10 @@ class pyarchinit_US(QDialog, MAIN_DIALOG_CLASS):
     # If it is not empty, it shows the checkBox.
 
     def check_v(self):
+        '''This is a function that checks if a comboBox is empty or not.
+		If it is empty, it hides a checkBox.
+		If it is not empty, it shows the checkBox.'''
+        
         if self.comboBox_per_iniz.currentText() =='':
             self.checkBox_validate.setHidden(True)
         else:
