@@ -49,74 +49,75 @@
 
     # This is a function that cleans comments from a text file
     # It takes a string as an argument and returns a string
+class pyarchinit_US():
 
-def clean_comments(self,text_to_clean):
-        clean_text = text_to_clean.split("##")[0].replace("\n", "")
-        return clean_text
-def EM_extract_node_name(self, node_element):
-    '''Initialize variables to store node information'''
-
-
-def check_if_empty(self,name):
-    '''This is a function that checks if a name is empty
-    If it is empty, it returns "--None--"
-    If it is not empty, it returns the name'''
+    def clean_comments(self,text_to_clean):
+            clean_text = text_to_clean.split("##")[0].replace("\n", "")
+            return clean_text
+    def EM_extract_node_name(self, node_element):
+        '''Initialize variables to store node information'''
 
 
+    def check_if_empty(self,name):
+        '''This is a function that checks if a name is empty
+        If it is empty, it returns "--None--"
+        If it is not empty, it returns the name'''
 
 
-def on_pushButton_graphml2csv_pressed(self):
-    '''This is a function that is called when a button is pressed
-    This is a QGIS setting'''
-
-def on_pushButton_csv2us_pressed(self):
-    """
-    This function is responsible for importing data from a CSV file into the 'us_table' of the SQLite database.
-    When the 'csv2us' button is pressed, the user is prompted to select a CSV file with the "Set file name" dialog.
-    The selected file is then opened and read, with the data from the file being inserted into the 'us_table' of the SQLite database.
-    The function starts by defining the path of the SQLite database, using the self.HOME variable and os.sep.
-    Then it opens a QFileDialog to select a CSV file and assigns the file path to the variable 'filename'.
-    It then creates an instance of the 'Connection' class and uses it to get the name of the SQLite database.
-    It creates a connection to the SQLite database using the connect method and assigns it to the 'con' variable.
-    A cursor object is created using the 'con.cursor()' method and assigned to the 'cur' variable.
-    It opens the selected CSV file in read mode, and uses the 'csv.DictReader' class to read the file and convert it into a dictionary object.
-    It then creates a list of tuples, each containing the values for the 'site', 'area', 'us', 'unit_type' and 'i_stratigrafica' columns.
-    It then uses the 'executemany' method of the cursor to insert the data from the list of tuples into the 'us_table' of the SQLite database.
-    The 'commit' method is used to save the changes to the database.
-    In case of any AssertionError, a warning message is displayed using the QMessageBox.warning method.
-    Otherwise, a message saying 'done' is displayed using the QMessageBox.information method.
-    Finally, the connection to the database is closed using the 'con.close()' method.
-    """
-
-def on_pushButton_fix_pressed(self):
-    """ This function is called when the user press the fix button.
-    It will first get the current text in comboBox_sito and comboBox_area widgets,
-    and create a search_dict dictionary with 'sito': sito and 'area': area as key-value pairs.
-    Then it queries the database with the search_dict and the MAPPER_TABLE_CLASS and assigns the result to the variable "records"
-    After that, it iterates over the range of the length of "records" and 
-    sets the checkBox_validation_rapp to be checked, selects each row of the tableWidget_rapporti,
-    calls the check_listoflist() function, sets the progressBar_3 to a value based on the current row number and total number of rows,
-    and updates the GUI. Finally, it resets the progressBar_3 to 0.
-    """
 
 
-def unit_type_select(self):
-    """
-    This function creates a dialog box for the user to select a unit type. The available unit types are determined by the value of the variable 'L', which is either 'it' or 'en'.
-    If 'L' is 'it', the available unit types are ('US','USM','USVA','USVB','USVC','USD','CON','VSF','SF','SUS','Combinar','Extractor','DOC','property').
-    If 'L' is 'en', the available unit types are ('SU','WSU','USVA','USVB','USVC','USD','CON','VSF','SF','SUS','Combinar','Extractor','DOC','property').
-    The user's selection is returned as a string.
-    """
+    def on_pushButton_graphml2csv_pressed(self):
+        '''This is a function that is called when a button is pressed
+        This is a QGIS setting'''
+
+    def on_pushButton_csv2us_pressed(self):
+        """
+        This function is responsible for importing data from a CSV file into the 'us_table' of the SQLite database.
+        When the 'csv2us' button is pressed, the user is prompted to select a CSV file with the "Set file name" dialog.
+        The selected file is then opened and read, with the data from the file being inserted into the 'us_table' of the SQLite database.
+        The function starts by defining the path of the SQLite database, using the self.HOME variable and os.sep.
+        Then it opens a QFileDialog to select a CSV file and assigns the file path to the variable 'filename'.
+        It then creates an instance of the 'Connection' class and uses it to get the name of the SQLite database.
+        It creates a connection to the SQLite database using the connect method and assigns it to the 'con' variable.
+        A cursor object is created using the 'con.cursor()' method and assigned to the 'cur' variable.
+        It opens the selected CSV file in read mode, and uses the 'csv.DictReader' class to read the file and convert it into a dictionary object.
+        It then creates a list of tuples, each containing the values for the 'site', 'area', 'us', 'unit_type' and 'i_stratigrafica' columns.
+        It then uses the 'executemany' method of the cursor to insert the data from the list of tuples into the 'us_table' of the SQLite database.
+        The 'commit' method is used to save the changes to the database.
+        In case of any AssertionError, a warning message is displayed using the QMessageBox.warning method.
+        Otherwise, a message saying 'done' is displayed using the QMessageBox.information method.
+        Finally, the connection to the database is closed using the 'con.close()' method.
+        """
+
+    def on_pushButton_fix_pressed(self):
+        """ This function is called when the user press the fix button.
+        It will first get the current text in comboBox_sito and comboBox_area widgets,
+        and create a search_dict dictionary with 'sito': sito and 'area': area as key-value pairs.
+        Then it queries the database with the search_dict and the MAPPER_TABLE_CLASS and assigns the result to the variable "records"
+        After that, it iterates over the range of the length of "records" and 
+        sets the checkBox_validation_rapp to be checked, selects each row of the tableWidget_rapporti,
+        calls the check_listoflist() function, sets the progressBar_3 to a value based on the current row number and total number of rows,
+        and updates the GUI. Finally, it resets the progressBar_3 to 0.
+        """
 
 
-def search_rapp(self):
-    '''
-    The function search_rapp is used to search for a specific value in the tableWidget_rapporti.
-    First, it clears the current selection in the tableWidget_rapporti.
-    It checks if the input variable 's' is empty, if it is then the function exits without searching.
-    Then it uses the findItems method to find all items in the tableWidget_rapporti that match the string '1' and stores the matching items in the list matching_items.
-    If there are any matching items, it sets the first item in the matching_items list as the current item in the tableWidget_rapporti.
-    '''
+    def unit_type_select(self):
+        """
+        This function creates a dialog box for the user to select a unit type. The available unit types are determined by the value of the variable 'L', which is either 'it' or 'en'.
+        If 'L' is 'it', the available unit types are ('US','USM','USVA','USVB','USVC','USD','CON','VSF','SF','SUS','Combinar','Extractor','DOC','property').
+        If 'L' is 'en', the available unit types are ('SU','WSU','USVA','USVB','USVC','USD','CON','VSF','SF','SUS','Combinar','Extractor','DOC','property').
+        The user's selection is returned as a string.
+        """
+
+
+    def search_rapp(self):
+        '''
+        The function search_rapp is used to search for a specific value in the tableWidget_rapporti.
+        First, it clears the current selection in the tableWidget_rapporti.
+        It checks if the input variable 's' is empty, if it is then the function exits without searching.
+        Then it uses the findItems method to find all items in the tableWidget_rapporti that match the string '1' and stores the matching items in the list matching_items.
+        If there are any matching items, it sets the first item in the matching_items list as the current item in the tableWidget_rapporti.
+        '''
 
 
             # us =str(self.lineEdit_us.text())

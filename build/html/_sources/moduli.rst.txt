@@ -83,4 +83,5 @@ pyarchinit US-USM
 
 .. automodule:: tabs.US_USM
 
-
+    .. autoclass:: pyarchinit_US
+       :members:
