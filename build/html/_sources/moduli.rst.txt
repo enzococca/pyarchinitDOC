@@ -73,6 +73,18 @@ settings
    .. autoclass:: Settings
        :members:
 
+pyarchinit_media_utility
+=======================================
+.. note::
+    Questa classe presenta due funzioni di settaggio
+
+------------------------------------------------------------------
+
+.. automodule:: modules.utility.pyarchinit_media_utility
+
+   .. autoclass:: Media_utility
+       :members:
+
 
 pyarchinit US-USM
 =======================================

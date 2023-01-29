@@ -55,7 +55,26 @@ MAIN_DIALOG_CLASS, _ = loadUiType(os.path.join(os.path.dirname(__file__), os.par
 
 
 class pyarchinit_Site(QDialog, MAIN_DIALOG_CLASS):
-    """This class provides to manage the Site Sheet"""
+    """This is a python class that is used to manage the Site Sheet. It inherits from the QDialog and MAIN_DIALOG_CLASS classes. The class has several class-level variables that are used to store information about the site sheet.
+
+        The first thing the class does is determine the user's locale by looking at the first 2 characters of the "locale/userLocale" value in QgsSettings(). Depending on the locale, the MSG_BOX_TITLE is set to a different string.
+
+        The class also defines several other variables such as:
+
+        DATA_LIST, DATA_LIST_REC_CORR, and DATA_LIST_REC_TEMP: used to store data for the site sheet
+        REC_CORR and REC_TOT: used to keep track of the current and total records
+        SITO: an instance of the pyArchInitDialog_Config class
+        STATUS_ITEMS: a dictionary that maps status codes to messages, the dictionary is different depending on the user's locale
+        BROWSE_STATUS: the current status of the sheet
+        SORT_MODE and SORTED_ITEMS: used to keep track of the sorting status of the sheet
+        UTILITY: an instance of the Utility class
+        DB_MANAGER: a variable used to store the database manager
+        TABLE_NAME: the name of the table in the database that stores the site sheet data
+        MAPPER_TABLE_CLASS: a string used to store the class name of the table in the database
+        NOME_SCHEDA: the name of the sheet, translated based on the user's locale
+        ID_TABLE: the name of the primary key field in the database table
+        CONVERSION_DICT: a dictionary that maps field names in the sheet to their corresponding field names in the database table
+        SORT_ITEMS: a list of fields that the sheet can be sorted by."""
 
     L=QgsSettings().value("locale/userLocale")[0:2]
     if L=='it':
