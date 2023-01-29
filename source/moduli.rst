@@ -76,7 +76,9 @@ settings
 pyarchinit Medi Utility
 =======================================
 .. note::
-    Questa classe presenta due funzioni di settaggio
+        Media_utility class is used for creating thumbnails of images.
+        It utilizes the Image module from the Python Imaging Library (PIL)
+        to open, resize, and save the image.
 
 ------------------------------------------------------------------
 

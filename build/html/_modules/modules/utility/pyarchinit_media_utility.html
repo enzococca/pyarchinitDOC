@@ -89,20 +89,36 @@
 <span class="kn">from</span> <span class="nn">builtins</span> <span class="kn">import</span> <span class="nb">str</span>
 <span class="kn">from</span> <span class="nn">qgis.PyQt.QtWidgets</span> <span class="kn">import</span> <span class="n">QMessageBox</span>
 <span class="kn">from</span> <span class="nn">..db.pyarchinit_conn_strings</span> <span class="kn">import</span> <span class="o">*</span>
+
 <div class="viewcode-block" id="Media_utility"><a class="viewcode-back" href="../../../moduli.html#modules.utility.pyarchinit_media_utility.Media_utility">[documenti]</a><span class="k">class</span> <span class="nc">Media_utility</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">    :noindex:</span>
-<span class="sd">    Media_utility</span>
+<span class="sd">        # import the Image module</span>
+<span class="sd">        import Image</span>
 
-<span class="sd">    &gt;&gt; import Image# importo il modulo</span>
-<span class="sd">    &gt;&gt; image_path = C:\test\snake.png # assegno l&#39; immagine alla variabile tramite raw string (r&quot;path\files&quot;)</span>
-<span class="sd">    &gt;&gt; image = Image.open(image_path)    # apro l&#39;immagine</span>
-<span class="sd">    &gt;&gt; width, height = (150, 110)        # ridimensiono l&#39;immagine l&#39; originale era 300x350px</span>
-<span class="sd">    &gt;&gt; size = (width, height)            # assegno grandezza e altezza</span>
-<span class="sd">    &gt;&gt; new_image_thumbnail = C:\test\snake_small.png # che sia pitone grande o  pitone piccolo l&#39; importante che pitone è</span>
-<span class="sd">    &gt;&gt; image.thumbnail(size, Image.ANTIALIAS) # creo la thumbnail vera e propria con antialias ma potevamo anche bicubic bilinear ecc</span>
-<span class="sd">    &gt;&gt; image.save(new_image_thumbnail)# salvo la nuova immagine &quot;thumbnail&quot;</span>
+<span class="sd">        # assign the image path to a variable using a raw string</span>
+<span class="sd">        image_path = r&quot;C:\test\snake.png&quot;</span>
+
+<span class="sd">        # open the image</span>
+<span class="sd">        image = Image.open(image_path)</span>
+
+<span class="sd">        # resize the image to 150x110</span>
+<span class="sd">        width, height = (150, 110)</span>
+
+<span class="sd">        # assign width and height to size variable</span>
+<span class="sd">        size = (width, height)</span>
+
+<span class="sd">        # create a new image path for the thumbnail</span>
+<span class="sd">        new_image_thumbnail = r&quot;C:\test\snake_small.png&quot;</span>
+
+<span class="sd">        # create the thumbnail using the Image.thumbnail method with the Image.ANTIALIAS filter</span>
+<span class="sd">        image.thumbnail(size, Image.ANTIALIAS)</span>
+
+<span class="sd">        # save the new thumbnail image</span>
+<span class="sd">        image.save(new_image_thumbnail)</span>
+
+<span class="sd">        #The class uses the Image module from the Python Imaging Library(PIL) to open, resize and save the image, the class uses the method thumbnail to create the thumbnail and it uses the Image.ANTIALIAS filter to smooth the image. The class also uses the method save to save the new thumbnail image.</span>
+
 
 <span class="sd">    &quot;&quot;&quot;</span>
 

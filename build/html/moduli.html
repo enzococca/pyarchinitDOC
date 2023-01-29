@@ -60,7 +60,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#pyarchinit-utility">9.2. pyarchinit_utility</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#pyarchinit-installation-folder">9.3. pyarchinit installation folder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#settings">9.4. settings</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pyarchinit-media-utility">9.5. pyarchinit_media_utility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyarchinit-medi-utility">9.5. pyarchinit Medi Utility</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#pyarchinit-us-usm">9.6. pyarchinit US-USM</a></li>
 </ul>
 </li>
@@ -339,34 +339,35 @@ conf.write(b»”,”LOGO” : “insert path for the image logo”}»)</p>
 </dd></dl>
 
 </section>
-<section id="pyarchinit-media-utility">
-<h2><span class="section-number">9.5. </span>pyarchinit_media_utility<a class="headerlink" href="#pyarchinit-media-utility" title="Link a questa intestazione"></a></h2>
+<section id="pyarchinit-medi-utility">
+<h2><span class="section-number">9.5. </span>pyarchinit Medi Utility<a class="headerlink" href="#pyarchinit-medi-utility" title="Link a questa intestazione"></a></h2>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
-<p>Questa classe presenta due funzioni di settaggio</p>
+<p>Media_utility class is used for creating thumbnails of images.
+It utilizes the Image module from the Python Imaging Library (PIL)
+to open, resize, and save the image.</p>
 </div>
 <hr class="docutils" />
 <span class="target" id="module-modules.utility.pyarchinit_media_utility"></span><dl class="py class">
 <dt class="sig sig-object py" id="modules.utility.pyarchinit_media_utility.Media_utility">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Media_utility</span></span><a class="reference internal" href="_modules/modules/utility/pyarchinit_media_utility.html#Media_utility"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.utility.pyarchinit_media_utility.Media_utility" title="Link a questa definizione"></a></dt>
-<dd><blockquote>
-<div><dl class="field-list simple">
-<dt class="field-odd">noindex</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<p>Media_utility</p>
-<p>&gt;&gt; import Image# importo il modulo
-&gt;&gt; image_path = C:  estsnake.png # assegno l” immagine alla variabile tramite raw string (r»path</p>
-</div></blockquote>
-<dl class="simple">
-<dt>iles»)</dt><dd><p>&gt;&gt; image = Image.open(image_path)    # apro l’immagine
-&gt;&gt; width, height = (150, 110)        # ridimensiono l’immagine l” originale era 300x350px
-&gt;&gt; size = (width, height)            # assegno grandezza e altezza
-&gt;&gt; new_image_thumbnail = C: estsnake_small.png # che sia pitone grande o  pitone piccolo l” importante che pitone è
-&gt;&gt; image.thumbnail(size, Image.ANTIALIAS) # creo la thumbnail vera e propria con antialias ma potevamo anche bicubic bilinear ecc
-&gt;&gt; image.save(new_image_thumbnail)# salvo la nuova immagine «thumbnail»</p>
-</dd>
-</dl>
+<dd><p># import the Image module
+import Image</p>
+<p># assign the image path to a variable using a raw string
+image_path = r»C:       estsnake.png»</p>
+<p># open the image
+image = Image.open(image_path)</p>
+<p># resize the image to 150x110
+width, height = (150, 110)</p>
+<p># assign width and height to size variable
+size = (width, height)</p>
+<p># create a new image path for the thumbnail
+new_image_thumbnail = r»C:      estsnake_small.png»</p>
+<p># create the thumbnail using the Image.thumbnail method with the Image.ANTIALIAS filter
+image.thumbnail(size, Image.ANTIALIAS)</p>
+<p># save the new thumbnail image
+image.save(new_image_thumbnail)</p>
+<p>#The class uses the Image module from the Python Imaging Library(PIL) to open, resize and save the image, the class uses the method thumbnail to create the thumbnail and it uses the Image.ANTIALIAS filter to smooth the image. The class also uses the method save to save the new thumbnail image.</p>
 </dd></dl>
 
 </section>

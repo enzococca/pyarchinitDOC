@@ -5,20 +5,36 @@ from builtins import object
 from builtins import str
 from qgis.PyQt.QtWidgets import QMessageBox
 from ..db.pyarchinit_conn_strings import *
+
 class Media_utility(object):
     """
 
-    :noindex:
-    Media_utility
+        # import the Image module
+        import Image
 
-    >> import Image# importo il modulo
-    >> image_path = C:\test\snake.png # assegno l' immagine alla variabile tramite raw string (r"path\files")
-    >> image = Image.open(image_path)    # apro l'immagine
-    >> width, height = (150, 110)        # ridimensiono l'immagine l' originale era 300x350px
-    >> size = (width, height)            # assegno grandezza e altezza
-    >> new_image_thumbnail = C:\test\snake_small.png # che sia pitone grande o  pitone piccolo l' importante che pitone è
-    >> image.thumbnail(size, Image.ANTIALIAS) # creo la thumbnail vera e propria con antialias ma potevamo anche bicubic bilinear ecc
-    >> image.save(new_image_thumbnail)# salvo la nuova immagine "thumbnail"
+        # assign the image path to a variable using a raw string
+        image_path = r"C:\test\snake.png"
+
+        # open the image
+        image = Image.open(image_path)
+
+        # resize the image to 150x110
+        width, height = (150, 110)
+
+        # assign width and height to size variable
+        size = (width, height)
+
+        # create a new image path for the thumbnail
+        new_image_thumbnail = r"C:\test\snake_small.png"
+
+        # create the thumbnail using the Image.thumbnail method with the Image.ANTIALIAS filter
+        image.thumbnail(size, Image.ANTIALIAS)
+
+        # save the new thumbnail image
+        image.save(new_image_thumbnail)
+
+        #The class uses the Image module from the Python Imaging Library(PIL) to open, resize and save the image, the class uses the method thumbnail to create the thumbnail and it uses the Image.ANTIALIAS filter to smooth the image. The class also uses the method save to save the new thumbnail image.
+
 
     """
 
