@@ -73,7 +73,7 @@ settings
    .. autoclass:: Settings
        :members:
 
-pyarchinit_media_utility
+pyarchinit Medi Utility
 =======================================
 .. note::
     Questa classe presenta due funzioni di settaggio
