@@ -6,6 +6,9 @@
   <title>modules.db.pyarchinit_db_manager &mdash; pyArchInit 4.0 4 documentazione</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/style.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/style.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -13,8 +16,11 @@
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
         <script src="../../../_static/translations.js"></script>
+        <script src="../../../_static/design-tabs.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="author" title="A proposito di questi documenti" href="../../../about.html" />
     <link rel="index" title="Indice" href="../../../genindex.html" />
@@ -37,17 +43,19 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Menu di navigazione">
-              <p class="caption" role="heading"><span class="caption-text">Contenuti:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../about.html">About</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../prerequisities.html">Prerequisiti</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../novit%C3%A0.html">Novità</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../01_installazione.html">1.Installazione</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../02_il_plugin.html">2 Il Plugin</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../03_le_schede.html">3.Le schede</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../04_funzioni.html">4.Funzioni</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../05_esempi_di_applicazione.html">5.Esempi di Applicazione</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../06_moduli.html">6.Moduli pyArchInit: Classi e Funzioni</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">1. About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../prerequisities.html">2. Prerequisiti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../novit%C3%A0.html">3. Novità</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installazione.html">4. Installazione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../il_plugin.html">5. Il Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../le_schede.html">6. Le schede</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../funzioni.html">7. Funzioni</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../come_documentare.html">8. Come documentare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../moduli.html">9. Moduli pyArchInit: Classi e Funzioni</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bibliography.html">10. Bibliografia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../lineee_guida.html">11. Linee guida</a></li>
 </ul>
 
         </div>
@@ -63,9 +71,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Naviga tra le pagine">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../../index.html">Codice del modulo</a> &raquo;</li>
-      <li>modules.db.pyarchinit_db_manager</li>
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Codice del modulo</a></li>
+      <li class="breadcrumb-item active">modules.db.pyarchinit_db_manager</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -94,9 +102,7 @@
 <span class="kn">from</span> <span class="nn">sqlalchemy.engine</span> <span class="kn">import</span> <span class="n">create_engine</span>
 <span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">sessionmaker</span>
 <span class="kn">from</span> <span class="nn">sqlalchemy.sql.schema</span> <span class="kn">import</span> <span class="n">MetaData</span>
-<span class="kn">from</span> <span class="nn">qgis.core</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">qgis.utils</span> <span class="kn">import</span> <span class="n">iface</span>
-<span class="kn">from</span> <span class="nn">qgis.PyQt.QtWidgets</span> <span class="kn">import</span> <span class="n">QMessageBox</span>
+
 <span class="kn">from</span> <span class="nn">modules.utility.pyarchinit_OS_utility</span> <span class="kn">import</span> <span class="n">Pyarchinit_OS_Utility</span>
 <span class="kn">from</span> <span class="nn">sqlalchemy.dialects</span> <span class="kn">import</span> <span class="n">postgresql</span>
 <span class="kn">from</span> <span class="nn">sqlalchemy.dialects.postgresql</span> <span class="kn">import</span> <span class="n">insert</span>
@@ -115,7 +121,7 @@
 
         
 
-<div class="viewcode-block" id="Pyarchinit_db_management"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management">[documenti]</a><span class="k">class</span> <span class="nc">Pyarchinit_db_management</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="Pyarchinit_db_management"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management">[documenti]</a><span class="k">class</span> <span class="nc">Pyarchinit_db_management</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="n">metadata</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="n">engine</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="n">boolean</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
@@ -340,7 +346,7 @@
     
     
     
-<div class="viewcode-block" id="Pyarchinit_db_management.insert_values"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_values"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Istanzia la classe US da pyarchinit_db_mapper&quot;&quot;&quot;</span>
 
         <span class="n">us</span> <span class="o">=</span> <span class="n">US</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
@@ -464,7 +470,7 @@
 
         <span class="k">return</span> <span class="n">us</span></div>
 
-<div class="viewcode-block" id="Pyarchinit_db_management.insert_ut_values"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_ut_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_ut_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_ut_values"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_ut_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_ut_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Istanzia la classe UT da pyarchinit_db_mapper&quot;&quot;&quot;</span>
 
         <span class="n">ut</span> <span class="o">=</span> <span class="n">UT</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
@@ -512,7 +518,7 @@
 
         <span class="k">return</span> <span class="n">ut</span></div>
 
-<div class="viewcode-block" id="Pyarchinit_db_management.insert_site_values"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_site_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_site_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_site_values"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_site_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_site_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Istanzia la classe SITE da pyarchinit_db_mapper&quot;&quot;&quot;</span>
         <span class="n">sito</span> <span class="o">=</span> <span class="n">SITE</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                     <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -527,7 +533,7 @@
 
         <span class="k">return</span> <span class="n">sito</span></div>
 
-<div class="viewcode-block" id="Pyarchinit_db_management.insert_periodizzazione_values"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_periodizzazione_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_periodizzazione_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_periodizzazione_values"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_periodizzazione_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_periodizzazione_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Istanzia la classe Periodizzazione da pyarchinit_db_mapper&quot;&quot;&quot;</span>
         <span class="n">periodizzazione</span> <span class="o">=</span> <span class="n">PERIODIZZAZIONE</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                                           <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -541,7 +547,7 @@
 
         <span class="k">return</span> <span class="n">periodizzazione</span></div>
 
-<div class="viewcode-block" id="Pyarchinit_db_management.insert_values_reperti"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_reperti">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_reperti</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_values_reperti"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_reperti">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_reperti</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Istanzia la classe Reperti da pyarchinit_db_mapper&quot;&quot;&quot;</span>
         <span class="n">inventario_materiali</span> <span class="o">=</span> <span class="n">INVENTARIO_MATERIALI</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                                                     <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -578,7 +584,7 @@
 
         <span class="k">return</span> <span class="n">inventario_materiali</span></div>
 
-<div class="viewcode-block" id="Pyarchinit_db_management.insert_struttura_values"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_struttura_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_struttura_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_struttura_values"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_struttura_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_struttura_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Istanzia la classe Struttura da pyarchinit_db_mapper&quot;&quot;&quot;</span>
         <span class="n">struttura</span> <span class="o">=</span> <span class="n">STRUTTURA</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                               <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -601,7 +607,7 @@
 
         <span class="k">return</span> <span class="n">struttura</span></div>
 
-<div class="viewcode-block" id="Pyarchinit_db_management.insert_values_ind"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_ind">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_ind</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_values_ind"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_ind">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_ind</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Istanzia la classe SCHEDAIND da pyarchinit_db_mapper&quot;&quot;&quot;</span>
         <span class="n">schedaind</span> <span class="o">=</span> <span class="n">SCHEDAIND</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                               <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -630,7 +636,7 @@
 
         <span class="k">return</span> <span class="n">schedaind</span></div>
 
-<div class="viewcode-block" id="Pyarchinit_db_management.insert_values_detsesso"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_detsesso">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_detsesso</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_values_detsesso"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_detsesso">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_detsesso</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Istanzia la classe DETSESSO da pyarchinit_db_mapper&quot;&quot;&quot;</span>
         <span class="n">detsesso</span> <span class="o">=</span> <span class="n">DETSESSO</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                             <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -689,7 +695,7 @@
 
         <span class="k">return</span> <span class="n">detsesso</span></div>
 
-<div class="viewcode-block" id="Pyarchinit_db_management.insert_values_deteta"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_deteta">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_deteta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_values_deteta"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_deteta">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_deteta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Istanzia la classe DETETA da pyarchinit_db_mapper&quot;&quot;&quot;</span>
         <span class="n">deteta</span> <span class="o">=</span> <span class="n">DETETA</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                         <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -751,7 +757,7 @@
 
         <span class="k">return</span> <span class="n">deteta</span></div>
 
-<div class="viewcode-block" id="Pyarchinit_db_management.insert_media_values"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_media_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_media_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_media_values"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_media_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_media_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Istanzia la classe MEDIA da pyarchinit_db_mapper&quot;&quot;&quot;</span>
         <span class="n">media</span> <span class="o">=</span> <span class="n">MEDIA</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                       <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -763,7 +769,7 @@
 
         <span class="k">return</span> <span class="n">media</span></div>
 
-<div class="viewcode-block" id="Pyarchinit_db_management.insert_mediathumb_values"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_mediathumb_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_mediathumb_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_mediathumb_values"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_mediathumb_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_mediathumb_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Istanzia la classe MEDIA da pyarchinit_db_mapper&quot;&quot;&quot;</span>
         <span class="n">media_thumb</span> <span class="o">=</span> <span class="n">MEDIA_THUMB</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                                   <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -776,7 +782,7 @@
 
         <span class="k">return</span> <span class="n">media_thumb</span></div>
 
-<div class="viewcode-block" id="Pyarchinit_db_management.insert_media2entity_values"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_media2entity_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_media2entity_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_media2entity_values"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_media2entity_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_media2entity_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Istanzia la classe MEDIATOENTITY da pyarchinit_db_mapper&quot;&quot;&quot;</span>
         <span class="n">mediatoentity</span> <span class="o">=</span> <span class="n">MEDIATOENTITY</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                                       <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -789,7 +795,7 @@
         <span class="k">return</span> <span class="n">mediatoentity</span></div>
 
     
-<div class="viewcode-block" id="Pyarchinit_db_management.insert_media2entity_view_values"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_media2entity_view_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_media2entity_view_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_media2entity_view_values"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_media2entity_view_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_media2entity_view_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Istanzia la classe MEDIATOENTITY da pyarchinit_db_mapper&quot;&quot;&quot;</span>
         <span class="n">mediaentity_view</span><span class="o">=</span> <span class="n">MEDIAVIEW</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                 <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -801,7 +807,7 @@
 
         <span class="k">return</span> <span class="n">mediaentity_view</span> </div>
     
-<div class="viewcode-block" id="Pyarchinit_db_management.insert_values_tomba"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_tomba">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_tomba</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_values_tomba"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_tomba">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_tomba</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Istanzia la classe TOMBA da pyarchinit_db_mapper&quot;&quot;&quot;</span>
 
         <span class="n">tomba</span> <span class="o">=</span> <span class="n">TOMBA</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
@@ -833,7 +839,7 @@
 
         <span class="k">return</span> <span class="n">tomba</span></div>
 
-<div class="viewcode-block" id="Pyarchinit_db_management.insert_values_campioni"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_campioni">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_campioni</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_values_campioni"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_campioni">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_campioni</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Istanzia la classe CAMPIONI da pyarchinit_db_mapper&quot;&quot;&quot;</span>
 
         <span class="n">campioni</span> <span class="o">=</span> <span class="n">CAMPIONI</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
@@ -849,7 +855,7 @@
 
         <span class="k">return</span> <span class="n">campioni</span></div>
 
-<div class="viewcode-block" id="Pyarchinit_db_management.insert_values_thesaurus"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_thesaurus">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_thesaurus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_values_thesaurus"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_thesaurus">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_thesaurus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Istanzia la classe PYARCHINIT_THESAURUS_SIGLE da pyarchinit_db_mapper&quot;&quot;&quot;</span>
 
         <span class="n">thesaurus</span> <span class="o">=</span> <span class="n">PYARCHINIT_THESAURUS_SIGLE</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
@@ -862,7 +868,7 @@
 
         <span class="k">return</span> <span class="n">thesaurus</span></div>
 
-<div class="viewcode-block" id="Pyarchinit_db_management.insert_values_archeozoology"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_archeozoology">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_archeozoology</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_values_archeozoology"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_archeozoology">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_archeozoology</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Istanzia la classe ARCHEOZOOLOGY da pyarchinit_db_mapper&quot;&quot;&quot;</span>
 
         <span class="n">archeozoology</span> <span class="o">=</span> <span class="n">ARCHEOZOOLOGY</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
@@ -899,7 +905,7 @@
 
         <span class="k">return</span> <span class="n">archeozoology</span></div>
 
-<div class="viewcode-block" id="Pyarchinit_db_management.insert_values_Lapidei"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_Lapidei">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_Lapidei</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_values_Lapidei"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_Lapidei">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_Lapidei</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Istanzia la classe Inventario_Lapidei da pyarchinit_db_mapper&quot;&quot;&quot;</span>
 
         <span class="n">inventario_lapidei</span> <span class="o">=</span> <span class="n">INVENTARIO_LAPIDEI</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
@@ -925,7 +931,7 @@
 
         <span class="k">return</span> <span class="n">inventario_lapidei</span></div>
 
-<div class="viewcode-block" id="Pyarchinit_db_management.insert_values_documentazione"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_documentazione">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_documentazione</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_values_documentazione"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_documentazione">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_documentazione</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Istanzia la classe DOCUMENTAZIONE da pyarchinit_db_mapper&quot;&quot;&quot;</span>
 
         <span class="n">documentazione</span> <span class="o">=</span> <span class="n">DOCUMENTAZIONE</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
@@ -940,7 +946,7 @@
 
         <span class="k">return</span> <span class="n">documentazione</span></div>
 
-<div class="viewcode-block" id="Pyarchinit_db_management.insert_pdf_administrator_values"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pdf_administrator_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_pdf_administrator_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_pdf_administrator_values"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pdf_administrator_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_pdf_administrator_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Istanzia la classe PDF_ADMINISTRATOR da pyarchinit_db_mapper&quot;&quot;&quot;</span>
         <span class="n">pdf_administrator</span> <span class="o">=</span> <span class="n">PDF_ADMINISTRATOR</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                                               <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -950,7 +956,7 @@
 
         <span class="k">return</span> <span class="n">pdf_administrator</span></div>
 
-<div class="viewcode-block" id="Pyarchinit_db_management.insert_campioni_values"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_campioni_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_campioni_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_campioni_values"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_campioni_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_campioni_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Istanzia la classe CAMPIONI da pyarchinit_db_mapper&quot;&quot;&quot;</span>
         <span class="n">campioni</span> <span class="o">=</span> <span class="n">CAMPIONI</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                             <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -1210,7 +1216,7 @@
         <span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
         
         <span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-<div class="viewcode-block" id="Pyarchinit_db_management.update"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.update">[documenti]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table_class_str</span><span class="p">,</span> <span class="n">id_table_str</span><span class="p">,</span> <span class="n">value_id_list</span><span class="p">,</span> <span class="n">columns_name_list</span><span class="p">,</span> <span class="n">values_update_list</span><span class="p">):</span>
+<div class="viewcode-block" id="Pyarchinit_db_management.update"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.update">[documenti]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table_class_str</span><span class="p">,</span> <span class="n">id_table_str</span><span class="p">,</span> <span class="n">value_id_list</span><span class="p">,</span> <span class="n">columns_name_list</span><span class="p">,</span> <span class="n">values_update_list</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Receives 5 values then putted in a list.</span>
 <span class="sd">        self.set_update = arg</span>
@@ -1330,7 +1336,7 @@
 
         <span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span><span class="c1"># managements utilities</span>
         
-<div class="viewcode-block" id="Pyarchinit_db_management.fields_list"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.fields_list">[documenti]</a>    <span class="k">def</span> <span class="nf">fields_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="Pyarchinit_db_management.fields_list"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.fields_list">[documenti]</a>    <span class="k">def</span> <span class="nf">fields_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;return the list of columns in a table. If s is set a int,</span>
 <span class="sd">        return only one column&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">table_name</span> <span class="o">=</span> <span class="n">t</span>
@@ -1382,7 +1388,7 @@
         <span class="c1">#session.close()</span>
         <span class="k">return</span> <span class="n">res_list</span>
 
-<div class="viewcode-block" id="Pyarchinit_db_management.update_for"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.update_for">[documenti]</a>    <span class="k">def</span> <span class="nf">update_for</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Pyarchinit_db_management.update_for"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.update_for">[documenti]</a>    <span class="k">def</span> <span class="nf">update_for</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        table = Table(&#39;us_table&#39;, self.metadata, autoload=True)</span>
 <span class="sd">        s = table.select(table.c.id_us &gt; 0)</span>
@@ -1403,7 +1409,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s1">&#39;INVENTARIO_MATERIALI_TOIMP&#39;</span><span class="p">,</span> <span class="s1">&#39;id_invmat&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;id_invmat&#39;</span><span class="p">],</span> <span class="p">[</span><span class="n">cont</span><span class="p">])</span>
             <span class="n">cont</span> <span class="o">=</span> <span class="n">cont</span> <span class="o">+</span> <span class="mi">1</span></div>
 
-<div class="viewcode-block" id="Pyarchinit_db_management.group_by"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.group_by">[documenti]</a>    <span class="k">def</span> <span class="nf">group_by</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">CD</span><span class="p">):</span>
+<div class="viewcode-block" id="Pyarchinit_db_management.group_by"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.group_by">[documenti]</a>    <span class="k">def</span> <span class="nf">group_by</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">CD</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Group by the values by table name - string, field name - string, table class DB from mapper - string&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">table_name</span> <span class="o">=</span> <span class="n">tn</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">field_name</span> <span class="o">=</span> <span class="n">fn</span>
@@ -1822,7 +1828,7 @@
     <p>&#169; Copyright 2021, AdArte srl.</p>
   </div>
 
-  Realizzato con <a href="https://www.sphinx-doc.org/">Sphinx</a> e il tema
+  Realizzato con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
     fornito da <a href="https://readthedocs.org">Read the Docs</a>.
    

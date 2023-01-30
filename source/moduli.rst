@@ -73,7 +73,22 @@ settings
    .. autoclass:: Settings
        :members:
 
-pyarchinit Medi Utility
+Pyarchinit DB manager
+=======================================
+.. note::
+    Questa classe presenta tutte le funzioni di gestione del database
+
+------------------------------------------------------------------
+
+.. automodule:: modules.db.pyarchinit_db_manager
+
+   .. autoclass:: Pyarchinit_db_management
+       :members:
+
+
+
+
+pyarchinit Media Utility
 =======================================
 .. note::
         Media_utility class is used for creating thumbnails of images.
