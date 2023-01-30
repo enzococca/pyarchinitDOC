@@ -440,12 +440,12 @@ The user’s selection is returned as a string.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.__init__"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.__init__" title="Link a questa definizione"></a></dt>
-<dd><p>Initialize the connection to MySQL. This is called by __init__ and should not be called directly.</p>
+<dd><p>Initialize the connection to DB. This is called by __init__ and should not be called directly.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parametri</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>self</strong> – An instance of this class. It’s a reference to the database connection that is used to communicate with the MySQL server.</p></li>
-<li><p><strong>c</strong> – The string containing the connection string. This string is passed to the connect () method of the MySQLConnection object.</p></li>
+<li><p><strong>self</strong> – An instance of this class. It’s a reference to the database connection that is used to communicate with the DB server.</p></li>
+<li><p><strong>c</strong> – The string containing the connection string. This string is passed to the connect () method of the DBConnection object.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Ritorna</dt>
@@ -457,9 +457,7 @@ The user’s selection is returned as a string.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.connection">
 <span class="sig-name descname"><span class="pre">connection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.connection"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.connection" title="Link a questa definizione"></a></dt>
-<dd><p>Connect to the database .
-:return: [description]
-:rtype: [type]</p>
+<dd><p>Connect to the database</p>
 </dd></dl>
 
 <dl class="py method">
@@ -544,9 +542,7 @@ table or other data that can be used to retrieve data from the database.
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_campioni_values">
 <span class="sig-name descname"><span class="pre">insert_campioni_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_campioni_values"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_campioni_values" title="Link a questa definizione"></a></dt>
-<dd><p>insert_campioni_values Inserts the values of the given campioni values into the given list .
-:return: [description]
-:rtype: [type]</p>
+<dd><p>insert_campioni_values Inserts the values of the given campioni values into the given list</p>
 </dd></dl>
 
 <dl class="py method">
@@ -576,299 +572,211 @@ table or other data that can be used to retrieve data from the database.
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_media2entity_view_values">
 <span class="sig-name descname"><span class="pre">insert_media2entity_view_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_media2entity_view_values"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_media2entity_view_values" title="Link a questa definizione"></a></dt>
-<dd><p>insert_media2entity_view_values Inserts values into Media2entity_view
-:return: [description]
-:rtype: [type]</p>
+<dd><p>insert_media2entity_view_values Inserts values into Media2entity_view</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_media_values">
 <span class="sig-name descname"><span class="pre">insert_media_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_media_values"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_media_values" title="Link a questa definizione"></a></dt>
-<dd><p>insert_media_values Insert media values into the media object
-:return: [description]
-:rtype: [type]</p>
+<dd><p>insert_media_values Insert media values into the media object</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_mediathumb_values">
 <span class="sig-name descname"><span class="pre">insert_mediathumb_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_mediathumb_values"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_mediathumb_values" title="Link a questa definizione"></a></dt>
-<dd><p>insert_mediathumb_values Inserts values into the media_thumbnail argument .
-:return: [description]
-:rtype: [type]</p>
+<dd><p>insert_mediathumb_values Inserts values into the media_thumbnail argument</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pdf_administrator_values">
 <span class="sig-name descname"><span class="pre">insert_pdf_administrator_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_pdf_administrator_values"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pdf_administrator_values" title="Link a questa definizione"></a></dt>
-<dd><p>insert_pdf_administrator_values Insert values into PDFAdmin object .
-:return: [description]
-:rtype: [type]</p>
+<dd><p>insert_pdf_administrator_values Insert values into PDFAdmin object</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_periodizzazione_values">
 <span class="sig-name descname"><span class="pre">insert_periodizzazione_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_periodizzazione_values"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_periodizzazione_values" title="Link a questa definizione"></a></dt>
-<dd><p>insert_periodizzazione_values Inserts periodizziza into the list of values .
-:return: [description]
-:rtype: [type]</p>
+<dd><p>insert_periodizzazione_values Inserts periodizziza into the list of values</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pottery_values">
 <span class="sig-name descname"><span class="pre">insert_pottery_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_pottery_values"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pottery_values" title="Link a questa definizione"></a></dt>
-<dd><p>Inserts the values of the Pottery values into the pottery dictionary .
-:return: [description]
-:rtype: [type]</p>
+<dd><p>Inserts the values of the Pottery values into the pottery dictionary</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pycampioni">
 <span class="sig-name descname"><span class="pre">insert_pycampioni</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_pycampioni"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pycampioni" title="Link a questa definizione"></a></dt>
-<dd><p>insert_pycampioni Insert a pycampionioni argument into the PYCUAMPIONI .
-:return: [description]
-:rtype: [type]</p>
+<dd><p>insert_pycampioni Insert a pycampionioni argument into the PYCUAMPIONI</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pydocumentazione">
 <span class="sig-name descname"><span class="pre">insert_pydocumentazione</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_pydocumentazione"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pydocumentazione" title="Link a questa definizione"></a></dt>
-<dd><p>insert_pydocumentazione Inserts a pydocumentazioneer into the first argument .
-:return: [description]
-:rtype: [type]</p>
+<dd><p>insert_pydocumentazione Inserts a pydocumentazioneer into the first argument</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pyindividui">
 <span class="sig-name descname"><span class="pre">insert_pyindividui</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_pyindividui"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pyindividui" title="Link a questa definizione"></a></dt>
-<dd><p>insert_pyindividui Inserts a Pyindividui into the list of pyindividis arguments
-:return: [description]
-:rtype: [type]</p>
+<dd><p>insert_pyindividui Inserts a Pyindividui into the list of pyindividis arguments</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pylineeriferimento">
 <span class="sig-name descname"><span class="pre">insert_pylineeriferimento</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_pylineeriferimento"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pylineeriferimento" title="Link a questa definizione"></a></dt>
-<dd><p>insert_pylineeriferimento Insert a pylineeriferimentoimentoimentoimento text into the docstring
-:return: [description]
-:rtype: [type]</p>
+<dd><p>insert_pylineeriferimento Insert a pylineeriferimentoimentoimentoimento text into the docstring</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pyquote">
 <span class="sig-name descname"><span class="pre">insert_pyquote</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_pyquote"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pyquote" title="Link a questa definizione"></a></dt>
-<dd><p>insert_pyquote Insert a PyYQUOTE into the stack .
-:return: [description]
-:rtype: [type]</p>
+<dd><p>insert_pyquote Insert a PyYQUOTE into the stack</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pyquote_usm">
 <span class="sig-name descname"><span class="pre">insert_pyquote_usm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_pyquote_usm"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pyquote_usm" title="Link a questa definizione"></a></dt>
-<dd><p>insert_pyquote_usm Insert a pyquote_usm into the stack .
-:return: [description]
-:rtype: [type]</p>
+<dd><p>insert_pyquote_usm Insert a pyquote_usm into the stack</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pyreperti">
 <span class="sig-name descname"><span class="pre">insert_pyreperti</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_pyreperti"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pyreperti" title="Link a questa definizione"></a></dt>
-<dd><p>insert_pyreperti Inserts a pyreperti argument into the list of pyreperti arguments .
-:return: [description]
-:rtype: [type]</p>
+<dd><p>insert_pyreperti Inserts a pyreperti argument into the list of pyreperti arguments</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pyripartizioni_spaziali">
 <span class="sig-name descname"><span class="pre">insert_pyripartizioni_spaziali</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_pyripartizioni_spaziali"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pyripartizioni_spaziali" title="Link a questa definizione"></a></dt>
-<dd><p>insert_pyripartizioni_spaziali Inserts a pyripartizioni_spazizioni_spazizioni into the pyripartizizioni_spazizioni_spazizioni
-:return: [description]
-:rtype: [type]</p>
+<dd><p>insert_pyripartizioni_spaziali Inserts a pyripartizioni_spazizioni_spazizioni into the pyripartizizioni_spazizioni_spazizioni</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pysezioni">
 <span class="sig-name descname"><span class="pre">insert_pysezioni</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_pysezioni"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pysezioni" title="Link a questa definizione"></a></dt>
-<dd><p>insert_pysezioni Insert a PysezionI into the parser
-:return: [description]
-:rtype: [type]</p>
+<dd><p>insert_pysezioni Insert a PysezionI into the parser</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pysito_point">
 <span class="sig-name descname"><span class="pre">insert_pysito_point</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_pysito_point"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pysito_point" title="Link a questa definizione"></a></dt>
-<dd><p>insert_pysito_point Inserts a Pysito point into the stack .
-:return: [description]
-:rtype: [type]</p>
+<dd><p>insert_pysito_point Inserts a Pysito point into the stack</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pysito_polygon">
 <span class="sig-name descname"><span class="pre">insert_pysito_polygon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_pysito_polygon"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pysito_polygon" title="Link a questa definizione"></a></dt>
-<dd><p>insert_pysito_polygon Insert a polygon into the current board .
-:return: [description]
-:rtype: [type]</p>
+<dd><p>insert_pysito_polygon Insert a polygon into the current board</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pystrutture">
 <span class="sig-name descname"><span class="pre">insert_pystrutture</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_pystrutture"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pystrutture" title="Link a questa definizione"></a></dt>
-<dd><p>insert_pystrutture Insert a pystrututure into the parser .
-:return: [description]
-:rtype: [type]</p>
+<dd><p>insert_pystrutture Insert a pystrututure into the parser</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pytomba">
 <span class="sig-name descname"><span class="pre">insert_pytomba</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_pytomba"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pytomba" title="Link a questa definizione"></a></dt>
-<dd><p>insert_pytomba Insert a Python TYTomba into a PYTomba object .
-:return: [description]
-:rtype: [type]</p>
+<dd><p>insert_pytomba Insert a Python TYTomba into a PYTomba object</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pyus">
 <span class="sig-name descname"><span class="pre">insert_pyus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_pyus"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pyus" title="Link a questa definizione"></a></dt>
-<dd><p>Insert a PyUS into the PyUS object .
-:return: [description]
-:rtype: [type]</p>
+<dd><p>Insert a PyUS into the PyUS object</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pyus_negative">
 <span class="sig-name descname"><span class="pre">insert_pyus_negative</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_pyus_negative"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pyus_negative" title="Link a questa definizione"></a></dt>
-<dd><p>insert_pyus_negative Insert a PyUS_NEGATIVE into the PYUS_NEGATIVE argument .
-:return: [description]
-:rtype: [type]</p>
+<dd><p>insert_pyus_negative Insert a PyUS_NEGATIVE into the PYUS_NEGATIVE argument</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pyusm">
 <span class="sig-name descname"><span class="pre">insert_pyusm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_pyusm"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pyusm" title="Link a questa definizione"></a></dt>
-<dd><p>insert_pyusm insert a pyusmtsm argument into the pyusm module
-:return: [description]
-:rtype: [type]</p>
+<dd><p>insert_pyusm insert a pyusmtsm argument into the pyusm module</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_site_values">
 <span class="sig-name descname"><span class="pre">insert_site_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_site_values"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_site_values" title="Link a questa definizione"></a></dt>
-<dd><p>insert_site_values Inserts a site values into the datapoint
-:return: [description]
-:rtype: [type]</p>
+<dd><p>insert_site_values Inserts a site values into the datapoint</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_struttura_values">
 <span class="sig-name descname"><span class="pre">insert_struttura_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_struttura_values"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_struttura_values" title="Link a questa definizione"></a></dt>
-<dd><p>insert_struttura_values Inserts STRUTTUTTRA values into the parser .
-:return: [description]
-:rtype: [type]</p>
+<dd><p>insert_struttura_values Inserts STRUTTUTTRA values into the parser</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_ut_values">
 <span class="sig-name descname"><span class="pre">insert_ut_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_ut_values"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_ut_values" title="Link a questa definizione"></a></dt>
-<dd><p>insert_ut_values Inserts values into the UT values .
-:return: [description]
-:rtype: [type]</p>
+<dd><p>insert_ut_values Inserts values into the UT values</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values">
 <span class="sig-name descname"><span class="pre">insert_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_values"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values" title="Link a questa definizione"></a></dt>
-<dd><p>insert_values Insert values into the US and US tags .
-:return: [description]
-:rtype: [type]</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_Lapidei">
-<span class="sig-name descname"><span class="pre">insert_values_Lapidei</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_values_Lapidei"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_Lapidei" title="Link a questa definizione"></a></dt>
-<dd><p>insert_values_Lapidei Inserts values into the LAPIDI_LAPPLICATION_LAPID .
-:return: [description]
-:rtype: [type]</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_archeozoology">
-<span class="sig-name descname"><span class="pre">insert_values_archeozoology</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_values_archeozoology"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_archeozoology" title="Link a questa definizione"></a></dt>
-<dd><p>insert_values_archeozoology Inserts values in the archez hierarchy into the given array
-:return: [description]
-:rtype: [type]</p>
+<dd><p>insert_values Insert values into the US and US tags</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_campioni">
 <span class="sig-name descname"><span class="pre">insert_values_campioni</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_values_campioni"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_campioni" title="Link a questa definizione"></a></dt>
-<dd><p>insert_values_campioni Inserts the given value into the campioni .
-:return: [description]
-:rtype: [type]</p>
+<dd><p>insert_values_campioni Inserts the given value into the campioni</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_deteta">
 <span class="sig-name descname"><span class="pre">insert_values_deteta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_values_deteta"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_deteta" title="Link a questa definizione"></a></dt>
-<dd><p>insert_values_deteta Compute the deteta of the given arguments .
-:return: [description]
-:rtype: [type]</p>
+<dd><p>insert_values_deteta Compute the deteta of the given arguments</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_detsesso">
 <span class="sig-name descname"><span class="pre">insert_values_detsesso</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_values_detsesso"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_detsesso" title="Link a questa definizione"></a></dt>
-<dd><p>insert_values_detsesso Inserts values into the matrix
-:return: [description]
-:rtype: [type]</p>
+<dd><p>insert_values_detsesso Inserts values into the matrix</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_documentazione">
 <span class="sig-name descname"><span class="pre">insert_values_documentazione</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_values_documentazione"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_documentazione" title="Link a questa definizione"></a></dt>
-<dd><p>insert_values_documentazione Inserts a value into the document
-:return: [description]
-:rtype: [type]</p>
+<dd><p>insert_values_documentazione Inserts a value into the document</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_ind">
 <span class="sig-name descname"><span class="pre">insert_values_ind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_values_ind"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_ind" title="Link a questa definizione"></a></dt>
-<dd><p>insert_values_ind insert values into scheduler
-:return: [description]
-:rtype: [type]</p>
+<dd><p>insert_values_ind insert values into scheduler</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_reperti">
 <span class="sig-name descname"><span class="pre">insert_values_reperti</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_values_reperti"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_reperti" title="Link a questa definizione"></a></dt>
-<dd><p>insert_values_reperti Inserts values in the inventory into the inventory
-:return: [description]
-:rtype: [type]</p>
+<dd><p>insert_values_reperti Inserts values in the inventory into the inventory</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_thesaurus">
 <span class="sig-name descname"><span class="pre">insert_values_thesaurus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_values_thesaurus"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_thesaurus" title="Link a questa definizione"></a></dt>
-<dd><p>insert_values_thesaurus Inserts the given values into the saurus
-:return: [description]
-:rtype: [type]</p>
+<dd><p>insert_values_thesaurus Inserts the given values into thesaurus</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_tomba">
 <span class="sig-name descname"><span class="pre">insert_values_tomba</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.insert_values_tomba"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_tomba" title="Link a questa definizione"></a></dt>
-<dd><p>insert_values_tomba Inserts values into TOMBA
-:return: [description]
-:rtype: [type]</p>
+<dd><p>insert_values_tomba Inserts values into TOMBA</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.load_spatialite">
 <span class="sig-name descname"><span class="pre">load_spatialite</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dbapi_conn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection_record</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.load_spatialite"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.load_spatialite" title="Link a questa definizione"></a></dt>
-<dd><p>Loads the spatialite database extension .
-:param dbapi_conn: [description]
-:type dbapi_conn: [type]
-:param connection_record: [description]
-:type connection_record: [type]</p>
+<dd><p>Loads the spatialite database extension .</p>
 </dd></dl>
 
 <dl class="py method">
@@ -884,30 +792,54 @@ table or other data that can be used to retrieve data from the database.
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.query">
 <span class="sig-name descname"><span class="pre">query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.query"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.query" title="Link a questa definizione"></a></dt>
-<dd><p>Queries the database for a query. This is a convenience method for performing query queries that do not require a database connection.
-:param self: The : class : . Connection  to use.
-:param n: The name of the class to query. This must be a string in the form’MyClass’e. g.
-:returns: A list of : class : . Row</p>
+<dd><p>Queries the database for a query. This is a convenience method for performing query queries that do not require a database connection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parametri</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>self</strong> – The class Connection  to use.</p></li>
+<li><p><strong>n</strong> – The name of the class to query. This must be a string in the form’MyClass’e. g.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Ritorna</dt>
+<dd class="field-even"><p>A list of : class : . Row</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.query_bool">
 <span class="sig-name descname"><span class="pre">query_bool</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.query_bool"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.query_bool" title="Link a questa definizione"></a></dt>
-<dd><p>Queries a table and returns True or False depending on the values of the params
-:param self: Reference to the object that calls this method
-:param params: Dictionary of key / value pairs to query the table
-:param table: Name of the table to query ( ex : table1. table2
-:returns: True or False depending on the</p>
+<dd><p>Queries a table and returns True or False depending on the values of the params</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parametri</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>self</strong> – Reference to the object that calls this method</p></li>
+<li><p><strong>params</strong> – Dictionary of key / value pairs to query the table</p></li>
+<li><p><strong>table</strong> – Name of the table to query ( ex : table1. table2</p></li>
+</ul>
+</dd>
+<dt class="field-even">Ritorna</dt>
+<dd class="field-even"><p>True or False depending on the</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.query_bool_special">
 <span class="sig-name descname"><span class="pre">query_bool_special</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.query_bool_special"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.query_bool_special" title="Link a questa definizione"></a></dt>
-<dd><p>This method queries the database for boolean values that are special. If there are more than one value in the params dict it will return True or False
-:param self: Reference to the calling object
-:param params: Dictionary of key / value pairs to search in
-:param table: Name of the table to query
-:returns: True or False depending on whether or not the query</p>
+<dd><p>This method queries the database for boolean values that are special. If there are more than one value in the params dict it will return True or False</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parametri</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>self</strong> – Reference to the calling object</p></li>
+<li><p><strong>params</strong> – Dictionary of key / value pairs to search in</p></li>
+<li><p><strong>table</strong> – Name of the table to query</p></li>
+</ul>
+</dd>
+<dt class="field-even">Ritorna</dt>
+<dd class="field-even"><p>True or False depending on whether or not the query</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -942,11 +874,19 @@ table or other data that can be used to retrieve data from the database.
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.query_operator">
 <span class="sig-name descname"><span class="pre">query_operator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.query_operator"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.query_operator" title="Link a questa definizione"></a></dt>
-<dd><p>This method queries the database for records that match the parameters. If there are multiple records the result will be a list of dictionaries
-:param self: Reference to the database object
-:param params: A list of parameters to match the query with
-:param table: The table to query. It is used to create the query
-:returns: A list of dictionaries that match the</p>
+<dd><p>This method queries the database for records that match the parameters. If there are multiple records the result will be a list of dictionaries</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parametri</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>self</strong> – Reference to the database object</p></li>
+<li><p><strong>params</strong> – A list of parameters to match the query with</p></li>
+<li><p><strong>table</strong> – The table to query. It is used to create the query</p></li>
+</ul>
+</dd>
+<dt class="field-even">Ritorna</dt>
+<dd class="field-even"><p>A list of dictionaries that match the</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">

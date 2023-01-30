@@ -33,14 +33,14 @@ class Pyarchinit_db_management(object):
     elif os.name == 'nt':
         boolean = 'True'
     def __init__(self, c):
-        """Initialize the connection to MySQL. This is called by __init__ and should not be called directly.
+        """Initialize the connection to DB. This is called by __init__ and should not be called directly.
 
         :param self:
-            An instance of this class. It's a reference to the database connection that is used to communicate with the MySQL server.
+            An instance of this class. It's a reference to the database connection that is used to communicate with the DB server.
 
         :param c:
 
-            The string containing the connection string. This string is passed to the connect () method of the MySQLConnection object.
+            The string containing the connection string. This string is passed to the connect () method of the DBConnection object.
 
         :returns:
             True if successful False otherwise. Note that this method does not return anything
@@ -48,11 +48,7 @@ class Pyarchinit_db_management(object):
         self.conn_str = c
     def load_spatialite(self,dbapi_conn, connection_record):
         '''Loads the spatialite database extension .
-        :param dbapi_conn: [description]
-        :type dbapi_conn: [type]
-        :param connection_record: [description]
-        :type connection_record: [type]
-        '''        
+        '''
         dbapi_conn.enable_load_extension(True)
         if Pyarchinit_OS_Utility.isWindows()== True:
             dbapi_conn.load_extension('mod_spatialite.dll')
@@ -61,9 +57,7 @@ class Pyarchinit_db_management(object):
         else:
             dbapi_conn.load_extension('mod_spatialite.so')  
     def connection(self):
-        '''Connect to the database .
-        :return: [description]
-        :rtype: [type]
+        '''Connect to the database
         '''        
         test = True
         try:
@@ -89,9 +83,7 @@ class Pyarchinit_db_management(object):
         return test
         # insert statement
     def insert_pottery_values(self, *arg):
-        '''Inserts the values of the Pottery values into the pottery dictionary .
-        :return: [description]
-        :rtype: [type]
+        '''Inserts the values of the Pottery values into the pottery dictionary
         '''        
         pottery = POTTERY(arg[0],
                   arg[1],
@@ -127,9 +119,7 @@ class Pyarchinit_db_management(object):
                   arg[31])
         return pottery
     def insert_pyus(self, *arg):
-        '''Insert a PyUS into the PyUS object .
-        :return: [description]
-        :rtype: [type]
+        '''Insert a PyUS into the PyUS object
         '''        
         pyus = PYUS(arg[0],
                 arg[1],
@@ -147,10 +137,7 @@ class Pyarchinit_db_management(object):
                 arg[13])
         return pyus
     def insert_pyusm(self, *arg):
-        '''
-        insert_pyusm insert a pyusmtsm argument into the pyusm module
-        :return: [description]
-        :rtype: [type]
+        '''insert_pyusm insert a pyusmtsm argument into the pyusm module
         '''        
         pyusm = PYUSM(arg[0],
                 arg[1],
@@ -168,30 +155,21 @@ class Pyarchinit_db_management(object):
                 arg[13])
         return pyusm
     def insert_pysito_point(self, *arg):
-        '''
-        insert_pysito_point Inserts a Pysito point into the stack .
-        :return: [description]
-        :rtype: [type]
+        '''insert_pysito_point Inserts a Pysito point into the stack
         '''        
         pysito_point = PYSITO_POINT(arg[0],
                 arg[1],
                 arg[2])
         return pysito_point
     def insert_pysito_polygon(self, *arg):
-        '''
-        insert_pysito_polygon Insert a polygon into the current board .
-        :return: [description]
-        :rtype: [type]
+        '''insert_pysito_polygon Insert a polygon into the current board
         '''        
         pysito_polygon = PYSITO_POLYGON(arg[0],
                 arg[1],
                 arg[2])
         return pysito_polygon
     def insert_pyquote(self, *arg):
-        '''
-        insert_pyquote Insert a PyYQUOTE into the stack .
-        :return: [description]
-        :rtype: [type]
+        '''insert_pyquote Insert a PyYQUOTE into the stack
         '''        
         pyquote = PYQUOTE(arg[0],
                 arg[1],
@@ -206,10 +184,7 @@ class Pyarchinit_db_management(object):
                 arg[10])
         return pyquote    
     def insert_pyquote_usm(self, *arg):
-        '''
-        insert_pyquote_usm Insert a pyquote_usm into the stack .
-        :return: [description]
-        :rtype: [type]
+        '''insert_pyquote_usm Insert a pyquote_usm into the stack
         '''        
         pyquote_usm = PYQUOTEUSM(arg[0],
                 arg[1],
@@ -224,10 +199,7 @@ class Pyarchinit_db_management(object):
                 arg[10])
         return pyquote_usm    
     def insert_pyus_negative(self, *arg):
-        '''
-        insert_pyus_negative Insert a PyUS_NEGATIVE into the PYUS_NEGATIVE argument .
-        :return: [description]
-        :rtype: [type]
+        '''insert_pyus_negative Insert a PyUS_NEGATIVE into the PYUS_NEGATIVE argument
         '''        
         pyus_negative = PYUS_NEGATIVE(arg[0],
                 arg[1],
@@ -238,10 +210,7 @@ class Pyarchinit_db_management(object):
                 arg[6])
         return pyus_negative
     def insert_pystrutture(self, *arg):
-        '''
-        insert_pystrutture Insert a pystrututure into the parser .
-        :return: [description]
-        :rtype: [type]
+        '''insert_pystrutture Insert a pystrututure into the parser
         '''        
         pystrutture = PYSTRUTTURE(arg[0],
                 arg[1],
@@ -257,10 +226,7 @@ class Pyarchinit_db_management(object):
                 arg[11])
         return pystrutture
     def insert_pyreperti(self, *arg):
-        '''
-        insert_pyreperti Inserts a pyreperti argument into the list of pyreperti arguments .
-        :return: [description]
-        :rtype: [type]
+        '''insert_pyreperti Inserts a pyreperti argument into the list of pyreperti arguments
         '''        
         pyreperti = PYREPERTI(arg[0],
                 arg[1],
@@ -269,10 +235,7 @@ class Pyarchinit_db_management(object):
                 arg[4])
         return pyreperti
     def insert_pyindividui(self, *arg):
-        '''
-        insert_pyindividui Inserts a Pyindividui into the list of pyindividis arguments
-        :return: [description]
-        :rtype: [type]
+        '''insert_pyindividui Inserts a Pyindividui into the list of pyindividis arguments
         '''        
         pyindividui = PYINDIVIDUI(arg[0],
                 arg[1],
@@ -282,10 +245,7 @@ class Pyarchinit_db_management(object):
                 arg[5])
         return pyindividui
     def insert_pycampioni(self, *arg):
-        '''
-        insert_pycampioni Insert a pycampionioni argument into the PYCUAMPIONI .
-        :return: [description]
-        :rtype: [type]
+        '''insert_pycampioni Insert a pycampionioni argument into the PYCUAMPIONI
         '''        
         pycampioni = PYCAMPIONI(arg[0],
                 arg[1],
@@ -298,10 +258,7 @@ class Pyarchinit_db_management(object):
                 arg[8])
         return pycampioni
     def insert_pytomba(self, *arg):
-        '''
-        insert_pytomba Insert a Python TYTomba into a PYTomba object .
-        :return: [description]
-        :rtype: [type]
+        '''insert_pytomba Insert a Python TYTomba into a PYTomba object
         '''        
         pytomba = PYTOMBA(arg[0],
                 arg[1],
@@ -309,10 +266,7 @@ class Pyarchinit_db_management(object):
                 arg[3])
         return pytomba
     def insert_pydocumentazione(self, *arg):
-        '''
-        insert_pydocumentazione Inserts a pydocumentazioneer into the first argument .
-        :return: [description]
-        :rtype: [type]
+        '''insert_pydocumentazione Inserts a pydocumentazioneer into the first argument
         '''        
         pydocumentazione = PYDOCUMENTAZIONE(arg[0],
                 arg[1],
@@ -323,10 +277,7 @@ class Pyarchinit_db_management(object):
                 arg[6])
         return pydocumentazione
     def insert_pylineeriferimento(self, *arg):
-        '''
-        insert_pylineeriferimento Insert a pylineeriferimentoimentoimentoimento text into the docstring
-        :return: [description]
-        :rtype: [type]
+        '''insert_pylineeriferimento Insert a pylineeriferimentoimentoimentoimento text into the docstring
         '''       
         pylineeriferimento = PYLINEERIFERIMENTO(arg[0],
                 arg[1],
@@ -335,10 +286,7 @@ class Pyarchinit_db_management(object):
                 arg[4])
         return pylineeriferimento
     def insert_pyripartizioni_spaziali(self, *arg):
-        '''
-        insert_pyripartizioni_spaziali Inserts a pyripartizioni_spazizioni_spazizioni into the pyripartizizioni_spazizioni_spazizioni
-        :return: [description]
-        :rtype: [type]
+        '''insert_pyripartizioni_spaziali Inserts a pyripartizioni_spazizioni_spazizioni into the pyripartizizioni_spazizioni_spazizioni
         '''
         pyripartizioni_spaziali = PYRIPARTIZIONI_SPAZIALI(arg[0],
                 arg[1],
@@ -348,10 +296,7 @@ class Pyarchinit_db_management(object):
                 arg[5])
         return pyripartizioni_spaziali
     def insert_pysezioni(self, *arg):
-        '''
-        insert_pysezioni Insert a PysezionI into the parser
-        :return: [description]
-        :rtype: [type]
+        '''insert_pysezioni Insert a PysezionI into the parser
         '''
         pysezioni = PYSEZIONI(arg[0],
                 arg[1],
@@ -363,10 +308,7 @@ class Pyarchinit_db_management(object):
                 arg[7])
         return pysezioni
     def insert_values(self, *arg):
-        '''
-        insert_values Insert values into the US and US tags .
-        :return: [description]
-        :rtype: [type]
+        '''insert_values Insert values into the US and US tags
         '''        
         us = US(arg[0],
                 arg[1],
@@ -488,10 +430,7 @@ class Pyarchinit_db_management(object):
                 )
         return us
     def insert_ut_values(self, *arg):
-        '''
-        insert_ut_values Inserts values into the UT values .
-        :return: [description]
-        :rtype: [type]
+        '''insert_ut_values Inserts values into the UT values
         '''
         ut = UT(arg[0],
                 arg[1],
@@ -537,10 +476,7 @@ class Pyarchinit_db_management(object):
                 arg[41])
         return ut
     def insert_site_values(self, *arg):
-        '''
-        insert_site_values Inserts a site values into the datapoint
-        :return: [description]
-        :rtype: [type]
+        '''insert_site_values Inserts a site values into the datapoint
         '''
         sito = SITE(arg[0],
                     arg[1],
@@ -554,10 +490,7 @@ class Pyarchinit_db_management(object):
                     arg[9])
         return sito
     def insert_periodizzazione_values(self, *arg):
-        '''
-        insert_periodizzazione_values Inserts periodizziza into the list of values .
-        :return: [description]
-        :rtype: [type]
+        '''insert_periodizzazione_values Inserts periodizziza into the list of values
         '''
         periodizzazione = PERIODIZZAZIONE(arg[0],
                                           arg[1],
@@ -570,10 +503,7 @@ class Pyarchinit_db_management(object):
                                           arg[8])
         return periodizzazione
     def insert_values_reperti(self, *arg):
-        '''
-        insert_values_reperti Inserts values in the inventory into the inventory
-        :return: [description]
-        :rtype: [type]
+        '''insert_values_reperti Inserts values in the inventory into the inventory
         '''
         inventario_materiali = INVENTARIO_MATERIALI(arg[0],
                                                     arg[1],
@@ -609,10 +539,7 @@ class Pyarchinit_db_management(object):
                                                     arg[31])
         return inventario_materiali
     def insert_struttura_values(self, *arg):
-        '''
-        insert_struttura_values Inserts STRUTTUTTRA values into the parser .
-        :return: [description]
-        :rtype: [type]
+        '''insert_struttura_values Inserts STRUTTUTTRA values into the parser
         '''
         struttura = STRUTTURA(arg[0],
                               arg[1],
@@ -634,10 +561,7 @@ class Pyarchinit_db_management(object):
                               arg[17])
         return struttura
     def insert_values_ind(self, *arg):
-        '''
-        insert_values_ind insert values into scheduler
-        :return: [description]
-        :rtype: [type]
+        '''insert_values_ind insert values into scheduler
         '''
         schedaind = SCHEDAIND(arg[0],
                               arg[1],
@@ -665,10 +589,7 @@ class Pyarchinit_db_management(object):
                               arg[23])
         return schedaind
     def insert_values_detsesso(self, *arg):
-        '''
-        insert_values_detsesso Inserts values into the matrix
-        :return: [description]
-        :rtype: [type]
+        '''insert_values_detsesso Inserts values into the matrix
         '''
         detsesso = DETSESSO(arg[0],
                             arg[1],
@@ -726,10 +647,7 @@ class Pyarchinit_db_management(object):
                             arg[53])
         return detsesso
     def insert_values_deteta(self, *arg):
-        '''
-        insert_values_deteta Compute the deteta of the given arguments .
-        :return: [description]
-        :rtype: [type]
+        '''insert_values_deteta Compute the deteta of the given arguments
         '''
         deteta = DETETA(arg[0],
                         arg[1],
@@ -790,10 +708,7 @@ class Pyarchinit_db_management(object):
                         arg[56])
         return deteta
     def insert_media_values(self, *arg):
-        '''
-        insert_media_values Insert media values into the media object
-        :return: [description]
-        :rtype: [type]
+        '''insert_media_values Insert media values into the media object
         '''
         media = MEDIA(arg[0],
                       arg[1],
@@ -804,10 +719,7 @@ class Pyarchinit_db_management(object):
                       arg[6])
         return media
     def insert_mediathumb_values(self, *arg):
-        '''
-        insert_mediathumb_values Inserts values into the media_thumbnail argument .
-        :return: [description]
-        :rtype: [type]
+        '''insert_mediathumb_values Inserts values into the media_thumbnail argument
         '''
         media_thumb = MEDIA_THUMB(arg[0],
                                   arg[1],
@@ -829,10 +741,7 @@ class Pyarchinit_db_management(object):
                                       arg[6])
         return mediatoentity
     def insert_media2entity_view_values(self, *arg):
-        '''
-        insert_media2entity_view_values Inserts values into Media2entity_view
-        :return: [description]
-        :rtype: [type]
+        '''insert_media2entity_view_values Inserts values into Media2entity_view
         '''
         mediaentity_view= MEDIAVIEW(arg[0],
                 arg[1],
@@ -843,10 +752,7 @@ class Pyarchinit_db_management(object):
                 arg[6])
         return mediaentity_view 
     def insert_values_tomba(self, *arg):
-        '''
-        insert_values_tomba Inserts values into TOMBA
-        :return: [description]
-        :rtype: [type]
+        '''insert_values_tomba Inserts values into TOMBA
         '''
         tomba = TOMBA(arg[0],
                               arg[1],
@@ -876,10 +782,7 @@ class Pyarchinit_db_management(object):
                               arg[25],)
         return tomba
     def insert_values_campioni(self, *arg):
-        '''
-        insert_values_campioni Inserts the given value into the campioni .
-        :return: [description]
-        :rtype: [type]
+        '''insert_values_campioni Inserts the given value into the campioni
         '''
         campioni = CAMPIONI(arg[0],
                             arg[1],
@@ -893,10 +796,7 @@ class Pyarchinit_db_management(object):
                             arg[9])
         return campioni
     def insert_values_thesaurus(self, *arg):
-        '''
-        insert_values_thesaurus Inserts the given values into the saurus
-        :return: [description]
-        :rtype: [type]
+        '''insert_values_thesaurus Inserts the given values into thesaurus
         '''
         thesaurus = PYARCHINIT_THESAURUS_SIGLE(arg[0],
                                                arg[1],
@@ -907,11 +807,7 @@ class Pyarchinit_db_management(object):
                                                arg[6])
         return thesaurus
     def insert_values_archeozoology(self, *arg):
-        '''
-        insert_values_archeozoology Inserts values in the archez hierarchy into the given array
-        :return: [description]
-        :rtype: [type]
-        '''
+
         archeozoology = ARCHEOZOOLOGY(arg[0],
                                         arg[1],
                                         arg[2],
@@ -945,11 +841,7 @@ class Pyarchinit_db_management(object):
                                         arg[30])
         return archeozoology
     def insert_values_Lapidei(self, *arg):
-        '''
-        insert_values_Lapidei Inserts values into the LAPIDI_LAPPLICATION_LAPID .
-        :return: [description]
-        :rtype: [type]
-        '''
+
         inventario_lapidei = INVENTARIO_LAPIDEI(arg[0],
                                                 arg[1],
                                                 arg[2],
@@ -972,10 +864,7 @@ class Pyarchinit_db_management(object):
                                                 arg[19])
         return inventario_lapidei
     def insert_values_documentazione(self, *arg):
-        '''
-        insert_values_documentazione Inserts a value into the document
-        :return: [description]
-        :rtype: [type]
+        '''insert_values_documentazione Inserts a value into the document
         '''
         documentazione = DOCUMENTAZIONE(arg[0],
                                         arg[1],
@@ -988,10 +877,7 @@ class Pyarchinit_db_management(object):
                                         arg[8])
         return documentazione
     def insert_pdf_administrator_values(self, *arg):
-        '''
-        insert_pdf_administrator_values Insert values into PDFAdmin object .
-        :return: [description]
-        :rtype: [type]
+        '''insert_pdf_administrator_values Insert values into PDFAdmin object
         '''
         pdf_administrator = PDF_ADMINISTRATOR(arg[0],
                                               arg[1],
@@ -1000,10 +886,7 @@ class Pyarchinit_db_management(object):
                                               arg[4])
         return pdf_administrator
     def insert_campioni_values(self, *arg):
-        '''
-        insert_campioni_values Inserts the values of the given campioni values into the given list .
-        :return: [description]
-        :rtype: [type]
+        '''insert_campioni_values Inserts the values of the given campioni values into the given list
         '''
         campioni = CAMPIONI(arg[0],
                             arg[1],
@@ -1058,11 +941,16 @@ class Pyarchinit_db_management(object):
         session.commit()
         session.close()
     def query(self, n):
-        """
-        Queries the database for a query. This is a convenience method for performing query queries that do not require a database connection.
-        :param self: The : class : . Connection  to use.
-        :param n: The name of the class to query. This must be a string in the form'MyClass'e. g.
-        :returns: A list of : class : . Row 
+        """Queries the database for a query. This is a convenience method for performing query queries that do not require a database connection.
+
+        :param self:
+            The class Connection  to use.
+
+        :param n:
+            The name of the class to query. This must be a string in the form'MyClass'e. g.
+
+        :returns:
+            A list of : class : . Row
         """
         class_name = eval(n)
         # engine = self.connection()
@@ -1075,10 +963,18 @@ class Pyarchinit_db_management(object):
     def query_bool(self, params, table):
         """
         Queries a table and returns True or False depending on the values of the params
-        :param self: Reference to the object that calls this method
-        :param params: Dictionary of key / value pairs to query the table
-        :param table: Name of the table to query ( ex : table1. table2
-        :returns: True or False depending on the
+
+        :param self:
+            Reference to the object that calls this method
+
+        :param params:
+            Dictionary of key / value pairs to query the table
+
+        :param table:
+            Name of the table to query ( ex : table1. table2
+
+        :returns:
+            True or False depending on the
         """
         u = Utility()
         params = u.remove_empty_items_fr_dict(params)
@@ -1112,10 +1008,18 @@ class Pyarchinit_db_management(object):
     def query_bool_special(self, params, table):
         """
         This method queries the database for boolean values that are special. If there are more than one value in the params dict it will return True or False
-        :param self: Reference to the calling object
-        :param params: Dictionary of key / value pairs to search in
-        :param table: Name of the table to query
-        :returns: True or False depending on whether or not the query
+
+        :param self:
+            Reference to the calling object
+
+        :param params:
+            Dictionary of key / value pairs to search in
+
+        :param table:
+            Name of the table to query
+
+        :returns:
+            True or False depending on whether or not the query
         """
         u = Utility()
         params = u.remove_empty_items_fr_dict(params)
@@ -1149,10 +1053,18 @@ class Pyarchinit_db_management(object):
     def query_operator(self, params, table):
         """
         This method queries the database for records that match the parameters. If there are multiple records the result will be a list of dictionaries
-        :param self: Reference to the database object
-        :param params: A list of parameters to match the query with
-        :param table: The table to query. It is used to create the query
-        :returns: A list of dictionaries that match the
+
+        :param self:
+            Reference to the database object
+
+        :param params:
+            A list of parameters to match the query with
+
+        :param table:
+            The table to query. It is used to create the query
+
+        :returns:
+            A list of dictionaries that match the
         """
         u = Utility()
         #params = u.remove_empty_items_fr_dict(params)

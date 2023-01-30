@@ -117,14 +117,14 @@
     <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;nt&#39;</span><span class="p">:</span>
         <span class="n">boolean</span> <span class="o">=</span> <span class="s1">&#39;True&#39;</span>
 <div class="viewcode-block" id="Pyarchinit_db_management.__init__"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.__init__">[documenti]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Initialize the connection to MySQL. This is called by __init__ and should not be called directly.</span>
+        <span class="sd">&quot;&quot;&quot;Initialize the connection to DB. This is called by __init__ and should not be called directly.</span>
 
 <span class="sd">        :param self:</span>
-<span class="sd">            An instance of this class. It&#39;s a reference to the database connection that is used to communicate with the MySQL server.</span>
+<span class="sd">            An instance of this class. It&#39;s a reference to the database connection that is used to communicate with the DB server.</span>
 
 <span class="sd">        :param c:</span>
 
-<span class="sd">            The string containing the connection string. This string is passed to the connect () method of the MySQLConnection object.</span>
+<span class="sd">            The string containing the connection string. This string is passed to the connect () method of the DBConnection object.</span>
 
 <span class="sd">        :returns:</span>
 <span class="sd">            True if successful False otherwise. Note that this method does not return anything</span>
@@ -132,11 +132,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">conn_str</span> <span class="o">=</span> <span class="n">c</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.load_spatialite"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.load_spatialite">[documenti]</a>    <span class="k">def</span> <span class="nf">load_spatialite</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dbapi_conn</span><span class="p">,</span> <span class="n">connection_record</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Loads the spatialite database extension .</span>
-<span class="sd">        :param dbapi_conn: [description]</span>
-<span class="sd">        :type dbapi_conn: [type]</span>
-<span class="sd">        :param connection_record: [description]</span>
-<span class="sd">        :type connection_record: [type]</span>
-<span class="sd">        &#39;&#39;&#39;</span>        
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">dbapi_conn</span><span class="o">.</span><span class="n">enable_load_extension</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">Pyarchinit_OS_Utility</span><span class="o">.</span><span class="n">isWindows</span><span class="p">()</span><span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
             <span class="n">dbapi_conn</span><span class="o">.</span><span class="n">load_extension</span><span class="p">(</span><span class="s1">&#39;mod_spatialite.dll&#39;</span><span class="p">)</span>
@@ -145,9 +141,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">dbapi_conn</span><span class="o">.</span><span class="n">load_extension</span><span class="p">(</span><span class="s1">&#39;mod_spatialite.so&#39;</span><span class="p">)</span>  </div>
 <div class="viewcode-block" id="Pyarchinit_db_management.connection"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.connection">[documenti]</a>    <span class="k">def</span> <span class="nf">connection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Connect to the database .</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
+        <span class="sd">&#39;&#39;&#39;Connect to the database</span>
 <span class="sd">        &#39;&#39;&#39;</span>        
         <span class="n">test</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">try</span><span class="p">:</span>
@@ -173,9 +167,7 @@
         <span class="k">return</span> <span class="n">test</span></div>
         <span class="c1"># insert statement</span>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_pottery_values"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pottery_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_pottery_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Inserts the values of the Pottery values into the pottery dictionary .</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
+        <span class="sd">&#39;&#39;&#39;Inserts the values of the Pottery values into the pottery dictionary</span>
 <span class="sd">        &#39;&#39;&#39;</span>        
         <span class="n">pottery</span> <span class="o">=</span> <span class="n">POTTERY</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                   <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -211,9 +203,7 @@
                   <span class="n">arg</span><span class="p">[</span><span class="mi">31</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">pottery</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_pyus"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pyus">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_pyus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Insert a PyUS into the PyUS object .</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
+        <span class="sd">&#39;&#39;&#39;Insert a PyUS into the PyUS object</span>
 <span class="sd">        &#39;&#39;&#39;</span>        
         <span class="n">pyus</span> <span class="o">=</span> <span class="n">PYUS</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                 <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -231,10 +221,7 @@
                 <span class="n">arg</span><span class="p">[</span><span class="mi">13</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">pyus</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_pyusm"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pyusm">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_pyusm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        insert_pyusm insert a pyusmtsm argument into the pyusm module</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
+        <span class="sd">&#39;&#39;&#39;insert_pyusm insert a pyusmtsm argument into the pyusm module</span>
 <span class="sd">        &#39;&#39;&#39;</span>        
         <span class="n">pyusm</span> <span class="o">=</span> <span class="n">PYUSM</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                 <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -252,30 +239,21 @@
                 <span class="n">arg</span><span class="p">[</span><span class="mi">13</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">pyusm</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_pysito_point"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pysito_point">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_pysito_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        insert_pysito_point Inserts a Pysito point into the stack .</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
+        <span class="sd">&#39;&#39;&#39;insert_pysito_point Inserts a Pysito point into the stack</span>
 <span class="sd">        &#39;&#39;&#39;</span>        
         <span class="n">pysito_point</span> <span class="o">=</span> <span class="n">PYSITO_POINT</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                 <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
                 <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">pysito_point</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_pysito_polygon"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pysito_polygon">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_pysito_polygon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        insert_pysito_polygon Insert a polygon into the current board .</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
+        <span class="sd">&#39;&#39;&#39;insert_pysito_polygon Insert a polygon into the current board</span>
 <span class="sd">        &#39;&#39;&#39;</span>        
         <span class="n">pysito_polygon</span> <span class="o">=</span> <span class="n">PYSITO_POLYGON</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                 <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
                 <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">pysito_polygon</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_pyquote"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pyquote">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_pyquote</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        insert_pyquote Insert a PyYQUOTE into the stack .</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
+        <span class="sd">&#39;&#39;&#39;insert_pyquote Insert a PyYQUOTE into the stack</span>
 <span class="sd">        &#39;&#39;&#39;</span>        
         <span class="n">pyquote</span> <span class="o">=</span> <span class="n">PYQUOTE</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                 <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -290,10 +268,7 @@
                 <span class="n">arg</span><span class="p">[</span><span class="mi">10</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">pyquote</span>    </div>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_pyquote_usm"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pyquote_usm">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_pyquote_usm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        insert_pyquote_usm Insert a pyquote_usm into the stack .</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
+        <span class="sd">&#39;&#39;&#39;insert_pyquote_usm Insert a pyquote_usm into the stack</span>
 <span class="sd">        &#39;&#39;&#39;</span>        
         <span class="n">pyquote_usm</span> <span class="o">=</span> <span class="n">PYQUOTEUSM</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                 <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -308,10 +283,7 @@
                 <span class="n">arg</span><span class="p">[</span><span class="mi">10</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">pyquote_usm</span>    </div>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_pyus_negative"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pyus_negative">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_pyus_negative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        insert_pyus_negative Insert a PyUS_NEGATIVE into the PYUS_NEGATIVE argument .</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
+        <span class="sd">&#39;&#39;&#39;insert_pyus_negative Insert a PyUS_NEGATIVE into the PYUS_NEGATIVE argument</span>
 <span class="sd">        &#39;&#39;&#39;</span>        
         <span class="n">pyus_negative</span> <span class="o">=</span> <span class="n">PYUS_NEGATIVE</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                 <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -322,10 +294,7 @@
                 <span class="n">arg</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">pyus_negative</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_pystrutture"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pystrutture">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_pystrutture</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        insert_pystrutture Insert a pystrututure into the parser .</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
+        <span class="sd">&#39;&#39;&#39;insert_pystrutture Insert a pystrututure into the parser</span>
 <span class="sd">        &#39;&#39;&#39;</span>        
         <span class="n">pystrutture</span> <span class="o">=</span> <span class="n">PYSTRUTTURE</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                 <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -341,10 +310,7 @@
                 <span class="n">arg</span><span class="p">[</span><span class="mi">11</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">pystrutture</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_pyreperti"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pyreperti">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_pyreperti</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        insert_pyreperti Inserts a pyreperti argument into the list of pyreperti arguments .</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
+        <span class="sd">&#39;&#39;&#39;insert_pyreperti Inserts a pyreperti argument into the list of pyreperti arguments</span>
 <span class="sd">        &#39;&#39;&#39;</span>        
         <span class="n">pyreperti</span> <span class="o">=</span> <span class="n">PYREPERTI</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                 <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -353,10 +319,7 @@
                 <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">pyreperti</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_pyindividui"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pyindividui">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_pyindividui</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        insert_pyindividui Inserts a Pyindividui into the list of pyindividis arguments</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
+        <span class="sd">&#39;&#39;&#39;insert_pyindividui Inserts a Pyindividui into the list of pyindividis arguments</span>
 <span class="sd">        &#39;&#39;&#39;</span>        
         <span class="n">pyindividui</span> <span class="o">=</span> <span class="n">PYINDIVIDUI</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                 <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -366,10 +329,7 @@
                 <span class="n">arg</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">pyindividui</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_pycampioni"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pycampioni">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_pycampioni</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        insert_pycampioni Insert a pycampionioni argument into the PYCUAMPIONI .</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
+        <span class="sd">&#39;&#39;&#39;insert_pycampioni Insert a pycampionioni argument into the PYCUAMPIONI</span>
 <span class="sd">        &#39;&#39;&#39;</span>        
         <span class="n">pycampioni</span> <span class="o">=</span> <span class="n">PYCAMPIONI</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                 <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -382,10 +342,7 @@
                 <span class="n">arg</span><span class="p">[</span><span class="mi">8</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">pycampioni</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_pytomba"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pytomba">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_pytomba</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        insert_pytomba Insert a Python TYTomba into a PYTomba object .</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
+        <span class="sd">&#39;&#39;&#39;insert_pytomba Insert a Python TYTomba into a PYTomba object</span>
 <span class="sd">        &#39;&#39;&#39;</span>        
         <span class="n">pytomba</span> <span class="o">=</span> <span class="n">PYTOMBA</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                 <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -393,10 +350,7 @@
                 <span class="n">arg</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">pytomba</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_pydocumentazione"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pydocumentazione">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_pydocumentazione</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        insert_pydocumentazione Inserts a pydocumentazioneer into the first argument .</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
+        <span class="sd">&#39;&#39;&#39;insert_pydocumentazione Inserts a pydocumentazioneer into the first argument</span>
 <span class="sd">        &#39;&#39;&#39;</span>        
         <span class="n">pydocumentazione</span> <span class="o">=</span> <span class="n">PYDOCUMENTAZIONE</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                 <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -407,10 +361,7 @@
                 <span class="n">arg</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">pydocumentazione</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_pylineeriferimento"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pylineeriferimento">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_pylineeriferimento</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        insert_pylineeriferimento Insert a pylineeriferimentoimentoimentoimento text into the docstring</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
+        <span class="sd">&#39;&#39;&#39;insert_pylineeriferimento Insert a pylineeriferimentoimentoimentoimento text into the docstring</span>
 <span class="sd">        &#39;&#39;&#39;</span>       
         <span class="n">pylineeriferimento</span> <span class="o">=</span> <span class="n">PYLINEERIFERIMENTO</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                 <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -419,10 +370,7 @@
                 <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">pylineeriferimento</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_pyripartizioni_spaziali"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pyripartizioni_spaziali">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_pyripartizioni_spaziali</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        insert_pyripartizioni_spaziali Inserts a pyripartizioni_spazizioni_spazizioni into the pyripartizizioni_spazizioni_spazizioni</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
+        <span class="sd">&#39;&#39;&#39;insert_pyripartizioni_spaziali Inserts a pyripartizioni_spazizioni_spazizioni into the pyripartizizioni_spazizioni_spazizioni</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">pyripartizioni_spaziali</span> <span class="o">=</span> <span class="n">PYRIPARTIZIONI_SPAZIALI</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                 <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -432,10 +380,7 @@
                 <span class="n">arg</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">pyripartizioni_spaziali</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_pysezioni"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pysezioni">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_pysezioni</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        insert_pysezioni Insert a PysezionI into the parser</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
+        <span class="sd">&#39;&#39;&#39;insert_pysezioni Insert a PysezionI into the parser</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">pysezioni</span> <span class="o">=</span> <span class="n">PYSEZIONI</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                 <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -447,10 +392,7 @@
                 <span class="n">arg</span><span class="p">[</span><span class="mi">7</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">pysezioni</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_values"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        insert_values Insert values into the US and US tags .</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
+        <span class="sd">&#39;&#39;&#39;insert_values Insert values into the US and US tags</span>
 <span class="sd">        &#39;&#39;&#39;</span>        
         <span class="n">us</span> <span class="o">=</span> <span class="n">US</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                 <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -572,10 +514,7 @@
                 <span class="p">)</span>
         <span class="k">return</span> <span class="n">us</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_ut_values"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_ut_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_ut_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        insert_ut_values Inserts values into the UT values .</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
+        <span class="sd">&#39;&#39;&#39;insert_ut_values Inserts values into the UT values</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">ut</span> <span class="o">=</span> <span class="n">UT</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                 <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -621,10 +560,7 @@
                 <span class="n">arg</span><span class="p">[</span><span class="mi">41</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">ut</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_site_values"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_site_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_site_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        insert_site_values Inserts a site values into the datapoint</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
+        <span class="sd">&#39;&#39;&#39;insert_site_values Inserts a site values into the datapoint</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">sito</span> <span class="o">=</span> <span class="n">SITE</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                     <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -638,10 +574,7 @@
                     <span class="n">arg</span><span class="p">[</span><span class="mi">9</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">sito</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_periodizzazione_values"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_periodizzazione_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_periodizzazione_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        insert_periodizzazione_values Inserts periodizziza into the list of values .</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
+        <span class="sd">&#39;&#39;&#39;insert_periodizzazione_values Inserts periodizziza into the list of values</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">periodizzazione</span> <span class="o">=</span> <span class="n">PERIODIZZAZIONE</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                                           <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -654,10 +587,7 @@
                                           <span class="n">arg</span><span class="p">[</span><span class="mi">8</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">periodizzazione</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_values_reperti"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_reperti">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_reperti</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        insert_values_reperti Inserts values in the inventory into the inventory</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
+        <span class="sd">&#39;&#39;&#39;insert_values_reperti Inserts values in the inventory into the inventory</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">inventario_materiali</span> <span class="o">=</span> <span class="n">INVENTARIO_MATERIALI</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                                                     <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -693,10 +623,7 @@
                                                     <span class="n">arg</span><span class="p">[</span><span class="mi">31</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">inventario_materiali</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_struttura_values"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_struttura_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_struttura_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        insert_struttura_values Inserts STRUTTUTTRA values into the parser .</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
+        <span class="sd">&#39;&#39;&#39;insert_struttura_values Inserts STRUTTUTTRA values into the parser</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">struttura</span> <span class="o">=</span> <span class="n">STRUTTURA</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                               <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -718,10 +645,7 @@
                               <span class="n">arg</span><span class="p">[</span><span class="mi">17</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">struttura</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_values_ind"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_ind">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_ind</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        insert_values_ind insert values into scheduler</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
+        <span class="sd">&#39;&#39;&#39;insert_values_ind insert values into scheduler</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">schedaind</span> <span class="o">=</span> <span class="n">SCHEDAIND</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                               <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -749,10 +673,7 @@
                               <span class="n">arg</span><span class="p">[</span><span class="mi">23</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">schedaind</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_values_detsesso"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_detsesso">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_detsesso</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        insert_values_detsesso Inserts values into the matrix</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
+        <span class="sd">&#39;&#39;&#39;insert_values_detsesso Inserts values into the matrix</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">detsesso</span> <span class="o">=</span> <span class="n">DETSESSO</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                             <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -810,10 +731,7 @@
                             <span class="n">arg</span><span class="p">[</span><span class="mi">53</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">detsesso</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_values_deteta"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_deteta">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_deteta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        insert_values_deteta Compute the deteta of the given arguments .</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
+        <span class="sd">&#39;&#39;&#39;insert_values_deteta Compute the deteta of the given arguments</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">deteta</span> <span class="o">=</span> <span class="n">DETETA</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                         <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -874,10 +792,7 @@
                         <span class="n">arg</span><span class="p">[</span><span class="mi">56</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">deteta</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_media_values"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_media_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_media_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        insert_media_values Insert media values into the media object</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
+        <span class="sd">&#39;&#39;&#39;insert_media_values Insert media values into the media object</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">media</span> <span class="o">=</span> <span class="n">MEDIA</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                       <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -888,10 +803,7 @@
                       <span class="n">arg</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">media</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_mediathumb_values"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_mediathumb_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_mediathumb_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        insert_mediathumb_values Inserts values into the media_thumbnail argument .</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
+        <span class="sd">&#39;&#39;&#39;insert_mediathumb_values Inserts values into the media_thumbnail argument</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">media_thumb</span> <span class="o">=</span> <span class="n">MEDIA_THUMB</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                                   <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -913,10 +825,7 @@
                                       <span class="n">arg</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">mediatoentity</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_media2entity_view_values"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_media2entity_view_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_media2entity_view_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        insert_media2entity_view_values Inserts values into Media2entity_view</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
+        <span class="sd">&#39;&#39;&#39;insert_media2entity_view_values Inserts values into Media2entity_view</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">mediaentity_view</span><span class="o">=</span> <span class="n">MEDIAVIEW</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                 <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -927,10 +836,7 @@
                 <span class="n">arg</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">mediaentity_view</span> </div>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_values_tomba"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_tomba">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_tomba</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        insert_values_tomba Inserts values into TOMBA</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
+        <span class="sd">&#39;&#39;&#39;insert_values_tomba Inserts values into TOMBA</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">tomba</span> <span class="o">=</span> <span class="n">TOMBA</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                               <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -960,10 +866,7 @@
                               <span class="n">arg</span><span class="p">[</span><span class="mi">25</span><span class="p">],)</span>
         <span class="k">return</span> <span class="n">tomba</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_values_campioni"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_campioni">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_campioni</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        insert_values_campioni Inserts the given value into the campioni .</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
+        <span class="sd">&#39;&#39;&#39;insert_values_campioni Inserts the given value into the campioni</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">campioni</span> <span class="o">=</span> <span class="n">CAMPIONI</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                             <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -977,10 +880,7 @@
                             <span class="n">arg</span><span class="p">[</span><span class="mi">9</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">campioni</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_values_thesaurus"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_thesaurus">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_thesaurus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        insert_values_thesaurus Inserts the given values into the saurus</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
+        <span class="sd">&#39;&#39;&#39;insert_values_thesaurus Inserts the given values into thesaurus</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">thesaurus</span> <span class="o">=</span> <span class="n">PYARCHINIT_THESAURUS_SIGLE</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                                                <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -990,12 +890,8 @@
                                                <span class="n">arg</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
                                                <span class="n">arg</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">thesaurus</span></div>
-<div class="viewcode-block" id="Pyarchinit_db_management.insert_values_archeozoology"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_archeozoology">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_archeozoology</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        insert_values_archeozoology Inserts values in the archez hierarchy into the given array</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
-<span class="sd">        &#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">insert_values_archeozoology</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+
         <span class="n">archeozoology</span> <span class="o">=</span> <span class="n">ARCHEOZOOLOGY</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                                         <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
                                         <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
@@ -1027,13 +923,9 @@
                                         <span class="n">arg</span><span class="p">[</span><span class="mi">28</span><span class="p">],</span>
                                         <span class="n">arg</span><span class="p">[</span><span class="mi">29</span><span class="p">],</span>
                                         <span class="n">arg</span><span class="p">[</span><span class="mi">30</span><span class="p">])</span>
-        <span class="k">return</span> <span class="n">archeozoology</span></div>
-<div class="viewcode-block" id="Pyarchinit_db_management.insert_values_Lapidei"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_Lapidei">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_Lapidei</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        insert_values_Lapidei Inserts values into the LAPIDI_LAPPLICATION_LAPID .</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
-<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="n">archeozoology</span>
+    <span class="k">def</span> <span class="nf">insert_values_Lapidei</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+
         <span class="n">inventario_lapidei</span> <span class="o">=</span> <span class="n">INVENTARIO_LAPIDEI</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                                                 <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
                                                 <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
@@ -1054,12 +946,9 @@
                                                 <span class="n">arg</span><span class="p">[</span><span class="mi">17</span><span class="p">],</span>
                                                 <span class="n">arg</span><span class="p">[</span><span class="mi">18</span><span class="p">],</span>
                                                 <span class="n">arg</span><span class="p">[</span><span class="mi">19</span><span class="p">])</span>
-        <span class="k">return</span> <span class="n">inventario_lapidei</span></div>
+        <span class="k">return</span> <span class="n">inventario_lapidei</span>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_values_documentazione"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_documentazione">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_documentazione</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        insert_values_documentazione Inserts a value into the document</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
+        <span class="sd">&#39;&#39;&#39;insert_values_documentazione Inserts a value into the document</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">documentazione</span> <span class="o">=</span> <span class="n">DOCUMENTAZIONE</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                                         <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -1072,10 +961,7 @@
                                         <span class="n">arg</span><span class="p">[</span><span class="mi">8</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">documentazione</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_pdf_administrator_values"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pdf_administrator_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_pdf_administrator_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        insert_pdf_administrator_values Insert values into PDFAdmin object .</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
+        <span class="sd">&#39;&#39;&#39;insert_pdf_administrator_values Insert values into PDFAdmin object</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">pdf_administrator</span> <span class="o">=</span> <span class="n">PDF_ADMINISTRATOR</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                                               <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -1084,10 +970,7 @@
                                               <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">pdf_administrator</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_campioni_values"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_campioni_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_campioni_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        insert_campioni_values Inserts the values of the given campioni values into the given list .</span>
-<span class="sd">        :return: [description]</span>
-<span class="sd">        :rtype: [type]</span>
+        <span class="sd">&#39;&#39;&#39;insert_campioni_values Inserts the values of the given campioni values into the given list</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">campioni</span> <span class="o">=</span> <span class="n">CAMPIONI</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                             <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -1142,11 +1025,16 @@
         <span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
         <span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.query"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.query">[documenti]</a>    <span class="k">def</span> <span class="nf">query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Queries the database for a query. This is a convenience method for performing query queries that do not require a database connection.</span>
-<span class="sd">        :param self: The : class : . Connection  to use.</span>
-<span class="sd">        :param n: The name of the class to query. This must be a string in the form&#39;MyClass&#39;e. g.</span>
-<span class="sd">        :returns: A list of : class : . Row </span>
+        <span class="sd">&quot;&quot;&quot;Queries the database for a query. This is a convenience method for performing query queries that do not require a database connection.</span>
+
+<span class="sd">        :param self:</span>
+<span class="sd">            The class Connection  to use.</span>
+
+<span class="sd">        :param n:</span>
+<span class="sd">            The name of the class to query. This must be a string in the form&#39;MyClass&#39;e. g.</span>
+
+<span class="sd">        :returns:</span>
+<span class="sd">            A list of : class : . Row</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">class_name</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
         <span class="c1"># engine = self.connection()</span>
@@ -1159,10 +1047,18 @@
 <div class="viewcode-block" id="Pyarchinit_db_management.query_bool"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.query_bool">[documenti]</a>    <span class="k">def</span> <span class="nf">query_bool</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">table</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Queries a table and returns True or False depending on the values of the params</span>
-<span class="sd">        :param self: Reference to the object that calls this method</span>
-<span class="sd">        :param params: Dictionary of key / value pairs to query the table</span>
-<span class="sd">        :param table: Name of the table to query ( ex : table1. table2</span>
-<span class="sd">        :returns: True or False depending on the</span>
+
+<span class="sd">        :param self:</span>
+<span class="sd">            Reference to the object that calls this method</span>
+
+<span class="sd">        :param params:</span>
+<span class="sd">            Dictionary of key / value pairs to query the table</span>
+
+<span class="sd">        :param table:</span>
+<span class="sd">            Name of the table to query ( ex : table1. table2</span>
+
+<span class="sd">        :returns:</span>
+<span class="sd">            True or False depending on the</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">u</span> <span class="o">=</span> <span class="n">Utility</span><span class="p">()</span>
         <span class="n">params</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">remove_empty_items_fr_dict</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
@@ -1196,10 +1092,18 @@
 <div class="viewcode-block" id="Pyarchinit_db_management.query_bool_special"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.query_bool_special">[documenti]</a>    <span class="k">def</span> <span class="nf">query_bool_special</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">table</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method queries the database for boolean values that are special. If there are more than one value in the params dict it will return True or False</span>
-<span class="sd">        :param self: Reference to the calling object</span>
-<span class="sd">        :param params: Dictionary of key / value pairs to search in</span>
-<span class="sd">        :param table: Name of the table to query</span>
-<span class="sd">        :returns: True or False depending on whether or not the query</span>
+
+<span class="sd">        :param self:</span>
+<span class="sd">            Reference to the calling object</span>
+
+<span class="sd">        :param params:</span>
+<span class="sd">            Dictionary of key / value pairs to search in</span>
+
+<span class="sd">        :param table:</span>
+<span class="sd">            Name of the table to query</span>
+
+<span class="sd">        :returns:</span>
+<span class="sd">            True or False depending on whether or not the query</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">u</span> <span class="o">=</span> <span class="n">Utility</span><span class="p">()</span>
         <span class="n">params</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">remove_empty_items_fr_dict</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
@@ -1233,10 +1137,18 @@
 <div class="viewcode-block" id="Pyarchinit_db_management.query_operator"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.query_operator">[documenti]</a>    <span class="k">def</span> <span class="nf">query_operator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">table</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method queries the database for records that match the parameters. If there are multiple records the result will be a list of dictionaries</span>
-<span class="sd">        :param self: Reference to the database object</span>
-<span class="sd">        :param params: A list of parameters to match the query with</span>
-<span class="sd">        :param table: The table to query. It is used to create the query</span>
-<span class="sd">        :returns: A list of dictionaries that match the</span>
+
+<span class="sd">        :param self:</span>
+<span class="sd">            Reference to the database object</span>
+
+<span class="sd">        :param params:</span>
+<span class="sd">            A list of parameters to match the query with</span>
+
+<span class="sd">        :param table:</span>
+<span class="sd">            The table to query. It is used to create the query</span>
+
+<span class="sd">        :returns:</span>
+<span class="sd">            A list of dictionaries that match the</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">u</span> <span class="o">=</span> <span class="n">Utility</span><span class="p">()</span>
         <span class="c1">#params = u.remove_empty_items_fr_dict(params)</span>
