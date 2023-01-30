@@ -93,7 +93,7 @@ pyarchinit db manager
 .. note::
     Questa classe presenta tutte le funzioni di gestione del database
 
-------------------------------------------------------------------
+-------------------------------------------------------------------------
 
 .. automodule:: modules.db.pyarchinit_db_manager
 
@@ -111,7 +111,7 @@ pyarchinit Media Utility
         It utilizes the Image module from the Python Imaging Library (PIL)
         to open, resize, and save the image.
 
-------------------------------------------------------------------
+---------------------------------------------------------------------------
 
 .. automodule:: modules.utility.pyarchinit_media_utility
 
