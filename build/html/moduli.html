@@ -8,7 +8,7 @@
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/style.css" type="text/css" />
-      <link rel="stylesheet" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" type="text/css" />
+      <link rel="stylesheet" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" type="text/css" />
       <link rel="stylesheet" href="_static/style.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
@@ -17,7 +17,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/copybutton.js"></script>
         <script src="_static/translations.js"></script>
         <script src="_static/design-tabs.js"></script>
@@ -56,13 +58,98 @@
 <li class="toctree-l1"><a class="reference internal" href="funzioni.html">7. Funzioni</a></li>
 <li class="toctree-l1"><a class="reference internal" href="come_documentare.html">8. Come documentare</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">9. Moduli pyArchInit: Classi e Funzioni</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#pyarchinit-os-utility">9.1. pyarchinit OS utility</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pyarchinit-utility">9.2. pyarchinit_utility</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pyarchinit-installation-folder">9.3. pyarchinit installation folder</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#settings">9.4. settings</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pyarchinit-us-usm">9.5. pyarchinit US-USM</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pyarchinit-db-manager">9.6. pyarchinit db manager</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pyarchinit-media-utility">9.7. pyarchinit Media Utility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyarchinit-os-utility">9.1. pyarchinit OS utility</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modules.utility.pyarchinit_OS_utility.Pyarchinit_OS_Utility"><code class="docutils literal notranslate"><span class="pre">Pyarchinit_OS_Utility</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#modules.utility.pyarchinit_OS_utility.Pyarchinit_OS_Utility.checkGraphvizInstallation"><code class="docutils literal notranslate"><span class="pre">Pyarchinit_OS_Utility.checkGraphvizInstallation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.utility.pyarchinit_OS_utility.Pyarchinit_OS_Utility.checkPostgresInstallation"><code class="docutils literal notranslate"><span class="pre">Pyarchinit_OS_Utility.checkPostgresInstallation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.utility.pyarchinit_OS_utility.Pyarchinit_OS_Utility.copy_file"><code class="docutils literal notranslate"><span class="pre">Pyarchinit_OS_Utility.copy_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.utility.pyarchinit_OS_utility.Pyarchinit_OS_Utility.create_dir"><code class="docutils literal notranslate"><span class="pre">Pyarchinit_OS_Utility.create_dir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.utility.pyarchinit_OS_utility.Pyarchinit_OS_Utility.isMac"><code class="docutils literal notranslate"><span class="pre">Pyarchinit_OS_Utility.isMac()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.utility.pyarchinit_OS_utility.Pyarchinit_OS_Utility.isWindows"><code class="docutils literal notranslate"><span class="pre">Pyarchinit_OS_Utility.isWindows()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pyarchinit-utility">9.2. pyarchinit_utility</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modules.db.pyarchinit_utility.Utility"><code class="docutils literal notranslate"><span class="pre">Utility</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#modules.db.pyarchinit_utility.Utility.add_item_to_dict"><code class="docutils literal notranslate"><span class="pre">Utility.add_item_to_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.db.pyarchinit_utility.Utility.count_list_eq_v"><code class="docutils literal notranslate"><span class="pre">Utility.count_list_eq_v()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.db.pyarchinit_utility.Utility.find_list_in_dict"><code class="docutils literal notranslate"><span class="pre">Utility.find_list_in_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.db.pyarchinit_utility.Utility.list_col_index_value"><code class="docutils literal notranslate"><span class="pre">Utility.list_col_index_value()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.db.pyarchinit_utility.Utility.list_tup_2_list"><code class="docutils literal notranslate"><span class="pre">Utility.list_tup_2_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.db.pyarchinit_utility.Utility.pos_none_in_list"><code class="docutils literal notranslate"><span class="pre">Utility.pos_none_in_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.db.pyarchinit_utility.Utility.select_in_list"><code class="docutils literal notranslate"><span class="pre">Utility.select_in_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.db.pyarchinit_utility.Utility.tup_2_list"><code class="docutils literal notranslate"><span class="pre">Utility.tup_2_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.db.pyarchinit_utility.Utility.tup_2_list_II"><code class="docutils literal notranslate"><span class="pre">Utility.tup_2_list_II()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.db.pyarchinit_utility.Utility.tup_2_list_III"><code class="docutils literal notranslate"><span class="pre">Utility.tup_2_list_III()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pyarchinit-installation-folder">9.3. pyarchinit installation folder</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modules.utility.pyarchinit_folder_installation.pyarchinit_Folder_installation"><code class="docutils literal notranslate"><span class="pre">pyarchinit_Folder_installation</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#modules.utility.pyarchinit_folder_installation.pyarchinit_Folder_installation.installConfigFile"><code class="docutils literal notranslate"><span class="pre">pyarchinit_Folder_installation.installConfigFile()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.utility.pyarchinit_folder_installation.pyarchinit_Folder_installation.install_dir"><code class="docutils literal notranslate"><span class="pre">pyarchinit_Folder_installation.install_dir()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#settings">9.4. settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modules.utility.settings.Settings"><code class="docutils literal notranslate"><span class="pre">Settings</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#modules.utility.settings.Settings.set_configuration"><code class="docutils literal notranslate"><span class="pre">Settings.set_configuration()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pyarchinit-us-usm">9.5. pyarchinit US-USM</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tabs.US_USM.pyarchinit_US"><code class="docutils literal notranslate"><span class="pre">pyarchinit_US</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#tabs.US_USM.pyarchinit_US.EM_extract_node_name"><code class="docutils literal notranslate"><span class="pre">pyarchinit_US.EM_extract_node_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tabs.US_USM.pyarchinit_US.check_if_empty"><code class="docutils literal notranslate"><span class="pre">pyarchinit_US.check_if_empty()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tabs.US_USM.pyarchinit_US.on_pushButton_csv2us_pressed"><code class="docutils literal notranslate"><span class="pre">pyarchinit_US.on_pushButton_csv2us_pressed()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tabs.US_USM.pyarchinit_US.on_pushButton_fix_pressed"><code class="docutils literal notranslate"><span class="pre">pyarchinit_US.on_pushButton_fix_pressed()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tabs.US_USM.pyarchinit_US.on_pushButton_graphml2csv_pressed"><code class="docutils literal notranslate"><span class="pre">pyarchinit_US.on_pushButton_graphml2csv_pressed()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tabs.US_USM.pyarchinit_US.search_rapp"><code class="docutils literal notranslate"><span class="pre">pyarchinit_US.search_rapp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tabs.US_USM.pyarchinit_US.unit_type_select"><code class="docutils literal notranslate"><span class="pre">pyarchinit_US.unit_type_select()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pyarchinit-db-manager">9.6. pyarchinit db manager</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management"><code class="docutils literal notranslate"><span class="pre">Pyarchinit_db_management</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.fields_list"><code class="docutils literal notranslate"><span class="pre">Pyarchinit_db_management.fields_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.group_by"><code class="docutils literal notranslate"><span class="pre">Pyarchinit_db_management.group_by()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_campioni_values"><code class="docutils literal notranslate"><span class="pre">Pyarchinit_db_management.insert_campioni_values()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_media2entity_values"><code class="docutils literal notranslate"><span class="pre">Pyarchinit_db_management.insert_media2entity_values()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_media2entity_view_values"><code class="docutils literal notranslate"><span class="pre">Pyarchinit_db_management.insert_media2entity_view_values()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_media_values"><code class="docutils literal notranslate"><span class="pre">Pyarchinit_db_management.insert_media_values()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_mediathumb_values"><code class="docutils literal notranslate"><span class="pre">Pyarchinit_db_management.insert_mediathumb_values()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pdf_administrator_values"><code class="docutils literal notranslate"><span class="pre">Pyarchinit_db_management.insert_pdf_administrator_values()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_periodizzazione_values"><code class="docutils literal notranslate"><span class="pre">Pyarchinit_db_management.insert_periodizzazione_values()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_site_values"><code class="docutils literal notranslate"><span class="pre">Pyarchinit_db_management.insert_site_values()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_struttura_values"><code class="docutils literal notranslate"><span class="pre">Pyarchinit_db_management.insert_struttura_values()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_ut_values"><code class="docutils literal notranslate"><span class="pre">Pyarchinit_db_management.insert_ut_values()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values"><code class="docutils literal notranslate"><span class="pre">Pyarchinit_db_management.insert_values()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_Lapidei"><code class="docutils literal notranslate"><span class="pre">Pyarchinit_db_management.insert_values_Lapidei()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_archeozoology"><code class="docutils literal notranslate"><span class="pre">Pyarchinit_db_management.insert_values_archeozoology()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_campioni"><code class="docutils literal notranslate"><span class="pre">Pyarchinit_db_management.insert_values_campioni()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_deteta"><code class="docutils literal notranslate"><span class="pre">Pyarchinit_db_management.insert_values_deteta()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_detsesso"><code class="docutils literal notranslate"><span class="pre">Pyarchinit_db_management.insert_values_detsesso()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_documentazione"><code class="docutils literal notranslate"><span class="pre">Pyarchinit_db_management.insert_values_documentazione()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_ind"><code class="docutils literal notranslate"><span class="pre">Pyarchinit_db_management.insert_values_ind()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_reperti"><code class="docutils literal notranslate"><span class="pre">Pyarchinit_db_management.insert_values_reperti()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_thesaurus"><code class="docutils literal notranslate"><span class="pre">Pyarchinit_db_management.insert_values_thesaurus()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_tomba"><code class="docutils literal notranslate"><span class="pre">Pyarchinit_db_management.insert_values_tomba()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.update"><code class="docutils literal notranslate"><span class="pre">Pyarchinit_db_management.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.update_for"><code class="docutils literal notranslate"><span class="pre">Pyarchinit_db_management.update_for()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#modules.db.pyarchinit_db_manager.ANSI"><code class="docutils literal notranslate"><span class="pre">ANSI</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pyarchinit-media-utility">9.7. pyarchinit Media Utility</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modules.utility.pyarchinit_media_utility.Media_utility"><code class="docutils literal notranslate"><span class="pre">Media_utility</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="bibliography.html">10. Bibliografia</a></li>
@@ -82,8 +169,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Naviga tra le pagine">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li><span class="section-number">9. </span>Moduli pyArchInit: Classi e Funzioni</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">9. </span>Moduli pyArchInit: Classi e Funzioni</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/moduli.rst.txt" rel="nofollow"> Visualizza sorgente pagina</a>
       </li>
@@ -94,14 +181,14 @@
            <div itemprop="articleBody">
              
   <section id="moduli-pyarchinit-classi-e-funzioni">
-<h1><span class="section-number">9. </span>Moduli pyArchInit: Classi e Funzioni<a class="headerlink" href="#moduli-pyarchinit-classi-e-funzioni" title="Link a questa intestazione"></a></h1>
+<h1><span class="section-number">9. </span>Moduli pyArchInit: Classi e Funzioni<a class="headerlink" href="#moduli-pyarchinit-classi-e-funzioni" title="Permalink to this heading"></a></h1>
 <div class="admonition important">
 <p class="admonition-title">Importante</p>
 <p>In questa sezione si descivono le funzioni e alcune delle classi presenti in pyarchinit
 che possano aiutare allo sviluppo e implementazione del codice.</p>
 </div>
 <section id="pyarchinit-os-utility">
-<h2><span class="section-number">9.1. </span>pyarchinit OS utility<a class="headerlink" href="#pyarchinit-os-utility" title="Link a questa intestazione"></a></h2>
+<h2><span class="section-number">9.1. </span>pyarchinit OS utility<a class="headerlink" href="#pyarchinit-os-utility" title="Permalink to this heading"></a></h2>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
 <p>Questa classe presenta alcune funzioni per copiare immagini, file e creare cartelle durante
@@ -167,7 +254,7 @@ l’installazione del plugin</p>
 
 </section>
 <section id="pyarchinit-utility">
-<h2><span class="section-number">9.2. </span>pyarchinit_utility<a class="headerlink" href="#pyarchinit-utility" title="Link a questa intestazione"></a></h2>
+<h2><span class="section-number">9.2. </span>pyarchinit_utility<a class="headerlink" href="#pyarchinit-utility" title="Permalink to this heading"></a></h2>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
 <p>Questa classe presenta funzioni utili per aggiungere elementi ad un dizionario, contare
@@ -255,7 +342,7 @@ value in the i position</p>
 
 </section>
 <section id="pyarchinit-installation-folder">
-<h2><span class="section-number">9.3. </span>pyarchinit installation folder<a class="headerlink" href="#pyarchinit-installation-folder" title="Link a questa intestazione"></a></h2>
+<h2><span class="section-number">9.3. </span>pyarchinit installation folder<a class="headerlink" href="#pyarchinit-installation-folder" title="Permalink to this heading"></a></h2>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
 <p>Questa classe presenta due funzioni per installare nel percorso del tuo utente
@@ -281,7 +368,7 @@ i file di configurazione e le cartelle</p>
 
 </section>
 <section id="settings">
-<h2><span class="section-number">9.4. </span>settings<a class="headerlink" href="#settings" title="Link a questa intestazione"></a></h2>
+<h2><span class="section-number">9.4. </span>settings<a class="headerlink" href="#settings" title="Permalink to this heading"></a></h2>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
 <p>Questa classe presenta due funzioni di settaggio</p>
@@ -341,7 +428,7 @@ conf.write(b»”,”LOGO” : “insert path for the image logo”}»)</p>
 
 </section>
 <section id="pyarchinit-us-usm">
-<h2><span class="section-number">9.5. </span>pyarchinit US-USM<a class="headerlink" href="#pyarchinit-us-usm" title="Link a questa intestazione"></a></h2>
+<h2><span class="section-number">9.5. </span>pyarchinit US-USM<a class="headerlink" href="#pyarchinit-us-usm" title="Permalink to this heading"></a></h2>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
 <p>mettere descrizione</p>
@@ -427,7 +514,7 @@ The user’s selection is returned as a string.</p>
 
 </section>
 <section id="pyarchinit-db-manager">
-<h2><span class="section-number">9.6. </span>pyarchinit db manager<a class="headerlink" href="#pyarchinit-db-manager" title="Link a questa intestazione"></a></h2>
+<h2><span class="section-number">9.6. </span>pyarchinit db manager<a class="headerlink" href="#pyarchinit-db-manager" title="Permalink to this heading"></a></h2>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
 <p>Questa classe presenta tutte le funzioni di gestione del database</p>
@@ -611,7 +698,7 @@ cont = cont+1</p>
 
 </section>
 <section id="pyarchinit-media-utility">
-<h2><span class="section-number">9.7. </span>pyarchinit Media Utility<a class="headerlink" href="#pyarchinit-media-utility" title="Link a questa intestazione"></a></h2>
+<h2><span class="section-number">9.7. </span>pyarchinit Media Utility<a class="headerlink" href="#pyarchinit-media-utility" title="Permalink to this heading"></a></h2>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
 <p>Media_utility class is used for creating thumbnails of images.
@@ -658,7 +745,7 @@ image.save(new_image_thumbnail)</p>
     <p>&#169; Copyright 2021, AdArte srl.</p>
   </div>
 
-  Realizzato con <a href="https://www.sphinx-doc.org/">Sphinx</a> e il tema
+  Realizzato con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
     fornito da <a href="https://readthedocs.org">Read the Docs</a>.
    
