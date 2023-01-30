@@ -88,6 +88,21 @@ pyarchinit US-USM
        :members:
 
 
+pyarchinit db manager
+=======================================
+.. note::
+    Questa classe presenta tutte le funzioni di gestione del database
+
+-------------------------------------------------------------------------
+
+.. automodule:: modules.db.pyarchinit_db_manager
+
+   .. autoclass:: Pyarchinit_db_management
+       :members:
+
+   .. autoclass:: ANSI
+       :members:
+
 
 pyarchinit Media Utility
 =======================================
