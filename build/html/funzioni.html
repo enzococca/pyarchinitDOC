@@ -8,7 +8,7 @@
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/style.css" type="text/css" />
-      <link rel="stylesheet" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" type="text/css" />
+      <link rel="stylesheet" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" type="text/css" />
       <link rel="stylesheet" href="_static/style.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
@@ -17,6 +17,7 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/copybutton.js"></script>
         <script src="_static/translations.js"></script>
@@ -84,8 +85,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Naviga tra le pagine">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li><span class="section-number">7. </span>Funzioni</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">7. </span>Funzioni</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/funzioni.rst.txt" rel="nofollow"> Visualizza sorgente pagina</a>
       </li>
@@ -99,7 +100,7 @@
 <img alt="_images/logo_3.png" src="_images/logo_3.png" />
 </figure>
 <section id="funzioni">
-<h1><span class="section-number">7. </span>Funzioni<a class="headerlink" href="#funzioni" title="Link a questa intestazione"></a></h1>
+<h1><span class="section-number">7. </span>Funzioni<a class="headerlink" href="#funzioni" title="Permalink to this heading"></a></h1>
 <p>La scheda US possiede una serie di funzioni che vanno ad automatizzare alcune delle operazioni che si compiono nel corso della catastazione ed elaborazione dei dati archeologici al fine di aumentare il controllo sull’integrità del dato e la validità dell’output. Al momento per la scheda US sono disponibili le seguenti funzioni:</p>
 <ul class="simple">
 <li><p>apertura delle schede US da selezione su base GIS;</p></li>
@@ -118,7 +119,7 @@ Per generare piante composite, pyArchInit prevede una generazione in automatico 
 <p>Tuttavia Qgis non è in grado di disegnare le US nel loro ordine stratigrafico. Per fare questo esiste un campo apposito «order layer», contenuto nela scheda US che gestisce in Qgis l’ordine di disegno: le più antiche sotto, le più recenti sopra. Per poter assegnare l’indice di ordinamento pyArchInit dispone di uno script che leggendo i rapporti stratigrafici, assegna l’indice. Per poter assegnare l’indice è fondamentale che i rapporti stratigrafici non contengano errori.</p>
 <p>Per arrivare ad una schedatura perfetta è bene eseguire il Controllo automatico dei rapporti stratigrafici e generare il Matrix per poter verificare che la schedatura non contenga errori.</p>
 <section id="apertura-delle-schede-us-da-selezione-su-base-gis">
-<h2><span class="section-number">7.1. </span>Apertura delle schede US da selezione su base GIS<a class="headerlink" href="#apertura-delle-schede-us-da-selezione-su-base-gis" title="Link a questa intestazione"></a></h2>
+<h2><span class="section-number">7.1. </span>Apertura delle schede US da selezione su base GIS<a class="headerlink" href="#apertura-delle-schede-us-da-selezione-su-base-gis" title="Permalink to this heading"></a></h2>
 <p>Sul livello pyarchinit_US_view eseguire una selezione nella porzione di scavo che desiderate.</p>
 <figure class="align-center" id="id1">
 <img alt="_images/img_3231f.png" src="_images/img_3231f.png" />
@@ -160,7 +161,7 @@ Per generare piante composite, pyArchInit prevede una generazione in automatico 
 </figure>
 </section>
 <section id="visualizzazione-su-base-gis-dell-us-corrente">
-<h2><span class="section-number">7.2. </span>Visualizzazione su base GIS dell’US corrente<a class="headerlink" href="#visualizzazione-su-base-gis-dell-us-corrente" title="Link a questa intestazione"></a></h2>
+<h2><span class="section-number">7.2. </span>Visualizzazione su base GIS dell’US corrente<a class="headerlink" href="#visualizzazione-su-base-gis-dell-us-corrente" title="Permalink to this heading"></a></h2>
 <p>Quando ci si è posizionati sull’US che si desidera visualizzare, andare nella sezione tools e cliccare sul pulsante «Disegna US”.</p>
 <figure class="align-center" id="id7">
 <img alt="_images/img_3231n.png" src="_images/img_3231n.png" />
@@ -184,12 +185,12 @@ Per generare piante composite, pyArchInit prevede una generazione in automatico 
 <p>!!! ATTENZIONE !!! AL MOMENTO QUESTO SISTEMA NON FUNZIONA PIU” PER MODIFICA DELLE API DI QGIS!!!</p>
 </section>
 <section id="visualizzazione-della-pianta-all-interno-della-scheda-us">
-<h2><span class="section-number">7.3. </span>Visualizzazione della pianta all’interno della scheda US<a class="headerlink" href="#visualizzazione-della-pianta-all-interno-della-scheda-us" title="Link a questa intestazione"></a></h2>
+<h2><span class="section-number">7.3. </span>Visualizzazione della pianta all’interno della scheda US<a class="headerlink" href="#visualizzazione-della-pianta-all-interno-della-scheda-us" title="Permalink to this heading"></a></h2>
 <p>È possibile visualizzare la pianta di una US andando nella sezione Tools e cliccando sul pulsante “Preview pianta US” apparirà un messaggio che vi avvertirà che ogni US consultata sarà caricata nell’apposita sezione.</p>
 <p>Andando nella sezione “Piante” della scheda US sarà possibile visualizzare la pianta dell’US, con le caratterizzazioni e le quote. Posizionandosi sulla pianta è possibile zoomare con la rotella del mouse e selezionando lo strumento di spostamento (icona con la manina) è possibile navigare in ogni direzione.</p>
 </section>
 <section id="creazione-in-automatico-del-codice-di-periodizzazione-dell-us">
-<h2><span class="section-number">7.4. </span>Creazione in automatico del codice di periodizzazione dell’US<a class="headerlink" href="#creazione-in-automatico-del-codice-di-periodizzazione-dell-us" title="Link a questa intestazione"></a></h2>
+<h2><span class="section-number">7.4. </span>Creazione in automatico del codice di periodizzazione dell’US<a class="headerlink" href="#creazione-in-automatico-del-codice-di-periodizzazione-dell-us" title="Permalink to this heading"></a></h2>
 <p>Dalla scheda US è possibile creare il codice di periodizzazione dell’US.</p>
 <p>Come spiegato nel capitolo inerente alla scheda di Periodizzazione e nella parte della scheda US riguardante la periodizzazione,
 una volta assegnato un periodo/fase iniziale all’US e un eventuale periodo finale, basta cliccare nella sezione Tools il
@@ -262,7 +263,7 @@ periodi precedenti;
 </figure>
 </section>
 <section id="sistema-di-generazione-di-piante-composite-a-partire-dalle-query-della-scheda-us">
-<h2><span class="section-number">7.5. </span>Sistema di generazione di piante composite a partire dalle query della scheda US<a class="headerlink" href="#sistema-di-generazione-di-piante-composite-a-partire-dalle-query-della-scheda-us" title="Link a questa intestazione"></a></h2>
+<h2><span class="section-number">7.5. </span>Sistema di generazione di piante composite a partire dalle query della scheda US<a class="headerlink" href="#sistema-di-generazione-di-piante-composite-a-partire-dalle-query-della-scheda-us" title="Permalink to this heading"></a></h2>
 <ol class="arabic simple">
 <li><p>Andate nella sezione Tools della scheda US e cliccare sul pulsante “Visualizzazione GIS”; apparirà un messaggio che vi informa che le vostre ricerche saranno trasformate in piante di scavo.</p></li>
 </ol>
@@ -301,7 +302,7 @@ periodi precedenti;
 </figure>
 </section>
 <section id="controllo-automatico-dei-rapporti-stratigrafici">
-<h2><span class="section-number">7.6. </span>Controllo automatico dei rapporti stratigrafici<a class="headerlink" href="#controllo-automatico-dei-rapporti-stratigrafici" title="Link a questa intestazione"></a></h2>
+<h2><span class="section-number">7.6. </span>Controllo automatico dei rapporti stratigrafici<a class="headerlink" href="#controllo-automatico-dei-rapporti-stratigrafici" title="Permalink to this heading"></a></h2>
 <p>Nella sezione Tools, selezionando uno scavo, è possibile eseguire il controllo sui rapporti stratigrafici.</p>
 <p>Gli errori nell’inserimento delle US possono essere di vari tipi. Ecco elencate alcune casistiche:</p>
 <ol class="arabic simple">
@@ -341,7 +342,7 @@ Sito: “Via Cignani, 18 Rimini “, #Area: “1”, US: 128 - “Riempimento”
 <p>A questo punto basta andare ad aprire i relativi files e iniziare a verificare i rapporti. E” possibile per fare questo anche tenersi aperto il matrix interattivo per disegnare le US su Qgis. Nell’esempio sotto riportato, Abbiamo verificato perchè il sistema ci riporta l’errore US6 Gli si appoggia US12. Accendendo su Qgis le US possiamo verificare che vi sia adiacenza topografica, quindi il rapporto è possibile, mentre aprendo la scheda US di US12, vediamo che è stato inserito il medesimo rapporto US12 Gli si appoggia US6. A questo punto solo l’archeologo è in grado di capire come risolvere il paradosso e da cosa può dipendere.</p>
 </section>
 <section id="esportazione-del-matrix-di-harris">
-<h2><span class="section-number">7.7. </span>Esportazione del matrix di Harris<a class="headerlink" href="#esportazione-del-matrix-di-harris" title="Link a questa intestazione"></a></h2>
+<h2><span class="section-number">7.7. </span>Esportazione del matrix di Harris<a class="headerlink" href="#esportazione-del-matrix-di-harris" title="Permalink to this heading"></a></h2>
 <p>È possibile realizzare dei diagrammi stratigrafici che espongano la successione stratigrafica di qualsiasi istanza del database dopo una ricerca. Il sistema esporta due formati: un’immagine raster in .png e un vettoriale .svg modificabile. L’aspetto del matrix ovviamente tende ad essere ordinato quante meno US sono presenti. Tuttavia un primo tentativo di migliorare l’aspetto del diagramma ottenuto è stato rappresentato dall’aggiunta del raggruppamento per insiemi delle US basate sulla periodizzazione.
 Dopo aver realizzato una ricerca sulla scheda US cliccare sul pulsante “Export Matrix”. Il matrix viene salvato all’interno della cartella pyarchinit_Matrix_folder all’interno del vostro utente.</p>
 <p>Nell’esempio seguente mostriamo due semplici passaggi per avere pianta di struttura e matrix in 2 semplici passaggi:</p>
@@ -354,7 +355,7 @@ Dopo aver realizzato una ricerca sulla scheda US cliccare sul pulsante “Export
 <p>Vai alla pagina del Blog <a class="reference external" href="http://pyarchinit.blogspot.it/2015/04/this-afternoon-im-thinking-about-issues.html">a link</a>.</p>
 </section>
 <section id="creazione-dell-indice-di-ordine-di-successione-stratigrafica">
-<h2><span class="section-number">7.8. </span>Creazione dell’indice di ordine di successione stratigrafica<a class="headerlink" href="#creazione-dell-indice-di-ordine-di-successione-stratigrafica" title="Link a questa intestazione"></a></h2>
+<h2><span class="section-number">7.8. </span>Creazione dell’indice di ordine di successione stratigrafica<a class="headerlink" href="#creazione-dell-indice-di-ordine-di-successione-stratigrafica" title="Permalink to this heading"></a></h2>
 <p>L’indice di successione stratigrafica è stato ideato per poter ovviare alla visualizzazione del GIS, che sovrappone i poligoni in base al loro ordine di immissione all’interno del database.</p>
 <p>L’algoritmo realizzato (al momento altamente in via di sviluppo) crea un ordine di successione stratigrafica basato sui rapporti stratigrafici. Ogni US assume un valore univoco in base alla sua posizione nella stratigrafia e dai rapporti che ha con altre US.
 Per esempio, se 1 copre 2, 2 copre 3 e 4, ma 3 e 4 non hanno rapporti tra di loro lo script genererà i seguenti valori:</p>
@@ -406,7 +407,7 @@ Per esempio, se 1 copre 2, 2 copre 3 e 4, ma 3 e 4 non hanno rapporti tra di lor
 <p>PROBLEMI NOTI: se si lancia il comando e sono presenti paradossi è possibile che il sistema non riuscendo a risolverli vada avanti all’infito. Oppure se si lancia il sistema su più Aree di uno scavo o su più scavi, il sistema va in loop e non c’è modo di abortire il processo. In tutti questi casi è necessario forzare l’arresto di Qgis.</p>
 </section>
 <section id="esportazione-schede-e-indice-delle-us-in-formato-pdf">
-<h2><span class="section-number">7.9. </span>Esportazione schede e indice delle US in formato PDF<a class="headerlink" href="#esportazione-schede-e-indice-delle-us-in-formato-pdf" title="Link a questa intestazione"></a></h2>
+<h2><span class="section-number">7.9. </span>Esportazione schede e indice delle US in formato PDF<a class="headerlink" href="#esportazione-schede-e-indice-delle-us-in-formato-pdf" title="Permalink to this heading"></a></h2>
 <p>È possibile esportare sia le singole schede che l’indice delle US basandosi su qualsiasi ricerca o criterio di ordinamento. Alcuni dati vengono presi direttamente dalla us_table, mentre altri, come la quota minima e massima, sono ricavati per relazione dalle features dei layers.</p>
 <p>Le modalità per esportare le schede sono molteplici. E” possibile fare una ricerca in scheda, oppure una ricerca sui layer in Qgis e visualizzare le US corrispondenti in scheda ed esportarle. I criteri di esportazione sono pressochè illimitati, potendo cercare su vari campi ed ordinare le schede in base a più modalità. Per esempio si potrebbero cercare tutte le schede relative al Medioevo ed esportare tutte le US ordinate per scavo e tipo di defizione. Un medesimo set di dati può essere esportato secondo ordinamenti differenti, dando la possibilità di creare elenchi consultabili secondo vari criteri.</p>
 <p>Nell’esempio sottostante abbiamo cercato in scheda l’ED01 di un nostro scavo, selezionato a video le US che ci interessavano e aperto le schede US. Infine le abbiamo ordinate per numero di US.</p>
@@ -428,7 +429,7 @@ Per esempio, se 1 copre 2, 2 copre 3 e 4, ma 3 e 4 non hanno rapporti tra di lor
     <p>&#169; Copyright 2021, AdArte srl.</p>
   </div>
 
-  Realizzato con <a href="https://www.sphinx-doc.org/">Sphinx</a> e il tema
+  Realizzato con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
     fornito da <a href="https://readthedocs.org">Read the Docs</a>.
    
