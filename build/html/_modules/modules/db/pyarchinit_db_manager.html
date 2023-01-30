@@ -107,19 +107,7 @@
 <span class="kn">from</span> <span class="nn">sqlalchemy.ext.compiler</span> <span class="kn">import</span> <span class="n">compiles</span>
 <span class="c1">#from modules.db.pyarchinit_conn_strings import Connection</span>
 <div class="viewcode-block" id="Pyarchinit_db_management"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management">[documenti]</a><span class="k">class</span> <span class="nc">Pyarchinit_db_management</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;[This function creates a database manager which creates the database and then creates the database object]</span>
-
-<span class="sd">    :param object:</span>
-<span class="sd">        [description]</span>
-
-<span class="sd">    :type object:</span>
-<span class="sd">        [type]</span>
-
-<span class="sd">    :return:</span>
-<span class="sd">        [description]</span>
-
-<span class="sd">    :rtype:</span>
-<span class="sd">        [type]</span>
+    <span class="sd">&#39;&#39;&#39;This function creates a database manager which creates the database and then creates the database object</span>
 <span class="sd">    &#39;&#39;&#39;</span>    
     <span class="n">metadata</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="n">engine</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
@@ -129,11 +117,17 @@
     <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;nt&#39;</span><span class="p">:</span>
         <span class="n">boolean</span> <span class="o">=</span> <span class="s1">&#39;True&#39;</span>
 <div class="viewcode-block" id="Pyarchinit_db_management.__init__"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.__init__">[documenti]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Initialize the connection to MySQL. This is called by __init__ and should not be called directly.</span>
-<span class="sd">        :param self: An instance of this class. It&#39;s a reference to the database connection that is used to communicate with the MySQL server.</span>
-<span class="sd">        :param c: The string containing the connection string. This string is passed to the connect () method of the MySQLConnection object.</span>
-<span class="sd">        :returns: True if successful False otherwise. Note that this method does not return anything</span>
+        <span class="sd">&quot;&quot;&quot;Initialize the connection to MySQL. This is called by __init__ and should not be called directly.</span>
+
+<span class="sd">        :param self:</span>
+<span class="sd">            An instance of this class. It&#39;s a reference to the database connection that is used to communicate with the MySQL server.</span>
+
+<span class="sd">        :param c:</span>
+
+<span class="sd">            The string containing the connection string. This string is passed to the connect () method of the MySQLConnection object.</span>
+
+<span class="sd">        :returns:</span>
+<span class="sd">            True if successful False otherwise. Note that this method does not return anything</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">conn_str</span> <span class="o">=</span> <span class="n">c</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.load_spatialite"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.load_spatialite">[documenti]</a>    <span class="k">def</span> <span class="nf">load_spatialite</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dbapi_conn</span><span class="p">,</span> <span class="n">connection_record</span><span class="p">):</span>

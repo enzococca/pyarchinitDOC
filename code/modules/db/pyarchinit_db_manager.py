@@ -23,19 +23,7 @@ from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.ext.compiler import compiles
 #from modules.db.pyarchinit_conn_strings import Connection
 class Pyarchinit_db_management(object):
-    '''[This function creates a database manager which creates the database and then creates the database object]
-
-    :param object:
-        [description]
-
-    :type object:
-        [type]
-
-    :return:
-        [description]
-
-    :rtype:
-        [type]
+    '''This function creates a database manager which creates the database and then creates the database object
     '''    
     metadata = ''
     engine = ''
@@ -45,11 +33,17 @@ class Pyarchinit_db_management(object):
     elif os.name == 'nt':
         boolean = 'True'
     def __init__(self, c):
-        """
-        Initialize the connection to MySQL. This is called by __init__ and should not be called directly.
-        :param self: An instance of this class. It's a reference to the database connection that is used to communicate with the MySQL server.
-        :param c: The string containing the connection string. This string is passed to the connect () method of the MySQLConnection object.
-        :returns: True if successful False otherwise. Note that this method does not return anything
+        """Initialize the connection to MySQL. This is called by __init__ and should not be called directly.
+
+        :param self:
+            An instance of this class. It's a reference to the database connection that is used to communicate with the MySQL server.
+
+        :param c:
+
+            The string containing the connection string. This string is passed to the connect () method of the MySQLConnection object.
+
+        :returns:
+            True if successful False otherwise. Note that this method does not return anything
         """
         self.conn_str = c
     def load_spatialite(self,dbapi_conn, connection_record):
