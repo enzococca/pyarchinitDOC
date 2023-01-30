@@ -18,7 +18,7 @@ from sqlalchemy.engine import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.sql.schema import MetaData
 
-from modules.utility.pyarchinit_OS_utility import Pyarchinit_OS_Utility
+#from modules.utility.pyarchinit_OS_utility import Pyarchinit_OS_Utility
 from sqlalchemy.dialects import postgresql
 from sqlalchemy.dialects.postgresql import insert
 
@@ -37,7 +37,17 @@ from modules.db.pyarchinit_conn_strings import Connection
         
 
 class Pyarchinit_db_management(object):
+    metadata = ''
+    engine = ''
+    boolean = ''
 
+    if os.name == 'posix':
+        boolean = 'True'
+    elif os.name == 'nt':
+        boolean = 'True'
+
+    def __init__(self, c):
+        self.conn_str = c
         
     
     def load_spatialite(self,dbapi_conn, connection_record):
