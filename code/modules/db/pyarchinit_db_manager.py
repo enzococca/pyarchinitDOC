@@ -23,11 +23,19 @@ from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.ext.compiler import compiles
 #from modules.db.pyarchinit_conn_strings import Connection
 class Pyarchinit_db_management(object):
-    '''This function creates a database manager which creates the database and then creates the database object .
-    :param object: [description]
-    :type object: [type]
-    :return: [description]
-    :rtype: [type]
+    '''[This function creates a database manager which creates the database and then creates the database object]
+
+    :param object:
+        [description]
+
+    :type object:
+        [type]
+
+    :return:
+        [description]
+
+    :rtype:
+        [type]
     '''    
     metadata = ''
     engine = ''
