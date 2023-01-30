@@ -22,17 +22,17 @@ from sqlalchemy.sql.schema import MetaData
 from sqlalchemy.dialects import postgresql
 from sqlalchemy.dialects.postgresql import insert
 
-from modules.db.pyarchinit_db_mapper import US, UT, SITE, PERIODIZZAZIONE, \
-    STRUTTURA, SCHEDAIND, INVENTARIO_MATERIALI, DETSESSO, DOCUMENTAZIONE, DETETA, MEDIA, \
-    MEDIA_THUMB, MEDIATOENTITY, MEDIAVIEW, TOMBA, CAMPIONI, PYARCHINIT_THESAURUS_SIGLE, \
-    ARCHEOZOOLOGY, INVENTARIO_LAPIDEI, PDF_ADMINISTRATOR,PYUS ,PYUSM,PYSITO_POINT,PYSITO_POLYGON,PYQUOTE,PYQUOTEUSM, \
-    PYUS_NEGATIVE, PYSTRUTTURE, PYREPERTI, PYINDIVIDUI, PYCAMPIONI, PYTOMBA, PYDOCUMENTAZIONE, PYLINEERIFERIMENTO, \
-    PYRIPARTIZIONI_SPAZIALI, PYSEZIONI
-from modules.db.pyarchinit_db_update import DB_update
-from modules.db.pyarchinit_utility import Utility
+# from modules.db.pyarchinit_db_mapper import US, UT, SITE, PERIODIZZAZIONE, \
+#     STRUTTURA, SCHEDAIND, INVENTARIO_MATERIALI, DETSESSO, DOCUMENTAZIONE, DETETA, MEDIA, \
+#     MEDIA_THUMB, MEDIATOENTITY, MEDIAVIEW, TOMBA, CAMPIONI, PYARCHINIT_THESAURUS_SIGLE, \
+#     ARCHEOZOOLOGY, INVENTARIO_LAPIDEI, PDF_ADMINISTRATOR,PYUS ,PYUSM,PYSITO_POINT,PYSITO_POLYGON,PYQUOTE,PYQUOTEUSM, \
+#     PYUS_NEGATIVE, PYSTRUTTURE, PYREPERTI, PYINDIVIDUI, PYCAMPIONI, PYTOMBA, PYDOCUMENTAZIONE, PYLINEERIFERIMENTO, \
+#     PYRIPARTIZIONI_SPAZIALI, PYSEZIONI
+# from modules.db.pyarchinit_db_update import DB_update
+# from modules.db.pyarchinit_utility import Utility
 from sqlalchemy.ext.compiler import compiles
 
-from modules.db.pyarchinit_conn_strings import Connection
+#from modules.db.pyarchinit_conn_strings import Connection
 
         
 
