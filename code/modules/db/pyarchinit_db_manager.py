@@ -1,23 +1,23 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-"""
-/***************************************************************************
-        pyArchInit Plugin  - A QGIS plugin to manage archaeological dataset
-                             -------------------
-        begin                : 2007-12-01
-        copyright            : (C) 2008 by Luca Mandolesi; Enzo Cocca <enzo.ccc@gmail.com>
-        email                : mandoluca at gmail.com
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
-"""
+# """
+# /***************************************************************************
+#         pyArchInit Plugin  - A QGIS plugin to manage archaeological dataset
+#                              -------------------
+#         begin                : 2007-12-01
+#         copyright            : (C) 2008 by Luca Mandolesi; Enzo Cocca <enzo.ccc@gmail.com>
+#         email                : mandoluca at gmail.com
+#  ***************************************************************************/
+#
+# /***************************************************************************
+#  *                                                                         *
+#  *   This program is free software; you can redistribute it and/or modify  *
+#  *   it under the terms of the GNU General Public License as published by  *
+#  *   the Free Software Foundation; either version 2 of the License, or     *
+#  *   (at your option) any later version.                                   *
+#  *                                                                         *
+#  ***************************************************************************/
+# """
 
 import os
 from sqlalchemy.event import listen
@@ -31,7 +31,6 @@ from geoalchemy2 import *
 from sqlalchemy.engine import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.sql.schema import MetaData
-from qgis.core import *
 from qgis.PyQt.QtWidgets import QMessageBox
 
 
@@ -42,7 +41,8 @@ class Pyarchinit_db_management(object):
     :type object: [type]
     :return: [description]
     :rtype: [type]
-    '''    
+    '''
+
     metadata = ''
     engine = ''
     boolean = ''
@@ -1317,7 +1317,7 @@ class Pyarchinit_db_management(object):
         return res
     def query_operator(self, params, table):
         """
-         this function takes in a list of tuples and a table name and returns a list of tuples
+        this function takes in a list of tuples and a table name and returns a list of tuples
         that match the query.
         @param params - the list of tuples that contain the field name, operator, and value.
         @param table - the table name.
@@ -1614,8 +1614,8 @@ class Pyarchinit_db_management(object):
         res_list = self.run(s)
         cont = 11900
         for i in res_list:
-            self.update('US_toimp', 'id_us', [i], ['id_us'], [cont])
-            cont = cont+1
+        self.update('US_toimp', 'id_us', [i], ['id_us'], [cont])
+        cont = cont+1
         """
         table = Table('inventario_materiali_table_toimp', self.metadata, autoload=True)
         s = table.select(table.c.id_invmat > 0)
@@ -2043,16 +2043,6 @@ class Pyarchinit_db_management(object):
     def query_in_idusb(self):
         pass
 
-
-# def main():
-    # db = Pyarchinit_db_management('sqlite:////Users//Luca//pyarchinit_DB_folder//pyarchinit_db.sqlite')
-    # db.connection()
-
-    # db.insert_arbitrary_number_of_records(10, 'Giorgio', 1, 1, 'US')  # us_range, sito, area, n_us)
-    
-
-# if __name__ == '__main__':
-    # main()
 class ANSI():
     def background(code):
         return "\33[{code}m".format(code=code)
