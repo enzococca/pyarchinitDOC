@@ -74,7 +74,21 @@ settings
        :members:
 
 
-Pyarchinit DB manager
+
+pyarchinit US-USM
+=======================================
+.. note::
+    mettere descrizione
+
+-----------------------------------------------------------------------
+
+.. automodule:: tabs.US_USM
+
+    .. autoclass:: pyarchinit_US
+       :members:
+
+
+pyarchinit db manager
 =======================================
 .. note::
     Questa classe presenta tutte le funzioni di gestione del database
@@ -101,17 +115,4 @@ pyarchinit Media Utility
 .. automodule:: modules.utility.pyarchinit_media_utility
 
    .. autoclass:: Media_utility
-       :members:
-
-
-pyarchinit US-USM
-=======================================
-.. note::
-    mettere descrizione
-
------------------------------------------------------------------------
-
-.. automodule:: tabs.US_USM
-
-    .. autoclass:: pyarchinit_US
        :members:

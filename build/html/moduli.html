@@ -60,9 +60,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#pyarchinit-utility">9.2. pyarchinit_utility</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#pyarchinit-installation-folder">9.3. pyarchinit installation folder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#settings">9.4. settings</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pyarchinit-db-manager">9.5. Pyarchinit DB manager</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pyarchinit-media-utility">9.6. pyarchinit Media Utility</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pyarchinit-us-usm">9.7. pyarchinit US-USM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyarchinit-us-usm">9.5. pyarchinit US-USM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyarchinit-db-manager">9.6. pyarchinit db manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyarchinit-media-utility">9.7. pyarchinit Media Utility</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="bibliography.html">10. Bibliografia</a></li>
@@ -340,8 +340,94 @@ conf.write(b»”,”LOGO” : “insert path for the image logo”}»)</p>
 </dd></dl>
 
 </section>
+<section id="pyarchinit-us-usm">
+<h2><span class="section-number">9.5. </span>pyarchinit US-USM<a class="headerlink" href="#pyarchinit-us-usm" title="Link a questa intestazione"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>mettere descrizione</p>
+</div>
+<hr class="docutils" />
+<span class="target" id="module-tabs.US_USM"></span><dl class="py class">
+<dt class="sig sig-object py" id="tabs.US_USM.pyarchinit_US">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pyarchinit_US</span></span><a class="reference internal" href="_modules/tabs/US_USM.html#pyarchinit_US"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#tabs.US_USM.pyarchinit_US" title="Link a questa definizione"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="tabs.US_USM.pyarchinit_US.EM_extract_node_name">
+<span class="sig-name descname"><span class="pre">EM_extract_node_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node_element</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tabs/US_USM.html#pyarchinit_US.EM_extract_node_name"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#tabs.US_USM.pyarchinit_US.EM_extract_node_name" title="Link a questa definizione"></a></dt>
+<dd><p>Initialize variables to store node information</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tabs.US_USM.pyarchinit_US.check_if_empty">
+<span class="sig-name descname"><span class="pre">check_if_empty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tabs/US_USM.html#pyarchinit_US.check_if_empty"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#tabs.US_USM.pyarchinit_US.check_if_empty" title="Link a questa definizione"></a></dt>
+<dd><p>This is a function that checks if a name is empty
+If it is empty, it returns «–None–»
+If it is not empty, it returns the name</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tabs.US_USM.pyarchinit_US.on_pushButton_csv2us_pressed">
+<span class="sig-name descname"><span class="pre">on_pushButton_csv2us_pressed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tabs/US_USM.html#pyarchinit_US.on_pushButton_csv2us_pressed"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#tabs.US_USM.pyarchinit_US.on_pushButton_csv2us_pressed" title="Link a questa definizione"></a></dt>
+<dd><p>This function is responsible for importing data from a CSV file into the “us_table” of the SQLite database.
+When the “csv2us” button is pressed, the user is prompted to select a CSV file with the «Set file name» dialog.
+The selected file is then opened and read, with the data from the file being inserted into the “us_table” of the SQLite database.
+The function starts by defining the path of the SQLite database, using the self.HOME variable and os.sep.
+Then it opens a QFileDialog to select a CSV file and assigns the file path to the variable “filename”.
+It then creates an instance of the “Connection” class and uses it to get the name of the SQLite database.
+It creates a connection to the SQLite database using the connect method and assigns it to the “con” variable.
+A cursor object is created using the “con.cursor()” method and assigned to the “cur” variable.
+It opens the selected CSV file in read mode, and uses the “csv.DictReader” class to read the file and convert it into a dictionary object.
+It then creates a list of tuples, each containing the values for the “site”, “area”, “us”, “unit_type” and “i_stratigrafica” columns.
+It then uses the “executemany” method of the cursor to insert the data from the list of tuples into the “us_table” of the SQLite database.
+The “commit” method is used to save the changes to the database.
+In case of any AssertionError, a warning message is displayed using the QMessageBox.warning method.
+Otherwise, a message saying “done” is displayed using the QMessageBox.information method.
+Finally, the connection to the database is closed using the “con.close()” method.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tabs.US_USM.pyarchinit_US.on_pushButton_fix_pressed">
+<span class="sig-name descname"><span class="pre">on_pushButton_fix_pressed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tabs/US_USM.html#pyarchinit_US.on_pushButton_fix_pressed"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#tabs.US_USM.pyarchinit_US.on_pushButton_fix_pressed" title="Link a questa definizione"></a></dt>
+<dd><p>This function is called when the user press the fix button.
+It will first get the current text in comboBox_sito and comboBox_area widgets,
+and create a search_dict dictionary with “sito”: sito and “area”: area as key-value pairs.
+Then it queries the database with the search_dict and the MAPPER_TABLE_CLASS and assigns the result to the variable «records»
+After that, it iterates over the range of the length of «records» and
+sets the checkBox_validation_rapp to be checked, selects each row of the tableWidget_rapporti,
+calls the check_listoflist() function, sets the progressBar_3 to a value based on the current row number and total number of rows,
+and updates the GUI. Finally, it resets the progressBar_3 to 0.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tabs.US_USM.pyarchinit_US.on_pushButton_graphml2csv_pressed">
+<span class="sig-name descname"><span class="pre">on_pushButton_graphml2csv_pressed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tabs/US_USM.html#pyarchinit_US.on_pushButton_graphml2csv_pressed"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#tabs.US_USM.pyarchinit_US.on_pushButton_graphml2csv_pressed" title="Link a questa definizione"></a></dt>
+<dd><p>This is a function that is called when a button is pressed
+This is a QGIS setting</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tabs.US_USM.pyarchinit_US.search_rapp">
+<span class="sig-name descname"><span class="pre">search_rapp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tabs/US_USM.html#pyarchinit_US.search_rapp"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#tabs.US_USM.pyarchinit_US.search_rapp" title="Link a questa definizione"></a></dt>
+<dd><p>The function search_rapp is used to search for a specific value in the tableWidget_rapporti.
+First, it clears the current selection in the tableWidget_rapporti.
+It checks if the input variable “s” is empty, if it is then the function exits without searching.
+Then it uses the findItems method to find all items in the tableWidget_rapporti that match the string “1” and stores the matching items in the list matching_items.
+If there are any matching items, it sets the first item in the matching_items list as the current item in the tableWidget_rapporti.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tabs.US_USM.pyarchinit_US.unit_type_select">
+<span class="sig-name descname"><span class="pre">unit_type_select</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tabs/US_USM.html#pyarchinit_US.unit_type_select"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#tabs.US_USM.pyarchinit_US.unit_type_select" title="Link a questa definizione"></a></dt>
+<dd><p>This function creates a dialog box for the user to select a unit type. The available unit types are determined by the value of the variable “L”, which is either “it” or “en”.
+If “L” is “it”, the available unit types are (“US”,”USM”,”USVA”,”USVB”,”USVC”,”USD”,”CON”,”VSF”,”SF”,”SUS”,”Combinar”,”Extractor”,”DOC”,”property”).
+If “L” is “en”, the available unit types are (“SU”,”WSU”,”USVA”,”USVB”,”USVC”,”USD”,”CON”,”VSF”,”SF”,”SUS”,”Combinar”,”Extractor”,”DOC”,”property”).
+The user’s selection is returned as a string.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
 <section id="pyarchinit-db-manager">
-<h2><span class="section-number">9.5. </span>Pyarchinit DB manager<a class="headerlink" href="#pyarchinit-db-manager" title="Link a questa intestazione"></a></h2>
+<h2><span class="section-number">9.6. </span>pyarchinit db manager<a class="headerlink" href="#pyarchinit-db-manager" title="Link a questa intestazione"></a></h2>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
 <p>Questa classe presenta tutte le funzioni di gestione del database</p>
@@ -520,7 +606,7 @@ cont = cont+1</p>
 
 </section>
 <section id="pyarchinit-media-utility">
-<h2><span class="section-number">9.6. </span>pyarchinit Media Utility<a class="headerlink" href="#pyarchinit-media-utility" title="Link a questa intestazione"></a></h2>
+<h2><span class="section-number">9.7. </span>pyarchinit Media Utility<a class="headerlink" href="#pyarchinit-media-utility" title="Link a questa intestazione"></a></h2>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
 <p>Media_utility class is used for creating thumbnails of images.
@@ -548,92 +634,6 @@ image.thumbnail(size, Image.ANTIALIAS)</p>
 <p># save the new thumbnail image
 image.save(new_image_thumbnail)</p>
 <p>#The class uses the Image module from the Python Imaging Library(PIL) to open, resize and save the image, the class uses the method thumbnail to create the thumbnail and it uses the Image.ANTIALIAS filter to smooth the image. The class also uses the method save to save the new thumbnail image.</p>
-</dd></dl>
-
-</section>
-<section id="pyarchinit-us-usm">
-<h2><span class="section-number">9.7. </span>pyarchinit US-USM<a class="headerlink" href="#pyarchinit-us-usm" title="Link a questa intestazione"></a></h2>
-<div class="admonition note">
-<p class="admonition-title">Nota</p>
-<p>mettere descrizione</p>
-</div>
-<hr class="docutils" />
-<span class="target" id="module-tabs.US_USM"></span><dl class="py class">
-<dt class="sig sig-object py" id="tabs.US_USM.pyarchinit_US">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pyarchinit_US</span></span><a class="reference internal" href="_modules/tabs/US_USM.html#pyarchinit_US"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#tabs.US_USM.pyarchinit_US" title="Link a questa definizione"></a></dt>
-<dd><dl class="py method">
-<dt class="sig sig-object py" id="tabs.US_USM.pyarchinit_US.EM_extract_node_name">
-<span class="sig-name descname"><span class="pre">EM_extract_node_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node_element</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tabs/US_USM.html#pyarchinit_US.EM_extract_node_name"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#tabs.US_USM.pyarchinit_US.EM_extract_node_name" title="Link a questa definizione"></a></dt>
-<dd><p>Initialize variables to store node information</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="tabs.US_USM.pyarchinit_US.check_if_empty">
-<span class="sig-name descname"><span class="pre">check_if_empty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tabs/US_USM.html#pyarchinit_US.check_if_empty"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#tabs.US_USM.pyarchinit_US.check_if_empty" title="Link a questa definizione"></a></dt>
-<dd><p>This is a function that checks if a name is empty
-If it is empty, it returns «–None–»
-If it is not empty, it returns the name</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="tabs.US_USM.pyarchinit_US.on_pushButton_csv2us_pressed">
-<span class="sig-name descname"><span class="pre">on_pushButton_csv2us_pressed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tabs/US_USM.html#pyarchinit_US.on_pushButton_csv2us_pressed"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#tabs.US_USM.pyarchinit_US.on_pushButton_csv2us_pressed" title="Link a questa definizione"></a></dt>
-<dd><p>This function is responsible for importing data from a CSV file into the “us_table” of the SQLite database.
-When the “csv2us” button is pressed, the user is prompted to select a CSV file with the «Set file name» dialog.
-The selected file is then opened and read, with the data from the file being inserted into the “us_table” of the SQLite database.
-The function starts by defining the path of the SQLite database, using the self.HOME variable and os.sep.
-Then it opens a QFileDialog to select a CSV file and assigns the file path to the variable “filename”.
-It then creates an instance of the “Connection” class and uses it to get the name of the SQLite database.
-It creates a connection to the SQLite database using the connect method and assigns it to the “con” variable.
-A cursor object is created using the “con.cursor()” method and assigned to the “cur” variable.
-It opens the selected CSV file in read mode, and uses the “csv.DictReader” class to read the file and convert it into a dictionary object.
-It then creates a list of tuples, each containing the values for the “site”, “area”, “us”, “unit_type” and “i_stratigrafica” columns.
-It then uses the “executemany” method of the cursor to insert the data from the list of tuples into the “us_table” of the SQLite database.
-The “commit” method is used to save the changes to the database.
-In case of any AssertionError, a warning message is displayed using the QMessageBox.warning method.
-Otherwise, a message saying “done” is displayed using the QMessageBox.information method.
-Finally, the connection to the database is closed using the “con.close()” method.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="tabs.US_USM.pyarchinit_US.on_pushButton_fix_pressed">
-<span class="sig-name descname"><span class="pre">on_pushButton_fix_pressed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tabs/US_USM.html#pyarchinit_US.on_pushButton_fix_pressed"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#tabs.US_USM.pyarchinit_US.on_pushButton_fix_pressed" title="Link a questa definizione"></a></dt>
-<dd><p>This function is called when the user press the fix button.
-It will first get the current text in comboBox_sito and comboBox_area widgets,
-and create a search_dict dictionary with “sito”: sito and “area”: area as key-value pairs.
-Then it queries the database with the search_dict and the MAPPER_TABLE_CLASS and assigns the result to the variable «records»
-After that, it iterates over the range of the length of «records» and
-sets the checkBox_validation_rapp to be checked, selects each row of the tableWidget_rapporti,
-calls the check_listoflist() function, sets the progressBar_3 to a value based on the current row number and total number of rows,
-and updates the GUI. Finally, it resets the progressBar_3 to 0.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="tabs.US_USM.pyarchinit_US.on_pushButton_graphml2csv_pressed">
-<span class="sig-name descname"><span class="pre">on_pushButton_graphml2csv_pressed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tabs/US_USM.html#pyarchinit_US.on_pushButton_graphml2csv_pressed"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#tabs.US_USM.pyarchinit_US.on_pushButton_graphml2csv_pressed" title="Link a questa definizione"></a></dt>
-<dd><p>This is a function that is called when a button is pressed
-This is a QGIS setting</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="tabs.US_USM.pyarchinit_US.search_rapp">
-<span class="sig-name descname"><span class="pre">search_rapp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tabs/US_USM.html#pyarchinit_US.search_rapp"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#tabs.US_USM.pyarchinit_US.search_rapp" title="Link a questa definizione"></a></dt>
-<dd><p>The function search_rapp is used to search for a specific value in the tableWidget_rapporti.
-First, it clears the current selection in the tableWidget_rapporti.
-It checks if the input variable “s” is empty, if it is then the function exits without searching.
-Then it uses the findItems method to find all items in the tableWidget_rapporti that match the string “1” and stores the matching items in the list matching_items.
-If there are any matching items, it sets the first item in the matching_items list as the current item in the tableWidget_rapporti.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="tabs.US_USM.pyarchinit_US.unit_type_select">
-<span class="sig-name descname"><span class="pre">unit_type_select</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tabs/US_USM.html#pyarchinit_US.unit_type_select"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#tabs.US_USM.pyarchinit_US.unit_type_select" title="Link a questa definizione"></a></dt>
-<dd><p>This function creates a dialog box for the user to select a unit type. The available unit types are determined by the value of the variable “L”, which is either “it” or “en”.
-If “L” is “it”, the available unit types are (“US”,”USM”,”USVA”,”USVB”,”USVC”,”USD”,”CON”,”VSF”,”SF”,”SUS”,”Combinar”,”Extractor”,”DOC”,”property”).
-If “L” is “en”, the available unit types are (“SU”,”WSU”,”USVA”,”USVB”,”USVC”,”USD”,”CON”,”VSF”,”SF”,”SUS”,”Combinar”,”Extractor”,”DOC”,”property”).
-The user’s selection is returned as a string.</p>
-</dd></dl>
-
 </dd></dl>
 
 </section>
