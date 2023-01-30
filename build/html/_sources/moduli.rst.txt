@@ -73,6 +73,7 @@ settings
    .. autoclass:: Settings
        :members:
 
+
 Pyarchinit DB manager
 =======================================
 .. note::
