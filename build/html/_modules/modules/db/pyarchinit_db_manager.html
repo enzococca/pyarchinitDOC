@@ -88,10 +88,1736 @@
 <span class="c1"># -*- coding: utf-8 -*-</span>
 
 
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sqlalchemy</span> <span class="k">as</span> <span class="nn">db</span>
 
+<span class="kn">from</span> <span class="nn">sqlalchemy.sql.expression</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.event</span> <span class="kn">import</span> <span class="n">listen</span>
+<span class="kn">import</span> <span class="nn">psycopg2</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="kn">import</span> <span class="nb">object</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="kn">import</span> <span class="nb">range</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="kn">import</span> <span class="nb">str</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="kn">import</span> <span class="nb">zip</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">and_</span><span class="p">,</span> <span class="n">or_</span><span class="p">,</span> <span class="n">Table</span><span class="p">,</span> <span class="n">select</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">asc</span><span class="p">,</span><span class="n">UniqueConstraint</span>
+<span class="kn">from</span> <span class="nn">geoalchemy2</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.engine</span> <span class="kn">import</span> <span class="n">create_engine</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">sessionmaker</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.sql.schema</span> <span class="kn">import</span> <span class="n">MetaData</span>
+
+<span class="c1">#from modules.utility.pyarchinit_OS_utility import Pyarchinit_OS_Utility</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.dialects</span> <span class="kn">import</span> <span class="n">postgresql</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.dialects.postgresql</span> <span class="kn">import</span> <span class="n">insert</span>
+
+<span class="kn">from</span> <span class="nn">modules.db.pyarchinit_db_mapper</span> <span class="kn">import</span> <span class="n">US</span><span class="p">,</span> <span class="n">UT</span><span class="p">,</span> <span class="n">SITE</span><span class="p">,</span> <span class="n">PERIODIZZAZIONE</span><span class="p">,</span> \
+    <span class="n">STRUTTURA</span><span class="p">,</span> <span class="n">SCHEDAIND</span><span class="p">,</span> <span class="n">INVENTARIO_MATERIALI</span><span class="p">,</span> <span class="n">DETSESSO</span><span class="p">,</span> <span class="n">DOCUMENTAZIONE</span><span class="p">,</span> <span class="n">DETETA</span><span class="p">,</span> <span class="n">MEDIA</span><span class="p">,</span> \
+    <span class="n">MEDIA_THUMB</span><span class="p">,</span> <span class="n">MEDIATOENTITY</span><span class="p">,</span> <span class="n">MEDIAVIEW</span><span class="p">,</span> <span class="n">TOMBA</span><span class="p">,</span> <span class="n">CAMPIONI</span><span class="p">,</span> <span class="n">PYARCHINIT_THESAURUS_SIGLE</span><span class="p">,</span> \
+    <span class="n">ARCHEOZOOLOGY</span><span class="p">,</span> <span class="n">INVENTARIO_LAPIDEI</span><span class="p">,</span> <span class="n">PDF_ADMINISTRATOR</span><span class="p">,</span><span class="n">PYUS</span> <span class="p">,</span><span class="n">PYUSM</span><span class="p">,</span><span class="n">PYSITO_POINT</span><span class="p">,</span><span class="n">PYSITO_POLYGON</span><span class="p">,</span><span class="n">PYQUOTE</span><span class="p">,</span><span class="n">PYQUOTEUSM</span><span class="p">,</span> \
+    <span class="n">PYUS_NEGATIVE</span><span class="p">,</span> <span class="n">PYSTRUTTURE</span><span class="p">,</span> <span class="n">PYREPERTI</span><span class="p">,</span> <span class="n">PYINDIVIDUI</span><span class="p">,</span> <span class="n">PYCAMPIONI</span><span class="p">,</span> <span class="n">PYTOMBA</span><span class="p">,</span> <span class="n">PYDOCUMENTAZIONE</span><span class="p">,</span> <span class="n">PYLINEERIFERIMENTO</span><span class="p">,</span> \
+    <span class="n">PYRIPARTIZIONI_SPAZIALI</span><span class="p">,</span> <span class="n">PYSEZIONI</span>
+<span class="kn">from</span> <span class="nn">modules.db.pyarchinit_db_update</span> <span class="kn">import</span> <span class="n">DB_update</span>
+<span class="kn">from</span> <span class="nn">modules.db.pyarchinit_utility</span> <span class="kn">import</span> <span class="n">Utility</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.ext.compiler</span> <span class="kn">import</span> <span class="n">compiles</span>
+
+<span class="kn">from</span> <span class="nn">modules.db.pyarchinit_conn_strings</span> <span class="kn">import</span> <span class="n">Connection</span>
+
+        
 
 <div class="viewcode-block" id="Pyarchinit_db_management"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management">[documenti]</a><span class="k">class</span> <span class="nc">Pyarchinit_db_management</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="n">tet</span><span class="o">=</span><span class="s1">&#39;&#39;</span></div>
+    <span class="n">metadata</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">engine</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">boolean</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;posix&#39;</span><span class="p">:</span>
+        <span class="n">boolean</span> <span class="o">=</span> <span class="s1">&#39;True&#39;</span>
+    <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;nt&#39;</span><span class="p">:</span>
+        <span class="n">boolean</span> <span class="o">=</span> <span class="s1">&#39;True&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conn_str</span> <span class="o">=</span> <span class="n">c</span>
+        
+    
+    <span class="k">def</span> <span class="nf">load_spatialite</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dbapi_conn</span><span class="p">,</span> <span class="n">connection_record</span><span class="p">):</span>
+        <span class="n">dbapi_conn</span><span class="o">.</span><span class="n">enable_load_extension</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">Pyarchinit_OS_Utility</span><span class="o">.</span><span class="n">isWindows</span><span class="p">()</span><span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">dbapi_conn</span><span class="o">.</span><span class="n">load_extension</span><span class="p">(</span><span class="s1">&#39;mod_spatialite.dll&#39;</span><span class="p">)</span>
+        
+        <span class="k">elif</span> <span class="n">Pyarchinit_OS_Utility</span><span class="o">.</span><span class="n">isMac</span><span class="p">()</span><span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">dbapi_conn</span><span class="o">.</span><span class="n">load_extension</span><span class="p">(</span><span class="s1">&#39;mod_spatialite.so&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">dbapi_conn</span><span class="o">.</span><span class="n">load_extension</span><span class="p">(</span><span class="s1">&#39;mod_spatialite.so&#39;</span><span class="p">)</span>  
+    
+    <span class="k">def</span> <span class="nf">connection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">test</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">test_conn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn_str</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;sqlite&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">test_conn</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conn_str</span><span class="p">,</span> <span class="n">echo</span><span class="o">=</span><span class="nb">eval</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">boolean</span><span class="p">))</span>
+                <span class="n">listen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">,</span> <span class="s1">&#39;connect&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_spatialite</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conn_str</span><span class="p">,</span> <span class="n">max_overflow</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">echo</span><span class="o">=</span><span class="nb">eval</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">boolean</span><span class="p">))</span>
+            
+                
+            <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="n">MetaData</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+            <span class="n">conn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+            
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">QMessageBox</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;Message&quot;</span><span class="p">,</span> <span class="s2">&quot;Error: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="n">QMessageBox</span><span class="o">.</span><span class="n">Ok</span><span class="p">)</span>
+            <span class="n">test</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">db_upd</span> <span class="o">=</span> <span class="n">DB_update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conn_str</span><span class="p">)</span>
+            <span class="n">db_upd</span><span class="o">.</span><span class="n">update_table</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">QMessageBox</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;Message&quot;</span><span class="p">,</span> <span class="s2">&quot;Error: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="n">QMessageBox</span><span class="o">.</span><span class="n">Ok</span><span class="p">)</span>
+            <span class="n">test</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="n">test</span>
+
+        <span class="c1"># insert statement</span>
+    <span class="k">def</span> <span class="nf">insert_pyus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+        <span class="n">pyus</span> <span class="o">=</span> <span class="n">PYUS</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">13</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">pyus</span>
+    <span class="k">def</span> <span class="nf">insert_pyusm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+        <span class="n">pyusm</span> <span class="o">=</span> <span class="n">PYUSM</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">13</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">pyusm</span>
+    <span class="k">def</span> <span class="nf">insert_pysito_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+        <span class="n">pysito_point</span> <span class="o">=</span> <span class="n">PYSITO_POINT</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">pysito_point</span>
+    
+    
+    <span class="k">def</span> <span class="nf">insert_pysito_polygon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+        <span class="n">pysito_polygon</span> <span class="o">=</span> <span class="n">PYSITO_POLYGON</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">pysito_polygon</span>
+        
+    <span class="k">def</span> <span class="nf">insert_pyquote</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+        <span class="n">pyquote</span> <span class="o">=</span> <span class="n">PYQUOTE</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">10</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">pyquote</span>    
+    <span class="k">def</span> <span class="nf">insert_pyquote_usm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+        <span class="n">pyquote_usm</span> <span class="o">=</span> <span class="n">PYQUOTEUSM</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">10</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">pyquote_usm</span>    
+    <span class="k">def</span> <span class="nf">insert_pyus_negative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+        <span class="n">pyus_negative</span> <span class="o">=</span> <span class="n">PYUS_NEGATIVE</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">pyus_negative</span>
+    
+    <span class="k">def</span> <span class="nf">insert_pystrutture</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+        <span class="n">pystrutture</span> <span class="o">=</span> <span class="n">PYSTRUTTURE</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">11</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">pystrutture</span>
+    
+    <span class="k">def</span> <span class="nf">insert_pyreperti</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+        <span class="n">pyreperti</span> <span class="o">=</span> <span class="n">PYREPERTI</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">pyreperti</span>
+    
+    <span class="k">def</span> <span class="nf">insert_pyindividui</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+        <span class="n">pyindividui</span> <span class="o">=</span> <span class="n">PYINDIVIDUI</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">pyindividui</span>
+    
+    <span class="k">def</span> <span class="nf">insert_pycampioni</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+        <span class="n">pycampioni</span> <span class="o">=</span> <span class="n">PYCAMPIONI</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">8</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">pycampioni</span>
+    
+    <span class="k">def</span> <span class="nf">insert_pytomba</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+        <span class="n">pytomba</span> <span class="o">=</span> <span class="n">PYTOMBA</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">pytomba</span>
+    
+    <span class="k">def</span> <span class="nf">insert_pydocumentazione</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+        <span class="n">pydocumentazione</span> <span class="o">=</span> <span class="n">PYDOCUMENTAZIONE</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">pydocumentazione</span>
+    
+    <span class="k">def</span> <span class="nf">insert_pylineeriferimento</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+        <span class="n">pylineeriferimento</span> <span class="o">=</span> <span class="n">PYLINEERIFERIMENTO</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">pylineeriferimento</span>
+    
+    <span class="k">def</span> <span class="nf">insert_pyripartizioni_spaziali</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+        <span class="n">pyripartizioni_spaziali</span> <span class="o">=</span> <span class="n">PYRIPARTIZIONI_SPAZIALI</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">pyripartizioni_spaziali</span>
+    
+    <span class="k">def</span> <span class="nf">insert_pysezioni</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+        <span class="n">pysezioni</span> <span class="o">=</span> <span class="n">PYSEZIONI</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">7</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">pysezioni</span>
+    
+    
+    
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_values"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Istanzia la classe US da pyarchinit_db_mapper&quot;&quot;&quot;</span>
+
+        <span class="n">us</span> <span class="o">=</span> <span class="n">US</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">13</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">14</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">15</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">16</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">17</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">18</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">19</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">20</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">21</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">22</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">23</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">24</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">25</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">26</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">27</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">28</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">29</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">30</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">31</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">32</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">33</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">34</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">35</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">36</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">37</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">38</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">39</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">40</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">41</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">42</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">43</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">44</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">45</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">46</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">47</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">48</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">49</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">50</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">51</span><span class="p">],</span>    <span class="c1"># 51 campi aggiunti per archeo 3.0 e allineamento ICCD</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">52</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">53</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">54</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">55</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">56</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">57</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">58</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">59</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">60</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">61</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">62</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">63</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">64</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">65</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">66</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">67</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">68</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">69</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">70</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">71</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">72</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">73</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">74</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">75</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">76</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">77</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">78</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">79</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">80</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">81</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">82</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">83</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">84</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">85</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">86</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">87</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">88</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">89</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">90</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">91</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">92</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">93</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">94</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">95</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">96</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">97</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">98</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">99</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">100</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">101</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">102</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">103</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">104</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">105</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">106</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">107</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">108</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">109</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">110</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">111</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">112</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">113</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">114</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">115</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">116</span><span class="p">],</span>
+                <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">us</span></div>
+
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_ut_values"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_ut_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_ut_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Istanzia la classe UT da pyarchinit_db_mapper&quot;&quot;&quot;</span>
+
+        <span class="n">ut</span> <span class="o">=</span> <span class="n">UT</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">13</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">14</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">15</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">16</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">17</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">18</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">19</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">20</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">21</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">22</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">23</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">24</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">25</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">26</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">27</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">28</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">29</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">30</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">31</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">32</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">33</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">34</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">35</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">36</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">37</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">38</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">39</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">40</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">41</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">ut</span></div>
+
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_site_values"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_site_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_site_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Istanzia la classe SITE da pyarchinit_db_mapper&quot;&quot;&quot;</span>
+        <span class="n">sito</span> <span class="o">=</span> <span class="n">SITE</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                    <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                    <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                    <span class="n">arg</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                    <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                    <span class="n">arg</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+                    <span class="n">arg</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span>
+                    <span class="n">arg</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span>
+                    <span class="n">arg</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span>
+                    <span class="n">arg</span><span class="p">[</span><span class="mi">9</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">sito</span></div>
+
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_periodizzazione_values"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_periodizzazione_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_periodizzazione_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Istanzia la classe Periodizzazione da pyarchinit_db_mapper&quot;&quot;&quot;</span>
+        <span class="n">periodizzazione</span> <span class="o">=</span> <span class="n">PERIODIZZAZIONE</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                          <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                          <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                                          <span class="n">arg</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                                          <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                                          <span class="n">arg</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+                                          <span class="n">arg</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span>
+                                          <span class="n">arg</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span>
+                                          <span class="n">arg</span><span class="p">[</span><span class="mi">8</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">periodizzazione</span></div>
+
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_values_reperti"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_reperti">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_reperti</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Istanzia la classe Reperti da pyarchinit_db_mapper&quot;&quot;&quot;</span>
+        <span class="n">inventario_materiali</span> <span class="o">=</span> <span class="n">INVENTARIO_MATERIALI</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                                    <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                                    <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                                                    <span class="n">arg</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                                                    <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                                                    <span class="n">arg</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+                                                    <span class="n">arg</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span>
+                                                    <span class="n">arg</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span>
+                                                    <span class="n">arg</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span>
+                                                    <span class="n">arg</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span>
+                                                    <span class="n">arg</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span>
+                                                    <span class="n">arg</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span>
+                                                    <span class="n">arg</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span>
+                                                    <span class="n">arg</span><span class="p">[</span><span class="mi">13</span><span class="p">],</span>
+                                                    <span class="n">arg</span><span class="p">[</span><span class="mi">14</span><span class="p">],</span>
+                                                    <span class="n">arg</span><span class="p">[</span><span class="mi">15</span><span class="p">],</span>
+                                                    <span class="n">arg</span><span class="p">[</span><span class="mi">16</span><span class="p">],</span>
+                                                    <span class="n">arg</span><span class="p">[</span><span class="mi">17</span><span class="p">],</span>
+                                                    <span class="n">arg</span><span class="p">[</span><span class="mi">18</span><span class="p">],</span>
+                                                    <span class="n">arg</span><span class="p">[</span><span class="mi">19</span><span class="p">],</span>
+                                                    <span class="n">arg</span><span class="p">[</span><span class="mi">20</span><span class="p">],</span>
+                                                    <span class="n">arg</span><span class="p">[</span><span class="mi">21</span><span class="p">],</span>
+                                                    <span class="n">arg</span><span class="p">[</span><span class="mi">22</span><span class="p">],</span>
+                                                    <span class="n">arg</span><span class="p">[</span><span class="mi">23</span><span class="p">],</span>
+                                                    <span class="n">arg</span><span class="p">[</span><span class="mi">24</span><span class="p">],</span>
+                                                    <span class="n">arg</span><span class="p">[</span><span class="mi">25</span><span class="p">],</span>
+                                                    <span class="n">arg</span><span class="p">[</span><span class="mi">26</span><span class="p">],</span>
+                                                    <span class="n">arg</span><span class="p">[</span><span class="mi">27</span><span class="p">],</span>
+                                                    <span class="n">arg</span><span class="p">[</span><span class="mi">28</span><span class="p">],</span>
+                                                    <span class="n">arg</span><span class="p">[</span><span class="mi">29</span><span class="p">],</span>
+                                                    <span class="n">arg</span><span class="p">[</span><span class="mi">30</span><span class="p">],</span>
+                                                    <span class="n">arg</span><span class="p">[</span><span class="mi">31</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">inventario_materiali</span></div>
+
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_struttura_values"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_struttura_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_struttura_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Istanzia la classe Struttura da pyarchinit_db_mapper&quot;&quot;&quot;</span>
+        <span class="n">struttura</span> <span class="o">=</span> <span class="n">STRUTTURA</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">13</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">14</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">15</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">16</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">17</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">struttura</span></div>
+
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_values_ind"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_ind">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_ind</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Istanzia la classe SCHEDAIND da pyarchinit_db_mapper&quot;&quot;&quot;</span>
+        <span class="n">schedaind</span> <span class="o">=</span> <span class="n">SCHEDAIND</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">13</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">14</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">15</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">16</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">17</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">18</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">19</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">20</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">21</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">22</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">23</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">schedaind</span></div>
+
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_values_detsesso"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_detsesso">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_detsesso</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Istanzia la classe DETSESSO da pyarchinit_db_mapper&quot;&quot;&quot;</span>
+        <span class="n">detsesso</span> <span class="o">=</span> <span class="n">DETSESSO</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">13</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">14</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">15</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">16</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">17</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">18</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">19</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">20</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">21</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">22</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">23</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">24</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">25</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">26</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">27</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">28</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">29</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">30</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">31</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">32</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">33</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">34</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">35</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">36</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">37</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">38</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">39</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">40</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">41</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">42</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">43</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">44</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">45</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">46</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">47</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">48</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">49</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">50</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">51</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">52</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">53</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">detsesso</span></div>
+
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_values_deteta"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_deteta">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_deteta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Istanzia la classe DETETA da pyarchinit_db_mapper&quot;&quot;&quot;</span>
+        <span class="n">deteta</span> <span class="o">=</span> <span class="n">DETETA</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">13</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">14</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">15</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">16</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">17</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">18</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">19</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">20</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">21</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">22</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">23</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">24</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">25</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">26</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">27</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">28</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">29</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">30</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">31</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">32</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">33</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">34</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">35</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">36</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">37</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">38</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">39</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">40</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">41</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">42</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">43</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">44</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">45</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">46</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">47</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">48</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">49</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">50</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">51</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">52</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">53</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">54</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">55</span><span class="p">],</span>
+                        <span class="n">arg</span><span class="p">[</span><span class="mi">56</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">deteta</span></div>
+
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_media_values"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_media_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_media_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Istanzia la classe MEDIA da pyarchinit_db_mapper&quot;&quot;&quot;</span>
+        <span class="n">media</span> <span class="o">=</span> <span class="n">MEDIA</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                      <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                      <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                      <span class="n">arg</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                      <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                      <span class="n">arg</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+                      <span class="n">arg</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">media</span></div>
+
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_mediathumb_values"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_mediathumb_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_mediathumb_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Istanzia la classe MEDIA da pyarchinit_db_mapper&quot;&quot;&quot;</span>
+        <span class="n">media_thumb</span> <span class="o">=</span> <span class="n">MEDIA_THUMB</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                  <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                  <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                                  <span class="n">arg</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                                  <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                                  <span class="n">arg</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+                                  <span class="n">arg</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span>
+                                  <span class="n">arg</span><span class="p">[</span><span class="mi">7</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">media_thumb</span></div>
+
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_media2entity_values"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_media2entity_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_media2entity_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Istanzia la classe MEDIATOENTITY da pyarchinit_db_mapper&quot;&quot;&quot;</span>
+        <span class="n">mediatoentity</span> <span class="o">=</span> <span class="n">MEDIATOENTITY</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                      <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                      <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                                      <span class="n">arg</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                                      <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                                      <span class="n">arg</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+                                      <span class="n">arg</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">mediatoentity</span></div>
+
+    
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_media2entity_view_values"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_media2entity_view_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_media2entity_view_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Istanzia la classe MEDIATOENTITY da pyarchinit_db_mapper&quot;&quot;&quot;</span>
+        <span class="n">mediaentity_view</span><span class="o">=</span> <span class="n">MEDIAVIEW</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+                <span class="n">arg</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">mediaentity_view</span> </div>
+    
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_values_tomba"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_tomba">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_tomba</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Istanzia la classe TOMBA da pyarchinit_db_mapper&quot;&quot;&quot;</span>
+
+        <span class="n">tomba</span> <span class="o">=</span> <span class="n">TOMBA</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">13</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">14</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">15</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">16</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">17</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">18</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">19</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">20</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">21</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">22</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">23</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">24</span><span class="p">],</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">25</span><span class="p">],)</span>
+
+        <span class="k">return</span> <span class="n">tomba</span></div>
+
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_values_campioni"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_campioni">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_campioni</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Istanzia la classe CAMPIONI da pyarchinit_db_mapper&quot;&quot;&quot;</span>
+
+        <span class="n">campioni</span> <span class="o">=</span> <span class="n">CAMPIONI</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">9</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">campioni</span></div>
+
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_values_thesaurus"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_thesaurus">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_thesaurus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Istanzia la classe PYARCHINIT_THESAURUS_SIGLE da pyarchinit_db_mapper&quot;&quot;&quot;</span>
+
+        <span class="n">thesaurus</span> <span class="o">=</span> <span class="n">PYARCHINIT_THESAURUS_SIGLE</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                               <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                               <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                                               <span class="n">arg</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                                               <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                                               <span class="n">arg</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+                                               <span class="n">arg</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">thesaurus</span></div>
+
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_values_archeozoology"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_archeozoology">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_archeozoology</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Istanzia la classe ARCHEOZOOLOGY da pyarchinit_db_mapper&quot;&quot;&quot;</span>
+
+        <span class="n">archeozoology</span> <span class="o">=</span> <span class="n">ARCHEOZOOLOGY</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">13</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">14</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">15</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">16</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">17</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">18</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">19</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">20</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">21</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">22</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">23</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">24</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">25</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">26</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">27</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">28</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">29</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">30</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">archeozoology</span></div>
+
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_values_Lapidei"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_Lapidei">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_Lapidei</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Istanzia la classe Inventario_Lapidei da pyarchinit_db_mapper&quot;&quot;&quot;</span>
+
+        <span class="n">inventario_lapidei</span> <span class="o">=</span> <span class="n">INVENTARIO_LAPIDEI</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                                <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                                <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                                                <span class="n">arg</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                                                <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                                                <span class="n">arg</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+                                                <span class="n">arg</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span>
+                                                <span class="n">arg</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span>
+                                                <span class="n">arg</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span>
+                                                <span class="n">arg</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span>
+                                                <span class="n">arg</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span>
+                                                <span class="n">arg</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span>
+                                                <span class="n">arg</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span>
+                                                <span class="n">arg</span><span class="p">[</span><span class="mi">13</span><span class="p">],</span>
+                                                <span class="n">arg</span><span class="p">[</span><span class="mi">14</span><span class="p">],</span>
+                                                <span class="n">arg</span><span class="p">[</span><span class="mi">15</span><span class="p">],</span>
+                                                <span class="n">arg</span><span class="p">[</span><span class="mi">16</span><span class="p">],</span>
+                                                <span class="n">arg</span><span class="p">[</span><span class="mi">17</span><span class="p">],</span>
+                                                <span class="n">arg</span><span class="p">[</span><span class="mi">18</span><span class="p">],</span>
+                                                <span class="n">arg</span><span class="p">[</span><span class="mi">19</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">inventario_lapidei</span></div>
+
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_values_documentazione"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_values_documentazione">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_values_documentazione</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Istanzia la classe DOCUMENTAZIONE da pyarchinit_db_mapper&quot;&quot;&quot;</span>
+
+        <span class="n">documentazione</span> <span class="o">=</span> <span class="n">DOCUMENTAZIONE</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span>
+                                        <span class="n">arg</span><span class="p">[</span><span class="mi">8</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">documentazione</span></div>
+
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_pdf_administrator_values"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pdf_administrator_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_pdf_administrator_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Istanzia la classe PDF_ADMINISTRATOR da pyarchinit_db_mapper&quot;&quot;&quot;</span>
+        <span class="n">pdf_administrator</span> <span class="o">=</span> <span class="n">PDF_ADMINISTRATOR</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                              <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                              <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                                              <span class="n">arg</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                                              <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">pdf_administrator</span></div>
+
+<div class="viewcode-block" id="Pyarchinit_db_management.insert_campioni_values"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_campioni_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_campioni_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Istanzia la classe CAMPIONI da pyarchinit_db_mapper&quot;&quot;&quot;</span>
+        <span class="n">campioni</span> <span class="o">=</span> <span class="n">CAMPIONI</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span>
+                            <span class="n">arg</span><span class="p">[</span><span class="mi">9</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">campioni</span></div></div>
+
+    <span class="c1">##  def insert_relationship_check_values(self, *arg):</span>
+    <span class="c1">##      &quot;&quot;&quot;Istanzia la classe RELATIONSHIP_CHECK da pyarchinit_db_mapper&quot;&quot;&quot;</span>
+    <span class="c1">##      relationship_check = RELATIONSHIP_CHECK(arg[0],</span>
+    <span class="c1">##                                              arg[1],</span>
+    <span class="c1">##                                              arg[2],</span>
+    <span class="c1">##                                              arg[3],</span>
+    <span class="c1">##                                              arg[4],</span>
+    <span class="c1">##                                              arg[5],</span>
+    <span class="c1">##                                              arg[6],</span>
+    <span class="c1">##                                              arg[7],</span>
+    <span class="c1">##                                              arg[8],</span>
+    <span class="c1">##                                              arg[9])</span>
+    <span class="c1">##</span>
+    <span class="c1">##      return relationship_check</span>
+
+
+<span class="c1">#     def execute_sql_create_db(self):</span>
+<span class="c1">#         path = os.path.dirname(__file__)</span>
+<span class="c1">#         rel_path = os.path.join(os.sep, &#39;query_sql&#39;, &#39;pyarchinit_create_db.sql&#39;)</span>
+<span class="c1">#         qyery_sql_path = &#39;{}{}&#39;.format(path, rel_path)</span>
+<span class="c1">#         create = open(qyery_sql_path, &quot;r&quot;)</span>
+<span class="c1">#         stringa = create.read()</span>
+<span class="c1">#         create.close()</span>
+<span class="c1">#         self.engine.raw_connection().set_isolation_level(psycopg2.extensions.ISOLATION_LEVEL_AUTOCOMMIT)</span>
+<span class="c1">#         self.engine.text(stringa).execute()</span>
+
+<span class="c1">#     def execute_sql_create_spatialite_db(self):</span>
+<span class="c1">#         path = os.path.dirname(__file__)</span>
+<span class="c1">#         rel_path = os.path.join(os.sep, &#39;query_sql&#39;, &#39;pyarchinit_create_spatialite_db.sql&#39;)</span>
+<span class="c1">#         qyery_sql_path = &#39;{}{}&#39;.format(path, rel_path)</span>
+<span class="c1">#         create = open(qyery_sql_path, &quot;r&quot;)</span>
+<span class="c1">#         stringa = create.read()</span>
+<span class="c1">#         create.close()</span>
+
+<span class="c1">#         Session = sessionmaker(bind=self.engine, autoflush=True, autocommit=True)</span>
+<span class="c1">#         session = Session()</span>
+<span class="c1">#         session.begin()</span>
+<span class="c1">#         session.execute(stringa)</span>
+<span class="c1">#         session.commit()</span>
+<span class="c1">#         session.close()</span>
+
+<span class="c1">#     def execute_sql_create_layers(self):</span>
+<span class="c1">#         path = os.path.dirname(__file__)</span>
+<span class="c1">#         rel_path = os.path.join(os.sep, &#39;query_sql&#39;, &#39;pyarchinit_layers_postgis.sql&#39;)</span>
+<span class="c1">#         qyery_sql_path = &#39;{}{}&#39;.format(path, rel_path)</span>
+<span class="c1">#         create = open(qyery_sql_path, &quot;r&quot;)</span>
+<span class="c1">#         stringa = create.read()</span>
+<span class="c1">#         create.close()</span>
+
+<span class="c1">#         Session = sessionmaker(bind=self.engine, autoflush=True, autocommit=True)</span>
+<span class="c1">#         session = Session()</span>
+<span class="c1">#         session.begin()</span>
+<span class="c1">#         session.execute(stringa)</span>
+<span class="c1">#         session.commit()</span>
+<span class="c1">#         session.close()</span>
+
+<span class="c1">#         # query statement</span>
+
+<span class="c1">#     def query(self, n):</span>
+<span class="c1">#         class_name = eval(n)</span>
+<span class="c1">#         # engine = self.connection()</span>
+<span class="c1">#         Session = sessionmaker(bind=self.engine, autoflush=True, autocommit=True)</span>
+<span class="c1">#         session = Session()</span>
+<span class="c1">#         query = session.query(class_name)</span>
+<span class="c1">#         res = query.all()</span>
+<span class="c1">#         session.close()</span>
+<span class="c1">#         return res</span>
+
+<span class="c1">#     def query_bool(self, params, table):</span>
+<span class="c1">#         u = Utility()</span>
+<span class="c1">#         params = u.remove_empty_items_fr_dict(params)</span>
+
+<span class="c1">#         list_keys_values = list(params.items())</span>
+
+<span class="c1">#         field_value_string = &quot;&quot;</span>
+
+<span class="c1">#         for sing_couple_n in range(len(list_keys_values)):</span>
+<span class="c1">#             if sing_couple_n == 0:</span>
+<span class="c1">#                 if type(list_keys_values[sing_couple_n][1]) != &quot;&lt;type &#39;str&#39;&gt;&quot;:</span>
+<span class="c1">#                     field_value_string = table + &quot;.%s == %s&quot; % (</span>
+<span class="c1">#                     list_keys_values[sing_couple_n][0], list_keys_values[sing_couple_n][1])</span>
+<span class="c1">#                 else:</span>
+<span class="c1">#                     field_value_string = table + &quot;.%s == u%s&quot; % (</span>
+<span class="c1">#                     list_keys_values[sing_couple_n][0], list_keys_values[sing_couple_n][1])</span>
+<span class="c1">#             else:</span>
+<span class="c1">#                 if type(list_keys_values[sing_couple_n][1]) == &quot;&lt;type &#39;str&#39;&gt;&quot;:</span>
+<span class="c1">#                     field_value_string = field_value_string + &quot;,&quot; + table + &quot;.%s == %s&quot; % (</span>
+<span class="c1">#                     list_keys_values[sing_couple_n][0], list_keys_values[sing_couple_n][1])</span>
+<span class="c1">#                 else:</span>
+<span class="c1">#                     field_value_string = field_value_string + &quot;,&quot; + table + &quot;.%s == %s&quot; % (</span>
+<span class="c1">#                     list_keys_values[sing_couple_n][0], list_keys_values[sing_couple_n][1])</span>
+
+<span class="c1">#                     #field_value_string = &quot;, &quot;.join([table + &quot;.%s == u%s&quot; % (k, v) for k, v in params.items()])</span>
+
+<span class="c1">#         &quot;&quot;&quot;</span>
+<span class="c1">#         Per poter utilizzare l&#39;operatore LIKE è necessario fare una iterazione attraverso il dizionario per discriminare tra</span>
+<span class="c1">#         stringhe e numeri</span>
+<span class="c1">#         #field_value_string = &quot;, &quot;.join([table + &quot;.%s.like(%s)&quot; % (k, v) for k, v in params.items()])</span>
+<span class="c1">#         &quot;&quot;&quot;</span>
+<span class="c1">#         # self.connection()</span>
+<span class="c1">#         Session = sessionmaker(bind=self.engine, autoflush=True, autocommit=True)</span>
+<span class="c1">#         session = Session()</span>
+<span class="c1">#         query_str = &quot;session.query(&quot; + table + &quot;).filter(and_(&quot; + field_value_string + &quot;)).all()&quot;</span>
+<span class="c1">#         res = eval(query_str)</span>
+
+<span class="c1">#         &#39;&#39;&#39;</span>
+<span class="c1">#         t = open(&quot;/test_import.txt&quot;, &quot;w&quot;)</span>
+<span class="c1">#         t.write(str(query_str))</span>
+<span class="c1">#         t.close()</span>
+<span class="c1">#         &#39;&#39;&#39;</span>
+<span class="c1">#         session.close()</span>
+<span class="c1">#         return res</span>
+    
+    
+    
+<span class="c1">#     def query_bool_special(self, params, table):</span>
+<span class="c1">#         u = Utility()</span>
+<span class="c1">#         params = u.remove_empty_items_fr_dict(params)</span>
+
+<span class="c1">#         list_keys_values = list(params.items())</span>
+
+<span class="c1">#         field_value_string = &quot;&quot;</span>
+
+<span class="c1">#         for sing_couple_n in range(len(list_keys_values)):</span>
+<span class="c1">#             if sing_couple_n == 0:</span>
+<span class="c1">#                 if type(list_keys_values[sing_couple_n][1]) != &quot;&lt;type &#39;str&#39;&gt;&quot;:</span>
+<span class="c1">#                     field_value_string = table + &quot;.%s == %s&quot; % (</span>
+<span class="c1">#                     list_keys_values[sing_couple_n][0], list_keys_values[sing_couple_n][1])</span>
+<span class="c1">#                 else:</span>
+<span class="c1">#                     field_value_string = table + &quot;.%s == u%s&quot; % (</span>
+<span class="c1">#                     list_keys_values[sing_couple_n][0], list_keys_values[sing_couple_n][1])</span>
+<span class="c1">#             else:</span>
+<span class="c1">#                 if type(list_keys_values[sing_couple_n][1]) == &quot;&lt;type &#39;str&#39;&gt;&quot;:</span>
+<span class="c1">#                     field_value_string = field_value_string + &quot;,&quot; + table + &quot;.%s == %s&quot; % (</span>
+<span class="c1">#                     list_keys_values[sing_couple_n][0], list_keys_values[sing_couple_n][1])</span>
+<span class="c1">#                 else:</span>
+<span class="c1">#                     field_value_string = field_value_string + &quot;,&quot; + table + &quot;.%s == %s&quot; % (</span>
+<span class="c1">#                     list_keys_values[sing_couple_n][0], list_keys_values[sing_couple_n][1])</span>
+
+<span class="c1">#                     # field_value_string = &quot;, &quot;.join([table + &quot;.%s == u%s&quot; % (k, v) for k, v in params.items()])</span>
+
+<span class="c1">#         &quot;&quot;&quot;</span>
+<span class="c1">#         Per poter utilizzare l&#39;operatore LIKE è necessario fare una iterazione attraverso il dizionario per discriminare tra</span>
+<span class="c1">#         stringhe e numeri</span>
+<span class="c1">#         #field_value_string = &quot;, &quot;.join([table + &quot;.%s.like(%s)&quot; % (k, v) for k, v in params.items()])</span>
+<span class="c1">#         &quot;&quot;&quot;</span>
+<span class="c1">#         # self.connection()</span>
+<span class="c1">#         Session = sessionmaker(bind=self.engine, autoflush=True, autocommit=True)</span>
+<span class="c1">#         session = Session()</span>
+<span class="c1">#         query_str = &quot;session.query(&quot; + table + &quot;).filter(and_(&quot; + field_value_string + &quot;)).all()&quot;</span>
+<span class="c1">#         res = eval(query_str)</span>
+
+<span class="c1">#         &#39;&#39;&#39;</span>
+<span class="c1">#         t = open(&quot;/test_import.txt&quot;, &quot;w&quot;)</span>
+<span class="c1">#         t.write(str(query_str))</span>
+<span class="c1">#         t.close()</span>
+<span class="c1">#         &#39;&#39;&#39;</span>
+<span class="c1">#         session.close()</span>
+<span class="c1">#         return res</span>
+<span class="c1">#     def query_operator(self, params, table):</span>
+<span class="c1">#         u = Utility()</span>
+<span class="c1">#         #params = u.remove_empty_items_fr_dict(params)</span>
+<span class="c1">#         field_value_string = &#39;&#39;</span>
+<span class="c1">#         for i in params:</span>
+<span class="c1">#             if field_value_string == &#39;&#39;:</span>
+<span class="c1">#                 field_value_string = &#39;%s.%s %s %s&#39; % (table, i[0], i[1], i[2])</span>
+<span class="c1">#             else:</span>
+<span class="c1">#                 field_value_string = field_value_string + &#39;, %s.%s %s %s&#39; % (table, i[0], i[1], i[2])</span>
+
+<span class="c1">#         query_str = &quot;session.query(&quot; + table + &quot;).filter(and_(&quot; + field_value_string + &quot;)).all()&quot;</span>
+
+<span class="c1">#         # self.connection()</span>
+<span class="c1">#         Session = sessionmaker(bind=self.engine, autoflush=True, autocommit=True)</span>
+<span class="c1">#         session = Session()</span>
+<span class="c1">#         session.close()</span>
+<span class="c1">#         return eval(query_str)</span>
+
+<span class="c1">#     def query_distinct(self, table, query_params, distinct_field_name_params):</span>
+<span class="c1">#         # u = Utility()</span>
+<span class="c1">#         # params = u.remove_empty_items_fr_dict(params)</span>
+<span class="c1">#         ##      return session.query(INVENTARIO_MATERIALI.area,INVENTARIO_MATERIALI.us ).filter(INVENTARIO_MATERIALI.sito==&#39;Sito archeologico&#39;).distinct().order_by(INVENTARIO_MATERIALI.area,INVENTARIO_MATERIALI.us )</span>
+
+<span class="c1">#         query_string = &quot;&quot;</span>
+<span class="c1">#         for i in query_params:</span>
+<span class="c1">#             if query_string == &#39;&#39;:</span>
+<span class="c1">#                 query_string = &#39;%s.%s==%s&#39; % (table, i[0], i[1])</span>
+<span class="c1">#             else:</span>
+<span class="c1">#                 query_string = query_string + &#39;,%s.%s==%s&#39; % (table, i[0], i[1])</span>
+
+<span class="c1">#         distinct_string = &quot;&quot;</span>
+<span class="c1">#         for i in distinct_field_name_params:</span>
+<span class="c1">#             if distinct_string == &#39;&#39;:</span>
+<span class="c1">#                 distinct_string = &#39;%s.%s&#39; % (table, i)</span>
+<span class="c1">#             else:</span>
+<span class="c1">#                 distinct_string = distinct_string + &#39;,%s.%s&#39; % (table, i)</span>
+
+<span class="c1">#         query_cmd = &quot;session.query(&quot; + distinct_string + &quot;).filter(and_(&quot; + query_string + &quot;)).distinct().order_by(&quot; + distinct_string + &quot;)&quot;</span>
+<span class="c1">#         # self.connection()</span>
+<span class="c1">#         Session = sessionmaker(bind=self.engine, autoflush=True, autocommit=True)</span>
+<span class="c1">#         session = Session()</span>
+<span class="c1">#         session.close()</span>
+<span class="c1">#         return eval(query_cmd)</span>
+
+<span class="c1">#     def query_distinct_sql(self, table, query_params, distinct_field_name_params):</span>
+<span class="c1">#         # u = Utility()</span>
+<span class="c1">#         # params = u.remove_empty_items_fr_dict(params)</span>
+<span class="c1">#         ##      return session.query(INVENTARIO_MATERIALI.area,INVENTARIO_MATERIALI.us ).filter(INVENTARIO_MATERIALI.sito==&#39;Sito archeologico&#39;).distinct().order_by(INVENTARIO_MATERIALI.area,INVENTARIO_MATERIALI.us )</span>
+
+<span class="c1">#         query_string = &quot;&quot;</span>
+<span class="c1">#         for i in query_params:</span>
+<span class="c1">#             if query_string == &#39;&#39;:</span>
+<span class="c1">#                 query_string = &#39;%s=%s&#39; % (i[0], i[1])</span>
+<span class="c1">#             else:</span>
+<span class="c1">#                 query_string = query_string + &#39; AND %s=%s&#39; % (i[0], i[1])</span>
+
+<span class="c1">#         distinct_string = &quot;&quot;</span>
+<span class="c1">#         for i in distinct_field_name_params:</span>
+<span class="c1">#             if distinct_string == &#39;&#39;:</span>
+<span class="c1">#                 distinct_string = &#39;%s&#39; % (i)</span>
+<span class="c1">#             else:</span>
+<span class="c1">#                 distinct_string = distinct_string + &#39;,%s&#39; % (i)</span>
+
+<span class="c1">#         query_cmd = &quot;SELECT DISTINCT &quot; + distinct_string + &quot; FROM &quot; + table + &#39; WHERE &#39; + query_string</span>
+<span class="c1">#         # self.connection()</span>
+<span class="c1">#         res = self.engine.execute(query_cmd)</span>
+<span class="c1">#         return res</span>
+
+<span class="c1">#     # count distinct &quot;name&quot; values</span>
+
+<span class="c1">#     # session statement</span>
+<span class="c1">#     def insert_data_session(self, data):</span>
+<span class="c1">#         Session = sessionmaker(bind=self.engine, autoflush=False)</span>
+<span class="c1">#         session = Session()</span>
+<span class="c1">#         session.add(data)</span>
+<span class="c1">#         session.commit()</span>
+<span class="c1">#         session.close()</span>
+<span class="c1">#     def insert_data_conflict(self, data):</span>
+<span class="c1">#         Session = sessionmaker(bind=self.engine, autoflush=False)</span>
+<span class="c1">#         session = Session()</span>
+<span class="c1">#         session.begin_nested()</span>
+<span class="c1">#         session.merge(data)</span>
+       
+<span class="c1">#         session.commit()</span>
+        
+<span class="c1">#         session.close()</span>
+<span class="c1">#     def update(self, table_class_str, id_table_str, value_id_list, columns_name_list, values_update_list):</span>
+<span class="c1">#         &quot;&quot;&quot;</span>
+<span class="c1">#         Receives 5 values then putted in a list.</span>
+<span class="c1">#         self.set_update = arg</span>
+<span class="c1">#         table = Table(self.set_update[0], self.metadata, autoload=True)</span>
+<span class="c1">#         changes_dict= {}</span>
+<span class="c1">#         u = Utility()</span>
+<span class="c1">#         set_update_4 = u.deunicode_list(self.set_update[4])</span>
+<span class="c1">#         u.add_item_to_dict(changes_dict,zip(self.set_update[3], set_update_4))</span>
+
+<span class="c1">#         exec_str = (&#39;%s%s%s%s%s%s%s&#39;) % (&quot;table.update(table.c.&quot;, self.set_update[1], &quot; == &#39;&quot;, self.set_update[2][0], &quot;&#39;).execute(&quot;,changes_dict ,&quot;)&quot;)</span>
+
+<span class="c1">#         &quot;&quot;&quot;</span>
+
+<span class="c1">#         self.table_class_str = table_class_str</span>
+<span class="c1">#         self.id_table_str = id_table_str</span>
+<span class="c1">#         self.value_id_list = value_id_list</span>
+<span class="c1">#         self.columns_name_list = columns_name_list</span>
+<span class="c1">#         self.values_update_list = values_update_list</span>
+
+<span class="c1">#         changes_dict = {}</span>
+<span class="c1">#         u = Utility()</span>
+<span class="c1">#         update_value_list = u.deunicode_list(self.values_update_list)</span>
+
+<span class="c1">#         column_list = []</span>
+<span class="c1">#         for field in self.columns_name_list:</span>
+<span class="c1">#             column_str = (&#39;%s.%s&#39;) % (table_class_str, field)</span>
+<span class="c1">#             column_list.append(column_str)</span>
+
+<span class="c1">#         u.add_item_to_dict(changes_dict, list(zip(self.columns_name_list, update_value_list)))</span>
+
+<span class="c1">#         Session = sessionmaker(bind=self.engine, autoflush=True, autocommit=True)</span>
+<span class="c1">#         session = Session()</span>
+<span class="c1">#         # session.query(SITE).filter(and_(SITE.id_sito == &#39;1&#39;)).update(values = {SITE.sito:&quot;updatetest&quot;})</span>
+
+<span class="c1">#         session_exec_str = &#39;session.query(%s).filter(and_(%s.%s == %s)).update(values = %s)&#39; % (</span>
+<span class="c1">#         self.table_class_str, self.table_class_str, self.id_table_str, self.value_id_list[0], changes_dict)</span>
+
+        
+<span class="c1">#         eval(session_exec_str)</span>
+<span class="c1">#         session.close()</span>
+<span class="c1">#     def update_find_check(self, table_class_str, id_table_str, value_id, find_check_value):</span>
+<span class="c1">#         self.table_class_str = table_class_str</span>
+<span class="c1">#         self.id_table_str = id_table_str</span>
+<span class="c1">#         self.value_id = value_id</span>
+<span class="c1">#         self.find_check_value = find_check_value</span>
+
+<span class="c1">#         Session = sessionmaker(bind=self.engine, autoflush=True, autocommit=True)</span>
+<span class="c1">#         session = Session()</span>
+
+<span class="c1">#         session_exec_str = &#39;session.query(%s).filter(%s.%s == %s)).update(values = {&quot;find_check&quot;: %d})&#39; % (</span>
+<span class="c1">#         self.table_class_str, self.table_class_str, self.id_table_str, self.value_id, find_check_value)</span>
+
+<span class="c1">#         eval(session_exec_str)</span>
+<span class="c1">#         session.close()</span>
+<span class="c1">#     def empty_find_check(self, table_class_str, find_check_value):</span>
+<span class="c1">#         self.table_class_str = table_class_str</span>
+<span class="c1">#         self.find_check_value = find_check_value</span>
+
+<span class="c1">#         Session = sessionmaker(bind=self.engine, autoflush=True, autocommit=True)</span>
+<span class="c1">#         session = Session()</span>
+
+<span class="c1">#         session_exec_str = &#39;session.query(%s).update(values = {&quot;find_check&quot;: %d})&#39; % (self.table_class_str, 0)</span>
+
+<span class="c1">#         eval(session_exec_str)</span>
+<span class="c1">#         session.close()</span>
+<span class="c1">#     def delete_one_record(self, tn, id_col, id_rec):</span>
+        
+<span class="c1">#         self.table_name = tn</span>
+<span class="c1">#         self.id_column = id_col</span>
+<span class="c1">#         self.id_rec = id_rec</span>
+<span class="c1">#         # self.connection()</span>
+<span class="c1">#         table = Table(self.table_name, self.metadata, autoload=True)</span>
+<span class="c1">#         exec_str = (&#39;%s%s%s%d%s&#39;) % (&#39;table.delete(table.c.&#39;, self.id_column, &#39; == &#39;, self.id_rec, &#39;).execute()&#39;)</span>
+
+<span class="c1">#         eval(exec_str)</span>
+        
+<span class="c1">#     def max_num_id(self, tc, f):</span>
+<span class="c1">#         self.table_class = tc</span>
+<span class="c1">#         self.field_id = f</span>
+
+<span class="c1">#         Session = sessionmaker(bind=self.engine, autoflush=True, autocommit=True)</span>
+<span class="c1">#         session = Session()</span>
+<span class="c1">#         exec_str = &quot;session.query(func.max({}.{}))&quot;.format(self.table_class, self.field_id)</span>
+<span class="c1">#         max_id_func = eval(exec_str)</span>
+<span class="c1">#         res_all = max_id_func.all()</span>
+<span class="c1">#         res_max_num_id = res_all[0][0]</span>
+<span class="c1">#         session.close()</span>
+<span class="c1">#         if not res_max_num_id:</span>
+<span class="c1">#             return 0</span>
+<span class="c1">#         else:</span>
+<span class="c1">#             return int(res_max_num_id)</span>
+        
+<span class="c1">#     # def max_num_id2(self, tc, f):</span>
+<span class="c1">#         # self.table_class = tc</span>
+<span class="c1">#         # self.field_id = f</span>
+
+<span class="c1">#         # Session = sessionmaker(bind=self.engine, autoflush=True, autocommit=True)</span>
+<span class="c1">#         # session = Session()</span>
+<span class="c1">#         # exec_str = &quot;session.query(func.max({}.{}))&quot;.format(self.table_class, self.field_id)</span>
+<span class="c1">#         # exec_str = exec_str.on_conflict_do_nothing(index_elements=&quot;{}&quot;.format( self.field_id))</span>
+<span class="c1">#         # max_id_func = eval(exec_str)</span>
+<span class="c1">#         # res_all = max_id_func.all()</span>
+<span class="c1">#         # res_max_num_id = res_all[0][0]</span>
+<span class="c1">#         # session.close()</span>
+<span class="c1">#         # if not res_max_num_id:</span>
+<span class="c1">#             # return 0</span>
+<span class="c1">#         # else:</span>
+<span class="c1">#             # return int(res_max_num_id)</span>
+    
+<span class="c1">#     def dir_query(self):</span>
+<span class="c1">#         Session = sessionmaker(bind=self.engine, autoflush=True, autocommit=True)</span>
+<span class="c1">#         session = Session()</span>
+
+<span class="c1">#         # session.query(SITE).filter(SITE.id_sito == &#39;1&#39;).update(values = {SITE.sito:&quot;updatetest&quot;})</span>
+<span class="c1">#         # return session.query(SITE).filter(and_(SITE.id_sito == 1)).all()</span>
+<span class="c1">#         # return os.environ[&#39;HOME&#39;]</span>
+
+<span class="c1">#         session.close()# managements utilities</span>
+        
+<span class="c1">#     def fields_list(self, t, s=&#39;&#39;):</span>
+<span class="c1">#         &quot;&quot;&quot;return the list of columns in a table. If s is set a int,</span>
+<span class="c1">#         return only one column&quot;&quot;&quot;</span>
+<span class="c1">#         self.table_name = t</span>
+<span class="c1">#         self.sing_column = s</span>
+<span class="c1">#         table = Table(self.table_name, self.metadata, autoload=True)</span>
+
+<span class="c1">#         if not str(s):</span>
+<span class="c1">#             return [c.name for c in table.columns]</span>
+<span class="c1">#         else:</span>
+<span class="c1">#             return [c.name for c in table.columns][int(s)]</span>
+
+<span class="c1">#     def query_in_idus(self, id_list):</span>
+<span class="c1">#         Session = sessionmaker(bind=self.engine, autoflush=True, autocommit=True)</span>
+<span class="c1">#         session = Session()</span>
+<span class="c1">#         res = session.query(US).filter(US.id_us.in_(id_list)).all()</span>
+
+<span class="c1">#         session.close()</span>
+
+<span class="c1">#         return res</span>
+
+<span class="c1">#     def query_sort(self, id_list, op, to, tc, idn):</span>
+<span class="c1">#         self.order_params = op</span>
+<span class="c1">#         self.type_order = to</span>
+<span class="c1">#         self.table_class = tc</span>
+<span class="c1">#         self.id_name = idn</span>
+
+<span class="c1">#         filter_params = self.type_order + &quot;(&quot; + self.table_class + &quot;.&quot; + self.order_params[0] + &quot;)&quot;</span>
+
+<span class="c1">#         for i in self.order_params[1:]:</span>
+<span class="c1">#             filter_temp = self.type_order + &quot;(&quot; + self.table_class + &quot;.&quot; + i + &quot;)&quot;</span>
+
+<span class="c1">#             filter_params = filter_params + &quot;, &quot; + filter_temp</span>
+
+<span class="c1">#         Session = sessionmaker(bind=self.engine, autoflush=True, autocommit=True)</span>
+<span class="c1">#         session = Session()</span>
+
+<span class="c1">#         cmd_str = &quot;session.query({0}).filter({0}.{1}.in_(id_list)).order_by({2}).all()&quot;.format(self.table_class,</span>
+<span class="c1">#                                                                                                self.id_name,</span>
+<span class="c1">#                                                                                                filter_params)</span>
+<span class="c1">#         s = eval(cmd_str)</span>
+<span class="c1">#         session.close()</span>
+<span class="c1">#         return s</span>
+
+<span class="c1">#     def run(self, stmt):</span>
+<span class="c1">#         rs = stmt.execute()</span>
+<span class="c1">#         res_list = []</span>
+<span class="c1">#         for row in rs:</span>
+<span class="c1">#             res_list.append(row[0])</span>
+<span class="c1">#         #session.close()</span>
+<span class="c1">#         return res_list</span>
+
+<span class="c1">#     def update_for(self):</span>
+<span class="c1">#         &quot;&quot;&quot;</span>
+<span class="c1">#         table = Table(&#39;us_table&#39;, self.metadata, autoload=True)</span>
+<span class="c1">#         s = table.select(table.c.id_us &gt; 0)</span>
+<span class="c1">#         res_list = self.run(s)</span>
+<span class="c1">#         cont = 0</span>
+
+<span class="c1">#         for i in res_list:</span>
+<span class="c1">#             self.update(&#39;US&#39;, &#39;id_us&#39;, [i], [&#39;id_us&#39;], [cont])</span>
+<span class="c1">#             cont = cont+1</span>
+
+<span class="c1">#         &quot;&quot;&quot;</span>
+
+<span class="c1">#         table = Table(&#39;inventario_materiali_table_toimp&#39;, self.metadata, autoload=True)</span>
+<span class="c1">#         s = table.select(table.c.id_invmat &gt; 0)</span>
+<span class="c1">#         res_list = self.run(s)</span>
+<span class="c1">#         cont = 900</span>
+<span class="c1">#         for i in res_list:</span>
+<span class="c1">#             self.update(&#39;INVENTARIO_MATERIALI_TOIMP&#39;, &#39;id_invmat&#39;, [i], [&#39;id_invmat&#39;], [cont])</span>
+<span class="c1">#             cont = cont + 1</span>
+
+<span class="c1">#     def group_by(self, tn, fn, CD):</span>
+<span class="c1">#         &quot;&quot;&quot;Group by the values by table name - string, field name - string, table class DB from mapper - string&quot;&quot;&quot;</span>
+<span class="c1">#         self.table_name = tn</span>
+<span class="c1">#         self.field_name = fn</span>
+<span class="c1">#         self.table_class = CD</span>
+
+<span class="c1">#         Session = sessionmaker(bind=self.engine, autoflush=True, autocommit=True)</span>
+<span class="c1">#         session = Session()</span>
+<span class="c1">#         s = eval(&#39;select([{0}.{1}]).group_by({0}.{1})&#39;.format(self.table_class, self.field_name))</span>
+<span class="c1">#         session.close()</span>
+<span class="c1">#         return self.engine.execute(s).fetchall()</span>
+
+<span class="c1">#     def query_where_text(self, c, v):</span>
+<span class="c1">#         self.c = c</span>
+<span class="c1">#         self.v = v</span>
+<span class="c1">#         # self.connection()</span>
+<span class="c1">#         Session = sessionmaker(bind=self.engine, autoflush=True, autocommit=True)</span>
+<span class="c1">#         session = Session()</span>
+
+<span class="c1">#         string = (&#39;%s%s%s%s%s&#39;) % (&#39;session.query(PERIODIZZAZIONE).filter_by(&#39;, self.c, &quot;=&#39;&quot;, self.v, &quot;&#39;)&quot;)</span>
+
+<span class="c1">#         res = eval(string)</span>
+<span class="c1">#         session.close()</span>
+<span class="c1">#         return res</span>
+
+<span class="c1">#     def update_cont_per(self, s):</span>
+<span class="c1">#         self.sito = s</span>
+
+<span class="c1">#         Session = sessionmaker(bind=self.engine, autoflush=True, autocommit=True)</span>
+<span class="c1">#         session = Session()</span>
+
+<span class="c1">#         string = (&#39;%s%s%s%s%s&#39;) % (&#39;session.query(US).filter_by(&#39;, &#39;sito&#39;, &quot;=&#39;&quot;, str(self.sito), &quot;&#39;)&quot;)</span>
+<span class="c1">#         # print string</span>
+<span class="c1">#         session.close()</span>
+<span class="c1">#         lista_us = eval(string)</span>
+
+<span class="c1">#         for i in lista_us:</span>
+<span class="c1">#             if not i.periodo_finale and i.periodo_iniziale:</span>
+<span class="c1">#                     periodiz = self.query_bool(</span>
+<span class="c1">#                         {&#39;sito&#39;: &quot;&#39;&quot; + str(self.sito) + &quot;&#39;&quot;, &#39;periodo&#39;: i.periodo_iniziale, &#39;fase&#39;: &quot;&#39;&quot; +str(i.fase_iniziale)+ &quot;&#39;&quot;},</span>
+<span class="c1">#                         &#39;PERIODIZZAZIONE&#39;)</span>
+<span class="c1">#                     self.update(&#39;US&#39;, &#39;id_us&#39;, [int(i.id_us)], [&#39;cont_per&#39;], [periodiz[0].cont_per])</span>
+            
+<span class="c1">#             elif not i.periodo_iniziale:</span>
+<span class="c1">#                 periodiz = self.query_bool(</span>
+<span class="c1">#                         {&#39;sito&#39;: &quot;&#39;&quot; + str(self.sito) + &quot;&#39;&quot;, &#39;periodo&#39;: i.periodo_iniziale, &#39;fase&#39;: &quot;&#39;&quot; +str(i.fase_iniziale)+ &quot;&#39;&quot;},</span>
+<span class="c1">#                         &#39;PERIODIZZAZIONE&#39;)</span>
+<span class="c1">#                 self.update(&#39;US&#39;, &#39;id_us&#39;, [int(i.id_us)], [&#39;cont_per&#39;], [periodiz[0].cont_per])</span>
+<span class="c1">#                 continue</span>
+<span class="c1">#             elif i.periodo_finale and i.periodo_iniziale:</span>
+<span class="c1">#                 try:</span>
+<span class="c1">#                     cod_cont_iniz_temp = self.query_bool(</span>
+<span class="c1">#                         {&#39;sito&#39;: &quot;&#39;&quot; + str(self.sito) + &quot;&#39;&quot;, &#39;periodo&#39;: int(i.periodo_iniziale),</span>
+<span class="c1">#                          &#39;fase&#39;: int(i.fase_iniziale+&#39;::text&#39;)}, &#39;PERIODIZZAZIONE&#39;)</span>
+                
+<span class="c1">#                     cod_cont_fin_temp = self.query_bool(</span>
+<span class="c1">#                         {&#39;sito&#39;: &quot;&#39;&quot; + str(self.sito) + &quot;&#39;&quot;, &#39;periodo&#39;: int(i.periodo_finale), &#39;fase&#39;: int(i.fase_finale)},</span>
+<span class="c1">#                         &#39;PERIODIZZAZIONE&#39;)</span>
+
+<span class="c1">#                     cod_cont_iniz = cod_cont_iniz_temp[0].cont_per</span>
+<span class="c1">#                     cod_cont_fin = cod_cont_fin_temp[0].cont_per</span>
+
+<span class="c1">#                     cod_cont_var_n = cod_cont_iniz</span>
+<span class="c1">#                     cod_cont_var_txt = str(cod_cont_iniz)</span>
+<span class="c1">#                     while cod_cont_var_n != cod_cont_fin:</span>
+<span class="c1">#                         cod_cont_var_n += 1</span>
+
+<span class="c1">#                         cod_cont_var_txt = cod_cont_var_txt + &quot;/&quot; + str(cod_cont_var_n)</span>
+
+<span class="c1">#                     self.update(&#39;US&#39;, &#39;id_us&#39;, [int(i.id_us)], [&#39;cont_per&#39;], [cod_cont_var_txt])</span>
+<span class="c1">#                 except:</span>
+<span class="c1">#                     pass</span>
+<span class="c1">#                 else:</span>
+<span class="c1">#                     cod_cont_iniz_temp = self.query_bool(</span>
+<span class="c1">#                         {&#39;sito&#39;: &quot;&#39;&quot; + str(self.sito) + &quot;&#39;&quot;, &#39;periodo&#39;: int(i.periodo_iniziale),</span>
+<span class="c1">#                          &#39;fase&#39;: int(i.fase_iniziale)}, &#39;PERIODIZZAZIONE&#39;)</span>
+                
+<span class="c1">#                     cod_cont_fin_temp = self.query_bool(</span>
+<span class="c1">#                         {&#39;sito&#39;: &quot;&#39;&quot; + str(self.sito) + &quot;&#39;&quot;, &#39;periodo&#39;: int(i.periodo_finale), &#39;fase&#39;: int(i.fase_finale)},</span>
+<span class="c1">#                         &#39;PERIODIZZAZIONE&#39;)</span>
+
+<span class="c1">#                     cod_cont_iniz = cod_cont_iniz_temp[0].cont_per</span>
+<span class="c1">#                     cod_cont_fin = cod_cont_fin_temp[0].cont_per</span>
+
+<span class="c1">#                     cod_cont_var_n = cod_cont_iniz</span>
+<span class="c1">#                     cod_cont_var_txt = str(cod_cont_iniz)</span>
+<span class="c1">#                     while cod_cont_var_n != cod_cont_fin:</span>
+<span class="c1">#                         cod_cont_var_n += 1</span>
+
+<span class="c1">#                         cod_cont_var_txt = cod_cont_var_txt + &quot;/&quot; + str(cod_cont_var_n)</span>
+
+<span class="c1">#                     self.update(&#39;US&#39;, &#39;id_us&#39;, [int(i.id_us)], [&#39;cont_per&#39;], [cod_cont_var_txt])</span>
+                
+
+<span class="c1">#     def remove_alltags_from_db_sql(self,s):</span>
+<span class="c1">#         sql_query_string = (&quot;DELETE FROM media_to_entity_table WHERE media_name  = &#39;%s&#39;&quot;) % (s)</span>
+    
+<span class="c1">#         res = self.engine.execute(sql_query_string)</span>
+<span class="c1">#         # rows= res.fetchall()</span>
+<span class="c1">#         return res    </span>
+    
+<span class="c1">#     def remove_tags_from_db_sql(self,s):</span>
+<span class="c1">#         sql_query_string = (&quot;DELETE FROM media_to_entity_table WHERE id_entity  = &#39;%s&#39;&quot;) % (s)</span>
+    
+<span class="c1">#         res = self.engine.execute(sql_query_string)</span>
+<span class="c1">#         # rows= res.fetchall()</span>
+<span class="c1">#         return res    </span>
+<span class="c1">#     def delete_thumb_from_db_sql(self,s):</span>
+<span class="c1">#         sql_query_string = (&quot;DELETE FROM media_thumb_table WHERE media_filename  = &#39;%s&#39;&quot;) % (s)</span>
+    
+<span class="c1">#         res = self.engine.execute(sql_query_string)</span>
+<span class="c1">#         # rows= res.fetchall()</span>
+<span class="c1">#         return res    </span>
+<span class="c1">#     def select_medianame_from_st_sql(self,sito,sigla,numero):</span>
+<span class="c1">#         sql_query_string = (&quot;SELECT c.filepath, a.media_name FROM media_to_entity_table as a,  struttura_table as b, media_thumb_table as c WHERE b.id_struttura=a.id_entity and c.id_media=a.id_media  and b.sito= &#39;%s&#39; and b.sigla_struttura=&#39;%s&#39; and b.numero_struttura=&#39;%s&#39; and entity_type=&#39;STRUTTURA&#39;&quot;)%(sito,sigla,numero) </span>
+        
+<span class="c1">#         res = self.engine.execute(sql_query_string)</span>
+<span class="c1">#         rows= res.fetchall()</span>
+<span class="c1">#         return rows    </span>
+<span class="c1">#     def select_medianame_from_db_sql(self,sito,area):</span>
+<span class="c1">#         sql_query_string = (&quot;SELECT c.filepath, b.us,a.media_name FROM media_to_entity_table as a,  us_table as b, media_thumb_table as c WHERE b.id_us=a.id_entity and c.id_media=a.id_media  and b.sito= &#39;%s&#39; and b.area=&#39;%s&#39;&quot;)%(sito,area) </span>
+        
+<span class="c1">#         res = self.engine.execute(sql_query_string)</span>
+<span class="c1">#         rows= res.fetchall()</span>
+<span class="c1">#         return rows</span>
+<span class="c1">#     def select_medianame_tb_from_db_sql(self,sito,area):</span>
+<span class="c1">#         sql_query_string = (&quot;SELECT c.filepath, a.media_name FROM media_to_entity_table as a,  tomba_table as b, media_thumb_table as c WHERE b.id_tomba=a.id_entity and c.id_media=a.id_media  and b.sito= &#39;%s&#39; and b.area=&#39;%s&#39;and entity_type=&#39;TOMBA&#39;&quot;)%(sito,area) </span>
+        
+<span class="c1">#         res = self.engine.execute(sql_query_string)</span>
+<span class="c1">#         rows= res.fetchall()</span>
+<span class="c1">#         return rows</span>
+    
+<span class="c1">#     def select_medianame_ra_from_db_sql(self,sito,area,us):</span>
+<span class="c1">#         sql_query_string = (&quot;SELECT c.filepath, a.media_name FROM media_to_entity_table as a,  inventario_materiali_table as b, media_thumb_table as c WHERE b.id_invmat=a.id_entity and c.id_media=a.id_media  and b.sito= &#39;%s&#39; and b.area=&#39;%s&#39; and b.us = &#39;%s&#39; and entity_type=&#39;REPERTO&#39;&quot;)%(sito,area,us) </span>
+        
+<span class="c1">#         res = self.engine.execute(sql_query_string)</span>
+<span class="c1">#         rows= res.fetchall()</span>
+<span class="c1">#         return rows</span>
+    
+<span class="c1">#     def select_medianame_2_from_db_sql(self,sito,area,us):</span>
+<span class="c1">#         sql_query_string = (&quot;SELECT c.filepath, a.media_name FROM media_to_entity_table as a,  us_table as b, media_thumb_table as c WHERE b.id_us=a.id_entity and c.id_media=a.id_media  and b.sito= &#39;%s&#39; and b.area=&#39;%s&#39; and b.us = &#39;%s&#39; and entity_type=&#39;US&#39;&quot;)%(sito,area,us) </span>
+        
+<span class="c1">#         res = self.engine.execute(sql_query_string)</span>
+<span class="c1">#         rows= res.fetchall()</span>
+<span class="c1">#         return rows</span>
+<span class="c1">#     def select_ra_from_db_sql(self,sito,area,us):</span>
+<span class="c1">#         sql_query_string = (&quot;SELECT n_reperto from inventario_materiali_table WHERE sito = &#39;%s&#39; and area = &#39;%s&#39; and us = &#39;%s&#39;&quot;)%(sito,area,us) </span>
+        
+<span class="c1">#         res = self.engine.execute(sql_query_string)</span>
+<span class="c1">#         rows= res.fetchall()</span>
+<span class="c1">#         return rows</span>
+<span class="c1">#     def select_coord_from_db_sql(self,sito,area,us):</span>
+<span class="c1">#         sql_query_string = (&quot;SELECT coord from pyunitastratigrafiche WHERE scavo_s = &#39;%s&#39; and area_s = &#39;%s&#39; and us_s = &#39;%s&#39;&quot;)%(sito,area,us) </span>
+        
+<span class="c1">#         res = self.engine.execute(sql_query_string)</span>
+<span class="c1">#         rows= res.fetchall()</span>
+<span class="c1">#         return rows</span>
+    
+<span class="c1">#     def select_medianame_3_from_db_sql(self,sito,area,us):</span>
+<span class="c1">#         sql_query_string = (&quot;SELECT c.filepath, b.us,a.media_name FROM media_to_entity_table as a,  inventario_materiali_table as b, media_thumb_table as c WHERE b.id_invmat=a.id_entity and c.id_media=a.id_media  and b.sito= &#39;%s&#39; and b.area=&#39;%s&#39; and us = &#39;%s&#39;&quot;)%(sito,area,us) </span>
+        
+<span class="c1">#         res = self.engine.execute(sql_query_string)</span>
+<span class="c1">#         rows= res.fetchall()</span>
+<span class="c1">#         return rows</span>
+    
+<span class="c1">#     def select_thumbnail_from_db_sql(self,sito):</span>
+<span class="c1">#         sql_query_string = (&quot;SELECT c.filepath, group_concat ((select us from us_table where id_us like id_entity))as us,a.media_name,b.area,b.unita_tipo FROM  media_to_entity_table as a,  us_table as b, media_thumb_table as c WHERE b.id_us=a.id_entity and c.id_media=a.id_media and sito=&#39;%s&#39; group by a.media_name order by a.media_name asc&quot;)%(sito)</span>
+<span class="c1">#         res = self.engine.execute(sql_query_string)</span>
+<span class="c1">#         rows= res.fetchall()</span>
+<span class="c1">#         return rows</span>
+    
+<span class="c1">#     def select_quote_from_db_sql(self, sito, area, us):</span>
+<span class="c1">#         sql_query_string = (&quot;SELECT * FROM pyarchinit_quote WHERE sito_q = &#39;%s&#39; AND area_q = &#39;%s&#39; AND us_q = &#39;%s&#39;&quot;) % (</span>
+<span class="c1">#         sito, area, us)</span>
+<span class="c1">#         res = self.engine.execute(sql_query_string)</span>
+<span class="c1">#         return res</span>
+<span class="c1">#     def select_us_from_db_sql(self, sito, area, us, stratigraph_index_us):</span>
+<span class="c1">#         sql_query_string = (</span>
+<span class="c1">#                            &quot;SELECT * FROM pyunitastratigrafiche WHERE scavo_s = &#39;%s&#39; AND area_s = &#39;%s&#39; AND us_s = &#39;%s&#39; AND stratigraph_index_us = &#39;%s&#39;&quot;) % (</span>
+<span class="c1">#                            sito, area, us, stratigraph_index_us)</span>
+<span class="c1">#         res = self.engine.execute(sql_query_string)</span>
+<span class="c1">#         return res</span>
+
+<span class="c1">#     def select_us_doc_from_db_sql(self, sito, tipo_doc, nome_doc):</span>
+<span class="c1">#         sql_query_string = (</span>
+<span class="c1">#                            &quot;SELECT * FROM pyunitastratigrafiche WHERE scavo_s = &#39;%s&#39; AND tipo_doc = &#39;%s&#39; AND nome_doc = &#39;%s&#39;&quot;) % (</span>
+<span class="c1">#                            sito, tipo_doc, nome_doc)</span>
+<span class="c1">#         res = self.engine.execute(sql_query_string)</span>
+<span class="c1">#         return res</span>
+
+<span class="c1">#     def select_usneg_doc_from_db_sql(self, sito, tipo_doc, nome_doc):</span>
+<span class="c1">#         sql_query_string = (</span>
+<span class="c1">#                            &quot;SELECT * FROM pyarchinit_us_negative_doc WHERE sito_n = &#39;%s&#39; AND  tipo_doc_n = &#39;%s&#39; AND nome_doc_n = &#39;%s&#39;&quot;) % (</span>
+<span class="c1">#                            sito, tipo_doc, nome_doc)</span>
+<span class="c1">#         res = self.engine.execute(sql_query_string)</span>
+<span class="c1">#         return res</span>
+
+<span class="c1">#     def select_db_sql(self, table):</span>
+<span class="c1">#         sql_query_string = (&quot;SELECT * FROM %s&quot;) % table</span>
+<span class="c1">#         res = self.engine.execute(sql_query_string)</span>
+<span class="c1">#         return res</span>
+    
+<span class="c1">#     def select_db_sql_2(self, sito,area,us,d_stratigrafica):</span>
+<span class="c1">#         sql_query_string = (&quot;SELECT * FROM us_table as a where a.sito=&#39;%s&#39; AND a.area=&#39;%s&#39; AND a.us=&#39;%s&#39; AND a.d_stratigrafica=&#39;%s&#39;&quot;) % (sito,area,us,d_stratigrafica)</span>
+<span class="c1">#         res = self.engine.execute(sql_query_string)</span>
+<span class="c1">#         rows= res.fetchall()</span>
+        
+<span class="c1">#         return rows</span>
+    
+    
+<span class="c1">#     def test_ut_sql(self,unita_tipo):</span>
+<span class="c1">#         sql_query_string = (&quot;SELECT %s FROM us_table&quot;)% (unita_tipo)</span>
+<span class="c1">#         res = self.engine.execute(sql_query_string)</span>
+<span class="c1">#         return res</span>
+    
+<span class="c1">#     def query_in_contains(self, value_list, sitof, areaf):</span>
+<span class="c1">#         self.value_list = value_list</span>
+       
+<span class="c1">#         Session = sessionmaker(bind=self.engine, autoflush=True, autocommit=True)</span>
+<span class="c1">#         session = Session()</span>
+
+<span class="c1">#         res_list = []</span>
+<span class="c1">#         n = len(self.value_list) - 1</span>
+<span class="c1">#         # QMessageBox.warning(None, &quot;Messaggio&quot;, str(n), QMessageBox.Ok)</span>
+<span class="c1">#         while self.value_list:</span>
+<span class="c1">#             chunk = self.value_list[0:n]</span>
+<span class="c1">#             self.value_list = self.value_list[n:]</span>
+<span class="c1">#             res_list.extend(session.query(US).filter_by(sito=sitof).filter_by(area=areaf).filter(</span>
+<span class="c1">#                 or_(*[US.rapporti.contains(v) for v in chunk])))</span>
+<span class="c1">#             # res_list.extend(us for us, in session.query(US.us).filter(or_(*[US.rapporti.contains(v) for v in chunk])))</span>
+<span class="c1">#         session.close()</span>
+<span class="c1">#         return res_list</span>
+
+<span class="c1">#     def insert_arbitrary_number_of_us_records(self, us_range, sito, area, n_us, unita_tipo):</span>
+<span class="c1">#         id_us = self.max_num_id(&#39;US&#39;, &#39;id_us&#39;)</span>
+        
+<span class="c1">#         l=QgsSettings().value(&quot;locale/userLocale&quot;)[0:2]</span>
+
+<span class="c1">#         for i in range(us_range):</span>
+<span class="c1">#             id_us += 1</span>
+
+<span class="c1">#             data_ins = self.insert_values(id_us, sito, area, n_us, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;[]&#39;,</span>
+<span class="c1">#                                           &#39;[]&#39;, &#39;[]&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;0&#39;, &#39;[]&#39;, unita_tipo, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;,</span>
+<span class="c1">#                                           &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, None, None, &#39;&#39;, &#39;[]&#39;,&#39;[]&#39;, &#39;[]&#39;, &#39;[]&#39;, &#39;[]&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,None,None,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;[]&#39;,&#39;[]&#39;,None,None,None,None,None,None,None,None,None,None,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,None,None,None,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;)</span>
+                                           
+<span class="c1">#             self.insert_data_session(data_ins)</span>
+<span class="c1">#             n_us += 1</span>
+<span class="c1">#         return</span>
+
+    
+<span class="c1">#     # def insert_number_of_rapp_records(self, sito, area, us, rapp_n, unita_tipo):</span>
+<span class="c1">#         # id_us = self.max_num_id(&#39;US&#39;, &#39;id_us&#39;)</span>
+        
+<span class="c1">#         # l=QgsSettings().value(&quot;locale/userLocale&quot;)[0:2]</span>
+
+        
+<span class="c1">#         # id_us += 1</span>
+
+<span class="c1">#         # data_ins = self.insert_values(id_us, sito, area, us, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;[]&#39;,</span>
+<span class="c1">#                                       # &#39;[]&#39;, </span>
+<span class="c1">#                                       # &#39;[[&#39;+rapp_n+&#39;]]&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;0&#39;, &#39;[]&#39;, unita_tipo, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;,</span>
+<span class="c1">#                                       # &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, None, None, &#39;&#39;, &#39;[]&#39;,&#39;[]&#39;, &#39;[]&#39;, &#39;[]&#39;, &#39;[]&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,None,None,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;[]&#39;,&#39;[]&#39;,None,None,None,None,None,None,None,None,None,None,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,None,None,None,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;)</span>
+                                           
+<span class="c1">#         # self.insert_data_session(data_ins)</span>
+        
+<span class="c1">#         # return</span>
+    
+<span class="c1">#     def insert_number_of_us_records(self, sito, area, n_us, unita_tipo):</span>
+<span class="c1">#         id_us = self.max_num_id(&#39;US&#39;, &#39;id_us&#39;)</span>
+<span class="c1">#         text = &quot;SCHEDA CREATA IN AUTOMATICO&quot; </span>
+<span class="c1">#         l=QgsSettings().value(&quot;locale/userLocale&quot;)[0:2]</span>
+
+        
+<span class="c1">#         id_us += 1</span>
+
+<span class="c1">#         data_ins = self.insert_values(id_us, sito, area, n_us, text, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;[]&#39;,</span>
+<span class="c1">#                                       &#39;[]&#39;, &#39;[]&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;0&#39;, &#39;[]&#39;, unita_tipo, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;,</span>
+<span class="c1">#                                       &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, None, None, &#39;&#39;, &#39;[]&#39;,&#39;[]&#39;, &#39;[]&#39;, &#39;[]&#39;, &#39;[]&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,None,None,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;[]&#39;,&#39;[]&#39;,None,None,None,None,None,None,None,None,None,None,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,None,None,None,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;,&#39;&#39;)</span>
+                                           
+<span class="c1">#         self.insert_data_session(data_ins)</span>
+        
+<span class="c1">#         return</span>
+    
+<span class="c1">#     def insert_number_of_reperti_records(self, sito, numero_invetario):</span>
+<span class="c1">#         id_invmat = self.max_num_id(&#39;INVENTARIO_MATERIALI&#39;, &#39;id_invmat&#39;)</span>
+        
+<span class="c1">#         l=QgsSettings().value(&quot;locale/userLocale&quot;)[0:2]</span>
+
+        
+<span class="c1">#         id_invmat += 1</span>
+
+<span class="c1">#         data_ins = self.insert_values_reperti(id_invmat, sito, numero_invetario, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, None, None, &#39;&#39;, None, &#39;&#39;, &#39;&#39;,&#39;0&#39;,&#39;&#39;,&#39;&#39;)</span>
+                                           
+<span class="c1">#         self.insert_data_session(data_ins)</span>
+        
+        
+<span class="c1">#         return</span>
+    
+    
+    
+    
+    
+<span class="c1">#     def insert_number_of_tomba_records(self, sito, nr_scheda_taf):</span>
+<span class="c1">#         id_tomba = self.max_num_id(&#39;TOMBA&#39;, &#39;id_tomba&#39;)</span>
+        
+<span class="c1">#         l=QgsSettings().value(&quot;locale/userLocale&quot;)[0:2]</span>
+
+        
+<span class="c1">#         id_tomba += 1</span>
+
+<span class="c1">#         data_ins = self.insert_values_tomba(id_tomba, sito, &#39;&#39;, nr_scheda_taf, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;,&#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;,&#39;&#39;)</span>
+                                           
+<span class="c1">#         self.insert_data_session(data_ins)</span>
+        
+<span class="c1">#         return</span>
+<span class="c1">#     def insert_struttura_records(self, sito, sigla_struttura,numero_struttura):</span>
+<span class="c1">#         id_struttura = self.max_num_id(&#39;STRUTTURA&#39;, &#39;id_struttura&#39;)</span>
+        
+<span class="c1">#         l=QgsSettings().value(&quot;locale/userLocale&quot;)[0:2]</span>
+
+        
+<span class="c1">#         id_struttura += 1</span>
+
+<span class="c1">#         data_ins = self.insert_struttura_values(id_struttura, sito, sigla_struttura, numero_struttura, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;)</span>
+                                           
+<span class="c1">#         self.insert_data_session(data_ins)</span>
+        
+<span class="c1">#         return</span>
+<span class="c1">#     def select_like_from_db_sql(self, rapp_list, us_rapp_list):</span>
+<span class="c1">#         # this is a test</span>
+<span class="c1">#         pass</span>
+
+<span class="c1">#     ##      self.us_rapp_list = us_rapp_list</span>
+<span class="c1">#     ##      rapp_type = rapp_list</span>
+<span class="c1">#     ##      query_string_base = &quot;&quot;&quot;session.query(US).filter(or_(&quot;&quot;&quot;</span>
+<span class="c1">#     ##      query_list = []</span>
+<span class="c1">#     ##</span>
+<span class="c1">#     ##      #costruisce la stringa che trova i like</span>
+<span class="c1">#     ##      for sing_us_rapp in self.us_rapp_list:</span>
+<span class="c1">#     ##          for sing_rapp in rapp_type:</span>
+<span class="c1">#     ##              sql_query_string = &quot;&quot;&quot;US.rapporti.contains(&quot;[u&#39;%s&#39;, u&#39;%s&#39;]&quot;)&quot;&quot;&quot; % (sing_rapp,sing_us_rapp) #funziona!!!</span>
+<span class="c1">#     ##              query_list.append(sql_query_string)</span>
+<span class="c1">#     ##</span>
+<span class="c1">#     ##      string_contains = &quot;&quot;</span>
+<span class="c1">#     ##      for sing_contains in range(len(query_list)):</span>
+<span class="c1">#     ##          if sing_contains == 0:</span>
+<span class="c1">#     ##              string_contains = query_list[sing_contains]</span>
+<span class="c1">#     ##          else:</span>
+<span class="c1">#     ##              string_contains = string_contains + &quot;,&quot; + query_list[sing_contains]</span>
+<span class="c1">#     ##</span>
+<span class="c1">#     ##      query_string_execute = query_string_base + string_contains + &#39;))&#39;</span>
+<span class="c1">#     ##</span>
+<span class="c1">#     ##      Session = sessionmaker(bind=self.engine, autoflush=True, autocommit=True)</span>
+<span class="c1">#     ##      session = Session()</span>
+<span class="c1">#     ##      res = eval(query_string_execute)</span>
+<span class="c1">#     ##</span>
+<span class="c1">#     ##      return res</span>
+
+<span class="c1">#     def select_not_like_from_db_sql(self, sitof, areaf):</span>
+<span class="c1">#         # NB per funzionare con postgres è necessario che al posto di &quot; ci sia &#39;</span>
+<span class="c1">#         l=QgsSettings().value(&quot;locale/userLocale&quot;)[0:2]</span>
+<span class="c1">#         Session = sessionmaker(bind=self.engine, autoflush=True, autocommit=True)</span>
+<span class="c1">#         session = Session()</span>
+        
+<span class="c1">#         if l==&#39;it&#39;:</span>
+<span class="c1">#             res = session.query(US).filter_by(sito=sitof).filter_by(area=areaf).filter(</span>
+<span class="c1">#                 and_(~US.rapporti.like(&quot;%&#39;Copre&#39;%&quot;), ~US.rapporti.like(&quot;%&#39;Riempie&#39;%&quot;),</span>
+<span class="c1">#                      ~US.rapporti.like(&quot;%&#39;Taglia&#39;%&quot;), ~US.rapporti.like(&quot;%&#39;Si appoggia a&#39;%&quot;)))</span>
+<span class="c1">#                 # MyModel.query.filter(sqlalchemy.not_(Mymodel.name.contains(&#39;a_string&#39;)))</span>
+<span class="c1">#         elif l==&#39;en&#39;:</span>
+<span class="c1">#             res = session.query(US).filter_by(sito=sitof).filter_by(area=areaf).filter(</span>
+<span class="c1">#                 and_(~US.rapporti.like(&quot;%&#39;Cuts&#39;%&quot;), ~US.rapporti.like(&quot;%&#39;Abuts&#39;%&quot;),</span>
+<span class="c1">#                      ~US.rapporti.like(&quot;%&#39;Covers&#39;%&quot;), ~US.rapporti.like(&quot;%&#39;Fills&#39;%&quot;)))</span>
+<span class="c1">#             # MyModel.query.filter(sqlalchemy.not_(Mymodel.name.contains(&#39;a_string&#39;)))</span>
+<span class="c1">#         elif l==&#39;de&#39;:</span>
+<span class="c1">#             res = session.query(US).filter_by(sito=sitof).filter_by(area=areaf).filter(</span>
+<span class="c1">#                 and_(~US.rapporti.like(&quot;%&#39;Schneidet&#39;%&quot;), ~US.rapporti.like(&quot;%&#39;Stützt sich auf&#39;%&quot;),</span>
+<span class="c1">#                      ~US.rapporti.like(&quot;%&#39;Liegt über&#39;%&quot;), ~US.rapporti.like(&quot;%&#39;Verfüllt&#39;%&quot;)))</span>
+<span class="c1">#             # MyModel.query.filter(sqlalchemy.not_(Mymodel.name.contains(&#39;a_string&#39;)))</span>
+<span class="c1">#         session.close()</span>
+<span class="c1">#         #QMessageBox.warning(None, &quot;Messaggio&quot;, &quot;DATA LIST&quot; + str(res), QMessageBox.Ok)</span>
+<span class="c1">#         return res</span>
+        
+<span class="c1">#     def query_in_idusb(self):</span>
+<span class="c1">#         pass</span>
+
+
+<span class="c1"># # def main():</span>
+<span class="c1">#     # db = Pyarchinit_db_management(&#39;sqlite:////Users//Luca//pyarchinit_DB_folder//pyarchinit_db.sqlite&#39;)</span>
+<span class="c1">#     # db.connection()</span>
+
+<span class="c1">#     # db.insert_arbitrary_number_of_records(10, &#39;Giorgio&#39;, 1, 1, &#39;US&#39;)  # us_range, sito, area, n_us)</span>
+    
+
+<span class="c1"># # if __name__ == &#39;__main__&#39;:</span>
+<span class="c1">#     # main()</span>
+<span class="c1"># class ANSI():</span>
+<span class="c1">#     def background(code):</span>
+<span class="c1">#         return &quot;\33[{code}m&quot;.format(code=code)</span>
+  
+<span class="c1">#     def style_text(code):</span>
+<span class="c1">#         return &quot;\33[{code}m&quot;.format(code=code)</span>
+  
+<span class="c1">#     def color_text(code):</span>
+<span class="c1">#         return &quot;\33[{code}m&quot;.format(code=code)</span>
+  
+  
 </pre></div>
 
            </div>
