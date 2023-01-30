@@ -1,46 +1,52 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+"""
+/***************************************************************************
+        pyArchInit Plugin  - A QGIS plugin to manage archaeological dataset
+                             -------------------
+        begin                : 2007-12-01
+        copyright            : (C) 2008 by Luca Mandolesi; Enzo Cocca <enzo.ccc@gmail.com>
+        email                : mandoluca at gmail.com
+ ***************************************************************************/
 
+/***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ ***************************************************************************/
+"""
 
 import os
-import sqlalchemy as db
-
-from sqlalchemy.sql.expression import *
 from sqlalchemy.event import listen
 import psycopg2
 from builtins import object
 from builtins import range
 from builtins import str
 from builtins import zip
-from sqlalchemy import and_, or_, Table, select, func, asc,UniqueConstraint
+from sqlalchemy import and_, or_
 from geoalchemy2 import *
 from sqlalchemy.engine import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.sql.schema import MetaData
+from qgis.core import *
+from qgis.PyQt.QtWidgets import QMessageBox
 
-#from .modules.utility.pyarchinit_OS_utility import Pyarchinit_OS_Utility
-from sqlalchemy.dialects import postgresql
-from sqlalchemy.dialects.postgresql import insert
-
-#from .modules.db.pyarchinit_db_mapper import US, UT, SITE, PERIODIZZAZIONE, \
-    # STRUTTURA, SCHEDAIND, INVENTARIO_MATERIALI, DETSESSO, DOCUMENTAZIONE, DETETA, MEDIA, \
-    # MEDIA_THUMB, MEDIATOENTITY, MEDIAVIEW, TOMBA, CAMPIONI, PYARCHINIT_THESAURUS_SIGLE, \
-    # ARCHEOZOOLOGY, INVENTARIO_LAPIDEI, PDF_ADMINISTRATOR,PYUS ,PYUSM,PYSITO_POINT,PYSITO_POLYGON,PYQUOTE,PYQUOTEUSM, \
-    # PYUS_NEGATIVE, PYSTRUTTURE, PYREPERTI, PYINDIVIDUI, PYCAMPIONI, PYTOMBA, PYDOCUMENTAZIONE, PYLINEERIFERIMENTO, \
-    # PYRIPARTIZIONI_SPAZIALI, PYSEZIONI
-#from .modules.db.pyarchinit_db_update import DB_update
-#from .modules.db.pyarchinit_utility import Utility
-from sqlalchemy.ext.compiler import compiles
-
-#from .modules.db.pyarchinit_conn_strings import Connection
-
-        
 
 class Pyarchinit_db_management(object):
+    '''This function creates a database manager which creates the database and then creates the database object .
+
+    :param object: [description]
+    :type object: [type]
+    :return: [description]
+    :rtype: [type]
+    '''    
     metadata = ''
     engine = ''
     boolean = ''
-
+    
     if os.name == 'posix':
         boolean = 'True'
     elif os.name == 'nt':
@@ -51,6 +57,13 @@ class Pyarchinit_db_management(object):
         
     
     def load_spatialite(self,dbapi_conn, connection_record):
+        '''Loads the spatialite database extension .
+
+        :param dbapi_conn: [description]
+        :type dbapi_conn: [type]
+        :param connection_record: [description]
+        :type connection_record: [type]
+        '''        
         dbapi_conn.enable_load_extension(True)
         
         if Pyarchinit_OS_Utility.isWindows()== True:
@@ -60,8 +73,12 @@ class Pyarchinit_db_management(object):
             dbapi_conn.load_extension('mod_spatialite.so')
         else:
             dbapi_conn.load_extension('mod_spatialite.so')  
-    
     def connection(self):
+        '''Connect to the database .
+
+        :return: [description]
+        :rtype: [type]
+        '''        
         test = True
         try:
             test_conn = self.conn_str.find("sqlite")
@@ -90,7 +107,53 @@ class Pyarchinit_db_management(object):
         return test
 
         # insert statement
+
+    def insert_pottery_values(self, *arg):
+        '''Inserts the values of the Pottery values into the pottery dictionary .
+
+        :return: [description]
+        :rtype: [type]
+        '''        
+        pottery = POTTERY(arg[0],
+                  arg[1],
+                  arg[2],
+                  arg[3],
+                  arg[4],
+                  arg[5],
+                  arg[6],
+                  arg[7],
+                  arg[8],
+                  arg[9],
+                  arg[10],
+                  arg[11],
+                  arg[12],
+                  arg[13],
+                  arg[14],
+                  arg[15],
+                  arg[16],
+                  arg[17],
+                  arg[18],
+                  arg[19],
+                  arg[20],
+                  arg[21],
+                  arg[22],
+                  arg[23],
+                  arg[24],
+                  arg[25],
+                  arg[26],
+                  arg[27],
+                  arg[28],
+                  arg[29],
+                  arg[30],
+                  arg[31])
+
+        return pottery
     def insert_pyus(self, *arg):
+        '''Insert a PyUS into the PyUS object .
+
+        :return: [description]
+        :rtype: [type]
+        '''        
         pyus = PYUS(arg[0],
                 arg[1],
                 arg[2],
@@ -107,6 +170,12 @@ class Pyarchinit_db_management(object):
                 arg[13])
         return pyus
     def insert_pyusm(self, *arg):
+        '''
+        insert_pyusm insert a pyusmtsm argument into the pyusm module
+
+        :return: [description]
+        :rtype: [type]
+        '''        
         pyusm = PYUSM(arg[0],
                 arg[1],
                 arg[2],
@@ -123,6 +192,12 @@ class Pyarchinit_db_management(object):
                 arg[13])
         return pyusm
     def insert_pysito_point(self, *arg):
+        '''
+        insert_pysito_point Inserts a Pysito point into the stack .
+
+        :return: [description]
+        :rtype: [type]
+        '''        
         pysito_point = PYSITO_POINT(arg[0],
                 arg[1],
                 arg[2])
@@ -130,12 +205,24 @@ class Pyarchinit_db_management(object):
     
     
     def insert_pysito_polygon(self, *arg):
+        '''
+        insert_pysito_polygon Insert a polygon into the current board .
+
+        :return: [description]
+        :rtype: [type]
+        '''        
         pysito_polygon = PYSITO_POLYGON(arg[0],
                 arg[1],
                 arg[2])
         return pysito_polygon
         
     def insert_pyquote(self, *arg):
+        '''
+        insert_pyquote Insert a PyYQUOTE into the stack .
+
+        :return: [description]
+        :rtype: [type]
+        '''        
         pyquote = PYQUOTE(arg[0],
                 arg[1],
                 arg[2],
@@ -149,6 +236,12 @@ class Pyarchinit_db_management(object):
                 arg[10])
         return pyquote    
     def insert_pyquote_usm(self, *arg):
+        '''
+        insert_pyquote_usm Insert a pyquote_usm into the stack .
+
+        :return: [description]
+        :rtype: [type]
+        '''        
         pyquote_usm = PYQUOTEUSM(arg[0],
                 arg[1],
                 arg[2],
@@ -162,6 +255,12 @@ class Pyarchinit_db_management(object):
                 arg[10])
         return pyquote_usm    
     def insert_pyus_negative(self, *arg):
+        '''
+        insert_pyus_negative Insert a PyUS_NEGATIVE into the PYUS_NEGATIVE argument .
+
+        :return: [description]
+        :rtype: [type]
+        '''        
         pyus_negative = PYUS_NEGATIVE(arg[0],
                 arg[1],
                 arg[2],
@@ -172,6 +271,12 @@ class Pyarchinit_db_management(object):
         return pyus_negative
     
     def insert_pystrutture(self, *arg):
+        '''
+        insert_pystrutture Insert a pystrututure into the parser .
+
+        :return: [description]
+        :rtype: [type]
+        '''        
         pystrutture = PYSTRUTTURE(arg[0],
                 arg[1],
                 arg[2],
@@ -187,6 +292,12 @@ class Pyarchinit_db_management(object):
         return pystrutture
     
     def insert_pyreperti(self, *arg):
+        '''
+        insert_pyreperti Inserts a pyreperti argument into the list of pyreperti arguments .
+
+        :return: [description]
+        :rtype: [type]
+        '''        
         pyreperti = PYREPERTI(arg[0],
                 arg[1],
                 arg[2],
@@ -195,6 +306,12 @@ class Pyarchinit_db_management(object):
         return pyreperti
     
     def insert_pyindividui(self, *arg):
+        '''
+        insert_pyindividui Inserts a Pyindividui into the list of pyindividis arguments
+
+        :return: [description]
+        :rtype: [type]
+        '''        
         pyindividui = PYINDIVIDUI(arg[0],
                 arg[1],
                 arg[2],
@@ -204,6 +321,12 @@ class Pyarchinit_db_management(object):
         return pyindividui
     
     def insert_pycampioni(self, *arg):
+        '''
+        insert_pycampioni Insert a pycampionioni argument into the PYCUAMPIONI .
+
+        :return: [description]
+        :rtype: [type]
+        '''        
         pycampioni = PYCAMPIONI(arg[0],
                 arg[1],
                 arg[2],
@@ -216,6 +339,12 @@ class Pyarchinit_db_management(object):
         return pycampioni
     
     def insert_pytomba(self, *arg):
+        '''
+        insert_pytomba Insert a Python TYTomba into a PYTomba object .
+
+        :return: [description]
+        :rtype: [type]
+        '''        
         pytomba = PYTOMBA(arg[0],
                 arg[1],
                 arg[2],
@@ -223,6 +352,12 @@ class Pyarchinit_db_management(object):
         return pytomba
     
     def insert_pydocumentazione(self, *arg):
+        '''
+        insert_pydocumentazione Inserts a pydocumentazioneer into the first argument .
+
+        :return: [description]
+        :rtype: [type]
+        '''        
         pydocumentazione = PYDOCUMENTAZIONE(arg[0],
                 arg[1],
                 arg[2],
@@ -233,6 +368,12 @@ class Pyarchinit_db_management(object):
         return pydocumentazione
     
     def insert_pylineeriferimento(self, *arg):
+        '''
+        insert_pylineeriferimento Insert a pylineeriferimentoimentoimentoimento text into the docstring
+
+        :return: [description]
+        :rtype: [type]
+        '''       
         pylineeriferimento = PYLINEERIFERIMENTO(arg[0],
                 arg[1],
                 arg[2],
@@ -241,6 +382,12 @@ class Pyarchinit_db_management(object):
         return pylineeriferimento
     
     def insert_pyripartizioni_spaziali(self, *arg):
+        '''
+        insert_pyripartizioni_spaziali Inserts a pyripartizioni_spazizioni_spazizioni into the pyripartizizioni_spazizioni_spazizioni
+
+        :return: [description]
+        :rtype: [type]
+        '''
         pyripartizioni_spaziali = PYRIPARTIZIONI_SPAZIALI(arg[0],
                 arg[1],
                 arg[2],
@@ -250,6 +397,12 @@ class Pyarchinit_db_management(object):
         return pyripartizioni_spaziali
     
     def insert_pysezioni(self, *arg):
+        '''
+        insert_pysezioni Insert a PysezionI into the parser
+
+        :return: [description]
+        :rtype: [type]
+        '''
         pysezioni = PYSEZIONI(arg[0],
                 arg[1],
                 arg[2],
@@ -263,8 +416,12 @@ class Pyarchinit_db_management(object):
     
     
     def insert_values(self, *arg):
-        """Istanzia la classe US da pyarchinit_db_mapper"""
+        '''
+        insert_values Insert values into the US and US tags .
 
+        :return: [description]
+        :rtype: [type]
+        '''        
         us = US(arg[0],
                 arg[1],
                 arg[2],
@@ -316,7 +473,7 @@ class Pyarchinit_db_management(object):
                 arg[48],
                 arg[49],
                 arg[50],
-                arg[51],    # 51 campi aggiunti per archeo 3.0 e allineamento ICCD
+                arg[51],    
                 arg[52],
                 arg[53],
                 arg[54],
@@ -387,7 +544,12 @@ class Pyarchinit_db_management(object):
         return us
 
     def insert_ut_values(self, *arg):
-        """Istanzia la classe UT da pyarchinit_db_mapper"""
+        '''
+        insert_ut_values Inserts values into the UT values .
+
+        :return: [description]
+        :rtype: [type]
+        '''
 
         ut = UT(arg[0],
                 arg[1],
@@ -435,7 +597,12 @@ class Pyarchinit_db_management(object):
         return ut
 
     def insert_site_values(self, *arg):
-        """Istanzia la classe SITE da pyarchinit_db_mapper"""
+        '''
+        insert_site_values Inserts a site values into the datapoint
+
+        :return: [description]
+        :rtype: [type]
+        '''
         sito = SITE(arg[0],
                     arg[1],
                     arg[2],
@@ -450,7 +617,12 @@ class Pyarchinit_db_management(object):
         return sito
 
     def insert_periodizzazione_values(self, *arg):
-        """Istanzia la classe Periodizzazione da pyarchinit_db_mapper"""
+        '''
+        insert_periodizzazione_values Inserts periodizziza into the list of values .
+
+        :return: [description]
+        :rtype: [type]
+        '''
         periodizzazione = PERIODIZZAZIONE(arg[0],
                                           arg[1],
                                           arg[2],
@@ -464,7 +636,12 @@ class Pyarchinit_db_management(object):
         return periodizzazione
 
     def insert_values_reperti(self, *arg):
-        """Istanzia la classe Reperti da pyarchinit_db_mapper"""
+        '''
+        insert_values_reperti Inserts values in the inventory into the inventory
+
+        :return: [description]
+        :rtype: [type]
+        '''
         inventario_materiali = INVENTARIO_MATERIALI(arg[0],
                                                     arg[1],
                                                     arg[2],
@@ -501,7 +678,12 @@ class Pyarchinit_db_management(object):
         return inventario_materiali
 
     def insert_struttura_values(self, *arg):
-        """Istanzia la classe Struttura da pyarchinit_db_mapper"""
+        '''
+        insert_struttura_values Inserts STRUTTUTTRA values into the parser .
+
+        :return: [description]
+        :rtype: [type]
+        '''
         struttura = STRUTTURA(arg[0],
                               arg[1],
                               arg[2],
@@ -524,7 +706,12 @@ class Pyarchinit_db_management(object):
         return struttura
 
     def insert_values_ind(self, *arg):
-        """Istanzia la classe SCHEDAIND da pyarchinit_db_mapper"""
+        '''
+        insert_values_ind insert values into scheduler
+
+        :return: [description]
+        :rtype: [type]
+        '''
         schedaind = SCHEDAIND(arg[0],
                               arg[1],
                               arg[2],
@@ -553,7 +740,12 @@ class Pyarchinit_db_management(object):
         return schedaind
 
     def insert_values_detsesso(self, *arg):
-        """Istanzia la classe DETSESSO da pyarchinit_db_mapper"""
+        '''
+        insert_values_detsesso Inserts values into the matrix
+
+        :return: [description]
+        :rtype: [type]
+        '''
         detsesso = DETSESSO(arg[0],
                             arg[1],
                             arg[2],
@@ -612,7 +804,12 @@ class Pyarchinit_db_management(object):
         return detsesso
 
     def insert_values_deteta(self, *arg):
-        """Istanzia la classe DETETA da pyarchinit_db_mapper"""
+        '''
+        insert_values_deteta Compute the deteta of the given arguments .
+
+        :return: [description]
+        :rtype: [type]
+        '''
         deteta = DETETA(arg[0],
                         arg[1],
                         arg[2],
@@ -674,7 +871,12 @@ class Pyarchinit_db_management(object):
         return deteta
 
     def insert_media_values(self, *arg):
-        """Istanzia la classe MEDIA da pyarchinit_db_mapper"""
+        '''
+        insert_media_values Insert media values into the media object
+
+        :return: [description]
+        :rtype: [type]
+        '''
         media = MEDIA(arg[0],
                       arg[1],
                       arg[2],
@@ -686,7 +888,12 @@ class Pyarchinit_db_management(object):
         return media
 
     def insert_mediathumb_values(self, *arg):
-        """Istanzia la classe MEDIA da pyarchinit_db_mapper"""
+        '''
+        insert_mediathumb_values Inserts values into the media_thumbnail argument .
+
+        :return: [description]
+        :rtype: [type]
+        '''
         media_thumb = MEDIA_THUMB(arg[0],
                                   arg[1],
                                   arg[2],
@@ -712,7 +919,12 @@ class Pyarchinit_db_management(object):
 
     
     def insert_media2entity_view_values(self, *arg):
-        """Istanzia la classe MEDIATOENTITY da pyarchinit_db_mapper"""
+        '''
+        insert_media2entity_view_values Inserts values into Media2entity_view
+
+        :return: [description]
+        :rtype: [type]
+        '''
         mediaentity_view= MEDIAVIEW(arg[0],
                 arg[1],
                 arg[2],
@@ -724,7 +936,12 @@ class Pyarchinit_db_management(object):
         return mediaentity_view 
     
     def insert_values_tomba(self, *arg):
-        """Istanzia la classe TOMBA da pyarchinit_db_mapper"""
+        '''
+        insert_values_tomba Inserts values into TOMBA
+
+        :return: [description]
+        :rtype: [type]
+        '''
 
         tomba = TOMBA(arg[0],
                               arg[1],
@@ -756,7 +973,12 @@ class Pyarchinit_db_management(object):
         return tomba
 
     def insert_values_campioni(self, *arg):
-        """Istanzia la classe CAMPIONI da pyarchinit_db_mapper"""
+        '''
+        insert_values_campioni Inserts the given value into the campioni .
+
+        :return: [description]
+        :rtype: [type]
+        '''
 
         campioni = CAMPIONI(arg[0],
                             arg[1],
@@ -772,7 +994,12 @@ class Pyarchinit_db_management(object):
         return campioni
 
     def insert_values_thesaurus(self, *arg):
-        """Istanzia la classe PYARCHINIT_THESAURUS_SIGLE da pyarchinit_db_mapper"""
+        '''
+        insert_values_thesaurus Inserts the given values into the saurus
+
+        :return: [description]
+        :rtype: [type]
+        '''
 
         thesaurus = PYARCHINIT_THESAURUS_SIGLE(arg[0],
                                                arg[1],
@@ -785,7 +1012,12 @@ class Pyarchinit_db_management(object):
         return thesaurus
 
     def insert_values_archeozoology(self, *arg):
-        """Istanzia la classe ARCHEOZOOLOGY da pyarchinit_db_mapper"""
+        '''
+        insert_values_archeozoology Inserts values in the archez hierarchy into the given array
+
+        :return: [description]
+        :rtype: [type]
+        '''
 
         archeozoology = ARCHEOZOOLOGY(arg[0],
                                         arg[1],
@@ -822,7 +1054,12 @@ class Pyarchinit_db_management(object):
         return archeozoology
 
     def insert_values_Lapidei(self, *arg):
-        """Istanzia la classe Inventario_Lapidei da pyarchinit_db_mapper"""
+        '''
+        insert_values_Lapidei Inserts values into the LAPIDI_LAPPLICATION_LAPID .
+
+        :return: [description]
+        :rtype: [type]
+        '''
 
         inventario_lapidei = INVENTARIO_LAPIDEI(arg[0],
                                                 arg[1],
@@ -848,7 +1085,12 @@ class Pyarchinit_db_management(object):
         return inventario_lapidei
 
     def insert_values_documentazione(self, *arg):
-        """Istanzia la classe DOCUMENTAZIONE da pyarchinit_db_mapper"""
+        '''
+        insert_values_documentazione Inserts a value into the document
+
+        :return: [description]
+        :rtype: [type]
+        '''
 
         documentazione = DOCUMENTAZIONE(arg[0],
                                         arg[1],
@@ -863,7 +1105,12 @@ class Pyarchinit_db_management(object):
         return documentazione
 
     def insert_pdf_administrator_values(self, *arg):
-        """Istanzia la classe PDF_ADMINISTRATOR da pyarchinit_db_mapper"""
+        '''
+        insert_pdf_administrator_values Insert values into PDFAdmin object .
+
+        :return: [description]
+        :rtype: [type]
+        '''
         pdf_administrator = PDF_ADMINISTRATOR(arg[0],
                                               arg[1],
                                               arg[2],
@@ -873,7 +1120,12 @@ class Pyarchinit_db_management(object):
         return pdf_administrator
 
     def insert_campioni_values(self, *arg):
-        """Istanzia la classe CAMPIONI da pyarchinit_db_mapper"""
+        '''
+        insert_campioni_values Inserts the values of the given campioni values into the given list .
+
+        :return: [description]
+        :rtype: [type]
+        '''
         campioni = CAMPIONI(arg[0],
                             arg[1],
                             arg[2],
@@ -887,23 +1139,26 @@ class Pyarchinit_db_management(object):
 
         return campioni
 
-    #  def insert_relationship_check_values(self, *arg):
-    #      """Istanzia la classe RELATIONSHIP_CHECK da pyarchinit_db_mapper"""
-    #      relationship_check = RELATIONSHIP_CHECK(arg[0],
-    #                                              arg[1],
-    #                                              arg[2],
-    #                                              arg[3],
-    #                                              arg[4],
-    #                                              arg[5],
-    #                                              arg[6],
-    #                                              arg[7],
-    #                                              arg[8],
-    #                                              arg[9])
-    #
-    #      return relationship_check
+    ##  def insert_relationship_check_values(self, *arg):
+    ##      """Istanzia la classe RELATIONSHIP_CHECK da pyarchinit_db_mapper"""
+    ##      relationship_check = RELATIONSHIP_CHECK(arg[0],
+    ##                                              arg[1],
+    ##                                              arg[2],
+    ##                                              arg[3],
+    ##                                              arg[4],
+    ##                                              arg[5],
+    ##                                              arg[6],
+    ##                                              arg[7],
+    ##                                              arg[8],
+    ##                                              arg[9])
+    ##
+    ##      return relationship_check
 
 
     def execute_sql_create_db(self):
+        '''
+        execute_sql_create_db Execute the SQL create db
+        '''
         path = os.path.dirname(__file__)
         rel_path = os.path.join(os.sep, 'query_sql', 'pyarchinit_create_db.sql')
         qyery_sql_path = '{}{}'.format(path, rel_path)
@@ -914,6 +1169,9 @@ class Pyarchinit_db_management(object):
         self.engine.text(stringa).execute()
 
     def execute_sql_create_spatialite_db(self):
+        '''
+        execute_sql_create_spatialite_db Execute SQL for the SQLite database
+        '''
         path = os.path.dirname(__file__)
         rel_path = os.path.join(os.sep, 'query_sql', 'pyarchinit_create_spatialite_db.sql')
         qyery_sql_path = '{}{}'.format(path, rel_path)
@@ -929,6 +1187,9 @@ class Pyarchinit_db_management(object):
         session.close()
 
     def execute_sql_create_layers(self):
+        '''
+        execute_sql_create_layers Execute SQL create layer for the SQL
+        '''
         path = os.path.dirname(__file__)
         rel_path = os.path.join(os.sep, 'query_sql', 'pyarchinit_layers_postgis.sql')
         qyery_sql_path = '{}{}'.format(path, rel_path)
@@ -946,6 +1207,12 @@ class Pyarchinit_db_management(object):
         # query statement
 
     def query(self, n):
+        """
+        Query the database for n rows of the class.
+        @param n - the number of rows to query for.
+        @return the rows of the class.
+        """
+        
         class_name = eval(n)
         # engine = self.connection()
         Session = sessionmaker(bind=self.engine, autoflush=True, autocommit=True)
@@ -956,6 +1223,12 @@ class Pyarchinit_db_management(object):
         return res
 
     def query_bool(self, params, table):
+        """
+        Given a dictionary of parameters and a table, return the result of the query.
+        @param params - the dictionary of parameters           
+        @param table - the table to query           
+        @return the result of the query           
+        """
         u = Utility()
         params = u.remove_empty_items_fr_dict(params)
 
@@ -992,17 +1265,18 @@ class Pyarchinit_db_management(object):
         query_str = "session.query(" + table + ").filter(and_(" + field_value_string + ")).all()"
         res = eval(query_str)
 
-        '''
-        t = open("/test_import.txt", "w")
-        t.write(str(query_str))
-        t.close()
-        '''
         session.close()
         return res
     
     
     
     def query_bool_special(self, params, table):
+        """
+        Given a dictionary of parameters and a table, return the result of the query.
+        @param params - the dictionary of parameters           
+        @param table - the table to query           
+        @return the result of the query           
+        """
         u = Utility()
         params = u.remove_empty_items_fr_dict(params)
 
@@ -1039,14 +1313,16 @@ class Pyarchinit_db_management(object):
         query_str = "session.query(" + table + ").filter(and_(" + field_value_string + ")).all()"
         res = eval(query_str)
 
-        '''
-        t = open("/test_import.txt", "w")
-        t.write(str(query_str))
-        t.close()
-        '''
         session.close()
         return res
     def query_operator(self, params, table):
+        """
+         this function takes in a list of tuples and a table name and returns a list of tuples
+        that match the query.
+        @param params - the list of tuples that contain the field name, operator, and value.
+        @param table - the table name.
+        @returns a list of tuples that match the query.
+        """
         u = Utility()
         #params = u.remove_empty_items_fr_dict(params)
         field_value_string = ''
@@ -1065,10 +1341,14 @@ class Pyarchinit_db_management(object):
         return eval(query_str)
 
     def query_distinct(self, table, query_params, distinct_field_name_params):
-        # u = Utility()
-        # params = u.remove_empty_items_fr_dict(params)
-        ##      return session.query(INVENTARIO_MATERIALI.area,INVENTARIO_MATERIALI.us ).filter(INVENTARIO_MATERIALI.sito=='Sito archeologico').distinct().order_by(INVENTARIO_MATERIALI.area,INVENTARIO_MATERIALI.us )
-
+        """
+        Query the database for distinct values of the fields in the query_params.
+        @param table - the table to query           
+        @param query_params - the query parameters           
+        @param distinct_field_name_params - the field names to return           
+        @return The distinct values of the fields in the query_params           
+        """
+        
         query_string = ""
         for i in query_params:
             if query_string == '':
@@ -1091,10 +1371,15 @@ class Pyarchinit_db_management(object):
         return eval(query_cmd)
 
     def query_distinct_sql(self, table, query_params, distinct_field_name_params):
-        # u = Utility()
-        # params = u.remove_empty_items_fr_dict(params)
-        ##      return session.query(INVENTARIO_MATERIALI.area,INVENTARIO_MATERIALI.us ).filter(INVENTARIO_MATERIALI.sito=='Sito archeologico').distinct().order_by(INVENTARIO_MATERIALI.area,INVENTARIO_MATERIALI.us )
-
+        """
+        Given a table name, id, value, column names and values, update the table.
+        @param table_class_str - the table name
+        @param id_table_str - the id column name
+        @param value_id_list - the id value
+        @param columns_name_list - the column names
+        @param values_update_list - the values to update
+        """
+        
         query_string = ""
         for i in query_params:
             if query_string == '':
@@ -1114,16 +1399,22 @@ class Pyarchinit_db_management(object):
         res = self.engine.execute(query_cmd)
         return res
 
-    # count distinct "name" values
-
-    # session statement
+    
     def insert_data_session(self, data):
+        """
+        Insert the data into the database.
+        @param data - the data to be inserted
+        """
         Session = sessionmaker(bind=self.engine, autoflush=False)
         session = Session()
         session.add(data)
         session.commit()
         session.close()
     def insert_data_conflict(self, data):
+        """
+        Insert the data into the database.
+        @param data - the data to be inserted
+        """
         Session = sessionmaker(bind=self.engine, autoflush=False)
         session = Session()
         session.begin_nested()
@@ -1134,17 +1425,11 @@ class Pyarchinit_db_management(object):
         session.close()
     def update(self, table_class_str, id_table_str, value_id_list, columns_name_list, values_update_list):
         """
-        Receives 5 values then putted in a list.
-        self.set_update = arg
-        table = Table(self.set_update[0], self.metadata, autoload=True)
-        changes_dict= {}
-        u = Utility()
-        set_update_4 = u.deunicode_list(self.set_update[4])
-        u.add_item_to_dict(changes_dict,zip(self.set_update[3], set_update_4))
-
-        exec_str = ('%s%s%s%s%s%s%s') % ("table.update(table.c.", self.set_update[1], " == '", self.set_update[2][0], "').execute(",changes_dict ,")")
-
+        Receives 5 values then putted in a list. The values must be passed in this order: table name->string, column_name_where->list containin' one value ('site_table', 'id_sito', [1], ['sito', 'nazione', 'regione', 'comune', 'descrizione', 'provincia'], ['Sito archeologico 1', 'Italiauiodsds', 'Emilia-Romagna', 'Riminijk', 'Sito di epoca altomedievale....23', 'Riminikljlks'])
+        @param table_class_str - the table class string
+        @param id
         """
+       
 
         self.table_class_str = table_class_str
         self.id_table_str = id_table_str
@@ -1174,6 +1459,13 @@ class Pyarchinit_db_management(object):
         eval(session_exec_str)
         session.close()
     def update_find_check(self, table_class_str, id_table_str, value_id, find_check_value):
+        """
+        Update the find_check value for a given table class and id.
+        @param table_class_str - the table class string
+        @param id_table_str - the id table string
+        @param value_id - the value id
+        @param find_check_value - the find_check value
+        """
         self.table_class_str = table_class_str
         self.id_table_str = id_table_str
         self.value_id = value_id
@@ -1188,6 +1480,11 @@ class Pyarchinit_db_management(object):
         eval(session_exec_str)
         session.close()
     def empty_find_check(self, table_class_str, find_check_value):
+        """
+        Given a table name and a find check value, update the find_check value for that table.
+        @param table_class_str - the table name           
+        @param find_check_value - the find check value           
+        """
         self.table_class_str = table_class_str
         self.find_check_value = find_check_value
 
@@ -1199,6 +1496,12 @@ class Pyarchinit_db_management(object):
         eval(session_exec_str)
         session.close()
     def delete_one_record(self, tn, id_col, id_rec):
+        """
+        Delete a record from a table.
+        @param tn - the table name
+        @param id_col - the id column
+        @param id_rec - the id record
+        """
         
         self.table_name = tn
         self.id_column = id_col
@@ -1306,17 +1609,14 @@ class Pyarchinit_db_management(object):
 
     def update_for(self):
         """
-        table = Table('us_table', self.metadata, autoload=True)
+        table = Table('us_table_toimp', self.metadata, autoload=True)
         s = table.select(table.c.id_us > 0)
         res_list = self.run(s)
-        cont = 0
-
+        cont = 11900
         for i in res_list:
-            self.update('US', 'id_us', [i], ['id_us'], [cont])
+            self.update('US_toimp', 'id_us', [i], ['id_us'], [cont])
             cont = cont+1
-
         """
-
         table = Table('inventario_materiali_table_toimp', self.metadata, autoload=True)
         s = table.select(table.c.id_invmat > 0)
         res_list = self.run(s)
@@ -1375,48 +1675,48 @@ class Pyarchinit_db_management(object):
                 self.update('US', 'id_us', [int(i.id_us)], ['cont_per'], [periodiz[0].cont_per])
                 continue
             elif i.periodo_finale and i.periodo_iniziale:
-                try:
-                    cod_cont_iniz_temp = self.query_bool(
-                        {'sito': "'" + str(self.sito) + "'", 'periodo': int(i.periodo_iniziale),
-                         'fase': int(i.fase_iniziale+'::text')}, 'PERIODIZZAZIONE')
-                
-                    cod_cont_fin_temp = self.query_bool(
-                        {'sito': "'" + str(self.sito) + "'", 'periodo': int(i.periodo_finale), 'fase': int(i.fase_finale)},
-                        'PERIODIZZAZIONE')
+                # try:
+                cod_cont_iniz_temp = self.query_bool(
+                    {'sito': "'" + str(self.sito) + "'", 'periodo': int(i.periodo_iniziale),
+                     'fase': int(i.fase_iniziale)}, 'PERIODIZZAZIONE')
 
-                    cod_cont_iniz = cod_cont_iniz_temp[0].cont_per
-                    cod_cont_fin = cod_cont_fin_temp[0].cont_per
+                cod_cont_fin_temp = self.query_bool(
+                    {'sito': "'" + str(self.sito) + "'", 'periodo': int(i.periodo_finale), 'fase': int(i.fase_finale)},
+                    'PERIODIZZAZIONE')
 
-                    cod_cont_var_n = cod_cont_iniz
-                    cod_cont_var_txt = str(cod_cont_iniz)
-                    while cod_cont_var_n != cod_cont_fin:
-                        cod_cont_var_n += 1
+                cod_cont_iniz = cod_cont_iniz_temp[0].cont_per
+                cod_cont_fin = cod_cont_fin_temp[0].cont_per
 
-                        cod_cont_var_txt = cod_cont_var_txt + "/" + str(cod_cont_var_n)
+                cod_cont_var_n = cod_cont_iniz
+                cod_cont_var_txt = str(cod_cont_iniz)
+                while cod_cont_var_n != cod_cont_fin:
+                    cod_cont_var_n += 1
 
-                    self.update('US', 'id_us', [int(i.id_us)], ['cont_per'], [cod_cont_var_txt])
-                except:
-                    pass
-                else:
-                    cod_cont_iniz_temp = self.query_bool(
-                        {'sito': "'" + str(self.sito) + "'", 'periodo': int(i.periodo_iniziale),
-                         'fase': int(i.fase_iniziale)}, 'PERIODIZZAZIONE')
-                
-                    cod_cont_fin_temp = self.query_bool(
-                        {'sito': "'" + str(self.sito) + "'", 'periodo': int(i.periodo_finale), 'fase': int(i.fase_finale)},
-                        'PERIODIZZAZIONE')
+                    cod_cont_var_txt = cod_cont_var_txt + "/" + str(cod_cont_var_n)
 
-                    cod_cont_iniz = cod_cont_iniz_temp[0].cont_per
-                    cod_cont_fin = cod_cont_fin_temp[0].cont_per
-
-                    cod_cont_var_n = cod_cont_iniz
-                    cod_cont_var_txt = str(cod_cont_iniz)
-                    while cod_cont_var_n != cod_cont_fin:
-                        cod_cont_var_n += 1
-
-                        cod_cont_var_txt = cod_cont_var_txt + "/" + str(cod_cont_var_n)
-
-                    self.update('US', 'id_us', [int(i.id_us)], ['cont_per'], [cod_cont_var_txt])
+                self.update('US', 'id_us', [int(i.id_us)], ['cont_per'], [cod_cont_var_txt])
+                #except:
+                    #pass
+                # else:
+                #     cod_cont_iniz_temp = self.query_bool(
+                #         {'sito': "'" + str(self.sito) + "'", 'periodo': int(i.periodo_iniziale),
+                #          'fase': int(i.fase_iniziale)}, 'PERIODIZZAZIONE')
+                #
+                #     cod_cont_fin_temp = self.query_bool(
+                #         {'sito': "'" + str(self.sito) + "'", 'periodo': int(i.periodo_finale), 'fase': int(i.fase_finale)},
+                #         'PERIODIZZAZIONE')
+                #
+                #     cod_cont_iniz = cod_cont_iniz_temp[0].cont_per
+                #     cod_cont_fin = cod_cont_fin_temp[0].cont_per
+                #
+                #     cod_cont_var_n = cod_cont_iniz
+                #     cod_cont_var_txt = str(cod_cont_iniz)
+                #     while cod_cont_var_n != cod_cont_fin:
+                #         cod_cont_var_n += 1
+                #
+                #         cod_cont_var_txt = cod_cont_var_txt + "/" + str(cod_cont_var_n)
+                #
+                #     self.update('US', 'id_us', [int(i.id_us)], ['cont_per'], [cod_cont_var_txt])
                 
 
     def remove_alltags_from_db_sql(self,s):
@@ -1456,7 +1756,17 @@ class Pyarchinit_db_management(object):
         res = self.engine.execute(sql_query_string)
         rows= res.fetchall()
         return rows
-    
+
+    def select_medianame_pot_from_db_sql(self, sito, area, us):
+        sql_query_string = (
+                               "SELECT c.filepath, a.media_name FROM media_to_entity_table as a,  pottery_table as b, media_thumb_table as c WHERE b.id_rep=a.id_entity and c.id_media=a.id_media  and b.sito= '%s' and b.area='%s' and b.us = '%s' and entity_type='CERAMICA'") % (
+                           sito, area, us)
+
+        res = self.engine.execute(sql_query_string)
+        rows = res.fetchall()
+        return rows
+
+
     def select_medianame_ra_from_db_sql(self,sito,area,us):
         sql_query_string = ("SELECT c.filepath, a.media_name FROM media_to_entity_table as a,  inventario_materiali_table as b, media_thumb_table as c WHERE b.id_invmat=a.id_entity and c.id_media=a.id_media  and b.sito= '%s' and b.area='%s' and b.us = '%s' and entity_type='REPERTO'")%(sito,area,us) 
         
@@ -1592,20 +1902,29 @@ class Pyarchinit_db_management(object):
         
         # return
     
-    def insert_number_of_us_records(self, sito, area, n_us, unita_tipo):
+    def insert_number_of_us_records(self, sito, area, n_us):
         id_us = self.max_num_id('US', 'id_us')
-        text = "SCHEDA CREATA IN AUTOMATICO" 
+        #text = "SCHEDA CREATA IN AUTOMATICO"
         l=QgsSettings().value("locale/userLocale")[0:2]
 
-        
+        if l == 'it':
+            text = "SCHEDA CREATA IN AUTOMATICO"
+            unita_tipo='US'
+        else:
+            text = "FORM MADE AUTOMATIC"
+            unita_tipo = 'SU'
         id_us += 1
 
-        data_ins = self.insert_values(id_us, sito, area, n_us, text, '', '', '', '', '', '', '', '', '', '', '', '[]',
+        data_ins = self.insert_values(id_us, sito, area, n_us, '', '', '', '', '', '', '', '', '', '', '', '', '[]',
                                       '[]', '[]', '', '', '', '', '', '', '', '', '0', '[]', unita_tipo, '', '', '', '',
-                                      '', '', '', '', '', '', '', '', '', None, None, '', '[]','[]', '[]', '[]', '[]','','','','',None,None,'','','','','','','[]','[]',None,None,None,None,None,None,None,None,None,None,'','','','','','','','','','',None,None,None,'','','','','','','','','','','','','','','','','','','','','','','','','','','','','')
-                                           
+                                      '', '', '', '', '', '', '', '', '', None, None, '', '[]', '[]', '[]', '[]', '[]',
+                                      '', '', '', '', None, None, '', '', '', '', '', '', '[]', '[]', None, None, None,
+                                      None, None, None, None, None, None, None, '', '', '', '', '', '', '', '', '', '',
+                                      None, None, None, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
+                                      '', '', '', '', '', '', '', '', '', '', '', '', '')
+
         self.insert_data_session(data_ins)
-        
+
         return
     
     def insert_number_of_reperti_records(self, sito, numero_invetario):
@@ -1622,8 +1941,21 @@ class Pyarchinit_db_management(object):
         
         
         return
-    
-    
+
+    def insert_number_of_pottery_records(self,  id_number,sito, area,us):
+        id_rep = self.max_num_id('POTTERY', 'id_rep')
+
+        l = QgsSettings().value("locale/userLocale")[0:2]
+
+        id_rep += 1
+
+        data_ins = self.insert_pottery_values(id_rep, id_number, sito, area, us, 0, '', '', 0, '', '', '', '',
+                                              '', '', '', '', '', '', '', '', '', '', None, 0, None, None, None, None, '',
+                                              0,'')
+
+        self.insert_data_session(data_ins)
+
+        return
     
     
     
