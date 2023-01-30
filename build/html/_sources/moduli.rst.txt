@@ -100,7 +100,8 @@ pyarchinit db manager
    .. autoclass:: Pyarchinit_db_management
        :members:
 
-
+   .. autoclass:: ANSI
+       :members:
 
 
 pyarchinit Media Utility
