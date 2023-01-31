@@ -98,9 +98,11 @@
 
 <div class="viewcode-block" id="Pyarchinit_db_management"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management">[documenti]</a><span class="k">class</span> <span class="nc">Pyarchinit_db_management</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    ..note::</span>
+
+<span class="sd">    .. note::</span>
 <span class="sd">        This function creates a database manager which creates the database and then creates the database object</span>
-<span class="sd">    &#39;&#39;&#39;</span>    
+<span class="sd">    .. py:function:: Pyarchinit_db_management()</span>
+<span class="sd">    &#39;&#39;&#39;</span>
     <span class="n">metadata</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="n">engine</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="n">boolean</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
@@ -112,14 +114,14 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialize the connection to DB. This is called by __init__ and should not be called directly.</span>
 
-<span class="sd">        :param c:</span>
-<span class="sd">            The string containing the connection string. This string is passed to the connect () method of the DBConnection object.</span>
-<span class="sd">        :type:</span>
-<span class="sd">            str</span>
-<span class="sd">        :returns:</span>
-<span class="sd">            True if successful False otherwise. Note that this method does not return anything</span>
-<span class="sd">        :rtype:</span>
-<span class="sd">            boolean</span>
+<span class="sd">            :param c:</span>
+<span class="sd">                The string containing the connection string. This string is passed to the connect () method of the DBConnection object.</span>
+<span class="sd">            :type:</span>
+<span class="sd">                [str]</span>
+<span class="sd">            :returns:</span>
+<span class="sd">                True if successful False otherwise. Note that this method does not return anything</span>
+<span class="sd">            :rtype:</span>
+<span class="sd">                [boolean]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">conn_str</span> <span class="o">=</span> <span class="n">c</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.load_spatialite"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.load_spatialite">[documenti]</a>    <span class="k">def</span> <span class="nf">load_spatialite</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dbapi_conn</span><span class="p">,</span> <span class="n">connection_record</span><span class="p">):</span>

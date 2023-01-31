@@ -14,9 +14,11 @@ from qgis.PyQt.QtWidgets import QMessageBox
 
 class Pyarchinit_db_management(object):
     '''
-    ..note::
+
+    .. note::
         This function creates a database manager which creates the database and then creates the database object
-    '''    
+    .. py:function:: Pyarchinit_db_management()
+    '''
     metadata = ''
     engine = ''
     boolean = ''
@@ -28,14 +30,14 @@ class Pyarchinit_db_management(object):
         """
         Initialize the connection to DB. This is called by __init__ and should not be called directly.
 
-        :param c:
-            The string containing the connection string. This string is passed to the connect () method of the DBConnection object.
-        :type:
-            str
-        :returns:
-            True if successful False otherwise. Note that this method does not return anything
-        :rtype:
-            boolean
+            :param c:
+                The string containing the connection string. This string is passed to the connect () method of the DBConnection object.
+            :type:
+                [str]
+            :returns:
+                True if successful False otherwise. Note that this method does not return anything
+            :rtype:
+                [boolean]
         """
         self.conn_str = c
     def load_spatialite(self,dbapi_conn, connection_record):
