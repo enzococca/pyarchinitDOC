@@ -98,7 +98,7 @@
 
 <div class="viewcode-block" id="Pyarchinit_db_management"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management">[documenti]</a><span class="k">class</span> <span class="nc">Pyarchinit_db_management</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    :important:</span>
+<span class="sd">    ..note::</span>
 <span class="sd">        This function creates a database manager which creates the database and then creates the database object</span>
 <span class="sd">    &#39;&#39;&#39;</span>    
     <span class="n">metadata</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
@@ -111,10 +111,15 @@
 <div class="viewcode-block" id="Pyarchinit_db_management.__init__"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.__init__">[documenti]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialize the connection to DB. This is called by __init__ and should not be called directly.</span>
-<span class="sd">        :param c: The string containing the connection string. This string is passed to the connect () method of the DBConnection object.</span>
-<span class="sd">        :type: str</span>
-<span class="sd">        :returns: True if successful False otherwise. Note that this method does not return anything</span>
-<span class="sd">        :rtype: boolean</span>
+
+<span class="sd">        :param c:</span>
+<span class="sd">            The string containing the connection string. This string is passed to the connect () method of the DBConnection object.</span>
+<span class="sd">        :type:</span>
+<span class="sd">            str</span>
+<span class="sd">        :returns:</span>
+<span class="sd">            True if successful False otherwise. Note that this method does not return anything</span>
+<span class="sd">        :rtype:</span>
+<span class="sd">            boolean</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">conn_str</span> <span class="o">=</span> <span class="n">c</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.load_spatialite"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.load_spatialite">[documenti]</a>    <span class="k">def</span> <span class="nf">load_spatialite</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dbapi_conn</span><span class="p">,</span> <span class="n">connection_record</span><span class="p">):</span>
@@ -156,7 +161,8 @@
         <span class="k">return</span> <span class="n">test</span></div>
         <span class="c1"># insert statement</span>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_pottery_values"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pottery_values">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_pottery_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Inserts the values of the Pottery values into the pottery dictionary</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Inserts the values of the Pottery values into the pottery dictionary</span>
 <span class="sd">        &#39;&#39;&#39;</span>        
         <span class="n">pottery</span> <span class="o">=</span> <span class="n">POTTERY</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                   <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -192,7 +198,8 @@
                   <span class="n">arg</span><span class="p">[</span><span class="mi">31</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">pottery</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_pyus"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pyus">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_pyus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Insert a PyUS into the PyUS object</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Insert a PyUS into the PyUS object</span>
 <span class="sd">        &#39;&#39;&#39;</span>        
         <span class="n">pyus</span> <span class="o">=</span> <span class="n">PYUS</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                 <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -210,7 +217,8 @@
                 <span class="n">arg</span><span class="p">[</span><span class="mi">13</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">pyus</span></div>
 <div class="viewcode-block" id="Pyarchinit_db_management.insert_pyusm"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.insert_pyusm">[documenti]</a>    <span class="k">def</span> <span class="nf">insert_pyusm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;insert_pyusm insert a pyusmtsm argument into the pyusm module</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        insert_pyusm insert a pyusmtsm argument into the pyusm module</span>
 <span class="sd">        &#39;&#39;&#39;</span>        
         <span class="n">pyusm</span> <span class="o">=</span> <span class="n">PYUSM</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                 <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>

@@ -14,7 +14,7 @@ from qgis.PyQt.QtWidgets import QMessageBox
 
 class Pyarchinit_db_management(object):
     '''
-    :important:
+    ..note::
         This function creates a database manager which creates the database and then creates the database object
     '''    
     metadata = ''
@@ -27,10 +27,15 @@ class Pyarchinit_db_management(object):
     def __init__(self, c):
         """
         Initialize the connection to DB. This is called by __init__ and should not be called directly.
-        :param c: The string containing the connection string. This string is passed to the connect () method of the DBConnection object.
-        :type: str
-        :returns: True if successful False otherwise. Note that this method does not return anything
-        :rtype: boolean
+
+        :param c:
+            The string containing the connection string. This string is passed to the connect () method of the DBConnection object.
+        :type:
+            str
+        :returns:
+            True if successful False otherwise. Note that this method does not return anything
+        :rtype:
+            boolean
         """
         self.conn_str = c
     def load_spatialite(self,dbapi_conn, connection_record):
@@ -72,7 +77,8 @@ class Pyarchinit_db_management(object):
         return test
         # insert statement
     def insert_pottery_values(self, *arg):
-        '''Inserts the values of the Pottery values into the pottery dictionary
+        '''
+        Inserts the values of the Pottery values into the pottery dictionary
         '''        
         pottery = POTTERY(arg[0],
                   arg[1],
@@ -108,7 +114,8 @@ class Pyarchinit_db_management(object):
                   arg[31])
         return pottery
     def insert_pyus(self, *arg):
-        '''Insert a PyUS into the PyUS object
+        '''
+        Insert a PyUS into the PyUS object
         '''        
         pyus = PYUS(arg[0],
                 arg[1],
@@ -126,7 +133,8 @@ class Pyarchinit_db_management(object):
                 arg[13])
         return pyus
     def insert_pyusm(self, *arg):
-        '''insert_pyusm insert a pyusmtsm argument into the pyusm module
+        '''
+        insert_pyusm insert a pyusmtsm argument into the pyusm module
         '''        
         pyusm = PYUSM(arg[0],
                 arg[1],
