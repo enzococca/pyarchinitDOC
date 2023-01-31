@@ -1231,11 +1231,25 @@ class Pyarchinit_db_management(object):
     def delete_one_record(self, tn, id_col, id_rec):
         """
         Delete a record from a table. This is a wrapper around the sqlalchemy delete_record method
-        :param self: the database connection to use
-        :param tn: the name of the table to delete from.
-        :param id_col: the name of the id column.
-        :param id_rec: the name of the id record.
-        :returns: the number of rows deleted or - 1 if an error
+        .. :noindex:
+        .. py:function:: delete_one_record(self, tn, id_col, id_rec)
+
+            :param tn:
+                the name of the table to delete from.
+            :type:
+                [str]
+            :param id_col:
+                the name of the id column.
+            :type:
+                [int]
+            :param id_rec:
+                the name of the id record.
+            :type:
+                [int]
+            :returns:
+                the number of rows deleted or - 1 if an error
+            :rtype:
+                [int]
         """
         self.table_name = tn
         self.id_column = id_col

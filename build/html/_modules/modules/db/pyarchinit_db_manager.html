@@ -1315,11 +1315,25 @@
 <div class="viewcode-block" id="Pyarchinit_db_management.delete_one_record"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.delete_one_record">[documenti]</a>    <span class="k">def</span> <span class="nf">delete_one_record</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="n">id_col</span><span class="p">,</span> <span class="n">id_rec</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Delete a record from a table. This is a wrapper around the sqlalchemy delete_record method</span>
-<span class="sd">        :param self: the database connection to use</span>
-<span class="sd">        :param tn: the name of the table to delete from.</span>
-<span class="sd">        :param id_col: the name of the id column.</span>
-<span class="sd">        :param id_rec: the name of the id record.</span>
-<span class="sd">        :returns: the number of rows deleted or - 1 if an error</span>
+<span class="sd">        .. :noindex:</span>
+<span class="sd">        .. py:function:: delete_one_record(self, tn, id_col, id_rec)</span>
+
+<span class="sd">            :param tn:</span>
+<span class="sd">                the name of the table to delete from.</span>
+<span class="sd">            :type:</span>
+<span class="sd">                [str]</span>
+<span class="sd">            :param id_col:</span>
+<span class="sd">                the name of the id column.</span>
+<span class="sd">            :type:</span>
+<span class="sd">                [int]</span>
+<span class="sd">            :param id_rec:</span>
+<span class="sd">                the name of the id record.</span>
+<span class="sd">            :type:</span>
+<span class="sd">                [int]</span>
+<span class="sd">            :returns:</span>
+<span class="sd">                the number of rows deleted or - 1 if an error</span>
+<span class="sd">            :rtype:</span>
+<span class="sd">                [int]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">table_name</span> <span class="o">=</span> <span class="n">tn</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">id_column</span> <span class="o">=</span> <span class="n">id_col</span>

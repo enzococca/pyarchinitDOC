@@ -477,11 +477,36 @@ The user’s selection is returned as a string.</p>
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.delete_one_record">
 <span class="sig-name descname"><span class="pre">delete_one_record</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_rec</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.delete_one_record"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.delete_one_record" title="Link a questa definizione"></a></dt>
 <dd><p>Delete a record from a table. This is a wrapper around the sqlalchemy delete_record method
-:param self: the database connection to use
-:param tn: the name of the table to delete from.
-:param id_col: the name of the id column.
-:param id_rec: the name of the id record.
-:returns: the number of rows deleted or - 1 if an error</p>
+.. :noindex:
+.. py:function:: delete_one_record(self, tn, id_col, id_rec)</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">param tn</dt>
+<dd class="field-odd"><p>the name of the table to delete from.</p>
+</dd>
+<dt class="field-even">type</dt>
+<dd class="field-even"><p>[str]</p>
+</dd>
+<dt class="field-odd">param id_col</dt>
+<dd class="field-odd"><p>the name of the id column.</p>
+</dd>
+<dt class="field-even">type</dt>
+<dd class="field-even"><p>[int]</p>
+</dd>
+<dt class="field-odd">param id_rec</dt>
+<dd class="field-odd"><p>the name of the id record.</p>
+</dd>
+<dt class="field-even">type</dt>
+<dd class="field-even"><p>[int]</p>
+</dd>
+<dt class="field-odd">returns</dt>
+<dd class="field-odd"><p>the number of rows deleted or - 1 if an error</p>
+</dd>
+<dt class="field-even">rtype</dt>
+<dd class="field-even"><p>[int]</p>
+</dd>
+</dl>
+</div></blockquote>
 </dd></dl>
 
 <dl class="py method">
