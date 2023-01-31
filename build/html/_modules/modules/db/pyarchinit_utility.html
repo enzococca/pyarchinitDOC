@@ -6,6 +6,9 @@
   <title>modules.db.pyarchinit_utility &mdash; pyArchInit 4.0 4 documentazione</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/style.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/style.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -13,8 +16,12 @@
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
         <script src="../../../_static/translations.js"></script>
+        <script src="../../../_static/design-tabs.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="author" title="A proposito di questi documenti" href="../../../about.html" />
     <link rel="index" title="Indice" href="../../../genindex.html" />
@@ -37,17 +44,19 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Menu di navigazione">
-              <p class="caption" role="heading"><span class="caption-text">Contenuti:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../about.html">About</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../prerequisities.html">Prerequisiti</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../novit%C3%A0.html">Novità</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../01_installazione.html">1.Installazione</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../02_il_plugin.html">2 Il Plugin</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../03_le_schede.html">3.Le schede</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../04_funzioni.html">4.Funzioni</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../05_esempi_di_applicazione.html">5.Esempi di Applicazione</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../06_moduli.html">pyArchInit Classi e Funzioni</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">1. About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../prerequisities.html">2. Prerequisiti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../novit%C3%A0.html">3. Novità</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installazione.html">4. Installazione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../il_plugin.html">5. Il Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../le_schede.html">6. Le schede</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../funzioni.html">7. Funzioni</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../come_documentare.html">8. Come documentare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../moduli.html">9. Moduli pyArchInit: Classi e Funzioni</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bibliography.html">10. Bibliografia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../lineee_guida.html">11. Linee guida</a></li>
 </ul>
 
         </div>
@@ -63,9 +72,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Naviga tra le pagine">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../../index.html">Codice del modulo</a> &raquo;</li>
-      <li>modules.db.pyarchinit_utility</li>
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Codice del modulo</a></li>
+      <li class="breadcrumb-item active">modules.db.pyarchinit_utility</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -79,10 +88,10 @@
 <span class="c1"># -*- coding: utf-8 -*-</span>
 
 
-<div class="viewcode-block" id="Utility"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_utility.Utility">[documenti]</a><span class="k">class</span> <span class="nc">Utility</span><span class="p">:</span>
-<div class="viewcode-block" id="Utility.pos_none_in_list"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_utility.Utility.pos_none_in_list">[documenti]</a>    <span class="k">def</span> <span class="nf">pos_none_in_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">l</span><span class="p">):</span>
+<div class="viewcode-block" id="Utility"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_utility.Utility">[documenti]</a><span class="k">class</span> <span class="nc">Utility</span><span class="p">:</span>
+<div class="viewcode-block" id="Utility.pos_none_in_list"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_utility.Utility.pos_none_in_list">[documenti]</a>    <span class="k">def</span> <span class="nf">pos_none_in_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">l</span><span class="p">):</span>
 
-        <span class="sd">&quot;&quot;&quot;take a list of values and return the position number of the values</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;take a list of values and return the position number of the values</span>
 <span class="sd">        equal to &#39;None&#39; &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">list</span> <span class="o">=</span> <span class="n">l</span>
         <span class="n">l2</span> <span class="o">=</span> <span class="p">[]</span>
@@ -94,9 +103,9 @@
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">list</span></div>
 
-<div class="viewcode-block" id="Utility.tup_2_list"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_utility.Utility.tup_2_list">[documenti]</a>    <span class="k">def</span> <span class="nf">tup_2_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<div class="viewcode-block" id="Utility.tup_2_list"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_utility.Utility.tup_2_list">[documenti]</a>    <span class="k">def</span> <span class="nf">tup_2_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 
-        <span class="sd">&quot;&quot;&quot;take a tuple of strings, and return a list of lists of the values.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;take a tuple of strings, and return a list of lists of the values.</span>
 <span class="sd">        if s is set, add the value to the strings. If i is set return only the</span>
 <span class="sd">        value in the i position&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tupla</span> <span class="o">=</span> <span class="n">t</span>
@@ -113,8 +122,8 @@
             <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">l</span></div>
 
-<div class="viewcode-block" id="Utility.tup_2_list_II"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_utility.Utility.tup_2_list_II">[documenti]</a>    <span class="k">def</span> <span class="nf">tup_2_list_II</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">l</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;take a list of tuples ad return a list of lists&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Utility.tup_2_list_II"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_utility.Utility.tup_2_list_II">[documenti]</a>    <span class="k">def</span> <span class="nf">tup_2_list_II</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">l</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;take a list of tuples ad return a list of lists&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">list</span> <span class="o">=</span> <span class="n">l</span>
         <span class="n">l</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="p">:</span>
@@ -124,24 +133,24 @@
             <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sublist</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">l</span></div>
 
-<div class="viewcode-block" id="Utility.tup_2_list_III"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_utility.Utility.tup_2_list_III">[documenti]</a>    <span class="k">def</span> <span class="nf">tup_2_list_III</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">l</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;take a list of tuples ad return a list of values&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Utility.tup_2_list_III"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_utility.Utility.tup_2_list_III">[documenti]</a>    <span class="k">def</span> <span class="nf">tup_2_list_III</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">l</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;take a list of tuples ad return a list of values&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">list</span> <span class="o">=</span> <span class="n">l</span>
         <span class="n">nl</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="p">:</span>
             <span class="n">nl</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">nl</span></div>
 
-<div class="viewcode-block" id="Utility.list_tup_2_list"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_utility.Utility.list_tup_2_list">[documenti]</a>    <span class="k">def</span> <span class="nf">list_tup_2_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">l</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;take a list of tuples ad return a list of lists&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Utility.list_tup_2_list"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_utility.Utility.list_tup_2_list">[documenti]</a>    <span class="k">def</span> <span class="nf">list_tup_2_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">l</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;take a list of tuples ad return a list of lists&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">list</span> <span class="o">=</span> <span class="n">l</span>
         <span class="n">res_list</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="p">:</span>
             <span class="n">res_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">res_list</span></div>
 
-<div class="viewcode-block" id="Utility.select_in_list"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_utility.Utility.select_in_list">[documenti]</a>    <span class="k">def</span> <span class="nf">select_in_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;take a list of lists or value and return the in a list of lists</span>
+<div class="viewcode-block" id="Utility.select_in_list"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_utility.Utility.select_in_list">[documenti]</a>    <span class="k">def</span> <span class="nf">select_in_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;take a list of lists or value and return the in a list of lists</span>
 <span class="sd">        the value taken by the value of p. &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">list</span> <span class="o">=</span> <span class="n">l</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">p</span>
@@ -156,8 +165,8 @@
                 <span class="k">break</span>
         <span class="k">return</span> <span class="n">res_list</span></div>
 
-<div class="viewcode-block" id="Utility.count_list_eq_v"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_utility.Utility.count_list_eq_v">[documenti]</a>    <span class="k">def</span> <span class="nf">count_list_eq_v</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;take a list and a value. If the number of occurens of a</span>
+<div class="viewcode-block" id="Utility.count_list_eq_v"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_utility.Utility.count_list_eq_v">[documenti]</a>    <span class="k">def</span> <span class="nf">count_list_eq_v</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;take a list and a value. If the number of occurens of a</span>
 <span class="sd">        items inside the list is equal to v value, put the singol value</span>
 <span class="sd">        into list_res as a list. Return a list of lists&quot;&quot;&quot;</span>
 
@@ -169,8 +178,8 @@
                 <span class="n">list_res</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">i</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">list_res</span></div>
 
-<div class="viewcode-block" id="Utility.find_list_in_dict"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_utility.Utility.find_list_in_dict">[documenti]</a>    <span class="k">def</span> <span class="nf">find_list_in_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;recives a dict and if contains a list of lists and</span>
+<div class="viewcode-block" id="Utility.find_list_in_dict"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_utility.Utility.find_list_in_dict">[documenti]</a>    <span class="k">def</span> <span class="nf">find_list_in_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;recives a dict and if contains a list of lists and</span>
 <span class="sd">        delete the item from the dict.</span>
 <span class="sd">        Return a tuple containin the new dict and a list of</span>
 <span class="sd">        tuples wich contain the keys and the values&quot;&quot;&quot;</span>
@@ -198,8 +207,8 @@
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict</span><span class="p">,</span> <span class="n">ret</span></div>
 
-<div class="viewcode-block" id="Utility.add_item_to_dict"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_utility.Utility.add_item_to_dict">[documenti]</a>    <span class="k">def</span> <span class="nf">add_item_to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;receive a dict and a list containt tuple with key,value</span>
+<div class="viewcode-block" id="Utility.add_item_to_dict"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_utility.Utility.add_item_to_dict">[documenti]</a>    <span class="k">def</span> <span class="nf">add_item_to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;receive a dict and a list containt tuple with key,value</span>
 <span class="sd">        and add them to dict&quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">dict</span> <span class="o">=</span> <span class="n">d</span>
@@ -208,8 +217,8 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">dict</span><span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict</span></div>
 
-<div class="viewcode-block" id="Utility.list_col_index_value"><a class="viewcode-back" href="../../../06_moduli.html#modules.db.pyarchinit_utility.Utility.list_col_index_value">[documenti]</a>    <span class="k">def</span> <span class="nf">list_col_index_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;return two lists into one tupla,</span>
+<div class="viewcode-block" id="Utility.list_col_index_value"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_utility.Utility.list_col_index_value">[documenti]</a>    <span class="k">def</span> <span class="nf">list_col_index_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;return two lists into one tupla,</span>
 <span class="sd">        takin&#39; two list with same lenght and lookin for the occurrences.</span>
 <span class="sd">        for every occurrences between v_1 and v_2 the v_2 value it&#39;s charged</span>
 <span class="sd">        into mod_value and its position in list it&#39;s put into list_index.</span>
@@ -405,7 +414,7 @@
     <p>&#169; Copyright 2021, AdArte srl.</p>
   </div>
 
-  Realizzato con <a href="https://www.sphinx-doc.org/">Sphinx</a> e il tema
+  Realizzato con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
     fornito da <a href="https://readthedocs.org">Read the Docs</a>.
    

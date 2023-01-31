@@ -7,7 +7,7 @@
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
@@ -16,7 +16,9 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
         <script src="../../_static/copybutton.js"></script>
         <script src="../../_static/translations.js"></script>
         <script src="../../_static/design-tabs.js"></script>
@@ -70,9 +72,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Naviga tra le pagine">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../index.html">Codice del modulo</a> &raquo;</li>
-      <li>tabs.US_USM</li>
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Codice del modulo</a></li>
+      <li class="breadcrumb-item active">tabs.US_USM</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -139,11 +141,11 @@
             <span class="n">clean_text</span> <span class="o">=</span> <span class="n">text_to_clean</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;##&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">clean_text</span>
 <div class="viewcode-block" id="pyarchinit_US.EM_extract_node_name"><a class="viewcode-back" href="../../moduli.html#tabs.US_USM.pyarchinit_US.EM_extract_node_name">[documenti]</a>    <span class="k">def</span> <span class="nf">EM_extract_node_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_element</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Initialize variables to store node information&#39;&#39;&#39;</span></div>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Initialize variables to store node information&#39;&#39;&#39;</span></div>
 
 
 <div class="viewcode-block" id="pyarchinit_US.check_if_empty"><a class="viewcode-back" href="../../moduli.html#tabs.US_USM.pyarchinit_US.check_if_empty">[documenti]</a>    <span class="k">def</span> <span class="nf">check_if_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;This is a function that checks if a name is empty</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;This is a function that checks if a name is empty</span>
 <span class="sd">        If it is empty, it returns &quot;--None--&quot;</span>
 <span class="sd">        If it is not empty, it returns the name&#39;&#39;&#39;</span></div>
 
@@ -151,11 +153,11 @@
 
 
 <div class="viewcode-block" id="pyarchinit_US.on_pushButton_graphml2csv_pressed"><a class="viewcode-back" href="../../moduli.html#tabs.US_USM.pyarchinit_US.on_pushButton_graphml2csv_pressed">[documenti]</a>    <span class="k">def</span> <span class="nf">on_pushButton_graphml2csv_pressed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;This is a function that is called when a button is pressed</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;This is a function that is called when a button is pressed</span>
 <span class="sd">        This is a QGIS setting&#39;&#39;&#39;</span></div>
 
 <div class="viewcode-block" id="pyarchinit_US.on_pushButton_csv2us_pressed"><a class="viewcode-back" href="../../moduli.html#tabs.US_USM.pyarchinit_US.on_pushButton_csv2us_pressed">[documenti]</a>    <span class="k">def</span> <span class="nf">on_pushButton_csv2us_pressed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function is responsible for importing data from a CSV file into the &#39;us_table&#39; of the SQLite database.</span>
 <span class="sd">        When the &#39;csv2us&#39; button is pressed, the user is prompted to select a CSV file with the &quot;Set file name&quot; dialog.</span>
 <span class="sd">        The selected file is then opened and read, with the data from the file being inserted into the &#39;us_table&#39; of the SQLite database.</span>
@@ -174,7 +176,7 @@
 <span class="sd">        &quot;&quot;&quot;</span></div>
 
 <div class="viewcode-block" id="pyarchinit_US.on_pushButton_fix_pressed"><a class="viewcode-back" href="../../moduli.html#tabs.US_USM.pyarchinit_US.on_pushButton_fix_pressed">[documenti]</a>    <span class="k">def</span> <span class="nf">on_pushButton_fix_pressed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; This function is called when the user press the fix button.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; This function is called when the user press the fix button.</span>
 <span class="sd">        It will first get the current text in comboBox_sito and comboBox_area widgets,</span>
 <span class="sd">        and create a search_dict dictionary with &#39;sito&#39;: sito and &#39;area&#39;: area as key-value pairs.</span>
 <span class="sd">        Then it queries the database with the search_dict and the MAPPER_TABLE_CLASS and assigns the result to the variable &quot;records&quot;</span>
@@ -186,7 +188,7 @@
 
 
 <div class="viewcode-block" id="pyarchinit_US.unit_type_select"><a class="viewcode-back" href="../../moduli.html#tabs.US_USM.pyarchinit_US.unit_type_select">[documenti]</a>    <span class="k">def</span> <span class="nf">unit_type_select</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function creates a dialog box for the user to select a unit type. The available unit types are determined by the value of the variable &#39;L&#39;, which is either &#39;it&#39; or &#39;en&#39;.</span>
 <span class="sd">        If &#39;L&#39; is &#39;it&#39;, the available unit types are (&#39;US&#39;,&#39;USM&#39;,&#39;USVA&#39;,&#39;USVB&#39;,&#39;USVC&#39;,&#39;USD&#39;,&#39;CON&#39;,&#39;VSF&#39;,&#39;SF&#39;,&#39;SUS&#39;,&#39;Combinar&#39;,&#39;Extractor&#39;,&#39;DOC&#39;,&#39;property&#39;).</span>
 <span class="sd">        If &#39;L&#39; is &#39;en&#39;, the available unit types are (&#39;SU&#39;,&#39;WSU&#39;,&#39;USVA&#39;,&#39;USVB&#39;,&#39;USVC&#39;,&#39;USD&#39;,&#39;CON&#39;,&#39;VSF&#39;,&#39;SF&#39;,&#39;SUS&#39;,&#39;Combinar&#39;,&#39;Extractor&#39;,&#39;DOC&#39;,&#39;property&#39;).</span>
@@ -195,7 +197,7 @@
 
 
 <div class="viewcode-block" id="pyarchinit_US.search_rapp"><a class="viewcode-back" href="../../moduli.html#tabs.US_USM.pyarchinit_US.search_rapp">[documenti]</a>    <span class="k">def</span> <span class="nf">search_rapp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        The function search_rapp is used to search for a specific value in the tableWidget_rapporti.</span>
 <span class="sd">        First, it clears the current selection in the tableWidget_rapporti.</span>
 <span class="sd">        It checks if the input variable &#39;s&#39; is empty, if it is then the function exits without searching.</span>
@@ -6185,7 +6187,7 @@
     <p>&#169; Copyright 2021, AdArte srl.</p>
   </div>
 
-  Realizzato con <a href="https://www.sphinx-doc.org/">Sphinx</a> e il tema
+  Realizzato con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
     fornito da <a href="https://readthedocs.org">Read the Docs</a>.
    
