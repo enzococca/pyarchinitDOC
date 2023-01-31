@@ -1,6 +1,4 @@
 import os
-import sqlalchemy as db
-from sqlalchemy.sql.expression import *
 from sqlalchemy.event import listen
 import psycopg2
 from builtins import object
@@ -12,18 +10,12 @@ from geoalchemy2 import *
 from sqlalchemy.engine import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.sql.schema import MetaData
-#from qgis.core import *
-#from qgis.utils import iface
 from qgis.PyQt.QtWidgets import QMessageBox
-#from modules.utility.pyarchinit_OS_utility import Pyarchinit_OS_Utility
-from sqlalchemy.dialects import postgresql
-from sqlalchemy.dialects.postgresql import insert
-#from modules.db.pyarchinit_db_update import DB_update
-#from modules.db.pyarchinit_utility import Utility
-from sqlalchemy.ext.compiler import compiles
-#from modules.db.pyarchinit_conn_strings import Connection
+
 class Pyarchinit_db_management(object):
-    '''This function creates a database manager which creates the database and then creates the database object
+    '''
+    :important:
+        This function creates a database manager which creates the database and then creates the database object
     '''    
     metadata = ''
     engine = ''
@@ -33,21 +25,17 @@ class Pyarchinit_db_management(object):
     elif os.name == 'nt':
         boolean = 'True'
     def __init__(self, c):
-        """Initialize the connection to DB. This is called by __init__ and should not be called directly.
-
-        :param self:
-            An instance of this class. It's a reference to the database connection that is used to communicate with the DB server.
-
-        :param c:
-
-            The string containing the connection string. This string is passed to the connect () method of the DBConnection object.
-
-        :returns:
-            True if successful False otherwise. Note that this method does not return anything
+        """
+        Initialize the connection to DB. This is called by __init__ and should not be called directly.
+        :param c: The string containing the connection string. This string is passed to the connect () method of the DBConnection object.
+        :type: str
+        :returns: True if successful False otherwise. Note that this method does not return anything
+        :rtype: boolean
         """
         self.conn_str = c
     def load_spatialite(self,dbapi_conn, connection_record):
-        '''Loads the spatialite database extension .
+        '''
+        Loads the spatialite database extension .
         '''
         dbapi_conn.enable_load_extension(True)
         if Pyarchinit_OS_Utility.isWindows()== True:
@@ -57,7 +45,8 @@ class Pyarchinit_db_management(object):
         else:
             dbapi_conn.load_extension('mod_spatialite.so')  
     def connection(self):
-        '''Connect to the database
+        '''
+        Connect to the database
         '''        
         test = True
         try:

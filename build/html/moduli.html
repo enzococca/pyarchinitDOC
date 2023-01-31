@@ -436,22 +436,19 @@ The user’s selection is returned as a string.</p>
 <span class="target" id="module-modules.db.pyarchinit_db_manager"></span><dl class="py class">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Pyarchinit_db_management</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management" title="Link a questa definizione"></a></dt>
-<dd><p>This function creates a database manager which creates the database and then creates the database object</p>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Important</dt>
+<dd class="field-odd"><p>This function creates a database manager which creates the database and then creates the database object</p>
+</dd>
+</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.__init__"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.__init__" title="Link a questa definizione"></a></dt>
-<dd><p>Initialize the connection to DB. This is called by __init__ and should not be called directly.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parametri</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>self</strong> – An instance of this class. It’s a reference to the database connection that is used to communicate with the DB server.</p></li>
-<li><p><strong>c</strong> – The string containing the connection string. This string is passed to the connect () method of the DBConnection object.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Ritorna</dt>
-<dd class="field-even"><p>True if successful False otherwise. Note that this method does not return anything</p>
-</dd>
-</dl>
+<dd><p>Initialize the connection to DB. This is called by __init__ and should not be called directly.
+:param c: The string containing the connection string. This string is passed to the connect () method of the DBConnection object.
+:type: str
+:returns: True if successful False otherwise. Note that this method does not return anything
+:rtype: boolean</p>
 </dd></dl>
 
 <dl class="py method">
