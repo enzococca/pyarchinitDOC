@@ -103,7 +103,9 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    .. note::</span>
 <span class="sd">        This function creates a database manager which creates the database and then creates the database object</span>
+<span class="sd">        </span>
 <span class="sd">    .. py:function:: Pyarchinit_db_management()</span>
+<span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">metadata</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
@@ -1532,12 +1534,17 @@
                           <span class="n">find_check_value</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Update the find_check field in the database. This is used to determine if a record should be deleted or not</span>
-<span class="sd">        :param self: The class of the object</span>
-<span class="sd">        :param table_class_str: The table class of the object</span>
-<span class="sd">        :param id_table_str: The id table of the object</span>
-<span class="sd">        :param value_id: The id value of the object to delete</span>
-<span class="sd">        :param find_check_value: The value of the find_check field</span>
-<span class="sd">        :returns: True if the update was successful False if not ( in which case the database is in an unusable state</span>
+<span class="sd">        </span>
+<span class="sd">            :param table_class_str: </span>
+<span class="sd">                The table class of the object</span>
+<span class="sd">            :param id_table_str: </span>
+<span class="sd">                The id table of the object</span>
+<span class="sd">            :param value_id: </span>
+<span class="sd">                The id value of the object to delete</span>
+<span class="sd">            :param find_check_value: </span>
+<span class="sd">                The value of the find_check field</span>
+<span class="sd">            :returns: </span>
+<span class="sd">                True if the update was successful False if not ( in which case the database is in an unusable state</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">table_class_str</span> <span class="o">=</span> <span class="n">table_class_str</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">id_table_str</span> <span class="o">=</span> <span class="n">id_table_str</span>
@@ -1562,10 +1569,13 @@
 <div class="viewcode-block" id="Pyarchinit_db_management.empty_find_check"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.empty_find_check">[documenti]</a>    <span class="k">def</span> <span class="nf">empty_find_check</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table_class_str</span><span class="p">,</span> <span class="n">find_check_value</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Empty the find_check field in the table_class_str. This is used to prevent an error in SQLAlchemy&#39;s create_table ()</span>
-<span class="sd">        :param self: The class of the table</span>
-<span class="sd">        :param table_class_str: The name of the table class</span>
-<span class="sd">        :param find_check_value: The value to set the field to</span>
-<span class="sd">        :returns: True if the update was successful False if it wasn&#39;t</span>
+<span class="sd">        </span>
+<span class="sd">            :param table_class_str: </span>
+<span class="sd">                The name of the table class</span>
+<span class="sd">            :param find_check_value: </span>
+<span class="sd">                The value to set the field to</span>
+<span class="sd">            :returns: </span>
+<span class="sd">                True if the update was successful False if it wasn&#39;t</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">table_class_str</span> <span class="o">=</span> <span class="n">table_class_str</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">find_check_value</span> <span class="o">=</span> <span class="n">find_check_value</span>
@@ -1620,10 +1630,13 @@
 <div class="viewcode-block" id="Pyarchinit_db_management.max_num_id"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.max_num_id">[documenti]</a>    <span class="k">def</span> <span class="nf">max_num_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tc</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the max number of that field in the table. It is used to determine the number of records in a table that have an auto increment field</span>
-<span class="sd">        :param self: The class of the database</span>
-<span class="sd">        :param tc: The table class ( ex.&#39;US&#39;)</span>
-<span class="sd">        :param f: The field id ( ex.&#39;us&#39;)</span>
-<span class="sd">        :returns: The max number of that field in the table. If there are no records 0 is</span>
+<span class="sd">        </span>
+<span class="sd">            :param tc: </span>
+<span class="sd">                The table class ( ex.&#39;US&#39;)</span>
+<span class="sd">            :param f: </span>
+<span class="sd">                The field id ( ex.&#39;us&#39;)</span>
+<span class="sd">            :returns: </span>
+<span class="sd">                The max number of that field in the table. If there are no records 0 is</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">table_class</span> <span class="o">=</span> <span class="n">tc</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">field_id</span> <span class="o">=</span> <span class="n">f</span>
@@ -1648,8 +1661,11 @@
 <span class="sd">        Return a generator that yields SQLAlchemy query objects.</span>
 <span class="sd">        This is useful for building a directory - based query from an SQLAlchemy</span>
 <span class="sd">        table or other data that can be used to retrieve data from the database.</span>
-<span class="sd">        :param self: The : class : . Engine  that is used to create the database.</span>
-<span class="sd">        :returns: A generator that yields SQLAlchemy query objects that can be used to retrieve data</span>
+<span class="sd">        </span>
+<span class="sd">            :param self:</span>
+<span class="sd">                The class . Engine  that is used to create the database.</span>
+<span class="sd">            :returns: </span>
+<span class="sd">                A generator that yields SQLAlchemy query objects that can be used to retrieve data</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">Session</span> <span class="o">=</span> <span class="n">sessionmaker</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">,</span>
                                <span class="n">autoflush</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -1660,10 +1676,13 @@
 <div class="viewcode-block" id="Pyarchinit_db_management.fields_list"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.fields_list">[documenti]</a>    <span class="k">def</span> <span class="nf">fields_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a list of fields in a table. This is useful for creating table objects that don&#39;t have a table_name or table_name attribute</span>
-<span class="sd">        :param self: The class to use for this query</span>
-<span class="sd">        :param t: The table name to search for fields in.</span>
-<span class="sd">        :param s: The column to search for. If empty all columns are returned.</span>
-<span class="sd">        :returns: A list of field names or a single column name</span>
+<span class="sd">        </span>
+<span class="sd">            :param t: </span>
+<span class="sd">                The table name to search for fields in.</span>
+<span class="sd">            :param s: </span>
+<span class="sd">                The column to search for. If empty all columns are returned.</span>
+<span class="sd">            :returns:</span>
+<span class="sd">                A list of field names or a single column name</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">table_name</span> <span class="o">=</span> <span class="n">t</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sing_column</span> <span class="o">=</span> <span class="n">s</span>
@@ -1677,9 +1696,11 @@
 <div class="viewcode-block" id="Pyarchinit_db_management.query_in_idus"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.query_in_idus">[documenti]</a>    <span class="k">def</span> <span class="nf">query_in_idus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">id_list</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Query for US records in id_us. This is used to find US records that belong to a list of US IDs</span>
-<span class="sd">        :param self: Reference to the database object</span>
-<span class="sd">        :param id_list: List of IDs to search for.</span>
-<span class="sd">        :returns: A list of US records that belong to the list</span>
+<span class="sd">        </span>
+<span class="sd">            :param id_list: </span>
+<span class="sd">                List of IDs to search for.</span>
+<span class="sd">            :returns: </span>
+<span class="sd">                A list of US records that belong to the list</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">Session</span> <span class="o">=</span> <span class="n">sessionmaker</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">,</span>
                                <span class="n">autoflush</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -1692,13 +1713,19 @@
 <div class="viewcode-block" id="Pyarchinit_db_management.query_sort"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.query_sort">[documenti]</a>    <span class="k">def</span> <span class="nf">query_sort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">id_list</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">tc</span><span class="p">,</span> <span class="n">idn</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Sorts a list of objects based on a list of primary keys. This is useful for sort functions that need to be called from a query method.</span>
-<span class="sd">        :param self: The class that holds the connection to the database</span>
-<span class="sd">        :param id_list: The list of primary keys</span>
-<span class="sd">        :param op: The operator to use for sorting</span>
-<span class="sd">        :param to: The type of object to sort (&#39;ASC&#39;&#39; DESC&#39;)</span>
-<span class="sd">        :param tc: The class to use for sorting (&#39;TABLE&#39;&#39; COLUMNS&#39;etc. )</span>
-<span class="sd">        :param idn: The name of the column in the table</span>
-<span class="sd">        :returns: A list of objects</span>
+<span class="sd">        </span>
+<span class="sd">            :param id_list: </span>
+<span class="sd">                The list of primary keys</span>
+<span class="sd">            :param op: </span>
+<span class="sd">                The operator to use for sorting</span>
+<span class="sd">            :param to: </span>
+<span class="sd">                The type of object to sort (&#39;ASC&#39;&#39; DESC&#39;)</span>
+<span class="sd">            :param tc: </span>
+<span class="sd">                The class to use for sorting (&#39;TABLE&#39;&#39; COLUMNS&#39;etc. )</span>
+<span class="sd">            :param idn: </span>
+<span class="sd">                The name of the column in the table</span>
+<span class="sd">            :returns: </span>
+<span class="sd">                A list of objects</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">order_params</span> <span class="o">=</span> <span class="n">op</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">type_order</span> <span class="o">=</span> <span class="n">to</span>
@@ -1724,9 +1751,11 @@
 <div class="viewcode-block" id="Pyarchinit_db_management.run"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.run">[documenti]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stmt</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Executes a statement and returns a list of results. This is a wrapper around sqlalchemy&#39;s execute method.</span>
-<span class="sd">        :param self: The object that holds the connection to the database.</span>
-<span class="sd">        :param stmt: The SQLAlchemy Statement object. This should be an instance of sqlalchemy. engine. statement. Statement</span>
-<span class="sd">        :returns: A list of results</span>
+<span class="sd">        </span>
+<span class="sd">            :param stmt: </span>
+<span class="sd">                The SQLAlchemy Statement object. This should be an instance of sqlalchemy. engine. statement. Statement</span>
+<span class="sd">            :returns: </span>
+<span class="sd">                A list of results</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">rs</span> <span class="o">=</span> <span class="n">stmt</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
         <span class="n">res_list</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1738,8 +1767,9 @@
 <div class="viewcode-block" id="Pyarchinit_db_management.update_for"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.update_for">[documenti]</a>    <span class="k">def</span> <span class="nf">update_for</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Update toim inventario_materiali_table_toimp for all records</span>
-<span class="sd">        :param self: Reference to class calling this method</span>
-<span class="sd">        :returns: None Example :. from iota import Financial &gt;&gt;&gt; Financial ( 0 ). update_for</span>
+<span class="sd">        </span>
+<span class="sd">            :returns: </span>
+<span class="sd">                None Example :. from iota import Financial &gt;&gt;&gt; Financial ( 0 ). update_for</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="s2">&quot;inventario_materiali_table_toimp&quot;</span><span class="p">,</span>
                       <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">,</span>
@@ -1756,11 +1786,15 @@
 <div class="viewcode-block" id="Pyarchinit_db_management.group_by"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.group_by">[documenti]</a>    <span class="k">def</span> <span class="nf">group_by</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">CD</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Group rows by a field. This is useful for getting a list of rows that have been grouped by a field and their values</span>
-<span class="sd">        :param self: The class of the table to query</span>
-<span class="sd">        :param tn: The name of the table to query (&#39;users&#39;&#39; groups&#39;etc. )</span>
-<span class="sd">        :param fn: The name of the field to query (&#39;users&#39;&#39; groups&#39;etc. )</span>
-<span class="sd">        :param CD: The class of the table to query (&#39;users&#39;&#39; groups&#39;etc. )</span>
-<span class="sd">        :returns: A list of rows in the form of ( row_name value</span>
+<span class="sd">        </span>
+<span class="sd">            :param tn: </span>
+<span class="sd">                The name of the table to query (&#39;users&#39;&#39; groups&#39;etc. )</span>
+<span class="sd">            :param fn: </span>
+<span class="sd">                The name of the field to query (&#39;users&#39;&#39; groups&#39;etc. )</span>
+<span class="sd">            :param CD: </span>
+<span class="sd">                The class of the table to query (&#39;users&#39;&#39; groups&#39;etc. )</span>
+<span class="sd">            :returns: </span>
+<span class="sd">                A list of rows in the form of ( row_name value)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">table_name</span> <span class="o">=</span> <span class="n">tn</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">field_name</span> <span class="o">=</span> <span class="n">fn</span>
@@ -1777,10 +1811,13 @@
 <div class="viewcode-block" id="Pyarchinit_db_management.query_where_text"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.query_where_text">[documenti]</a>    <span class="k">def</span> <span class="nf">query_where_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Query the PERIODIZZAZIONE table for a value that matches the criteria</span>
-<span class="sd">        :param self: The class this method is called from</span>
-<span class="sd">        :param c: The column to search for in the table.</span>
-<span class="sd">        :param v: The value to search for in the column.</span>
-<span class="sd">        :returns: The result of the query as a string. This is useful for debugging</span>
+<span class="sd">        </span>
+<span class="sd">            :param c: </span>
+<span class="sd">                The column to search for in the table.</span>
+<span class="sd">            :param v: </span>
+<span class="sd">                The value to search for in the column.</span>
+<span class="sd">            :returns: </span>
+<span class="sd">                The result of the query as a string. This is useful for debugging</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">c</span> <span class="o">=</span> <span class="n">c</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">v</span> <span class="o">=</span> <span class="n">v</span>
@@ -1802,9 +1839,11 @@
 <div class="viewcode-block" id="Pyarchinit_db_management.update_cont_per"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.update_cont_per">[documenti]</a>    <span class="k">def</span> <span class="nf">update_cont_per</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Updates the user content in the PERIODIZZAZIONE table</span>
-<span class="sd">        :param self: Object belonging to the site</span>
-<span class="sd">        :param s: Name of site to be loaded</span>
-<span class="sd">        :returns: If the sieve is inserted or</span>
+<span class="sd">        </span>
+<span class="sd">            :param s: </span>
+<span class="sd">                Name of site to be loaded</span>
+<span class="sd">            :returns: </span>
+<span class="sd">                If the sieve is inserted or</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sito</span> <span class="o">=</span> <span class="n">s</span>
         <span class="n">Session</span> <span class="o">=</span> <span class="n">sessionmaker</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">,</span>
@@ -1879,9 +1918,11 @@
 <div class="viewcode-block" id="Pyarchinit_db_management.remove_alltags_from_db_sql"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.remove_alltags_from_db_sql">[documenti]</a>    <span class="k">def</span> <span class="nf">remove_alltags_from_db_sql</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Remove all tags from database based on media name. This is used to prevent tagging a media that is no longer used in the database</span>
-<span class="sd">        :param self: reference to the database engine</span>
-<span class="sd">        :param s: media name to remove tags from. Should be a string</span>
-<span class="sd">        :returns: number of rows removed from the database. If there was an error nothing will be</span>
+<span class="sd">        </span>
+<span class="sd">            :param s: </span>
+<span class="sd">                media name to remove tags from. Should be a string</span>
+<span class="sd">            :returns: </span>
+<span class="sd">                number of rows removed from the database. If there was an error nothing will be</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">sql_query_string</span> <span class="o">=</span> <span class="p">(</span>
             <span class="s2">&quot;DELETE FROM media_to_entity_table WHERE media_name  = &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="n">s</span><span class="p">)</span>
@@ -1891,9 +1932,11 @@
 <div class="viewcode-block" id="Pyarchinit_db_management.remove_tags_from_db_sql"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.remove_tags_from_db_sql">[documenti]</a>    <span class="k">def</span> <span class="nf">remove_tags_from_db_sql</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Remove tags from database. This is used to remove tags that are no longer associated with an entity</span>
-<span class="sd">        :param self: reference to the database engine</span>
-<span class="sd">        :param s: id of the entity to remove tags from.</span>
-<span class="sd">        :returns: a tuple containing the number of rows removed and the SQL</span>
+<span class="sd">        </span>
+<span class="sd">            :param s: </span>
+<span class="sd">                id of the entity to remove tags from.</span>
+<span class="sd">            :returns:</span>
+<span class="sd">                a tuple containing the number of rows removed and the SQL</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">sql_query_string</span> <span class="o">=</span> <span class="p">(</span>
             <span class="s2">&quot;DELETE FROM media_to_entity_table WHERE id_entity  = &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="n">s</span><span class="p">)</span>
@@ -1904,9 +1947,11 @@
 <div class="viewcode-block" id="Pyarchinit_db_management.delete_thumb_from_db_sql"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.delete_thumb_from_db_sql">[documenti]</a>    <span class="k">def</span> <span class="nf">delete_thumb_from_db_sql</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Delete a Thumb from the database. This is used to delete thumbnails that no longer exist</span>
-<span class="sd">        :param self: reference to the database engine</span>
-<span class="sd">        :param s: the filename of the thumbnail to delete. It must be in the database</span>
-<span class="sd">        :returns: the result of the sql execution. It is a list of</span>
+<span class="sd">        </span>
+<span class="sd">            :param s: </span>
+<span class="sd">                the filename of the thumbnail to delete. It must be in the database</span>
+<span class="sd">            :returns: </span>
+<span class="sd">                the result of the sql execution. It is a list </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">sql_query_string</span> <span class="o">=</span> <span class="p">(</span>
             <span class="s2">&quot;DELETE FROM media_thumb_table WHERE media_filename  = &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="n">s</span><span class="p">)</span>
@@ -1917,11 +1962,15 @@
 <div class="viewcode-block" id="Pyarchinit_db_management.select_medianame_from_st_sql"><a class="viewcode-back" href="../../../moduli.html#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.select_medianame_from_st_sql">[documenti]</a>    <span class="k">def</span> <span class="nf">select_medianame_from_st_sql</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sito</span><span class="p">,</span> <span class="n">sigla</span><span class="p">,</span> <span class="n">numero</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Select media names from struttura_table and media_thumb_table</span>
-<span class="sd">        :param self: Reference to the Sito instance. Used to execute the query</span>
-<span class="sd">        :param sito: String with sito&#39;s id ( ex : Sito archeologico )</span>
-<span class="sd">        :param sigla: String with sigla&#39;s id ( ex : TB )</span>
-<span class="sd">        :param numero: String with numero&#39;s id ( ex : 1 )</span>
-<span class="sd">        :returns: List with medieval names in format ( filepath media_name )</span>
+<span class="sd">        </span>
+<span class="sd">            :param sito: </span>
+<span class="sd">                String with sito&#39;s id ( ex : Sito archeologico )</span>
+<span class="sd">            :param sigla: </span>
+<span class="sd">                String with sigla&#39;s id ( ex : TB )</span>
+<span class="sd">            :param numero: </span>
+<span class="sd">                String with numero&#39;s id ( ex : 1 )</span>
+<span class="sd">            :returns: </span>
+<span class="sd">                List with medieval names in format ( filepath media_name )</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">sql_query_string</span> <span class="o">=</span> <span class="p">(</span>
             <span class="s2">&quot;SELECT c.filepath, a.media_name FROM media_to_entity_table as a,  struttura_table as b, media_thumb_table as c WHERE b.id_struttura=a.id_entity and c.id_media=a.id_media  and b.sito= &#39;</span><span class="si">%s</span><span class="s2">&#39; and b.sigla_struttura=&#39;</span><span class="si">%s</span><span class="s2">&#39; and b.numero_struttura=&#39;</span><span class="si">%s</span><span class="s2">&#39; and entity_type=&#39;STRUTTURA&#39;&quot;</span>

@@ -653,10 +653,17 @@ The user’s selection is returned as a string.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.delete_thumb_from_db_sql">
 <span class="sig-name descname"><span class="pre">delete_thumb_from_db_sql</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.delete_thumb_from_db_sql"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.delete_thumb_from_db_sql" title="Link a questa definizione"></a></dt>
-<dd><p>Delete a Thumb from the database. This is used to delete thumbnails that no longer exist
-:param self: reference to the database engine
-:param s: the filename of the thumbnail to delete. It must be in the database
-:returns: the result of the sql execution. It is a list of</p>
+<dd><p>Delete a Thumb from the database. This is used to delete thumbnails that no longer exist</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">param s</dt>
+<dd class="field-odd"><p>the filename of the thumbnail to delete. It must be in the database</p>
+</dd>
+<dt class="field-even">returns</dt>
+<dd class="field-even"><p>the result of the sql execution. It is a list</p>
+</dd>
+</dl>
+</div></blockquote>
 </dd></dl>
 
 <dl class="py method">
@@ -664,19 +671,36 @@ The user’s selection is returned as a string.</p>
 <span class="sig-name descname"><span class="pre">dir_query</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.dir_query"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.dir_query" title="Link a questa definizione"></a></dt>
 <dd><p>Return a generator that yields SQLAlchemy query objects.
 This is useful for building a directory - based query from an SQLAlchemy
-table or other data that can be used to retrieve data from the database.
-:param self: The : class : . Engine  that is used to create the database.
-:returns: A generator that yields SQLAlchemy query objects that can be used to retrieve data</p>
+table or other data that can be used to retrieve data from the database.</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">param self</dt>
+<dd class="field-odd"><p>The class . Engine  that is used to create the database.</p>
+</dd>
+<dt class="field-even">returns</dt>
+<dd class="field-even"><p>A generator that yields SQLAlchemy query objects that can be used to retrieve data</p>
+</dd>
+</dl>
+</div></blockquote>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.empty_find_check">
 <span class="sig-name descname"><span class="pre">empty_find_check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_class_str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">find_check_value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.empty_find_check"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.empty_find_check" title="Link a questa definizione"></a></dt>
-<dd><p>Empty the find_check field in the table_class_str. This is used to prevent an error in SQLAlchemy’s create_table ()
-:param self: The class of the table
-:param table_class_str: The name of the table class
-:param find_check_value: The value to set the field to
-:returns: True if the update was successful False if it wasn’t</p>
+<dd><p>Empty the find_check field in the table_class_str. This is used to prevent an error in SQLAlchemy’s create_table ()</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">param table_class_str</dt>
+<dd class="field-odd"><p>The name of the table class</p>
+</dd>
+<dt class="field-even">param find_check_value</dt>
+<dd class="field-even"><p>The value to set the field to</p>
+</dd>
+<dt class="field-odd">returns</dt>
+<dd class="field-odd"><p>True if the update was successful False if it wasn’t</p>
+</dd>
+</dl>
+</div></blockquote>
 </dd></dl>
 
 <dl class="py method">
@@ -700,22 +724,42 @@ table or other data that can be used to retrieve data from the database.
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.fields_list">
 <span class="sig-name descname"><span class="pre">fields_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.fields_list"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.fields_list" title="Link a questa definizione"></a></dt>
-<dd><p>Returns a list of fields in a table. This is useful for creating table objects that don’t have a table_name or table_name attribute
-:param self: The class to use for this query
-:param t: The table name to search for fields in.
-:param s: The column to search for. If empty all columns are returned.
-:returns: A list of field names or a single column name</p>
+<dd><p>Returns a list of fields in a table. This is useful for creating table objects that don’t have a table_name or table_name attribute</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">param t</dt>
+<dd class="field-odd"><p>The table name to search for fields in.</p>
+</dd>
+<dt class="field-even">param s</dt>
+<dd class="field-even"><p>The column to search for. If empty all columns are returned.</p>
+</dd>
+<dt class="field-odd">returns</dt>
+<dd class="field-odd"><p>A list of field names or a single column name</p>
+</dd>
+</dl>
+</div></blockquote>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.group_by">
 <span class="sig-name descname"><span class="pre">group_by</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CD</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.group_by"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.group_by" title="Link a questa definizione"></a></dt>
-<dd><p>Group rows by a field. This is useful for getting a list of rows that have been grouped by a field and their values
-:param self: The class of the table to query
-:param tn: The name of the table to query (“users”” groups’etc. )
-:param fn: The name of the field to query (“users”” groups’etc. )
-:param CD: The class of the table to query (“users”” groups’etc. )
-:returns: A list of rows in the form of ( row_name value</p>
+<dd><p>Group rows by a field. This is useful for getting a list of rows that have been grouped by a field and their values</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">param tn</dt>
+<dd class="field-odd"><p>The name of the table to query (“users”” groups’etc. )</p>
+</dd>
+<dt class="field-even">param fn</dt>
+<dd class="field-even"><p>The name of the field to query (“users”” groups’etc. )</p>
+</dd>
+<dt class="field-odd">param CD</dt>
+<dd class="field-odd"><p>The class of the table to query (“users”” groups’etc. )</p>
+</dd>
+<dt class="field-even">returns</dt>
+<dd class="field-even"><p>A list of rows in the form of ( row_name value)</p>
+</dd>
+</dl>
+</div></blockquote>
 </dd></dl>
 
 <dl class="py method">
@@ -1129,11 +1173,20 @@ table or other data that can be used to retrieve data from the database.
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.max_num_id">
 <span class="sig-name descname"><span class="pre">max_num_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.max_num_id"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.max_num_id" title="Link a questa definizione"></a></dt>
-<dd><p>Returns the max number of that field in the table. It is used to determine the number of records in a table that have an auto increment field
-:param self: The class of the database
-:param tc: The table class ( ex.”US”)
-:param f: The field id ( ex.”us”)
-:returns: The max number of that field in the table. If there are no records 0 is</p>
+<dd><p>Returns the max number of that field in the table. It is used to determine the number of records in a table that have an auto increment field</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">param tc</dt>
+<dd class="field-odd"><p>The table class ( ex.”US”)</p>
+</dd>
+<dt class="field-even">param f</dt>
+<dd class="field-even"><p>The field id ( ex.”us”)</p>
+</dd>
+<dt class="field-odd">returns</dt>
+<dd class="field-odd"><p>The max number of that field in the table. If there are no records 0 is</p>
+</dd>
+</dl>
+</div></blockquote>
 </dd></dl>
 
 <dl class="py method">
@@ -1229,10 +1282,17 @@ table or other data that can be used to retrieve data from the database.
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.query_in_idus">
 <span class="sig-name descname"><span class="pre">query_in_idus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id_list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.query_in_idus"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.query_in_idus" title="Link a questa definizione"></a></dt>
-<dd><p>Query for US records in id_us. This is used to find US records that belong to a list of US IDs
-:param self: Reference to the database object
-:param id_list: List of IDs to search for.
-:returns: A list of US records that belong to the list</p>
+<dd><p>Query for US records in id_us. This is used to find US records that belong to a list of US IDs</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">param id_list</dt>
+<dd class="field-odd"><p>List of IDs to search for.</p>
+</dd>
+<dt class="field-even">returns</dt>
+<dd class="field-even"><p>A list of US records that belong to the list</p>
+</dd>
+</dl>
+</div></blockquote>
 </dd></dl>
 
 <dl class="py method">
@@ -1257,62 +1317,118 @@ table or other data that can be used to retrieve data from the database.
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.query_sort">
 <span class="sig-name descname"><span class="pre">query_sort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">op</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.query_sort"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.query_sort" title="Link a questa definizione"></a></dt>
-<dd><p>Sorts a list of objects based on a list of primary keys. This is useful for sort functions that need to be called from a query method.
-:param self: The class that holds the connection to the database
-:param id_list: The list of primary keys
-:param op: The operator to use for sorting
-:param to: The type of object to sort (“ASC”” DESC”)
-:param tc: The class to use for sorting (“TABLE”” COLUMNS’etc. )
-:param idn: The name of the column in the table
-:returns: A list of objects</p>
+<dd><p>Sorts a list of objects based on a list of primary keys. This is useful for sort functions that need to be called from a query method.</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">param id_list</dt>
+<dd class="field-odd"><p>The list of primary keys</p>
+</dd>
+<dt class="field-even">param op</dt>
+<dd class="field-even"><p>The operator to use for sorting</p>
+</dd>
+<dt class="field-odd">param to</dt>
+<dd class="field-odd"><p>The type of object to sort (“ASC”” DESC”)</p>
+</dd>
+<dt class="field-even">param tc</dt>
+<dd class="field-even"><p>The class to use for sorting (“TABLE”” COLUMNS’etc. )</p>
+</dd>
+<dt class="field-odd">param idn</dt>
+<dd class="field-odd"><p>The name of the column in the table</p>
+</dd>
+<dt class="field-even">returns</dt>
+<dd class="field-even"><p>A list of objects</p>
+</dd>
+</dl>
+</div></blockquote>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.query_where_text">
 <span class="sig-name descname"><span class="pre">query_where_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.query_where_text"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.query_where_text" title="Link a questa definizione"></a></dt>
-<dd><p>Query the PERIODIZZAZIONE table for a value that matches the criteria
-:param self: The class this method is called from
-:param c: The column to search for in the table.
-:param v: The value to search for in the column.
-:returns: The result of the query as a string. This is useful for debugging</p>
+<dd><p>Query the PERIODIZZAZIONE table for a value that matches the criteria</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">param c</dt>
+<dd class="field-odd"><p>The column to search for in the table.</p>
+</dd>
+<dt class="field-even">param v</dt>
+<dd class="field-even"><p>The value to search for in the column.</p>
+</dd>
+<dt class="field-odd">returns</dt>
+<dd class="field-odd"><p>The result of the query as a string. This is useful for debugging</p>
+</dd>
+</dl>
+</div></blockquote>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.remove_alltags_from_db_sql">
 <span class="sig-name descname"><span class="pre">remove_alltags_from_db_sql</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.remove_alltags_from_db_sql"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.remove_alltags_from_db_sql" title="Link a questa definizione"></a></dt>
-<dd><p>Remove all tags from database based on media name. This is used to prevent tagging a media that is no longer used in the database
-:param self: reference to the database engine
-:param s: media name to remove tags from. Should be a string
-:returns: number of rows removed from the database. If there was an error nothing will be</p>
+<dd><p>Remove all tags from database based on media name. This is used to prevent tagging a media that is no longer used in the database</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">param s</dt>
+<dd class="field-odd"><p>media name to remove tags from. Should be a string</p>
+</dd>
+<dt class="field-even">returns</dt>
+<dd class="field-even"><p>number of rows removed from the database. If there was an error nothing will be</p>
+</dd>
+</dl>
+</div></blockquote>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.remove_tags_from_db_sql">
 <span class="sig-name descname"><span class="pre">remove_tags_from_db_sql</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.remove_tags_from_db_sql"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.remove_tags_from_db_sql" title="Link a questa definizione"></a></dt>
-<dd><p>Remove tags from database. This is used to remove tags that are no longer associated with an entity
-:param self: reference to the database engine
-:param s: id of the entity to remove tags from.
-:returns: a tuple containing the number of rows removed and the SQL</p>
+<dd><p>Remove tags from database. This is used to remove tags that are no longer associated with an entity</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">param s</dt>
+<dd class="field-odd"><p>id of the entity to remove tags from.</p>
+</dd>
+<dt class="field-even">returns</dt>
+<dd class="field-even"><p>a tuple containing the number of rows removed and the SQL</p>
+</dd>
+</dl>
+</div></blockquote>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.run">
 <span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stmt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.run"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.run" title="Link a questa definizione"></a></dt>
-<dd><p>Executes a statement and returns a list of results. This is a wrapper around sqlalchemy’s execute method.
-:param self: The object that holds the connection to the database.
-:param stmt: The SQLAlchemy Statement object. This should be an instance of sqlalchemy. engine. statement. Statement
-:returns: A list of results</p>
+<dd><p>Executes a statement and returns a list of results. This is a wrapper around sqlalchemy’s execute method.</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">param stmt</dt>
+<dd class="field-odd"><p>The SQLAlchemy Statement object. This should be an instance of sqlalchemy. engine. statement. Statement</p>
+</dd>
+<dt class="field-even">returns</dt>
+<dd class="field-even"><p>A list of results</p>
+</dd>
+</dl>
+</div></blockquote>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.select_medianame_from_st_sql">
 <span class="sig-name descname"><span class="pre">select_medianame_from_st_sql</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sito</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigla</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numero</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.select_medianame_from_st_sql"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.select_medianame_from_st_sql" title="Link a questa definizione"></a></dt>
-<dd><p>Select media names from struttura_table and media_thumb_table
-:param self: Reference to the Sito instance. Used to execute the query
-:param sito: String with sito’s id ( ex : Sito archeologico )
-:param sigla: String with sigla’s id ( ex : TB )
-:param numero: String with numero’s id ( ex : 1 )
-:returns: List with medieval names in format ( filepath media_name )</p>
+<dd><p>Select media names from struttura_table and media_thumb_table</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">param sito</dt>
+<dd class="field-odd"><p>String with sito’s id ( ex : Sito archeologico )</p>
+</dd>
+<dt class="field-even">param sigla</dt>
+<dd class="field-even"><p>String with sigla’s id ( ex : TB )</p>
+</dd>
+<dt class="field-odd">param numero</dt>
+<dd class="field-odd"><p>String with numero’s id ( ex : 1 )</p>
+</dd>
+<dt class="field-even">returns</dt>
+<dd class="field-even"><p>List with medieval names in format ( filepath media_name )</p>
+</dd>
+</dl>
+</div></blockquote>
 </dd></dl>
 
 <dl class="py method">
@@ -1346,30 +1462,55 @@ table or other data that can be used to retrieve data from the database.
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.update_cont_per">
 <span class="sig-name descname"><span class="pre">update_cont_per</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.update_cont_per"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.update_cont_per" title="Link a questa definizione"></a></dt>
-<dd><p>Updates the user content in the PERIODIZZAZIONE table
-:param self: Object belonging to the site
-:param s: Name of site to be loaded
-:returns: If the sieve is inserted or</p>
+<dd><p>Updates the user content in the PERIODIZZAZIONE table</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">param s</dt>
+<dd class="field-odd"><p>Name of site to be loaded</p>
+</dd>
+<dt class="field-even">returns</dt>
+<dd class="field-even"><p>If the sieve is inserted or</p>
+</dd>
+</dl>
+</div></blockquote>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.update_find_check">
 <span class="sig-name descname"><span class="pre">update_find_check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_class_str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_table_str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">find_check_value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.update_find_check"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.update_find_check" title="Link a questa definizione"></a></dt>
-<dd><p>Update the find_check field in the database. This is used to determine if a record should be deleted or not
-:param self: The class of the object
-:param table_class_str: The table class of the object
-:param id_table_str: The id table of the object
-:param value_id: The id value of the object to delete
-:param find_check_value: The value of the find_check field
-:returns: True if the update was successful False if not ( in which case the database is in an unusable state</p>
+<dd><p>Update the find_check field in the database. This is used to determine if a record should be deleted or not</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">param table_class_str</dt>
+<dd class="field-odd"><p>The table class of the object</p>
+</dd>
+<dt class="field-even">param id_table_str</dt>
+<dd class="field-even"><p>The id table of the object</p>
+</dd>
+<dt class="field-odd">param value_id</dt>
+<dd class="field-odd"><p>The id value of the object to delete</p>
+</dd>
+<dt class="field-even">param find_check_value</dt>
+<dd class="field-even"><p>The value of the find_check field</p>
+</dd>
+<dt class="field-odd">returns</dt>
+<dd class="field-odd"><p>True if the update was successful False if not ( in which case the database is in an unusable state</p>
+</dd>
+</dl>
+</div></blockquote>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modules.db.pyarchinit_db_manager.Pyarchinit_db_management.update_for">
 <span class="sig-name descname"><span class="pre">update_for</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/db/pyarchinit_db_manager.html#Pyarchinit_db_management.update_for"><span class="viewcode-link"><span class="pre">[sorgente]</span></span></a><a class="headerlink" href="#modules.db.pyarchinit_db_manager.Pyarchinit_db_management.update_for" title="Link a questa definizione"></a></dt>
-<dd><p>Update toim inventario_materiali_table_toimp for all records
-:param self: Reference to class calling this method
-:returns: None Example :. from iota import Financial &gt;&gt;&gt; Financial ( 0 ). update_for</p>
+<dd><p>Update toim inventario_materiali_table_toimp for all records</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">returns</dt>
+<dd class="field-odd"><p>None Example :. from iota import Financial &gt;&gt;&gt; Financial ( 0 ). update_for</p>
+</dd>
+</dl>
+</div></blockquote>
 </dd></dl>
 
 </dd></dl>

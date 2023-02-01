@@ -17,7 +17,9 @@ class Pyarchinit_db_management(object):
     """
     .. note::
         This function creates a database manager which creates the database and then creates the database object
+        
     .. py:function:: Pyarchinit_db_management()
+    
     """
 
     metadata = ""
@@ -1446,12 +1448,17 @@ class Pyarchinit_db_management(object):
                           find_check_value):
         """
         Update the find_check field in the database. This is used to determine if a record should be deleted or not
-        :param self: The class of the object
-        :param table_class_str: The table class of the object
-        :param id_table_str: The id table of the object
-        :param value_id: The id value of the object to delete
-        :param find_check_value: The value of the find_check field
-        :returns: True if the update was successful False if not ( in which case the database is in an unusable state
+        
+            :param table_class_str: 
+                The table class of the object
+            :param id_table_str: 
+                The id table of the object
+            :param value_id: 
+                The id value of the object to delete
+            :param find_check_value: 
+                The value of the find_check field
+            :returns: 
+                True if the update was successful False if not ( in which case the database is in an unusable state
         """
         self.table_class_str = table_class_str
         self.id_table_str = id_table_str
@@ -1476,10 +1483,13 @@ class Pyarchinit_db_management(object):
     def empty_find_check(self, table_class_str, find_check_value):
         """
         Empty the find_check field in the table_class_str. This is used to prevent an error in SQLAlchemy's create_table ()
-        :param self: The class of the table
-        :param table_class_str: The name of the table class
-        :param find_check_value: The value to set the field to
-        :returns: True if the update was successful False if it wasn't
+        
+            :param table_class_str: 
+                The name of the table class
+            :param find_check_value: 
+                The value to set the field to
+            :returns: 
+                True if the update was successful False if it wasn't
         """
         self.table_class_str = table_class_str
         self.find_check_value = find_check_value
@@ -1534,10 +1544,13 @@ class Pyarchinit_db_management(object):
     def max_num_id(self, tc, f):
         """
         Returns the max number of that field in the table. It is used to determine the number of records in a table that have an auto increment field
-        :param self: The class of the database
-        :param tc: The table class ( ex.'US')
-        :param f: The field id ( ex.'us')
-        :returns: The max number of that field in the table. If there are no records 0 is
+        
+            :param tc: 
+                The table class ( ex.'US')
+            :param f: 
+                The field id ( ex.'us')
+            :returns: 
+                The max number of that field in the table. If there are no records 0 is
         """
         self.table_class = tc
         self.field_id = f
@@ -1562,8 +1575,11 @@ class Pyarchinit_db_management(object):
         Return a generator that yields SQLAlchemy query objects.
         This is useful for building a directory - based query from an SQLAlchemy
         table or other data that can be used to retrieve data from the database.
-        :param self: The : class : . Engine  that is used to create the database.
-        :returns: A generator that yields SQLAlchemy query objects that can be used to retrieve data
+        
+            :param self:
+                The class . Engine  that is used to create the database.
+            :returns: 
+                A generator that yields SQLAlchemy query objects that can be used to retrieve data
         """
         Session = sessionmaker(bind=self.engine,
                                autoflush=True,
@@ -1574,10 +1590,13 @@ class Pyarchinit_db_management(object):
     def fields_list(self, t, s=""):
         """
         Returns a list of fields in a table. This is useful for creating table objects that don't have a table_name or table_name attribute
-        :param self: The class to use for this query
-        :param t: The table name to search for fields in.
-        :param s: The column to search for. If empty all columns are returned.
-        :returns: A list of field names or a single column name
+        
+            :param t: 
+                The table name to search for fields in.
+            :param s: 
+                The column to search for. If empty all columns are returned.
+            :returns:
+                A list of field names or a single column name
         """
         self.table_name = t
         self.sing_column = s
@@ -1591,9 +1610,11 @@ class Pyarchinit_db_management(object):
     def query_in_idus(self, id_list):
         """
         Query for US records in id_us. This is used to find US records that belong to a list of US IDs
-        :param self: Reference to the database object
-        :param id_list: List of IDs to search for.
-        :returns: A list of US records that belong to the list
+        
+            :param id_list: 
+                List of IDs to search for.
+            :returns: 
+                A list of US records that belong to the list
         """
         Session = sessionmaker(bind=self.engine,
                                autoflush=True,
@@ -1606,13 +1627,19 @@ class Pyarchinit_db_management(object):
     def query_sort(self, id_list, op, to, tc, idn):
         """
         Sorts a list of objects based on a list of primary keys. This is useful for sort functions that need to be called from a query method.
-        :param self: The class that holds the connection to the database
-        :param id_list: The list of primary keys
-        :param op: The operator to use for sorting
-        :param to: The type of object to sort ('ASC'' DESC')
-        :param tc: The class to use for sorting ('TABLE'' COLUMNS'etc. )
-        :param idn: The name of the column in the table
-        :returns: A list of objects
+        
+            :param id_list: 
+                The list of primary keys
+            :param op: 
+                The operator to use for sorting
+            :param to: 
+                The type of object to sort ('ASC'' DESC')
+            :param tc: 
+                The class to use for sorting ('TABLE'' COLUMNS'etc. )
+            :param idn: 
+                The name of the column in the table
+            :returns: 
+                A list of objects
         """
         self.order_params = op
         self.type_order = to
@@ -1638,9 +1665,11 @@ class Pyarchinit_db_management(object):
     def run(self, stmt):
         """
         Executes a statement and returns a list of results. This is a wrapper around sqlalchemy's execute method.
-        :param self: The object that holds the connection to the database.
-        :param stmt: The SQLAlchemy Statement object. This should be an instance of sqlalchemy. engine. statement. Statement
-        :returns: A list of results
+        
+            :param stmt: 
+                The SQLAlchemy Statement object. This should be an instance of sqlalchemy. engine. statement. Statement
+            :returns: 
+                A list of results
         """
         rs = stmt.execute()
         res_list = []
@@ -1652,8 +1681,9 @@ class Pyarchinit_db_management(object):
     def update_for(self):
         """
         Update toim inventario_materiali_table_toimp for all records
-        :param self: Reference to class calling this method
-        :returns: None Example :. from iota import Financial >>> Financial ( 0 ). update_for
+        
+            :returns: 
+                None Example :. from iota import Financial >>> Financial ( 0 ). update_for
         """
         table = Table("inventario_materiali_table_toimp",
                       self.metadata,
@@ -1670,11 +1700,15 @@ class Pyarchinit_db_management(object):
     def group_by(self, tn, fn, CD):
         """
         Group rows by a field. This is useful for getting a list of rows that have been grouped by a field and their values
-        :param self: The class of the table to query
-        :param tn: The name of the table to query ('users'' groups'etc. )
-        :param fn: The name of the field to query ('users'' groups'etc. )
-        :param CD: The class of the table to query ('users'' groups'etc. )
-        :returns: A list of rows in the form of ( row_name value
+        
+            :param tn: 
+                The name of the table to query ('users'' groups'etc. )
+            :param fn: 
+                The name of the field to query ('users'' groups'etc. )
+            :param CD: 
+                The class of the table to query ('users'' groups'etc. )
+            :returns: 
+                A list of rows in the form of ( row_name value)
         """
         self.table_name = tn
         self.field_name = fn
@@ -1691,10 +1725,13 @@ class Pyarchinit_db_management(object):
     def query_where_text(self, c, v):
         """
         Query the PERIODIZZAZIONE table for a value that matches the criteria
-        :param self: The class this method is called from
-        :param c: The column to search for in the table.
-        :param v: The value to search for in the column.
-        :returns: The result of the query as a string. This is useful for debugging
+        
+            :param c: 
+                The column to search for in the table.
+            :param v: 
+                The value to search for in the column.
+            :returns: 
+                The result of the query as a string. This is useful for debugging
         """
         self.c = c
         self.v = v
@@ -1716,9 +1753,11 @@ class Pyarchinit_db_management(object):
     def update_cont_per(self, s):
         """
         Updates the user content in the PERIODIZZAZIONE table
-        :param self: Object belonging to the site
-        :param s: Name of site to be loaded
-        :returns: If the sieve is inserted or
+        
+            :param s: 
+                Name of site to be loaded
+            :returns: 
+                If the sieve is inserted or
         """
         self.sito = s
         Session = sessionmaker(bind=self.engine,
@@ -1793,9 +1832,11 @@ class Pyarchinit_db_management(object):
     def remove_alltags_from_db_sql(self, s):
         """
         Remove all tags from database based on media name. This is used to prevent tagging a media that is no longer used in the database
-        :param self: reference to the database engine
-        :param s: media name to remove tags from. Should be a string
-        :returns: number of rows removed from the database. If there was an error nothing will be
+        
+            :param s: 
+                media name to remove tags from. Should be a string
+            :returns: 
+                number of rows removed from the database. If there was an error nothing will be
         """
         sql_query_string = (
             "DELETE FROM media_to_entity_table WHERE media_name  = '%s'") % (s)
@@ -1805,9 +1846,11 @@ class Pyarchinit_db_management(object):
     def remove_tags_from_db_sql(self, s):
         """
         Remove tags from database. This is used to remove tags that are no longer associated with an entity
-        :param self: reference to the database engine
-        :param s: id of the entity to remove tags from.
-        :returns: a tuple containing the number of rows removed and the SQL
+        
+            :param s: 
+                id of the entity to remove tags from.
+            :returns:
+                a tuple containing the number of rows removed and the SQL
         """
         sql_query_string = (
             "DELETE FROM media_to_entity_table WHERE id_entity  = '%s'") % (s)
@@ -1818,9 +1861,11 @@ class Pyarchinit_db_management(object):
     def delete_thumb_from_db_sql(self, s):
         """
         Delete a Thumb from the database. This is used to delete thumbnails that no longer exist
-        :param self: reference to the database engine
-        :param s: the filename of the thumbnail to delete. It must be in the database
-        :returns: the result of the sql execution. It is a list of
+        
+            :param s: 
+                the filename of the thumbnail to delete. It must be in the database
+            :returns: 
+                the result of the sql execution. It is a list 
         """
         sql_query_string = (
             "DELETE FROM media_thumb_table WHERE media_filename  = '%s'") % (s)
@@ -1831,11 +1876,15 @@ class Pyarchinit_db_management(object):
     def select_medianame_from_st_sql(self, sito, sigla, numero):
         """
         Select media names from struttura_table and media_thumb_table
-        :param self: Reference to the Sito instance. Used to execute the query
-        :param sito: String with sito's id ( ex : Sito archeologico )
-        :param sigla: String with sigla's id ( ex : TB )
-        :param numero: String with numero's id ( ex : 1 )
-        :returns: List with medieval names in format ( filepath media_name )
+        
+            :param sito: 
+                String with sito's id ( ex : Sito archeologico )
+            :param sigla: 
+                String with sigla's id ( ex : TB )
+            :param numero: 
+                String with numero's id ( ex : 1 )
+            :returns: 
+                List with medieval names in format ( filepath media_name )
         """
         sql_query_string = (
             "SELECT c.filepath, a.media_name FROM media_to_entity_table as a,  struttura_table as b, media_thumb_table as c WHERE b.id_struttura=a.id_entity and c.id_media=a.id_media  and b.sito= '%s' and b.sigla_struttura='%s' and b.numero_struttura='%s' and entity_type='STRUTTURA'"
