@@ -102,7 +102,7 @@ class Pyarchinit_db_management(object):
 
     def insert_pottery_values(self, *arg):
         """
-        Inserts the values into the dictionary
+        Inserts the values into the dictionary pottery_table
         ..py:function:: self.Pyarchinit_db_management().insert_pottery_values(str)
             
             :param arg:
@@ -148,7 +148,7 @@ class Pyarchinit_db_management(object):
 
     def insert_pyus(self, *arg):
         """
-        Inserts the values into the dictionary
+        Inserts the values into the dictionary pyunitastratigrafiche
         ..py:function:: self.Pyarchinit_db_management().insert_pyus(str)
             
             :param arg:
@@ -176,7 +176,7 @@ class Pyarchinit_db_management(object):
 
     def insert_pyusm(self, *arg):
         """
-        Inserts the values into the dictionary
+        Inserts the values into the dictionary pyunitastratigrafiche_usm
         ..py:function:: self.Pyarchinit_db_management().insert_pyusm(str)
             
             :param arg:
@@ -204,7 +204,7 @@ class Pyarchinit_db_management(object):
 
     def insert_pysito_point(self, *arg):
         """
-        Inserts the values into the dictionary
+        Inserts the values into the dictionary pyarchinit_siti_point
         ..py:function:: self.Pyarchinit_db_management().insert_pysito_point(str)
             
             :param arg:
@@ -217,7 +217,7 @@ class Pyarchinit_db_management(object):
 
     def insert_pysito_polygon(self, *arg):
         """
-        Inserts the values into the dictionary
+        Inserts the values into the dictionary pyarchinit_siti_polygonal
         ..py:function:: self.Pyarchinit_db_management().insert_pysito_polygon(str)
             
             :param arg:
@@ -230,7 +230,7 @@ class Pyarchinit_db_management(object):
 
     def insert_pyquote(self, *arg):
         """
-        Inserts the values into the dictionary
+        Inserts the values into the dictionary pyarchinit_quote
         ..py:function:: self.Pyarchinit_db_management().insert_pyquote(str)
             
             :param arg:
@@ -255,7 +255,7 @@ class Pyarchinit_db_management(object):
 
     def insert_pyquote_usm(self, *arg):
         """
-        Inserts the values into the dictionary
+        Inserts the values into the dictionary pyarchinit_quote_usm
         ..py:function:: self.Pyarchinit_db_management().insert_pyquote_usm(str)
             
             :param arg:
@@ -280,7 +280,7 @@ class Pyarchinit_db_management(object):
 
     def insert_pyus_negative(self, *arg):
         """
-        Inserts the values into the dictionary
+        Inserts the values into the dictionary pyarchinit_us_negative_doc
         ..py:function:: self.Pyarchinit_db_management().insert_pyus_negative(str)
             
             :param arg:
@@ -294,7 +294,7 @@ class Pyarchinit_db_management(object):
 
     def insert_pystrutture(self, *arg):
         """
-        Inserts the values into the dictionary
+        Inserts the values into the dictionary pyarchinit_strutture_ipotesi
         ..py:function:: self.Pyarchinit_db_management().insert_pystrutture(str)
             
             :param arg:
@@ -320,7 +320,7 @@ class Pyarchinit_db_management(object):
 
     def insert_pyreperti(self, *arg):
         """
-        Inserts the values into the dictionary
+        Inserts the values into the dictionary pyarchinit_reperti
         ..py:function:: self.Pyarchinit_db_management().insert_pyreperti(str)
             
             :param arg:
@@ -338,7 +338,7 @@ class Pyarchinit_db_management(object):
 
     def insert_pyindividui(self, *arg):
         """
-        Inserts the values into the dictionary
+        Inserts the values into the dictionary pyarchinit_individui
         ..py:function:: self.Pyarchinit_db_management().insert_pyindividui(str)
             
             :param arg:
@@ -357,7 +357,7 @@ class Pyarchinit_db_management(object):
 
     def insert_pycampioni(self, *arg):
         """
-        Inserts the values into the dictionary
+        Inserts the values into the dictionary pyarchinit_campionature
         ..py:function:: self.Pyarchinit_db_management().insert_pycampioni(str)
             
             :param arg:
@@ -379,7 +379,7 @@ class Pyarchinit_db_management(object):
 
     def insert_pytomba(self, *arg):
         """
-        Inserts the values into the dictionary
+        Inserts the values into the dictionary pyarchinit_tafonomia
         ..py:function:: self.Pyarchinit_db_management().insert_pytomba(str)
             
             :param arg:
@@ -396,7 +396,7 @@ class Pyarchinit_db_management(object):
 
     def insert_pydocumentazione(self, *arg):
         """
-        Inserts the values into the dictionary
+        Inserts the values into the dictionary pyarchinit_documentazione
         ..py:function:: self.Pyarchinit_db_management().insert_pydocumentazione(str)
             
             :param arg:
@@ -415,7 +415,15 @@ class Pyarchinit_db_management(object):
         return pydocumentazione
 
     def insert_pylineeriferimento(self, *arg):
-        """insert_pylineeriferimento Insert a pylineeriferimentoimentoimentoimento text into the docstring"""
+        """
+        Inserts the values into the layer pyarchinit_linee_rif
+        ..py:function:: self.Pyarchinit_db_management().insert_pylineeriferimento(str)
+            
+            :param arg:
+                The arguments to the function which is passed to the function
+            :type:
+                [str]
+        """
 
         pylineeriferimento = PYLINEERIFERIMENTO(
             arg[0], 
@@ -426,7 +434,15 @@ class Pyarchinit_db_management(object):
         return pylineeriferimento
 
     def insert_pyripartizioni_spaziali(self, *arg):
-        """insert_pyripartizioni_spaziali Inserts a pyripartizioni_spazizioni_spazizioni into the pyripartizizioni_spazizioni_spazizioni"""
+        """
+        Inserts the values into the layer pyarchinit_ripartizioni_spaziali
+        ..py:function:: self.Pyarchinit_db_management().insert_pyripartizioni_spaziali(str)
+            
+            :param arg:
+                The arguments to the function which is passed to the function
+            :type:
+                [str]
+        """
         pyripartizioni_spaziali = PYRIPARTIZIONI_SPAZIALI(
             arg[0], 
             arg[1], 
@@ -437,7 +453,15 @@ class Pyarchinit_db_management(object):
         return pyripartizioni_spaziali
 
     def insert_pysezioni(self, *arg):
-        """insert_pysezioni Insert a PysezionI into the parser"""
+        """
+        Inserts the values into the layer pyarchinit_sezioni
+        ..py:function:: self.Pyarchinit_db_management().insert_pysezioni(str)
+            
+            :param arg:
+                The arguments to the function which is passed to the function
+            :type:
+                [str]
+        """
         pysezioni = PYSEZIONI(
             arg[0], 
             arg[1], 
@@ -450,7 +474,15 @@ class Pyarchinit_db_management(object):
         return pysezioni
 
     def insert_values(self, *arg):
-        """insert_values Insert values into the US and US tags"""
+        """
+        Inserts the values into the layer us_table
+        ..py:function:: self.Pyarchinit_db_management().insert_values(str)
+            
+            :param arg:
+                The arguments to the function which is passed to the function
+            :type:
+                [str]
+        """
         us = US(
             arg[0],
             arg[1],
@@ -573,7 +605,15 @@ class Pyarchinit_db_management(object):
         return us
 
     def insert_ut_values(self, *arg):
-        """insert_ut_values Inserts values into the UT values"""
+        """
+        Inserts the values into the layer ut_table
+        ..py:function:: self.Pyarchinit_db_management().insert_ut_values(str)
+            
+            :param arg:
+                The arguments to the function which is passed to the function
+            :type:
+                [str]
+        """
         ut = UT(
             arg[0],
             arg[1],
@@ -621,7 +661,15 @@ class Pyarchinit_db_management(object):
         return ut
 
     def insert_site_values(self, *arg):
-        """insert_site_values Inserts a site values into the datapoint"""
+        """
+        Inserts the values into the layer site_table
+        ..py:function:: self.Pyarchinit_db_management().insert_site_values(str)
+            
+            :param arg:
+                The arguments to the function which is passed to the function
+            :type:
+                [str]
+        """
         sito = SITE(
             arg[0],
             arg[1],
@@ -637,7 +685,15 @@ class Pyarchinit_db_management(object):
         return sito
 
     def insert_periodizzazione_values(self, *arg):
-        """insert_periodizzazione_values Inserts periodizziza into the list of values"""
+        """
+        Inserts the values into the layer periodizzazione_table
+        ..py:function:: self.Pyarchinit_db_management().insert_periodizzazione_values(str)
+            
+            :param arg:
+                The arguments to the function which is passed to the function
+            :type:
+                [str]
+        """
         periodizzazione = PERIODIZZAZIONE(
             arg[0], 
             arg[1], 
@@ -651,7 +707,15 @@ class Pyarchinit_db_management(object):
         return periodizzazione
 
     def insert_values_reperti(self, *arg):
-        """insert_values_reperti Inserts values in the inventory into the inventory"""
+        """
+        Inserts the values into the layer inventario_materiali_table
+        ..py:function:: self.Pyarchinit_db_management().insert_values_reperti(str)
+            
+            :param arg:
+                The arguments to the function which is passed to the function
+            :type:
+                [str]
+        """
         inventario_materiali = INVENTARIO_MATERIALI(
             arg[0],
             arg[1],
@@ -689,7 +753,15 @@ class Pyarchinit_db_management(object):
         return inventario_materiali
 
     def insert_struttura_values(self, *arg):
-        """insert_struttura_values Inserts STRUTTUTTRA values into the parser"""
+        """
+        Inserts the values into the layer struttura_table
+        ..py:function:: self.Pyarchinit_db_management().insert_struttura_values(str)
+            
+            :param arg:
+                The arguments to the function which is passed to the function
+            :type:
+                [str]
+        """
         struttura = STRUTTURA(
             arg[0],
             arg[1],
@@ -713,7 +785,15 @@ class Pyarchinit_db_management(object):
         return struttura
 
     def insert_values_ind(self, *arg):
-        """insert_values_ind insert values into scheduler"""
+        """
+        Inserts the values into the layer schedaind_table
+        ..py:function:: self.Pyarchinit_db_management().insert_values_ind(str)
+            
+            :param arg:
+                The arguments to the function which is passed to the function
+            :type:
+                [str]
+        """
         schedaind = SCHEDAIND(
             arg[0],
             arg[1],
@@ -743,7 +823,15 @@ class Pyarchinit_db_management(object):
         return schedaind
 
     def insert_values_detsesso(self, *arg):
-        """insert_values_detsesso Inserts values into the matrix"""
+        """
+        Inserts the values into the layer detsesso_table
+        ..py:function:: self.Pyarchinit_db_management().insert_values_detsesso(str)
+            
+            :param arg:
+                The arguments to the function which is passed to the function
+            :type:
+                [str]
+        """
         detsesso = DETSESSO(
             arg[0],
             arg[1],
@@ -803,7 +891,15 @@ class Pyarchinit_db_management(object):
         return detsesso
 
     def insert_values_deteta(self, *arg):
-        """insert_values_deteta Compute the deteta of the given arguments"""
+        """
+        Inserts the values into the layer deteta_table
+        ..py:function:: self.Pyarchinit_db_management().insert_values_deteta(str)
+            
+            :param arg:
+                The arguments to the function which is passed to the function
+            :type:
+                [str]
+        """
         deteta = DETETA(
             arg[0],
             arg[1],
@@ -866,7 +962,15 @@ class Pyarchinit_db_management(object):
         return deteta
 
     def insert_media_values(self, *arg):
-        """insert_media_values Insert media values into the media object"""
+        """
+        Inserts the values into the layer media_table
+        ..py:function:: self.Pyarchinit_db_management().insert_media_values(str)
+            
+            :param arg:
+                The arguments to the function which is passed to the function
+            :type:
+                [str]
+        """
         media = MEDIA(
             arg[0], 
             arg[1], 
@@ -878,7 +982,15 @@ class Pyarchinit_db_management(object):
         return media
 
     def insert_mediathumb_values(self, *arg):
-        """insert_mediathumb_values Inserts values into the media_thumbnail argument"""
+        """
+        Inserts the values into the layer mediathumb_table
+        ..py:function:: self.Pyarchinit_db_management().insert_mediathumb_values(str)
+            
+            :param arg:
+                The arguments to the function which is passed to the function
+            :type:
+                [str]
+        """
         media_thumb = MEDIA_THUMB(
             arg[0], 
             arg[1], 
@@ -891,7 +1003,15 @@ class Pyarchinit_db_management(object):
         return media_thumb
 
     def insert_media2entity_values(self, *arg):
-        """Istanzia la classe MEDIATOENTITY da pyarchinit_db_mapper"""
+        """
+        Inserts the values into the layer mediatoentity_table
+        ..py:function:: self.Pyarchinit_db_management().insert_media2entity_values(str)
+            
+            :param arg:
+                The arguments to the function which is passed to the function
+            :type:
+                [str]
+        """
         mediatoentity = MEDIATOENTITY(
             arg[0], 
             arg[1], 
@@ -903,7 +1023,15 @@ class Pyarchinit_db_management(object):
         return mediatoentity
 
     def insert_media2entity_view_values(self, *arg):
-        """insert_media2entity_view_values Inserts values into Media2entity_view"""
+        """
+        Inserts the values into the layer mediatoentity_view
+        ..py:function:: self.Pyarchinit_db_management().insert_media2entity_view_values(str)
+            
+            :param arg:
+                The arguments to the function which is passed to the function
+            :type:
+                [str]
+        """
         mediaentity_view = MEDIAVIEW(
             arg[0], 
             arg[1], 
@@ -915,7 +1043,15 @@ class Pyarchinit_db_management(object):
         return mediaentity_view
 
     def insert_values_tomba(self, *arg):
-        """insert_values_tomba Inserts values into TOMBA"""
+        """
+        Inserts the values into the layer tomba_table
+        ..py:function:: self.Pyarchinit_db_management().insert_values_tomba(str)
+            
+            :param arg:
+                The arguments to the function which is passed to the function
+            :type:
+                [str]
+        """
         tomba = TOMBA(
             arg[0],
             arg[1],
@@ -947,7 +1083,15 @@ class Pyarchinit_db_management(object):
         return tomba
 
     def insert_values_campioni(self, *arg):
-        """insert_values_campioni Inserts the given value into the campioni"""
+        """
+        Inserts the values into the layer campioni_table
+        ..py:function:: self.Pyarchinit_db_management().insert_values_campioni(str)
+            
+            :param arg:
+                The arguments to the function which is passed to the function
+            :type:
+                [str]
+        """
         campioni = CAMPIONI(
             arg[0],
             arg[1],
@@ -963,7 +1107,15 @@ class Pyarchinit_db_management(object):
         return campioni
 
     def insert_values_thesaurus(self, *arg):
-        """insert_values_thesaurus Inserts the given values into thesaurus"""
+        """
+        Inserts the values into the layer thesaurus
+        ..py:function:: self.Pyarchinit_db_management().insert_values_thesaurus(str)
+            
+            :param arg:
+                The arguments to the function which is passed to the function
+            :type:
+                [str]
+        """
         thesaurus = PYARCHINIT_THESAURUS_SIGLE(
             arg[0], 
             arg[1], 
@@ -1036,7 +1188,15 @@ class Pyarchinit_db_management(object):
         return inventario_lapidei
 
     def insert_values_documentazione(self, *arg):
-        """insert_values_documentazione Inserts a value into the document"""
+        """
+        Inserts the values into the layer documentazione_table
+        ..py:function:: self.Pyarchinit_db_management().insert_values_documentazione(str)
+            
+            :param arg:
+                The arguments to the function which is passed to the function
+            :type:
+                [str]
+        """
         documentazione = DOCUMENTAZIONE(
             arg[0], 
             arg[1], 
@@ -1050,7 +1210,15 @@ class Pyarchinit_db_management(object):
         return documentazione
 
     def insert_pdf_administrator_values(self, *arg):
-        """insert_pdf_administrator_values Insert values into PDFAdmin object"""
+        """
+        Inserts the values into the layer pdf_administrator
+        ..py:function:: self.Pyarchinit_db_management().insert_pdf_administrator_values(str)
+            
+            :param arg:
+                The arguments to the function which is passed to the function
+            :type:
+                [str]
+        """
         pdf_administrator = PDF_ADMINISTRATOR(
             arg[0], 
             arg[1], 
@@ -1058,22 +1226,6 @@ class Pyarchinit_db_management(object):
             arg[3],
             arg[4])
         return pdf_administrator
-
-    def insert_campioni_values(self, *arg):
-        """insert_campioni_values Inserts the values of the given campioni values into the given list"""
-        campioni = CAMPIONI(
-            arg[0],
-            arg[1],
-            arg[2],
-            arg[3],
-            arg[4],
-            arg[5],
-            arg[6],
-            arg[7],
-            arg[8],
-            arg[9],
-        )
-        return campioni
 
     def execute_sql_create_db(self):
         """execute_sql_create_db Execute the SQL create db"""
@@ -1647,7 +1799,7 @@ class Pyarchinit_db_management(object):
         self.id_name = idn
         filter_params = (self.type_order + "(" + self.table_class + "." +
                          self.order_params[0] + ")")
-        # Generates a string with the order of the table_class. i. e. the order of the table_class. i. e. the order of the table_class. i.
+        # Generates a string with the order of the table_class 
         for i in self.order_params[1:]:
             filter_temp = self.type_order + \
                 "(" + self.table_class + "." + i + ")"
@@ -1691,7 +1843,7 @@ class Pyarchinit_db_management(object):
         s = table.select(table.c.id_invmat > 0)
         res_list = self.run(s)
         cont = 900
-        # update INVENTARIO_MATERIALI_TOIMP id_invmat id_invmat id_invmat id_invmat id_invmat id_invmat id_invmat id_invmat
+        
         for i in res_list:
             self.update("INVENTARIO_MATERIALI_TOIMP", "id_invmat", [i],
                         ["id_invmat"], [cont])
@@ -1775,7 +1927,7 @@ class Pyarchinit_db_management(object):
         lista_us = eval(string)
         # lista_us list of lista_us.
         for i in lista_us:
-            # periodo_finale periodo_finale periodo_finale periodo_finale fase_finale periodo_finale fase_finale periodo_finale fase_finale periodo_finale fase_finale
+            
             if not i.periodo_finale and i.periodo_iniziale:
                 periodiz = self.query_bool(
                     {
@@ -1885,6 +2037,7 @@ class Pyarchinit_db_management(object):
                 String with numero's id ( ex : 1 )
             :returns: 
                 List with medieval names in format ( filepath media_name )
+             
         """
         sql_query_string = (
             "SELECT c.filepath, a.media_name FROM media_to_entity_table as a,  struttura_table as b, media_thumb_table as c WHERE b.id_struttura=a.id_entity and c.id_media=a.id_media  and b.sito= '%s' and b.sigla_struttura='%s' and b.numero_struttura='%s' and entity_type='STRUTTURA'"
@@ -1893,7 +2046,19 @@ class Pyarchinit_db_management(object):
         rows = res.fetchall()
         return rows
 
+    
     def select_medianame_from_db_sql(self, sito, area):
+        """
+        Select media from database. This is used to get the median name of a media in the media_to_entity_table
+        ..py:function:: select_medianame_from_db_sql(str, str)
+        
+            :param sito: 
+                Site where the media is located.
+            :param area: 
+                Area where the media is located. Example :'1 '
+            :returns:
+                A list of 3 - tuples : ( filepath us media_name)
+        """
         sql_query_string = (
             "SELECT c.filepath, b.us,a.media_name FROM media_to_entity_table as a,  us_table as b, media_thumb_table as c WHERE b.id_us=a.id_entity and c.id_media=a.id_media  and b.sito= '%s' and b.area='%s'"
         ) % (sito, area)
@@ -1902,6 +2067,17 @@ class Pyarchinit_db_management(object):
         return rows
 
     def select_medianame_tb_from_db_sql(self, sito, area):
+        """
+        Select median name from database. This is used to get the file path of a Tomba and its thumbnail
+        ..py:function:: select_medianame_tb_from_db_sql(str, str)
+            
+            :param sito: 
+                Site ID of the Tomba
+            :param area: 
+                Area ID of the Tomba ( area_id )
+            :returns: 
+                list of tuples ( filepath media_name ) where filepath is the filepath of the
+        """
         sql_query_string = (
             "SELECT c.filepath, a.media_name FROM media_to_entity_table as a,  tomba_table as b, media_thumb_table as c WHERE b.id_tomba=a.id_entity and c.id_media=a.id_media  and b.sito= '%s' and b.area='%s'and entity_type='TOMBA'"
         ) % (sito, area)
@@ -1909,7 +2085,21 @@ class Pyarchinit_db_management(object):
         rows = res.fetchall()
         return rows
 
+    
     def select_medianame_pot_from_db_sql(self, sito, area, us):
+        """
+        Select medias from database based on sito area and us. This is used to select medias about pottery that are in the database
+        ..py:function:: select_medianame_pot_from_db_sql(str, str, int)
+            
+            :param sito: 
+                sito of the pottery.
+            :param area: 
+                area of the pottery. 
+            :param us: 
+                stratigraphic unit where pottery has been found.
+            :returns: 
+                list of tuples ( filepath potttery)
+        """
         sql_query_string = (
             "SELECT c.filepath, a.media_name FROM media_to_entity_table as a,  pottery_table as b, media_thumb_table as c WHERE b.id_rep=a.id_entity and c.id_media=a.id_media  and b.sito= '%s' and b.area='%s' and b.us = '%s' and entity_type='CERAMICA'"
         ) % (sito, area, us)
@@ -1918,6 +2108,19 @@ class Pyarchinit_db_management(object):
         return rows
 
     def select_medianame_ra_from_db_sql(self, sito, area, us):
+        """
+        Select media names from database. This is used to get the median name from artefact
+        ..py:function:: select_medianame_ra_from_db_sqll(str, str, int)
+        
+            :param sito: 
+                name site
+            :param area: 
+                name area
+            :param us: 
+                name stratigraphic unit
+            :returns: 
+                list of tuples ( filepath media_name ) 
+        """
         sql_query_string = (
             "SELECT c.filepath, a.media_name FROM media_to_entity_table as a,  inventario_materiali_table as b, media_thumb_table as c WHERE b.id_invmat=a.id_entity and c.id_media=a.id_media  and b.sito= '%s' and b.area='%s' and b.us = '%s' and entity_type='REPERTO'"
         ) % (sito, area, us)
@@ -1926,6 +2129,9 @@ class Pyarchinit_db_management(object):
         return rows
 
     def select_medianame_2_from_db_sql(self, sito, area, us):
+        """
+        ..py:function:: select_medianame_2_from_db_sql(str, str, int)
+        """
         sql_query_string = (
             "SELECT c.filepath, a.media_name FROM media_to_entity_table as a,  us_table as b, media_thumb_table as c WHERE b.id_us=a.id_entity and c.id_media=a.id_media  and b.sito= '%s' and b.area='%s' and b.us = '%s' and entity_type='US'"
         ) % (sito, area, us)
@@ -1934,6 +2140,9 @@ class Pyarchinit_db_management(object):
         return rows
 
     def select_ra_from_db_sql(self, sito, area, us):
+        """
+        ..py:function:: select_medianame_2_from_db_sql(str, str, int)
+        """
         sql_query_string = (
             "SELECT n_reperto from inventario_materiali_table WHERE sito = '%s' and area = '%s' and us = '%s'"
         ) % (sito, area, us)
@@ -1942,6 +2151,9 @@ class Pyarchinit_db_management(object):
         return rows
 
     def select_coord_from_db_sql(self, sito, area, us):
+        """
+        ..py:function:: select_medianame_2_from_db_sql(str, str, int)
+        """
         sql_query_string = (
             "SELECT coord from pyunitastratigrafiche WHERE scavo_s = '%s' and area_s = '%s' and us_s = '%s'"
         ) % (sito, area, us)
@@ -2031,10 +2243,27 @@ class Pyarchinit_db_management(object):
         session.close()
         return res_list
 
+    
     def insert_arbitrary_number_of_us_records(self, us_range, sito, area, n_us,
                                               unita_tipo):
+        """
+        Insert a number of US records into the QGIS database. This is a helper function to avoid duplication of data in the database
+        
+        
+        :param us_range: 
+            Number of US records to insert ( int )
+        :param sito: 
+            Site ID ( str ). It's the same as the ID of the site
+        :param area: 
+            Area ID ( str ). It's
+        :param n_us:
+            number us
+        :param unita_tipo:
+            tupe of SU
+        """
         id_us = self.max_num_id("US", "id_us")
         l = QgsSettings().value("locale/userLocale")[0:2]
+        # Insert data into the session and store the data in the session.
         for i in range(us_range):
             id_us += 1
             data_ins = self.insert_values(
