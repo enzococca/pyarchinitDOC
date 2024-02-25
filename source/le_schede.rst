@@ -15,13 +15,13 @@ serie di tools per le chiamate dinamiche in tempo reale dei dati e l'elaborazion
 Le tabelle per il data entry sono:
 
 * Scheda Sito
-* Scheda Periodizzazione
-* Scheda Struttura
 * Scheda US-USM
+* Scheda Periodizzazione
 * Scheda Inventario Reperti
 * Scheda Campioni
-* Scheda Tafonomica
+* Scheda Struttura
 * Scheda Individuo
+* Scheda Tafonomica
 * Scheda Determinazione del sesso
 * Scheda Determinazione dell'età
 * Scheda di Catalogazione dei media
