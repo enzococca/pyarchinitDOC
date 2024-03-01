@@ -15,18 +15,20 @@ serie di tools per le chiamate dinamiche in tempo reale dei dati e l'elaborazion
 Le tabelle per il data entry sono:
 
 * Scheda Sito
-* Scheda Periodizzazione
-* Scheda Struttura
 * Scheda US-USM
-* Scheda Inventario Reperti
+* Scheda Reperti
 * Scheda Campioni
-* Scheda Tafonomica
-* Scheda Individuo
+* Scheda Pottery
+* Scheda Periodizzazione
+* Scheda Strutture
+* Scheda Tomba
+* Scheda Individui
+* Scheda Unità Topografica
+* Scheda Documentazione
 * Scheda Determinazione del sesso
 * Scheda Determinazione dell'età
-* Scheda di Catalogazione dei media
-* Scheda di gestione della documentazione
-* Scheda di gestione dei thesaurus
+* Scheda Media
+* Scheda Thesaurus
 
 
 I tools per la gestione e controllo dei dati:
@@ -34,7 +36,7 @@ I tools per la gestione e controllo dei dati:
 * Sistema di controllo del tempo
 * Sistema di esportazione delle directory per i media
 * Sistema centralizzato di esportazione PDF
-* Sistema di ricerca immagini simili
+* Sistema centralizzato di esportazione Excel
 * Configurazione del database
 * Info sul plugin
 * Sistema di caricamento e backup del database
@@ -199,6 +201,56 @@ Al momento si tratta di un sistema work in progress. Lo scopo sarebbe quello di 
 
 .. image:: ./_images/iconsus.png
    :align: center
+
+
+
+Funzioni Nascoste
+-----------------
+
+Queste sono descrizioni dettagliate  delle funzioni nascoste all'interno della scheda US-USM. Una di queste caratteristiche è la SQLPromptDialog, che è una finestra di dialogo per la gestione delle query SQL.
+
+SQLPromptDialog
+~~~~~~~~~~~~~~~~~~~
+
+SQLPromptDialog, sviluppata con PyQt5, offre funzionalità relative alle query SQL attraverso vari pulsanti:
+
+- "Start Query"
+- "Explain Query"
+- "Export Excel"
+- "Create  Graph"
+
+    .. note:: Chiave API
+
+        Una chiave API è un codice unico usato per identificare l'interazione con un'applicazione o un servizio.
+        In SQLPromptDialog, è necessaria una chiave API che puoi recuperare con una sottoscrizione a
+        `Tex2SQL <https://text2sql.ai>`_ per eseguire query SQL.
+
+Gestione del Prompt
+~~~~~~~~~~~~~~~~~~~
+
+di Seguito sono descritti i vari pulsanti e le loro funzionalità:
+
+Pulsante Start Query
++++++++++++++++++++++
+
+Dopo l'apertura di SQLPromptDialog, è disponibile un campo per inserire la query SQL. Supponendo una tabella chiamata "Prodotti" e si desidera selezionare tutti i dati, è possibile digitare "SELECT * FROM Prodotti;" nel campo. Dopo di che, cliccare su "Esegui Query" per procedere.
+
+Pulsante Explain Query
++++++++++++++++++++++++
+
+Se è necessario ottenere una spiegazione sulla query, si può digitare la query SQL nel campo di input e fatto ciò, cliccare su "Spiega Query". Ciò fornirà una spiegazione della query SQL inserita.
+
+Pulsante Export Excel
++++++++++++++++++++++++++
+
+A seguito dell'esecuzione di una query SQL con il pulsante "Esegui Query", è possibile esportare i risultati su un file Excel facendo clic su "Esporta su Excel".
+
+Pulsante Create Graph
+++++++++++++++++++++++
+
+Per generare un grafico basato sui risultati dell'ultima query SQL eseguita, eseguire la query come spiegato precedentemente, e poi fare clic su "Crea Grafico".
+
+È importante notare che ogni pulsante diventa attivo solo sotto determinate condizioni. Ad esempio, i pulsanti "Esporta su Excel" e "Crea Grafico" saranno attivi solo dopo l'esecuzione di una query SQL. Il pulsante "Spiega Query" sarà attivo solo quando viene inserito un input di query SQL valido.
 
 
 Scheda Reperti

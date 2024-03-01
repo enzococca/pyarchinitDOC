@@ -4,13 +4,27 @@
 Installazione
 ****************
 
+.. note:: **Attenzione!**
+
+        **Note per reinstallare o aggiornare pyarchinit:**
+
+        Per reinstallare pyarchinit o fare l'upgrade alle nuove versioni, al momento seguire questa procedura, sia se si installa da zip che da repository.
+
+        *1- disattivare pyarchinit da plugin manager*
+
+        *2- riavviare qgis*
+
+        *3- disinstallare pyarchinit da plugin manager*
+
+        *4- installare pyarchinit da zip o da repository.*
+
 Esistono due modi per installare pyArchInit.
 
 **La prima** consiste nell'inserire il seguente link nel manager dei plugin di QGIS (Consulta la pagina ufficiale di `pyArchInit`_ su GitHub.):
 
 .. _pyArchInit: https://github.com/pyarchinit/pyarchinit 
 
-http://pyarchinit.org/pyarchinit.xml
+http://pyarchinit.org/pyarchinit_repository
 
 **La seconda**, installando il plugin da un file ZIP, per cui si rimanda alla sezione **Installazione da ZIP**.
 
@@ -91,9 +105,6 @@ Scaricare l'archivio zip da github https://github.com/pyarchinit/pyarchinit
 Installare i requisiti dei pacchetti python (vedere il paragrafo Dipendenze)
 Aprire QGIS e poi da Plugin manager usare Install from ZIP per installare il plugin
 
-.. note::
-    Per i collaboratori della ditta adArte si consiglia di scaricare la versione dal sito github
-    https://github.com/adartesrlrimini/pyarchinit
 
 .. warning::
     **Durante la prima installazione comparirà un messaggio per avvertire della mancanza di pacchetti**

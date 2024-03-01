@@ -1,28 +1,25 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="it" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>6. Le schede &mdash; pyArchInit 4.0 4 documentazione</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/style.css" type="text/css" />
-      <link rel="stylesheet" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" type="text/css" />
+      <link rel="stylesheet" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" type="text/css" />
       <link rel="stylesheet" href="_static/style.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/documentation_options.js?v=1751830d"></script>
+        <script src="_static/doctools.js?v=13a9ecda"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="_static/copybutton.js"></script>
-        <script src="_static/translations.js"></script>
-        <script src="_static/design-tabs.js"></script>
+        <script src="_static/translations.js?v=0173e136"></script>
+        <script src="_static/design-tabs.js?v=36754332"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="author" title="A proposito di questi documenti" href="about.html" />
     <link rel="index" title="Indice" href="genindex.html" />
@@ -37,7 +34,6 @@
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
             <a href="index.html" class="icon icon-home"> pyArchInit 4.0
-            <img src="_static/pyarchinit_logo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -56,7 +52,14 @@
 <li class="toctree-l1"><a class="reference internal" href="il_plugin.html">5. Il Plugin</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">6. Le schede</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#scheda-sito">6.1. Scheda Sito</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#scheda-us-usm">6.2. Scheda US-USM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scheda-us-usm">6.2. Scheda US-USM</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#funzioni-nascoste">6.2.1. Funzioni Nascoste</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sqlpromptdialog">6.2.1.1. SQLPromptDialog</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gestione-del-prompt">6.2.1.2. Gestione del Prompt</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#scheda-reperti">6.3. Scheda Reperti</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#scheda-campioni">6.4. Scheda Campioni</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#scheda-periodizzazione">6.5. Scheda Periodizzazione</a></li>
@@ -98,8 +101,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Naviga tra le pagine">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
-      <li class="breadcrumb-item active"><span class="section-number">6. </span>Le schede</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">6. </span>Le schede</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/le_schede.rst.txt" rel="nofollow"> Visualizza sorgente pagina</a>
       </li>
@@ -111,7 +114,7 @@
              
   <img alt="_images/logo_3.png" class="align-right" src="_images/logo_3.png" />
 <section id="le-schede">
-<h1><span class="section-number">6. </span>Le schede<a class="headerlink" href="#le-schede" title="Permalink to this heading"></a></h1>
+<h1><span class="section-number">6. </span>Le schede<a class="headerlink" href="#le-schede" title="Link to this heading"></a></h1>
 <p>Il plugin offre una serie di interfacce grafiche per il data entry delle informazioni alfanumeriche provenienti da contesti archeologici e un pacchetto di layers tabellari postgres/postgis per la localizzazione del dato georeferenziato.</p>
 <p>Il plugin ha sostanzialmente 4 ambienti gestionali:
 data entry del dato alfanumerico tramite interfacce grafiche;
@@ -121,25 +124,27 @@ serie di tools per le chiamate dinamiche in tempo reale dei dati e l’elaborazi
 <p>Le tabelle per il data entry sono:</p>
 <ul class="simple">
 <li><p>Scheda Sito</p></li>
-<li><p>Scheda Periodizzazione</p></li>
-<li><p>Scheda Struttura</p></li>
 <li><p>Scheda US-USM</p></li>
-<li><p>Scheda Inventario Reperti</p></li>
+<li><p>Scheda Reperti</p></li>
 <li><p>Scheda Campioni</p></li>
-<li><p>Scheda Tafonomica</p></li>
-<li><p>Scheda Individuo</p></li>
+<li><p>Scheda Pottery</p></li>
+<li><p>Scheda Periodizzazione</p></li>
+<li><p>Scheda Strutture</p></li>
+<li><p>Scheda Tomba</p></li>
+<li><p>Scheda Individui</p></li>
+<li><p>Scheda Unità Topografica</p></li>
+<li><p>Scheda Documentazione</p></li>
 <li><p>Scheda Determinazione del sesso</p></li>
 <li><p>Scheda Determinazione dell’età</p></li>
-<li><p>Scheda di Catalogazione dei media</p></li>
-<li><p>Scheda di gestione della documentazione</p></li>
-<li><p>Scheda di gestione dei thesaurus</p></li>
+<li><p>Scheda Media</p></li>
+<li><p>Scheda Thesaurus</p></li>
 </ul>
 <p>I tools per la gestione e controllo dei dati:</p>
 <ul class="simple">
 <li><p>Sistema di controllo del tempo</p></li>
 <li><p>Sistema di esportazione delle directory per i media</p></li>
 <li><p>Sistema centralizzato di esportazione PDF</p></li>
-<li><p>Sistema di ricerca immagini simili</p></li>
+<li><p>Sistema centralizzato di esportazione Excel</p></li>
 <li><p>Configurazione del database</p></li>
 <li><p>Info sul plugin</p></li>
 <li><p>Sistema di caricamento e backup del database</p></li>
@@ -148,7 +153,7 @@ serie di tools per le chiamate dinamiche in tempo reale dei dati e l’elaborazi
 <li><p>Sistema di scaricamento dati Stazione Totale(TOPS)</p></li>
 </ul>
 <section id="scheda-sito">
-<h2><span class="section-number">6.1. </span>Scheda Sito<a class="headerlink" href="#scheda-sito" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">6.1. </span>Scheda Sito<a class="headerlink" href="#scheda-sito" title="Link to this heading"></a></h2>
 <a class="reference internal image-reference" href="_images/iconSite.png"><img alt="_images/iconSite.png" class="align-center" src="_images/iconSite.png" style="width: 3cm;" /></a>
 <p>Alla scheda di sito si accede tramite il pulsante della Toolbar di pyArchInit:</p>
 <p>La scheda di sito serve ad impostare il nome del luogo o del progetto in cui si verifica un’indagine. Al momento si tratta di una scheda aperta composta essenzialmente da 7 campi:</p>
@@ -173,7 +178,7 @@ serie di tools per le chiamate dinamiche in tempo reale dei dati e l’elaborazi
 <img alt="_images/img_322b.png" class="align-center" src="_images/img_322b.png" />
 </section>
 <section id="scheda-us-usm">
-<h2><span class="section-number">6.2. </span>Scheda US-USM<a class="headerlink" href="#scheda-us-usm" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">6.2. </span>Scheda US-USM<a class="headerlink" href="#scheda-us-usm" title="Link to this heading"></a></h2>
 <p>Alla scheda US/USM si accede tramite il pulsante della Toolbar di pyArchInit:</p>
 <img alt="_images/img_323button.png" class="align-center" src="_images/img_323button.png" />
 <p>La scheda US, è un adattamento della scheda ministeriale emessa dall’ICCD.</p>
@@ -267,81 +272,126 @@ serie di tools per le chiamate dinamiche in tempo reale dei dati e l’elaborazi
 <p>!!!ATTENZIONE!!!
 Al momento si tratta di un sistema work in progress. Lo scopo sarebbe quello di assegnare 1 riga del campo per ogni singola tipologia di documentazione prodotta e schedata nella scheda di Documentazione (realizzata da Simone Berto). Quindi ogni riga corrisponde ad una sola pianta oppure un prospetto oppure una sezione e così via, segnalando il tipo di documentazione e il numero di riferimento che costituiscono gli ID della scheda di Documentazione. Al momento il sistema risulta incompleto. NON E” POSSIBILE FARE RICERCHE AL SUO INTERNO.</p>
 <img alt="_images/iconsus.png" class="align-center" src="_images/iconsus.png" />
+<section id="funzioni-nascoste">
+<h3><span class="section-number">6.2.1. </span>Funzioni Nascoste<a class="headerlink" href="#funzioni-nascoste" title="Link to this heading"></a></h3>
+<p>Queste sono descrizioni dettagliate  delle funzioni nascoste all’interno della scheda US-USM. Una di queste caratteristiche è la SQLPromptDialog, che è una finestra di dialogo per la gestione delle query SQL.</p>
+<section id="sqlpromptdialog">
+<h4><span class="section-number">6.2.1.1. </span>SQLPromptDialog<a class="headerlink" href="#sqlpromptdialog" title="Link to this heading"></a></h4>
+<p>SQLPromptDialog, sviluppata con PyQt5, offre funzionalità relative alle query SQL attraverso vari pulsanti:</p>
+<ul>
+<li><p>«Start Query»</p></li>
+<li><p>«Explain Query»</p></li>
+<li><p>«Export Excel»</p></li>
+<li><p>«Create  Graph»</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Chiave API</p>
+<p>Una chiave API è un codice unico usato per identificare l’interazione con un’applicazione o un servizio.
+In SQLPromptDialog, è necessaria una chiave API che puoi recuperare con una sottoscrizione a
+<a class="reference external" href="https://text2sql.ai">Tex2SQL</a> per eseguire query SQL.</p>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="gestione-del-prompt">
+<h4><span class="section-number">6.2.1.2. </span>Gestione del Prompt<a class="headerlink" href="#gestione-del-prompt" title="Link to this heading"></a></h4>
+<p>di Seguito sono descritti i vari pulsanti e le loro funzionalità:</p>
+<section id="pulsante-start-query">
+<h5><span class="section-number">6.2.1.2.1. </span>Pulsante Start Query<a class="headerlink" href="#pulsante-start-query" title="Link to this heading"></a></h5>
+<p>Dopo l’apertura di SQLPromptDialog, è disponibile un campo per inserire la query SQL. Supponendo una tabella chiamata «Prodotti» e si desidera selezionare tutti i dati, è possibile digitare «SELECT * FROM Prodotti;» nel campo. Dopo di che, cliccare su «Esegui Query» per procedere.</p>
+</section>
+<section id="pulsante-explain-query">
+<h5><span class="section-number">6.2.1.2.2. </span>Pulsante Explain Query<a class="headerlink" href="#pulsante-explain-query" title="Link to this heading"></a></h5>
+<p>Se è necessario ottenere una spiegazione sulla query, si può digitare la query SQL nel campo di input e fatto ciò, cliccare su «Spiega Query». Ciò fornirà una spiegazione della query SQL inserita.</p>
+</section>
+<section id="pulsante-export-excel">
+<h5><span class="section-number">6.2.1.2.3. </span>Pulsante Export Excel<a class="headerlink" href="#pulsante-export-excel" title="Link to this heading"></a></h5>
+<p>A seguito dell’esecuzione di una query SQL con il pulsante «Esegui Query», è possibile esportare i risultati su un file Excel facendo clic su «Esporta su Excel».</p>
+</section>
+<section id="pulsante-create-graph">
+<h5><span class="section-number">6.2.1.2.4. </span>Pulsante Create Graph<a class="headerlink" href="#pulsante-create-graph" title="Link to this heading"></a></h5>
+<p>Per generare un grafico basato sui risultati dell’ultima query SQL eseguita, eseguire la query come spiegato precedentemente, e poi fare clic su «Crea Grafico».</p>
+<p>È importante notare che ogni pulsante diventa attivo solo sotto determinate condizioni. Ad esempio, i pulsanti «Esporta su Excel» e «Crea Grafico» saranno attivi solo dopo l’esecuzione di una query SQL. Il pulsante «Spiega Query» sarà attivo solo quando viene inserito un input di query SQL valido.</p>
+</section>
+</section>
+</section>
 </section>
 <section id="scheda-reperti">
-<h2><span class="section-number">6.3. </span>Scheda Reperti<a class="headerlink" href="#scheda-reperti" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">6.3. </span>Scheda Reperti<a class="headerlink" href="#scheda-reperti" title="Link to this heading"></a></h2>
 <img alt="_images/iconFinds.png" class="align-center" src="_images/iconFinds.png" />
 </section>
 <section id="scheda-campioni">
-<h2><span class="section-number">6.4. </span>Scheda Campioni<a class="headerlink" href="#scheda-campioni" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">6.4. </span>Scheda Campioni<a class="headerlink" href="#scheda-campioni" title="Link to this heading"></a></h2>
 <img alt="_images/champion.png" class="align-center" src="_images/champion.png" />
 </section>
 <section id="scheda-periodizzazione">
-<h2><span class="section-number">6.5. </span>Scheda Periodizzazione<a class="headerlink" href="#scheda-periodizzazione" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">6.5. </span>Scheda Periodizzazione<a class="headerlink" href="#scheda-periodizzazione" title="Link to this heading"></a></h2>
 <img alt="_images/iconPER.png" class="align-center" src="_images/iconPER.png" />
 </section>
 <section id="scheda-strutture">
-<h2><span class="section-number">6.6. </span>Scheda Strutture<a class="headerlink" href="#scheda-strutture" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">6.6. </span>Scheda Strutture<a class="headerlink" href="#scheda-strutture" title="Link to this heading"></a></h2>
 <img alt="_images/iconStrutt.png" class="align-center" src="_images/iconStrutt.png" />
 </section>
 <section id="scheda-tombe">
-<h2><span class="section-number">6.7. </span>Scheda Tombe<a class="headerlink" href="#scheda-tombe" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">6.7. </span>Scheda Tombe<a class="headerlink" href="#scheda-tombe" title="Link to this heading"></a></h2>
 <img alt="_images/iconGrave.png" class="align-center" src="_images/iconGrave.png" />
 </section>
 <section id="scheda-individui">
-<h2><span class="section-number">6.8. </span>Scheda Individui<a class="headerlink" href="#scheda-individui" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">6.8. </span>Scheda Individui<a class="headerlink" href="#scheda-individui" title="Link to this heading"></a></h2>
 <img alt="_images/iconIND.png" class="align-center" src="_images/iconIND.png" />
 </section>
 <section id="scheda-unita-topografiche">
-<h2><span class="section-number">6.9. </span>Scheda Unità Topografiche<a class="headerlink" href="#scheda-unita-topografiche" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">6.9. </span>Scheda Unità Topografiche<a class="headerlink" href="#scheda-unita-topografiche" title="Link to this heading"></a></h2>
 <img alt="_images/iconUT.png" class="align-center" src="_images/iconUT.png" />
 </section>
 <section id="scheda-documentazione">
-<h2><span class="section-number">6.10. </span>Scheda Documentazione<a class="headerlink" href="#scheda-documentazione" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">6.10. </span>Scheda Documentazione<a class="headerlink" href="#scheda-documentazione" title="Link to this heading"></a></h2>
 <img alt="_images/icondoc.png" class="align-center" src="_images/icondoc.png" />
 </section>
 <section id="scheda-gestione-immagini">
-<h2><span class="section-number">6.11. </span>Scheda Gestione Immagini<a class="headerlink" href="#scheda-gestione-immagini" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">6.11. </span>Scheda Gestione Immagini<a class="headerlink" href="#scheda-gestione-immagini" title="Link to this heading"></a></h2>
 <img alt="_images/photo.png" class="align-center" src="_images/photo.png" />
 </section>
 <section id="scheda-esportazione-pdf">
-<h2><span class="section-number">6.12. </span>Scheda Esportazione PDF<a class="headerlink" href="#scheda-esportazione-pdf" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">6.12. </span>Scheda Esportazione PDF<a class="headerlink" href="#scheda-esportazione-pdf" title="Link to this heading"></a></h2>
 <img alt="_images/pdf-icon.png" class="align-center" src="_images/pdf-icon.png" />
 </section>
 <section id="scheda-esportazione-immagini">
-<h2><span class="section-number">6.13. </span>Scheda Esportazione Immagini<a class="headerlink" href="#scheda-esportazione-immagini" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">6.13. </span>Scheda Esportazione Immagini<a class="headerlink" href="#scheda-esportazione-immagini" title="Link to this heading"></a></h2>
 <img alt="_images/directoryExp.png" class="align-center" src="_images/directoryExp.png" />
 </section>
 <section id="scheda-download-excel">
-<h2><span class="section-number">6.14. </span>Scheda Download Excel<a class="headerlink" href="#scheda-download-excel" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">6.14. </span>Scheda Download Excel<a class="headerlink" href="#scheda-download-excel" title="Link to this heading"></a></h2>
 <img alt="_images/excel-export.png" class="align-center" src="_images/excel-export.png" />
 </section>
 <section id="scheda-time-manager">
-<h2><span class="section-number">6.15. </span>Scheda Time Manager<a class="headerlink" href="#scheda-time-manager" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">6.15. </span>Scheda Time Manager<a class="headerlink" href="#scheda-time-manager" title="Link to this heading"></a></h2>
 <img alt="_images/iconTimeControll.png" class="align-center" src="_images/iconTimeControll.png" />
 </section>
 <section id="scheda-importazioni-dati-tops">
-<h2><span class="section-number">6.16. </span>Scheda Importazioni dati TOPS<a class="headerlink" href="#scheda-importazioni-dati-tops" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">6.16. </span>Scheda Importazioni dati TOPS<a class="headerlink" href="#scheda-importazioni-dati-tops" title="Link to this heading"></a></h2>
 <img alt="_images/tops.png" class="align-center" src="_images/tops.png" />
 </section>
 <section id="scheda-crea-la-tua-mappa">
-<h2><span class="section-number">6.17. </span>Scheda Crea la tua Mappa<a class="headerlink" href="#scheda-crea-la-tua-mappa" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">6.17. </span>Scheda Crea la tua Mappa<a class="headerlink" href="#scheda-crea-la-tua-mappa" title="Link to this heading"></a></h2>
 <img alt="_images/print_map.png" class="align-center" src="_images/print_map.png" />
 </section>
 <section id="scheda-impacchetta-per-geopackage">
-<h2><span class="section-number">6.18. </span>Scheda Impacchetta per Geopackage<a class="headerlink" href="#scheda-impacchetta-per-geopackage" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">6.18. </span>Scheda Impacchetta per Geopackage<a class="headerlink" href="#scheda-impacchetta-per-geopackage" title="Link to this heading"></a></h2>
 <img alt="_images/gpkg.png" class="align-center" src="_images/gpkg.png" />
 </section>
 <section id="scheda-configurazione-plugin">
-<h2><span class="section-number">6.19. </span>Scheda Configurazione plugin<a class="headerlink" href="#scheda-configurazione-plugin" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">6.19. </span>Scheda Configurazione plugin<a class="headerlink" href="#scheda-configurazione-plugin" title="Link to this heading"></a></h2>
 <img alt="_images/iconConn.png" class="align-center" src="_images/iconConn.png" />
 </section>
 <section id="scheda-thesaurus-sigle">
-<h2><span class="section-number">6.20. </span>Scheda Thesaurus Sigle<a class="headerlink" href="#scheda-thesaurus-sigle" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">6.20. </span>Scheda Thesaurus Sigle<a class="headerlink" href="#scheda-thesaurus-sigle" title="Link to this heading"></a></h2>
 <img alt="_images/thesaurusicon.png" class="align-center" src="_images/thesaurusicon.png" />
 </section>
 <section id="scheda-gestione-db">
-<h2><span class="section-number">6.21. </span>Scheda Gestione DB<a class="headerlink" href="#scheda-gestione-db" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">6.21. </span>Scheda Gestione DB<a class="headerlink" href="#scheda-gestione-db" title="Link to this heading"></a></h2>
 <img alt="_images/backup.png" class="align-center" src="_images/backup.png" />
 </section>
 </section>
@@ -360,7 +410,7 @@ Al momento si tratta di un sistema work in progress. Lo scopo sarebbe quello di 
     <p>&#169; Copyright 2021, AdArte srl.</p>
   </div>
 
-  Realizzato con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+  Realizzato con <a href="https://www.sphinx-doc.org/">Sphinx</a> e il tema
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
     fornito da <a href="https://readthedocs.org">Read the Docs</a>.
    
