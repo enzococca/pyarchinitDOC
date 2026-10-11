@@ -1,0 +1,287 @@
+# Tutorial 25 : Time Manager (Contrôleur Temporel SIG)
+
+## Introduction
+
+Le **Time Manager** (Contrôleur Temporel SIG) est un outil avancé pour visualiser la séquence stratigraphique dans le temps. Il permet de "naviguer" à travers les niveaux stratigraphiques en utilisant un contrôle temporel, visualisant progressivement les US de la plus ancienne à la plus récente (la formation du site).
+
+### Fonctionnalités Principales
+
+- Visualisation progressive des niveaux stratigraphiques
+- Contrôle via molette/curseur
+- Mode cumulatif ou niveau unique
+- Génération automatique d'images/vidéo
+- Intégration avec la Matrice de Harris
+
+## Accès
+
+### Depuis le Menu
+**PyArchInit** → **Time Manager**
+
+### Prérequis
+
+- Couche avec champ `order_layer` (index stratigraphique)
+- US avec order_layer rempli
+- Couches chargées dans QGIS
+
+## Interface
+
+### Panneau Principal
+
+```
++--------------------------------------------------+
+|         GIS Time Management                       |
++--------------------------------------------------+
+| Couches disponibles :                             |
+| [ ] pyunitastratigrafiche                        |
+| [ ] pyunitastratigrafiche_usm                    |
+| [ ] autre_couche                                 |
++--------------------------------------------------+
+|              [Molette Circulaire]                |
+|                   /  \                           |
+|                  /    \                          |
+|                 /______\                         |
+|                                                  |
+|         Niveau : [SpinBox : 0-N]                |
++--------------------------------------------------+
+| [x] Mode Cumulatif (affiche <= niveau)          |
++--------------------------------------------------+
+| [ ] Afficher Matrice    [Stop] [Générer Vidéo]  |
++--------------------------------------------------+
+| [Aperçu Matrice/Image]                           |
++--------------------------------------------------+
+```
+
+### Contrôles
+
+| Contrôle | Fonction |
+|----------|----------|
+| Case à cocher Couche | Sélectionne les couches à contrôler |
+| Molette | Navigation entre les niveaux (rotation) |
+| SpinBox | Saisie directe du niveau |
+| Mode Cumulatif | Affiche tous les niveaux jusqu'au sélectionné |
+| Afficher Matrice | Visualise la Matrice de Harris synchronisée |
+
+## Champ order_layer
+
+### Qu'est-ce que order_layer ?
+
+Le champ `order_layer` définit l'ordre stratigraphique de visualisation :
+- **0** = Niveau le plus ancien (profond)
+- **N** = Niveau le plus récent (superficiel)
+
+C'est la convention du bouton **Ordre stratigraphique** avec la case "Ordre : Ancien → Récent" cochée (réglage par défaut, voir Tutorial 03) : si l'ordre a été calculé à l'envers, le Time Manager et la carte affichent la séquence inversée.
+
+### Remplissage de order_layer
+
+Dans la Fiche US, onglet **Help** → **Tool Box**, le bouton **Ordre stratigraphique** calcule `order_layer` à partir des relations stratigraphiques (voir Tutorial 03) ; la valeur de l'US courante apparaît dans le champ sous le bouton. Règles :
+1. 0 aux US les plus anciennes, valeurs croissantes vers les plus récentes (en surface)
+2. Les US contemporaines peuvent avoir la même valeur
+3. Suivre la séquence de la Matrice
+
+### Exemple
+
+| US | order_layer | Description |
+|----|-------------|-------------|
+| US001 | 4 | Humus superficiel |
+| US002 | 3 | Couche de labour |
+| US003 | 2 | Effondrement |
+| US004 | 1 | Sol d'occupation |
+| US005 | 0 | Fondation |
+
+Depuis la 5.13.19-alpha, les couches US et USM que pyArchInit charge sur la carte (voir Tutorial 14, *Choix du Style*) sont dessinées dans le même ordre que celui du Time Manager : selon la chronologie de la période, puis selon `order_layer` (0 = la plus ancienne), de sorte que les unités les plus récentes sont au-dessus.
+
+## Modes de Visualisation
+
+### Mode Niveau Unique
+
+Case à cocher **NON** active :
+- Affiche UNIQUEMENT les US du niveau sélectionné
+- Utile pour isoler des couches individuelles
+- Visualisation "en tranches"
+
+### Mode Cumulatif
+
+Case à cocher **ACTIVE** :
+- Affiche toutes les US du niveau 0 (le plus ancien) au niveau sélectionné
+- Montre la formation du site, des US les plus anciennes aux plus récentes
+- Visualisation plus réaliste
+
+## Intégration Matrice
+
+### Visualisation Synchronisée
+
+Avec la case **"Afficher Matrice"** active :
+- La Matrice de Harris apparaît dans le panneau
+- Elle se met à jour en synchronisation avec le niveau
+- Elle met en évidence les US du niveau courant
+
+### Génération d'Images
+
+Le Time Manager peut générer :
+- Captures d'écran pour chaque niveau
+- Séquence d'images
+- Vidéo time-lapse
+
+## Génération Vidéo/Images
+
+### Processus
+
+1. Sélectionner les couches à inclure
+2. Configurer la plage de niveaux (min-max)
+3. Cliquer sur **"Générer Vidéo"**
+4. Attendre le traitement
+5. Sortie dans le dossier désigné
+
+### Sortie
+
+- Images PNG pour chaque niveau
+- Optionnel : vidéo MP4 compilée
+
+## Workflow Typique
+
+### 1. Préparation
+
+```
+1. Ouvrir le projet QGIS avec les couches US
+2. Vérifier que order_layer est rempli
+3. Ouvrir le Time Manager
+```
+
+### 2. Sélection des Couches
+
+```
+1. Sélectionner les couches à contrôler
+2. Généralement : pyunitastratigrafiche et/ou _usm
+```
+
+### 3. Navigation
+
+```
+1. Utiliser la molette ou le spinbox
+2. Observer le changement de visualisation
+3. Activer/désactiver le mode cumulatif
+```
+
+### 4. Documentation
+
+```
+1. Activer "Afficher Matrice"
+2. Générer des captures d'écran significatives
+3. Optionnel : générer une vidéo
+```
+
+## Templates de Mise en Page
+
+### Chargement de Template
+
+Le Time Manager prend en charge les templates QGIS pour :
+- Mises en page d'impression personnalisées
+- En-têtes et légendes
+- Formats standards
+
+### Templates Disponibles
+
+Dans le dossier `resources/templates/` :
+- Template de base
+- Template avec Matrice
+- Template pour vidéo
+
+## Bonnes Pratiques
+
+### 1. order_layer
+
+- Remplir AVANT d'utiliser le Time Manager
+- Utiliser des valeurs consécutives
+- US contemporaines = même valeur
+
+### 2. Visualisation
+
+- Commencer par le niveau 0 (le plus ancien)
+- Procéder par ordre croissant
+- Utiliser le mode cumulatif pour les présentations
+
+### 3. Documentation
+
+- Capturer des écrans aux niveaux significatifs
+- Documenter les passages de phase
+- Générer des vidéos pour les rapports
+
+## Résolution des Problèmes
+
+### Couches Non Visibles dans la Liste
+
+**Cause** : Couche sans champ order_layer
+
+**Solution** :
+- Ajouter le champ order_layer à la couche
+- Le remplir avec des valeurs appropriées
+
+### Aucun Changement Visuel
+
+**Causes** :
+- order_layer non rempli
+- Filtre non appliqué
+
+**Solutions** :
+- Vérifier les valeurs order_layer dans les US
+- Contrôler que la couche est sélectionnée
+
+### Molette Ne Répond Pas
+
+**Cause** : Aucune couche sélectionnée
+
+**Solution** : Sélectionner au moins une couche dans la liste
+
+## Références
+
+### Fichiers Source
+- `tabs/Gis_Time_controller.py` - Interface principale
+- `gui/ui/Gis_Time_controller.ui` - Layout UI
+
+### Champ Base de Données
+- `us_table.order_layer` - Index stratigraphique
+
+---
+
+## Vidéo Tutorial
+
+### Time Manager
+`[Placeholder : video_time_manager.mp4]`
+
+**Contenus** :
+- Configuration de order_layer
+- Navigation temporelle
+- Génération de vidéo
+- Intégration avec la Matrice
+
+**Durée prévue** : 15-18 minutes
+
+---
+
+*Dernière mise à jour : Janvier 2026*
+*PyArchInit - Système de Gestion des Données Archéologiques*
+
+---
+
+## Animation Interactive
+
+Explorez l'animation interactive pour en savoir plus sur ce sujet.
+
+[Ouvrir l'Animation Interactive](../../animations/pyarchinit_timemanager_animation.html)
+
+---
+
+## La matrice, depuis la 5.13.44
+
+La matrice du Time Manager ne passe plus par Graphviz. Elle est dessinée par le même moteur de mise en page que le panneau **Voir la matrice**, dans QGIS et sans sous-processus.
+
+- **Elle est immédiate.** Sur le site d'exemple (51 US, 81 relations) le dessin coûte quelques millisecondes au lieu d'environ trois dixièmes de seconde, et les processus `dot` et `tred` qui restaient parfois bloqués ont disparu. Les périodes du site sont lues **une seule fois** : auparavant elles étaient relues avec une requête par aire et par période, à chaque cran de la molette.
+- **Dans l'atlas la matrice est vectorielle.** L'image placée dans la planche est un SVG de quelques dizaines de Ko au lieu d'un JPEG de méga-octets.
+- **C'est la même matrice** que le panneau Extended Matrix : mêmes bandes de période, même symbologie, même réduction des redondances. Les flèches qui **remontent** les bandes — là où la stratigraphie contredit la chronologie — sont dessinées en **rouge**.
+- La matrice ne contient toujours que les US visibles à la position courante de la molette.
+
+- Les US **non visibles** à la position courante mais citées par une relation entrent tout de même dans le dessin, **estompées** : sans elles la séquence semblerait brisée, et dessinées comme les autres elles sembleraient sur la carte.
+
+> **Quel modèle choisir.** Dans le sélecteur chaque modèle est marqué : **✓** possède le titre et l'image de la matrice (celui du Time Manager), **•** seulement la carte — les planches sortent, plus dépouillées — **✗** n'a pas de carte. Auparavant, en choisir un sans ces éléments faisait revenir le générateur sans un mot.
+
+> **Rendre apte n'importe quel modèle.** `scripts/prepare_atlas_templates.py`, exécuté avec le Python de QGIS, écrit à côté de chaque modèle une copie suffixée « + Time Manager » portant le titre et l'image de la matrice sur une **nouvelle page**. Les originaux ne sont pas touchés. Chaque niveau produit alors deux images.

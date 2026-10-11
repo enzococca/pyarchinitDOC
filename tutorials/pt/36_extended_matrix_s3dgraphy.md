@@ -1,0 +1,455 @@
+# Tutorial 36: Exportação Extended Matrix e Bridge s3dgraphy
+
+## Introdução
+
+A partir da versão **5.2.0-alpha** o PyArchInit integra um **bridge bidirecional** com a biblioteca **s3dgraphy** (modelo de dados Extended Matrix de Emanuel Demetrescu). O bridge permite:
+
+- **Exportar** o diagrama estratigráfico como Extended Matrix em **em.json**, o formato que o EMStudio abre (a antiga exportação GraphML está retirada)
+- **Reimportar** alterações feitas no yEd (movimentos de UE entre períodos/grupos) atualizando a base SQL
+- **Anexar paradata** (Author / License / Embargo) a nível de sítio
+- **Agrupar** UE por dimensão (struttura, area, attivita, settore, ambient, saggio, quad_par ou grupos ad-hoc)
+
+Tag atual: `phase2-ai07-locationnodegroup-5.6.0-alpha` (2026-05-10).
+
+---
+
+## 1. Requisitos
+
+- Base de dados SQLite (PostgreSQL ainda não suportado)
+- **Migração Phase 1 node_uuid** aplicada automaticamente ao abrir o DB
+- **yEd Graph Editor** para visualizar a saída (https://www.yworks.com/products/yed)
+
+> ⚠️ Para DB pre-5.2.0-alpha a migração pode requerer reiniciar o QGIS.
+
+---
+
+## 2. Exportar Extended Matrix (botão verde)
+
+### 2.1 Abrir o diálogo
+
+1. Abre a **Ficha UE** do sítio desejado
+2. Clica no botão verde **"Esporta Extended Matrix"** (debaixo do tab Rapporti)
+
+### 2.2 Aba "Export"
+
+A janela diz em cima para que serve cada formato. Contém:
+
+- **Formati** (Formatos): **DOT (Graphviz) — matrice di Harris** e **em.json (Extended Matrix, per EMStudio)**, marcados de início, mais **Matrice per fasi** (matriz por fases, análise cronológica), opcional. O GraphML já não se exporta: o JSON desta janela **é o em.json**, o mesmo ficheiro que o menu **Extended Matrix → Esporta sito in em.json…** produz — mesmo projetor, mesma simbologia.
+- **Opzioni** (Opções): **Controlla la sequenza stratigrafica e segnala i problemi** (verificar a sequência estratigráfica e assinalar os problemas). É a única opção que resta, e agora é realmente lida: sem a marca, a verificação não se faz. As duas caixas antigas que falavam ao yEd (sugestões de auto-layout, cores por período) foram-se com a exportação GraphML.
+- **Extended Matrix**: quatro botões ao lado da exportação — **Apri in EMStudio** e **Vedi la matrice** (ambos acendem depois de uma exportação em.json bem sucedida; o segundo desenha a matriz dentro do QGIS, sem EMStudio), **Consegna alla stanza…** e **Apri la stanza**. São as mesmas entradas do menu pyArchInit, à mão.
+
+Ao premir **Esporta** é pedida a **pasta de destino**.
+
+Autores, licenças, embargos e grupos gerem-se na janela **"Manage paradata"** (§3).
+
+### 2.2.1 Sondagens: um unico ficheiro ou um por sondagem
+
+Um grupo de tres escolhas, na mesma janela, decide **como dividir o
+em.json** quando a escavacao tem varias sondagens:
+
+- **Automatico**: um unico ficheiro se o sitio tem uma sondagem, um por
+  sondagem se tem varias. E a escolha de partida.
+- **Um unico ficheiro**: toda a escavacao num grafo, como sempre.
+- **Um por sondagem**: um ficheiro para cada sondagem. As relacoes que
+  **saem** da sondagem nao se perdem: ficam no ficheiro como ligacoes
+  entre grafos (`graph.links`), e o EMStudio volta a encontra-las.
+
+A sondagem e o campo **Saggio** da ficha UE: as unidades que o tem vazio
+acabam num ficheiro separado.
+
+### 2.3 Clica em "Esporta"
+
+Os ficheiros que nascem, conforme os formatos marcados:
+- `<sítio>.em.json` — Extended Matrix, para abrir no EMStudio ou entregar a uma sala
+- `Extended_Matrix_<sítio>[_<area>].dot` — Graphviz DOT, para a matriz de Harris clássica
+- `Extended_Matrix_<sítio>[_<area>]_phased.json` — vista por época
+
+> **Os lugares nao entram no em.json.** Sitio, area e setor permanecem na ficha de cada unidade, mas ja nao viajam como nos de grupo com as suas arestas: enquanto o ficheiro contiver nem que seja uma aresta `is_in_location`, a vista **Matrix** do EMStudio amontoa todas as unidades na primeira faixa em vez de as distribuir por epoca (medido a 2026-10-08 contra o EMStudio 1.6.0-dev.26, por bisseccao sobre cinco ficheiros). Nenhuma informacao se perde — apenas uma forma de a representar.
+
+O resumo final lista os ficheiros e, para o em.json, **quantos nós e quantas arestas** saíram, com os avisos que houver.
+
+> **O GraphML já não se exporta**: a matriz vê-se e valida-se no EMStudio, que lê em.json. As linhas temporais (swimlanes) do antigo GraphML foram-se com ele. O GraphML sobrevive apenas à **entrada**, para os ficheiros desenhados no yEd (§5).
+
+---
+
+## 3. Diálogo "Manage paradata" (4 abas)
+
+### 3.1 Acesso
+Clica no botão **"Manage paradata"** na ficha UE (ao lado do botão verde Export).
+
+### 3.2 As 4 abas
+
+| Aba | Conteúdo | Ficheiro gerado |
+|---|---|---|
+| **Authors** | Adicionar autores (nome + ORCID + papel) | `paradata_<sítio>.graphml` |
+| **Licenses** | Licença do dataset (ex. CC-BY-NC-4.0 + URL) | idem |
+| **Embargoes** | Datas de embargo + motivo | idem |
+| **Groups** | Grupos ad-hoc (nome + seleção UE membros) | `groups_<sítio>.graphml` |
+
+Os ficheiros são guardados ao lado do DB SQLite e são **versionáveis em Git**.
+
+---
+
+## 4. Estilo visual por dimensão (5.5.1-alpha + 5.6.0-alpha)
+
+Cada dimensão de agrupamento tem uma cor distintiva em GraphML:
+
+| Dimensão | Fill (50% transparência) | Border |
+|---|---|---|
+| `area` | rosa pastel `#FFE0E680` | `#C84A5F` |
+| `struttura` | laranja pastel `#FFE6CC80` | `#C66B33` |
+| `attivita` | amarelo pastel `#FFF5CC80` | `#A89A33` |
+| `settore` | verde pastel `#E6FFCC80` | `#6BC633` |
+| `ambient` | água pastel `#CCFFE680` | `#33A86B` |
+| `saggio` | azul pastel `#CCF5FF80` | `#3389A8` |
+| `quad_par` | violeta pastel `#E0CCFF80` | `#6633C6` |
+| `adhoc` | cinza pastel `#F5F5F580` | `#666666` |
+
+A partir de 5.6.0-alpha, os `LocationNodeGroup` são distinguidos por `kind`:
+
+| `kind` | Fill (50% transparência) | Border |
+|---|---|---|
+| `toponym` | lavanda pastel `#E6E6FA80` | `#9370DB` |
+| `study` | marfim pastel `#FFFFE080` | `#888888` |
+| `functional` | ciano pastel `#E0FFFF80` | `#008B8B` |
+
+O alpha 50% deixa visíveis as swimlanes das épocas atrás do retângulo do grupo.
+
+### 4.1 Cadeia toponímica (5.6.0-alpha)
+
+Os campos `site_table.{nazione, regione, provincia, comune}` são emitidos automaticamente como uma cadeia recursiva de `LocationNodeGroup(kind="toponym")` (parent: nazione → regione → provincia → comune). Os níveis administrativos vazios são saltados sem quebrar a cadeia. Uma desduplicação cross-sítio garante que a mesma `comune` presente em 2 sítios se torne **um único nó partilhado** no GraphML.
+
+---
+
+## 4.2 Pertença multidimensional (5.6.0-alpha)
+
+A partir de 5.6.0-alpha uma UE pode pertencer a **múltiplas dimensões em simultâneo** graças ao modelo m:n com flag `is_primary`. Apenas a dimensão primária se torna o folder yEd visível; as outras aparecem como **etiquetas inline** sob o nó UE e como JSON em `<data key="s3d:other_locations">` para ferramentas downstream.
+
+Exemplo: uma UE com `struttura=basilica` e `area=B` (primária `struttura`) produz:
+- folder yEd "struttura: basilica" como parent visível;
+- sob o nó UE, uma etiqueta inline `also: B (study), TestCity (toponym)`;
+- no GraphML, o atributo `s3d:other_locations` com array JSON das pertenças secundárias.
+
+A dimensão primária segue uma ordem predefinida, com `struttura` em primeiro lugar; `toponym` nunca é primária.
+
+---
+
+## 5. Round-trip (aba Import)
+
+> **O que se pode importar**: a aba Import lê agora também **em.json** — o do EMStudio ou o do nó StratiGraph — e escolhe o leitor pela extensão do ficheiro; um `.graphml` do yEd continua a ser aceite para os ficheiros de antes. O procedimento abaixo, mover UE entre grupos, diz respeito à via yEd/GraphML.
+
+Para modificar a base SQL movendo UE entre grupos em GraphML:
+
+1. Abre o GraphML no **yEd**
+2. Arrasta uma UE para outro grupo, guarda
+3. Volta ao diálogo → aba **"Import"**
+4. **Marca** a checkbox *"Update SQL on import (struttura/area/...)"*
+5. Carrega o GraphML modificado
+
+O sistema executa uma transação atómica: se algo falhar, **rollback completo** (o DB fica inalterado). Os grupos `adhoc` nunca escrevem SQL — apenas atualizam `groups_<sítio>.graphml`.
+
+A partir de 5.6.0-alpha o walker de import é **recursivo** e suporta folders aninhados (p. ex. cadeia toponímica `nazione > regione > provincia > comune > UE`). Quando ciclos são detetados no grafo de folders, é levantada a exceção `CycleDetectedError` e o import é abortado com rollback.
+
+---
+
+## 6. CLI (alternativa ao diálogo)
+
+Para scripts / batch:
+
+```bash
+# Exportar
+python scripts/s3dgraphy_sync.py export \
+    --db <path> --sito <name> --mapping pyarchinit_us_mapping \
+    --output <out.graphml> --group-by struttura
+
+# Listar grupos ad-hoc
+python scripts/s3dgraphy_sync.py paradata list-groups \
+    --db <path> --sito <name>
+
+# Adicionar autor
+python scripts/s3dgraphy_sync.py paradata add-author \
+    --db <path> --sito <name> --name "Marco Pacifico" \
+    --orcid "0000-0002-1234-5678" --role curator
+```
+
+Exit codes: 0 = sucesso, 1 = erro de bridge, 2 = erro argparse.
+
+---
+
+## 7. Resolução de problemas
+
+| Sintoma | Causa | Solução |
+|---|---|---|
+| "no such column: node_uuid" | Migração Phase 1 não executada | Reiniciar QGIS, reabrir o DB |
+| GraphML vazio | DB sem rapporti / filtro de area demasiado restrito | Verificar us_table.rapporti |
+| "rapporti devem ser TEXT" | Inseriste um número como integer | Os campos UE/Area são **TEXT**, não integer |
+| Capitalização errada em rapporti | "copre" minúsculo no DB | Usa "Copre", "Coperto da" capitalizados |
+| `DeprecationWarning` em ficheiro 5.5.x | Ficheiro legacy `ActivityNodeGroup + group_kind` | O projector promove-o em memória para `LocationNodeGroup`. Reexporta para migrar o ficheiro em disco. |
+| As linhas da swimlane mostram um texto longuíssimo | As versões anteriores usavam a Descrizione da periodização como etiqueta | Atualiza o plugin e reexporta, e/ou preenche **Datazione estesa** com um nome curto |
+| As épocas da swimlane estão na ordem errada (ex. Bronze acima do Tardo-antigo) | As linhas são ordenadas por **Cronologia Inicial**; datas a.C. inseridas como números positivos (1650 em vez de -1650) são ordenadas como d.C. | Na Ficha de Periodização insere os anos a.C. como números negativos e reexporta. O resumo da exportação mostra agora um aviso "⚠️ Periodizzazione: ..." com a lista dos períodos a corrigir |
+
+---
+
+## 8. Documentação técnica
+
+Para aprofundar arquitetura, decisões de design e roadmap:
+
+- Specs: `docs/superpowers/specs/2026-05-*-design.md`
+- Plans: `docs/superpowers/plans/2026-05-*.md`
+- Dev log: `docs/superpowers/dev-log/T5.4_PyArchInit_Dev_Log.md`
+
+Carry-over diferidos:
+- **AI08-F3**: heurísticas de auto-layout (bin-packing de sub-grupos) — ainda diferido
+- **AI09**: TimeBranchNodeGroup mapping — futuro
+- **Phase 3**: SyncEngine + REST API — futuro
+- **Phase 4**: GraphDBBackend + SPARQL — futuro
+
+Entregues:
+- **AI07** (5.6.0-alpha, 2026-05-10): migração `LocationNodeGroup` com enum `kind` + cadeia toponímica + pertenças multidimensionais
+- **AI08-F1** (fundido em AI07): nesting hierárquico nativo via `is_primary`
+
+---
+
+## 5. yEd-aware Import — importar graphmls editados externamente (5.8.x)
+
+A partir de **5.8.0-alpha** a bridge é **bidirecional também para graphmls criados diretamente em yEd** (isto é, sem passar antes por uma exportação pyarchinit). O pyarchinit reconhece automaticamente os graphmls «yEd-raw» — aqueles que não trazem data keys `pyarchinit.*` — e importa-os através de um dispatch dedicado que mapeia o prefixo do label do nó → tipo estratigráfico, reconhece linhas de TableNode como períodos, percorre os group folder como dimensões arqueológicas e deixa o utilizador escolher uma política para as edges que tocam folders.
+
+### 5.1 Lançamento em 6 marcos
+
+| Marco | Tag | O que adiciona |
+|---|---|---|
+| **yE-A** | `yed-import-foundation-5.7.5-alpha` | `yed_detector.py` — flag de flavor `yed-raw` / `pyarchinit-projected` |
+| **yE-B** | `yed-import-classifier-5.7.6-alpha` | `yed_classifier.py` — enum `ClassificationKind` com 13 valores (US/USV/SF/VSF/RSF/DOC/COMB/PROP/...) + regex order-sensitive |
+| **yE-C** | `yed-import-parsers-5.7.7-alpha` | `yed_table_parser.py` (PeriodCandidate a partir das linhas de TableNode) + `yed_group_walker.py` (FolderCandidate com auto-dimension a partir do prefixo do label: VA01→attivita / AR01→area / etc.) |
+| **yE-D** | `yed-import-pipeline-5.8.0-alpha` | `yed_import_pipeline.py` — orquestrador `import_yed_raw()` + 5 write functions + `FolderEdgePolicy` (SKIP/FAN_OUT/REPRESENTATIVE/SYNTHETIC) + paradata via `ParadataStore` + sentinela `_DryRunRollback` + DbHandle PG+SQLite |
+| **yE-E** | `yed-import-dialog-5.8.2-alpha` | `gui/yed_import_dialog.py` — `YedImportDialog(QWizard)` com 5 páginas (classifier / periods / folders / policy / preview) + dataclass `YedOverrides` + persistência sidecar `<graphml>.yed_overrides.json` |
+| **yE-Closure** | `yed-import-closure-5.8.3-alpha` | Esta documentação + dev-log + CHANGELOG. |
+
+### 5.2 Como funciona — fluxo do utilizador
+
+1. **Abra um graphml no QGIS através do menu Import GraphML** (mesmo path do fluxo pyarchinit-projected existente).
+2. O pyarchinit deteta automaticamente que é yEd-raw (sem keys `pyarchinit.*`) → faz dispatch para o novo branch em vez de cair no path legacy.
+3. Abre-se o assistente `YedImportDialog` com **5 páginas**:
+   - **1/5 Classifier** — tabela com uma linha por leaf node. Cada linha mostra `label` + `auto_kind` (por ex. `us_real` / `usv_virtual` / `property`) + uma combobox de override `user_kind`. O botão **Aceitar auto** repõe cada linha no seu `auto_kind` (limpa todos os overrides).
+   - **2/5 Periods** — uma linha por TableNode-row parseada, colunas editáveis `periodo` + `fase`. As datas (`datazione_iniziale`/`finale`) ficam vazias: os graphmls yEd-raw não trazem datas.
+   - **3/5 Folders** — uma linha por group folder. Combobox de `dimension` (attivita / area / struttura / settore / ambient / saggio / quad_par / `skip` para excluir). `value` editável (default = `auto_value` derivado do prefixo do label).
+   - **4/5 Rapporti policy** — 4 radio buttons para tratar as edges que tocam folders:
+     - **SKIP** (default): descarta as edges folder-touching. As edges leaf-to-leaf passam intactas.
+     - **FAN_OUT**: uma edge `folder_A → folder_B` expande-se para `N×M` pares de leaves (produto cartesiano dos membros).
+     - **REPRESENTATIVE**: usa o primeiro membro de cada folder como proxy.
+     - **SYNTHETIC**: cria uma linha us_table por folder (`unita_tipo='VA'` virtual activity) + reconecta as edges através destas âncoras.
+   - **5/5 Preview** — dry-run de `import_yed_raw(overrides=..., dry_run=True)`. Mostra counts (us / inv / period / paradata) **sem commit**. Clicar **Finish** confirma, **Cancel** abandona.
+4. Em **Finish** o assistente guarda os seus overrides num **sidecar JSON** `<graphml>.yed_overrides.json` ao lado do ficheiro. Reabrir o mesmo graphml pré-carrega o sidecar, pelo que os seus overrides anteriores voltam pré-aplicados.
+
+### 5.3 Encaminhamento de destinos
+
+O dispatch usa `_classify_destination` (em `yed_import_pipeline.py`) para classificar cada leaf:
+
+| ClassificationKind | Destino | Nota |
+|---|---|---|
+| US_REAL | `us_table` (`unita_tipo='US'`) | a partir do label `^US\d+` |
+| US_MASONRY | `us_table` (`unita_tipo='USM'`) | a partir de `^USM|USR|USS` |
+| US_DOCUMENTARY | `us_table` (`unita_tipo='USD'`) | a partir de `^USD\d+` |
+| USV_VIRTUAL | `us_table` (`unita_tipo='USV'`) | a partir de `^USV\d+` |
+| USV_FORMAL | `us_table` (`unita_tipo` derivado do prefixo do label: USVs/USVn/USVc) | a partir de `^USVs|USVn\d*$` |
+| **REUSED_SPECIAL_FIND** (RSF — **5.8.1**) | `us_table` (`unita_tipo='RSF'`) | a partir de `^RSF\d+` (s3dgraphy 0.1.42, spolia) |
+| SPECIAL_FIND | `inventario_materiali_table` | a partir de `^SF\d+` |
+| VIRTUAL_FIND | `paradata` (via `ParadataStore`) | a partir de `^VSF\d+` |
+| DOCUMENT | `paradata` | a partir de `^D\.\d+` |
+| COMBINER | `paradata` | a partir de `^C\.\d+` |
+| PROPERTY | `paradata` | keyword no label (`material`/`position`/`width`/...) |
+
+**Decisão do utilizador 2026-05-13**: as USV* (virtuais) são «unità tipo» (continuam unidades estratigráficas) e vão para `us_table`, não para paradata. Apenas DOC/COMB/PROP/VIRTUAL_FIND permanecem em paradata.
+
+### 5.4 Sidecar JSON — esquema
+
+Versionado para forward-compat:
+
+```json
+{
+  "version": 1,
+  "saved_at": "2026-05-13T17:57:00+00:00",
+  "graphml_path": "/absolute/path/to/file.graphml",
+  "classifier": {
+    "n0::n0::n0": "us_real",
+    "n0::n0::n2": "us_real"
+  },
+  "periods": {
+    "p0": {"periodo": 5, "fase": 7}
+  },
+  "folders": {
+    "f0": {"dimension": "struttura", "value": "S01"}
+  },
+  "policy": "fan_out"
+}
+```
+
+Só os campos MODIFICADOS pelo utilizador são persistidos (diff). Valores `ClassificationKind` desconhecidos (por ex. de futuras releases de s3dgraphy) são silenciosamente ignorados ao carregar.
+
+### 5.5 CLI para ingest scripted
+
+Para CI / re-runs em batch:
+
+```bash
+python scripts/import_yed_graphml.py /path/to/file.graphml \
+    --site Al-Khutm \
+    --db /path/to/khutm2.sqlite \
+    --policy skip \
+    --overrides /path/to/file.graphml.yed_overrides.json \
+    --dry-run
+```
+
+Mutex `--db` / `--conn-str` para backend SQLite vs PostgreSQL. `--overrides` é opcional (sem overrides = defaults yE-D). `--auto-defaults` é uma flag no-op forward-compat.
+
+### 5.6 Limitações conhecidas
+
+- **Sem edição de datas no assistente**: os graphmls yEd-raw não trazem `datazione_iniziale`/`datazione_finale`. A página Periods só edita `periodo` + `fase` (targets FK).
+- **API ParadataStore parcial**: o upstream s3dgraphy ainda não fornece `add_virtual_us` / `add_document` / `add_combiner` / `add_property`. O yE-D regista «skip — method missing» por cada leaf paradata mas contabiliza as tentativas no preview.
+- **PropertyNode → Path B (sem ligação a US)**: os nós PROPERTY são escritos sem US alvo. O assistente emite um warning. Futuro: follow-up yE-Closure para adicionar «assign target» na UI.
+- **Multi-DB**: o sidecar JSON é por graphml, não por DB. Importar o mesmo graphml em DBs diferentes reutiliza os mesmos overrides para todas.
+
+### 5.7 Cobertura de testes final
+
+| Suite | Test | Cobertura |
+|---|---|---|
+| yE-A | `test_yed_detector.py` | deteção de flavor |
+| yE-B | `test_yed_classifier.py` | 13 ClassificationKind + regex order-sensitive |
+| yE-C | `test_yed_table_parser.py` + `test_yed_group_walker.py` | parse PeriodCandidate + FolderCandidate |
+| yE-D | `test_yed_rapporti_policy.py` (7) + `test_yed_import_pipeline.py` (15) + `test_yed_pipeline_integration.py` (9 incl. 2 L1 overrides e2e) | políticas + write functions + dispatch |
+| yE-E | `test_yed_import_dialog.py` (5 sidecar JSON) + `test_import_yed_graphml_cli.py` (3) | persistência sidecar + CLI |
+
+**Suite total pós-rollout**: 354 passed / 42 skipped (PG-L1 requerem psycopg2).
+
+### 5.8 Atualização 5.8.5-alpha (yed-fastfix)
+
+Pack de correções de comportamento sobre `5.8.3-alpha` que melhora a qualidade do re-export GraphML após um import yEd-aware. Alterações relevantes para o utilizador final:
+
+- **Paradata multi-folder**: as labels DOC / Combinar / Extractor / property partilhadas entre vários folders yEd (p. ex. `material` referenciado a partir de VA01 + VA04 + VA05) geram agora UMA linha em `us_table` POR ocorrência — visibilidade multi-folder restaurada no GraphML re-exportado. Compromisso: o dedup por identidade (colapso de `D.01` / `D.01-2` / `D.01bis` numa única linha) já não se aplica à segunda/terceira ocorrência.
+- **Rapporti recíprocos**: cada edge yEd `a → b` escreve o rapporto direto na linha de `a` E o inverso na linha de `b` (`<<` / «Coperto da» / etc.). Os DOC mostram agora todas as ligações extractor de entrada no formulário Scheda US.
+- **Strip do prefixo `us` numérico**: `US100` → `us='100'` `unita_tipo='US'` (antes `us='US100'`). SF/VSF/RSF são escritos em modo dual em `us_table` + `inventario_materiali`.
+- **Auto-fill periodo/fase**: a pertença de uma linha TableNode yEd a um período propaga-se para `us_table.periodo_iniziale`/`fase_iniziale` + `periodizzazione.cont_per`.
+- **Classifier BPMN-aware**: `D.NN` (BPMN data-object) → `DocumentNode`, `D.NN.MM` (plain) → `ExtractorNode` — preserva a distinção semântica EM 1.5.
+- **Re-import idempotente**: voltar a executar o mesmo import salta as linhas já presentes; sem rollback por colisão UNIQUE na passagem repetida.
+- **Paleta USV**: os nós USV renderizam-se agora com o paralelogramo azul canónico EM (antes retângulo com borda vermelha).
+
+### 5.9 yE-F paradata multi-pasta (5.9.0-alpha)
+
+Evolução estrutural de `yed-fastfix-5.8.5-alpha`: o compromisso do Bug R B1 (uma linha `us_table` por ocorrência, com `us='D.01_2'` / `us='D.01_3'`) foi superado. Uma folha paradata (DOC / Combinar / Extractor / property) partilhada entre várias pastas yEd produz agora **uma única linha** em `us_table` por label canónico, e a multi-pertença é preservada numa nova coluna `other_locations`.
+
+Alterações visíveis para o utilizador final:
+
+1. **Novo widget "Outras atividades" na ficha US/USM**: no separador *Periodizzazione* aparece um `QListWidget` etiquetado "Outras atividades" — visível **apenas** quando `unita_tipo` é uma tipologia paradata (`DOC`, `Combinar`, `Extractor`, `property`). O utilizador pode selecionar vários códigos de atividade; a seleção é serializada como lista JSON na nova coluna `other_locations`.
+2. **Novo item de menu QGIS**: `Plugins → pyArchInit → Migrazioni → Aggiungi colonna other_locations (yE-F)`. Tem de ser executado **uma vez** em cada DB preexistente para adicionar a nova coluna (as DB criadas pós-5.9 já têm a coluna).
+3. **Import yEd-aware melhorado**: uma folha paradata que aparece em N pastas yEd gera agora **apenas 1** linha `us_table` (já não N linhas com sufixo `_2`/`_3` como em 5.8.5). A primeira pasta encontrada torna-se a `attivita` principal; as pastas secundárias são listadas em `other_locations`. No **export** são emitidas N cópias visuais yEd (uma por pasta), todas partilhando o mesmo `node_uuid` canónico para garantir a identidade round-trip.
+
+**Retrocompatibilidade**: os dados produzidos pelo Bug R B1 em 5.8.5-alpha (linhas com sufixo `_2`/`_3`) permanecem legíveis sem qualquer conversão automática. A lógica nova aplica-se aos novos imports; as linhas legacy continuam a comportar-se como antes.
+
+Predecessor: ver secção 5.8 (`yed-fastfix-5.8.5-alpha`) para o comportamento substituído.
+
+---
+
+## 6. Gerar continuidade (fichas CON)
+
+No painel **«Verifica rapporti»** — disponível como separador dentro do diálogo de importação/exportação do s3dgraphy — encontra-se o botão **«Genera continuità»** (rótulo mantido em italiano como no plugin). Para o sítio atualmente selecionado, esta funcionalidade cria automaticamente as **fichas de continuidade** das US/USM cuja vida se estende por mais de um período.
+
+### 6.1 O que faz
+
+1. Percorre todas as US/USM do sítio em que **período inicial ≠ período final** (ou seja, cuja vida se estende por mais do que um período).
+2. Para cada uma cria ou atualiza uma ficha de continuidade chamada **`CON_<us>`** (p. ex. `US5` → `CON_US5`).
+3. A ficha CON **herda** da unidade-mãe: sítio, área (mais as áreas secundárias), estrutura e todo o intervalo de períodos (inicial → final). A sua descrição é gerada automaticamente.
+4. Escreve uma **relação de continuidade recíproca** em ambos os lados: na CON e na sua unidade-mãe.
+
+### 6.2 Idempotência
+
+A operação é **idempotente**: voltar a executá-la não duplica as fichas existentes — atualiza as `CON_<us>` existentes se os dados da unidade-mãe tiverem mudado.
+
+### 6.3 Pré-visualização (dry-run) e cópia de segurança
+
+Antes de escrever é mostrada uma **pré-visualização dry-run** com as contagens: quantas fichas há a **criar**, a **atualizar**, **inalteradas** e quantas **órfãs**. As alterações são aplicadas **apenas após confirmação** (botão «Genera»). Ao aplicar é feita primeiro uma **cópia de segurança da base de dados** automática.
+
+Uma ficha CON é **órfã** quando a sua unidade-mãe já não se estende por vários períodos (p. ex. o seu período inicial e final foram tornados iguais). Por predefinição as órfãs são apenas **assinaladas**; uma **caixa de seleção** («Rimuovi anche le CON orfane») permite optar por removê-las.
+
+### 6.4 Na exportação Extended Matrix
+
+As fichas `CON_<us>` geradas desta forma aparecem na exportação GraphML do Extended Matrix como **elementos de continuidade**.
+
+---
+
+## 7. Verificação de paradoxos temporais (estratigráficos)
+
+No painel **"Verifica rapporti"** (Verificar relações — uma aba do diálogo de import/export do s3dgraphy), a verificação agora também assinala os **paradoxos temporais**: quando o período/fase atribuído a uma unidade contradiz a estratigrafia observada. A estratigrafia é o dado de referência, por isso as correções automáticas deslocam os **períodos**, não as relações.
+
+### 7.1 O que deteta
+- **Inversão temporal**: duas unidades datadas ligadas por uma relação de ordem (p. ex. US5 «cobre» US7) em que a unidade mais recente na estratigrafia se revela inteiramente mais **antiga** por período.
+- **Contemporaneidade incoerente**: unidades declaradas contemporâneas (igualdade física / vínculo) mas com intervalos cronológicos **disjuntos**.
+- **Não avaliável**: relação de ordem em que pelo menos uma das duas unidades não tem um período datável (apenas assinalado, sem correção).
+
+Nota sobre o limite: dois períodos **adjacentes que se tocam** num único ponto cronológico são considerados sobrepostos → **não** constituem um paradoxo (benefício da dúvida).
+
+### 7.2 Correção automática e sugestões
+- Quando um único deslocamento resolve o conflito, a verificação propõe deslocar a unidade **mono-período** em conflito com a maioria dos seus vizinhos, escolhendo o período de deslocamento mínimo; para as contemporaneidades com uma unidade não datável copia o período do vizinho datado.
+- Nos casos ambíguos — empate, unidades **multi-período** (p. ex. fichas CON), nenhum período válido — não corrige automaticamente: fornece uma **sugestão «o quê + como»** (p. ex. «Desloca US5 para um período ≥ 3, ou US7 para um período ≤ 1, ou verifica a relação»).
+
+### 7.3 Pré-visualização e backup
+- A **pré-visualização** mostra as alterações de período propostas antes de as aplicar.
+- Antes de escrever os períodos é efetuado um **backup automático da base de dados** (SQLite e PostgreSQL).
+- Após a aplicação, relança a verificação para controlar eventuais paradoxos residuais.
+
+---
+
+## 8. Verificação da cronologia (periodização e fichas)
+
+No mesmo painel **"Verifica rapporti"** (Verificar relações — uma aba do diálogo de import/export do s3dgraphy), desde a versão 5.13.64-alpha a verificação encontra e corrige também problemas de **cronologia** do sítio selecionado. A verificação de paradoxos temporais (secção 7) compara o período de uma unidade com a estratigrafia; esta compara a periodização consigo própria e com as fichas US que a copiam.
+
+### 8.1 O que deteta
+
+O painel agrupa os problemas por tipo. Ao lado dos grupos das relações aparecem quatro grupos novos:
+
+| Grupo | O que assinala | Como é tratado |
+|-------|----------------|----------------|
+| **Fases com intervalos sobrepostos** | Duas linhas da periodização cujos intervalos de anos se cruzam | Manual: o painel propõe reduzir os intervalos apenas se, depois da redução, restar um intervalo utilizável |
+| **Datação da ficha desalinhada** | O campo `datazione` da ficha US diz algo diferente da `datazione_estesa` do seu período/fase | Automático: a periodização é a fonte e a ficha é a cópia, por isso a cópia é reescrita a partir da fonte. Um campo vazio é preenchido da mesma maneira. Uma US sem período é ignorada, porque não há nada para copiar |
+| **Periodização com início depois do fim** | `cron_iniziale` maior que `cron_finale` | Manual: são provavelmente datas a.C. sem o sinal menos — o painel propõe reescrever os dois anos como negativos (`-1650` em vez de `1650`); se for um erro de digitação, troque os dois valores à mão |
+| **Fase sem anos** | Uma fase cujos anos faltam ou não são legíveis | Só assinalada: não há nada de onde os herdar |
+
+Um exemplo para as sobreposições. A base de dados de exemplo tem duas, e nenhuma traz proposta: as duas fases têm intervalos **idênticos**, e qualquer redução faria uma fase terminar antes de começar. O painel limita-se a dizê-lo; a decisão (juntar as fases, corrigir os anos, deixar como está) cabe ao arqueólogo.
+
+### 8.2 Correção automática e sugestões
+
+**Correções automáticas e propostas.** As correções automáticas estão **já assinaladas**; as propostas **não**, e só são aplicadas se se assinalar a caixa. Antes a regra era diferente: um problema cuja correção exigia uma decisão humana só podia ser lido. Agora tem uma caixa, deixada em branco. Isto vale também para as duas categorias de relações mais antigas que oferecem uma sugestão, isto é, a contradição direta e o ciclo estratigráfico.
+
+Para usar o painel:
+
+1. Selecione no painel o **sítio** a verificar. A verificação é **por sítio**: olha apenas para o sítio escolhido e corrige apenas esse. Numa base de dados com dez sítios isto conta, porque os mesmos números de US existem em todos.
+2. Leia a **linha de resumo** acima da árvore: indica quantos problemas há, quantos são corrigíveis automaticamente e **quantas são as propostas a assinalar à mão**.
+3. Abra os grupos e selecione um problema para ler o detalhe no painel de pré-visualização.
+4. Verifique as caixas. As correções automáticas já estão assinaladas: retire a marca das que não quiser aplicar. Assinale as propostas com que concorda.
+5. Aplique as correções. Antes de escrever o que quer que seja é criada uma **cópia de segurança automática** (cópia do ficheiro SQLite ou `pg_dump` para PostgreSQL em `~/pyarchinit_5/pyarchinit_DB_folder/_pga_backups`); a cópia, que já existia para as correções dos campos de período, cobre agora também as cronológicas.
+6. Se o resultado não convencer, prima **Annulla ultimo fix** (anular a última correção): a anulação reverte também as correções escritas na tabela da periodização.
+
+### 8.3 Pré-visualização e backup
+
+**A pré-visualização mostra a data calculada.** Para cada unidade citada por um problema, o painel de pré-visualização mostra a sua data calculada numa linha como esta:
+
+`US 4 · 1500–1549 · epoca · has_first_epoch → epoch_2_2`
+
+A linha indica, por ordem, o intervalo de anos, a regra que o produziu e a relação ao longo da qual a restrição viajou, com o nó de onde veio. Quando os dois extremos do intervalo chegam por caminhos diferentes, cada extremo leva a sua etiqueta (`inizio …` e `fine …`), de modo que uma data nunca é atribuída à relação errada. Hoje, numa base de dados normal, cada unidade toma as suas datas do seu próprio período, por isso a maioria das linhas dirá `epoca`. O objetivo da linha não é surpreender, é permitir ver **de onde vem** uma data.
+
+---
+
+## 9. Como ler os arcos da matrix
+
+Algumas escolhas do desenho da matrix podem parecer estranhas, mas não são erros:
+
+- **Uma seta nunca passa por baixo de um nó.** Quando a coluna de chegada está ocupada, a seta entra na caixa **pelo lado**: é normal.
+- **A igualdade não é uma sobreposição.** Uma relação «Uguale a» (Igual a) ou «Si lega a» (Liga-se a) coloca as duas unidades na **mesma linha**, lado a lado, ligadas por **duas linhas horizontais** (o sinal de igual) **sem ponta de seta**.
+- **Os arcos redundantes não são desenhados.** Se a UE 1 cobre a 2 e a 2 cobre a 3, a seta de 1 para 3 não aparece, porque não acrescenta nada. Dentro de um **ciclo**, pelo contrário, todos os arcos ficam, porque um ciclo é um erro que é preciso ver.
+
+---
+
+## Referências
+
+- Issue upstream LocationNodeGroup: https://github.com/zalmoxes-laran/s3Dgraphy/issues/5
+- Repositório pyarchinit: https://github.com/pyarchinit/pyarchinit
+- yEd Graph Editor: https://www.yworks.com/products/yed
+- s3dgraphy library: https://github.com/zalmoxes-laran/s3Dgraphy

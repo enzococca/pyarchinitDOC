@@ -1,0 +1,438 @@
+# PyArchInit - Configuration Guide
+
+## Table of Contents
+1. [Introduction](#introduction)
+2. [Accessing Configuration](#accessing-configuration)
+3. [Connection Parameters Tab](#connection-parameters-tab)
+4. [DB Installation Tab](#db-installation-tab)
+5. [Import Tools Tab](#import-tools-tab)
+6. [Graphviz Tab](#graphviz-tab)
+7. [PostgreSQL Tab](#postgresql-tab)
+8. [Help Tab](#help-tab)
+9. [FTP to Lizmap Tab](#ftp-to-lizmap-tab)
+10. [Paradata Workspace (PostgreSQL only)](#paradata-workspace-postgresql-only)
+
+---
+
+## Introduction
+
+The PyArchInit configuration window allows you to set all the parameters necessary for the proper functioning of the plugin. Before starting to document an archaeological excavation, you need to correctly configure the database connection and resource paths.
+
+> **Video Tutorial**: [Insert video link for configuration introduction]
+
+---
+
+## Accessing Configuration
+
+To access the configuration:
+1. Open QGIS
+2. Menu **PyArchInit** → **Config**
+
+Or from the PyArchInit toolbar click on the **Settings** icon.
+
+![Accessing configuration](images/01_configurazione/01_menu_config.png)
+*Figure 1: Accessing the configuration window from the PyArchInit menu*
+
+![PyArchInit Toolbar](images/01_configurazione/02_toolbar_config.png)
+*Figure 2: Configuration icon in the toolbar*
+
+---
+
+## Connection Parameters Tab
+
+This is the main tab for configuring the database connection.
+
+![Connection Parameters Tab](images/01_configurazione/03_tab_parametri_connessione.png)
+*Figure 3: Connection Parameters Tab - Complete view*
+
+### DB Settings Section
+
+| Field | Description |
+|-------|-------------|
+| **Database** | Select the database type: `sqlite` (local) or `postgres` (server) |
+| **Host** | PostgreSQL server address (e.g., `localhost` or server IP) |
+| **DBname** | Database name (e.g., `pyarchinit`) |
+| **Port** | Connection port (default: `5432` for PostgreSQL) |
+| **User** | Username for connection |
+| **Password** | User password |
+| **SSL Mode** | SSL mode for PostgreSQL: `allow`, `prefer`, `require`, `disable` |
+
+![DB Settings](images/01_configurazione/04_db_settings.png)
+*Figure 4: DB Settings Section*
+
+#### Database Choice
+
+**SQLite/Spatialite** (Recommended for single user):
+- Local database, no server required
+- Ideal for individual or small projects
+- The `.sqlite` file is saved in the `pyarchinit_DB_folder` folder
+
+![SQLite Configuration](images/01_configurazione/05_config_sqlite.png)
+*Figure 5: SQLite configuration example*
+
+**PostgreSQL/PostGIS** (Recommended for teams):
+- Server database, multi-user access
+- Requires PostgreSQL with PostGIS extension installed
+- Supports user management and permissions
+- Ideal for large projects with multiple operators
+
+![PostgreSQL Configuration](images/01_configurazione/06_config_postgres.png)
+*Figure 6: PostgreSQL configuration example*
+
+> **Video Tutorial**: [Insert video link for database configuration]
+
+### Path Settings Section
+
+| Field | Description | Button |
+|-------|-------------|--------|
+| **Thumbnail path** | Path to save image thumbnails | `...` to browse |
+| **Image resize** | Path for resized images | `...` to browse |
+| **Logo path** | Path to custom logo for reports | `...` to browse |
+
+> **The two paths fill themselves in on first start.** pyArchInit creates
+> `pyarchinit_Thumbnails_folder` (the thumbnails) and
+> `pyarchinit_Resize_folder` (the resized images) inside the data folder,
+> writes the two paths into the fields above and draws the example
+> database's media there: **three per record** on US, pottery, finds,
+> tombs, structures and UT. They are placeholders, and they say so on the
+> image — they show how the form displays media, they are not excavation
+> photographs. **If you have already filled the two fields they are left
+> alone**, including when they point at a `webdav://`.
+
+![Path Settings](images/01_configurazione/07_path_settings.png)
+*Figure 7: Path Settings Section*
+
+#### Supported Remote Paths
+
+PyArchInit also supports remote storage:
+- **Google Drive**: `gdrive://folder/path/`
+- **Dropbox**: `dropbox://folder/path/`
+- **Amazon S3**: `s3://bucket/path/`
+- **Cloudinary**: `cloudinary://cloud_name/folder/`
+- **WebDAV**: `webdav://server/path/`
+- **HTTP/HTTPS**: `https://server/path/`
+
+![Remote Storage](images/01_configurazione/08_remote_storage.png)
+*Figure 8: Remote storage configuration example*
+
+> **Configuring media on WebDAV.** To use a WebDAV server as image storage:
+>
+> 1. **Credentials** — **Remote Storage Config** dialog, **WebDAV** tab: enter *Username* and *Password*.
+> 2. **Verify SSL** (same tab) — if the server uses a **self-signed certificate** (typical of servers on a bare IP address or a non-standard HTTPS port), set **"Verify SSL" → No (Self-signed certificates)**: with verification on against a self-signed server the connection fails silently. For servers with a valid certificate (e.g. Nextcloud/ownCloud) leave it on **Yes (Verify certificates)**, which is the default.
+> 3. **Paths** — in the **Thumbnail path** and **Thumbnail resize** fields use the format `webdav://server:port/folder/` (e.g. `webdav://192.0.2.10:5006/pyarchinit_media/thumb_resize/`).
+> 4. **Restart QGIS** after saving so the new storage settings take effect.
+
+### pyArchInit 5 data folder (`~/pyarchinit_5`)
+
+pyArchInit 5 stores all of its working data — `config.cfg`, databases, exports, backups, paradata, and the `bin/` folder with AI tools — in a dedicated folder in your home directory: **`~/pyarchinit_5/`**.
+
+This is separate from the classic pyArchInit, which keeps using **`~/pyarchinit/`**. The two versions therefore do **not** share data, so you can run pyArchInit 5 while your previous installation and its databases stay untouched.
+
+**First launch — copying your existing data.** The first time pyArchInit 5 starts, if `~/pyarchinit_5` does not yet exist but a previous `~/pyarchinit` installation is found, a dialog asks whether to copy your configuration and databases into the new folder:
+
+- Choose **Yes** to copy the `pyarchinit_DB_folder` (your `config.cfg` and the SQLite databases) into `~/pyarchinit_5`, so you can keep working with your existing data right away.
+- The **`bin/` folder is not copied**, because it contains large AI assets (SAM and pottery virtual environments, CLIP models, FAISS indexes, API-key files). Re-create them by running the relevant AI features again, or copy `~/pyarchinit/bin` into `~/pyarchinit_5/bin` manually.
+- If you choose **No**, pyArchInit 5 simply creates a new, empty folder structure, as on a fresh installation.
+
+> **New in 5.13.16-alpha — clearer first start.**
+> - The question "copy configuration and databases into the new folder `~/pyarchinit_5`?" now always appears in front of every window. Before, above all on Windows, it could stay hidden behind QGIS or the splash screen and the start seemed stuck. Answer **Yes** or **No** to continue.
+> - While the missing Python packages are installed, the pyArchInit splash screen stays in front with a progress bar showing package n of N, the percentage and the elapsed time. The installation can take several minutes: do not close QGIS. On Windows no console windows open during the installation.
+
+> **New in 5.13.17-alpha — QGIS 4 and several QGIS versions on the same computer.**
+> - pyArchInit's Python packages are installed with the Python of the QGIS you are using (for example Python 3.12 in QGIS 4). Before, with QGIS 3 and QGIS 4 installed side by side on macOS, they were installed for the QGIS 3 Python and QGIS 4 stopped with the error `No module named 'psycopg2._psycopg'`.
+> - If the plugin folder contains packages installed for another Python (for example a QGIS 3 profile copied into QGIS 4), at startup pyArchInit moves them into the `ext_libs_cp39` folder (the name shows the Python version) and reinstalls the ones it needs: the first time this can take a few minutes, with the progress shown on the splash screen. The message appears in the QGIS log panel, "PyArchInit" tab.
+> - The `ext_libs_cp…` folders can be deleted. If you use the same plugin from two QGIS versions, pyArchInit puts the right folder back in place instead of reinstalling.
+
+**Custom location (advanced).** To use a different data folder, set the `PYARCHINIT_HOME` environment variable before starting QGIS; when set, it overrides the default `~/pyarchinit_5`.
+
+### Site Settings Section
+
+| Field | Description |
+|-------|-------------|
+| **Site** | Default site name for new records |
+| **Experimental features** | Enable experimental features (Yes/No) |
+
+---
+
+## DB Installation Tab
+
+This tab allows you to install or upgrade the PyArchInit database.
+
+![DB Installation Tab](images/01_configurazione/08_tab_installazione_db.png)
+*Figure 8: DB Installation Tab*
+
+### New Installation
+
+1. Select **sqlite** or **postgres** as database type
+2. Click **Connect**
+3. If the database doesn't exist, click **Install Database**
+4. The system will create all necessary tables
+
+### Database Upgrade
+
+For existing installations:
+1. Click **Database Check/Update**
+2. The system verifies the structure and applies any updates
+
+> **Warning**: Always backup your database before upgrading!
+
+---
+
+## Import Tools Tab
+
+Tools for importing data from external sources.
+
+### CSV Import
+
+1. Select the CSV file
+2. Map columns to database fields
+3. Click **Import**
+
+### Shapefile Import
+
+For importing GIS data directly into PyArchInit layers.
+
+### Exporting a site to em.json (Extended Matrix)
+
+From the **pyArchInit → Extended Matrix → Esporta sito in em.json…** menu entry a whole site travels to the working format of the Extended Matrix, the one **EMStudio** opens natively.
+
+What to expect:
+
+- pyArchInit lists the sites in the database: pick **one**;
+- the file is born in `pyarchinit_EM_folder` inside the plugin's data folder, named after the site (any script: `Al-Khutm.em.json`, `Scavo_archeologico.em.json`);
+- before handing it over, pyArchInit **reads the file back**: an export that does not read back identical is not delivered;
+- at the end it asks whether to **open it in EMStudio right away**; when EMStudio is not installed, pyArchInit says where the file is and **offers to install it now** (see the next section).
+
+The file holds the chosen site and nothing else, and every unit arrives as what it is:
+
+- **only that site's rows**: in a multi-site database, the documentation and the periods of the other sites no longer leak into the export;
+- **every unit with the type it declares**: virtual units stay virtual, special finds and continuity elements stay themselves, so EMStudio draws the right symbol instead of turning everything into a layer;
+- **paradata travel as paradata**, not as stratigraphic units;
+- an **empty column** of the form no longer becomes an empty property in the graph.
+
+What the **«Vedi la matrice»** panel draws is exactly what the file holds: a look at it is the quickest way to check the export before sending it to EMStudio or to a room.
+
+> **Note**: GraphML survives only as the **one-time import from yEd**; the format for looking at and validating the matrix is em.json.
+
+### Installing EMStudio from the menu
+
+**EMStudio** is the Extended Matrix viewer: a separate program of the Extended Matrix project (GPL-3 licence). pyArchInit does not contain it — it **downloads it and launches it**, when asked to.
+
+With **pyArchInit → Extended Matrix → Installa EMStudio…** (Install EMStudio):
+
+1. pyArchInit reads the official EMStudio releases and **picks the package for this computer** (macOS Apple Silicon, Windows, Linux);
+2. before downloading it shows a window with **version, file name, size, the address it downloads from and the destination folder** — `<pyArchInit data folder>/tools/EMStudio` — and waits for a yes;
+3. once downloaded it **verifies the sha256 fingerprint** the release declares: a file that does not match is not installed;
+4. on macOS **removing the quarantine flag** is part of the installation: the build is not notarised by Apple, and without that step the system would say the app is "damaged";
+5. at the end it says where it was installed. If EMStudio was already there, it asks whether to download the latest version again.
+
+When the em.json export cannot find EMStudio, it **offers to install it there and then** and opens the file afterwards.
+
+> **Known limit**: today's release publishes no package for **Intel Macs**. In that case pyArchInit says so and points at the releases page (github.com/ExtendedMatrix/EMStudio/releases), to download it by hand.
+
+### Seeing the matrix inside QGIS
+
+From the **pyArchInit → Extended Matrix → Vedi la matrice…** (See the matrix) menu entry a site's matrix is drawn in a **panel docked on the right** of the QGIS window. No EMStudio, no StratiGraph node, no login and no internet: pyArchInit exports the site's em.json into a temporary folder and draws it.
+
+What to expect:
+
+- you pick the **site** from a list; the panel opens with the matrix already fitted to the window and, at the top, a line saying **how many units, how many epochs and how many relationships** were drawn;
+- the drawing has **one horizontal band per period/phase**, the **most recent on top**, each with its name, its years and its own colour;
+- every unit sits in the band of the period it was created in, and inside the band the stratigraphy decides the level: **what covers is drawn above what is covered**;
+- every unit is drawn with the **Extended Matrix symbology**, the one in the s3dgraphy rules (see the table);
+- the **mouse wheel** zooms in and out, a **double click** puts the whole matrix back into the window (like the **Adatta** / Fit button), a **click on a unit** shows its record in the pane on the right: definition, interpretation, period and phase, dating, area, structure;
+- under the record you get the **media linked to that SU**: the photo thumbnails, with their names. When the images live on remote storage the thumbnails are not fetched by themselves — a **Carica le anteprime** (load thumbnails) button asks for them, because each one is a network request;
+- the **Zoom sulla geometria** button frames the unit's plan on the map. It is enabled only for units that are rows of the SU record (a continuity node or a document has no geometry), and it searches the **already loaded layers**, in legend order, adding none. If no loaded layer carries the fields to recognise the unit, or the plan was never drawn, the panel says so instead of doing nothing.
+
+| Unit | Symbol |
+|---|---|
+| SU — stratigraphic unit | rectangle |
+| USVs — structural virtual unit | blue parallelogram |
+| USVn — non-structural virtual unit | green hexagon |
+| SF — special find | olive octagon |
+| BR / CON — continuity | black diamond |
+| Extractor | pentagon |
+| Combiner | dashed hexagon |
+| Document | ellipse |
+| Property | dashed circle |
+
+**Salva SVG…** (Save SVG) and **Salva PNG…** (Save PNG) save the drawing wherever you want. The **SVG is vector**: it opens in a browser or in Inkscape, it can be enlarged as much as you need without blurring and printed at any size, posters included.
+
+The same matrix also opens from the **«Export Extended Matrix»** window of the SU form: the **«Vedi la matrice»** button, next to **«Apri in EMStudio»**, lights up after a successful em.json export and draws the file just exported.
+
+> **Note**: on a very large site the panel says so itself, with a message in the QGIS message bar, and suggests **saving the SVG and looking at it outside QGIS**: panning a drawing of thousands of units on screen is slow.
+
+> **Note**: the matrix is drawn even when the excavation is not tidy. Relationships that point at a paradatum stay in the drawing, and units whose level cannot be decided because the relationships contain a loop are drawn anyway: the panel does not refuse a real excavation.
+
+### Delivering a site to a StratiGraph room
+
+From **pyArchInit → Extended Matrix → Consegna sito alla stanza…** a site's stratigraphic units travel to a **room** on a StratiGraph node (REST, one delivery at a time — no standing connection needed).
+
+What to expect:
+
+- pick the **site**, then the dialog asks for the **node** (e.g. `http://127.0.0.1:8020`; for an institutional node `https://node.org/em` — writing the root also works, `/em` is found automatically), the **room** and, only when the node demands it, a **token** (best kept in the `STRATIGRAPH_TOKEN` environment variable: it is never saved);
+- the outcome is a sentence: *"129 applied out of 129"* on the first delivery; on the second *"44 applied out of 129, 85 already there"* — **repeats duplicate nothing**: nodes merge, known edges come back as "already there";
+- rows that cannot become room units (documents, extractors, properties) are listed under *Show details*, never invented;
+- **the signature belongs to the deliverer**: the node writes the author from the verified identity, not from the payload.
+
+**Extended Matrix → Apri il nodo (stanze)…** opens the room **inside pyArchInit** (side panel): it uses Qt WebEngine when the QGIS profile has it, Qt WebKit otherwise — the engine QGIS 3 still ships — so the panel stays inside QGIS even where WebEngine is missing, and the external browser is only the last resort. With a room configured it opens that room's own page, without one it opens the node's front door with all the rooms.
+
+### Database to Database Migration
+
+To move a whole database into another one — SQLite to PostgreSQL, PostgreSQL to SQLite, or between two databases of the same kind — there is no need to repeat the operation table by table: pick **ALL** in the list of tables and press **Import**.
+
+**44 tables** are copied: every sheet (budget, personnel, attendance, equipment, bill of quantities, stone inventory, archaeozoology, sex and age determination included) **and every geometry** (SU, WSU, levels, sites, sections, documentation, finds, individuals, samples, burials, structures, reference lines, spatial divisions).
+
+- **Before it starts**, if the destination database already holds data, pyArchInit says so and shows which tables and how many rows: where there is no unique constraint the records would pile up on the ones already there. You can stop.
+- **While it runs**, the progress bar names the table being copied.
+- **At the end**, a single window sums up how many rows travelled per table; *Show details* also lists what did not travel, and why.
+
+Taken care of automatically: a SQLite database just created from the template registers its geometries without a reference system and would refuse every one of them — when the destination table is empty the column is registered with the SRID of the incoming data; empty number fields become null, because PostgreSQL does not accept an empty string in a number column; **in an empty destination the identifiers of the records are kept**, so the links (thumbnails, media, relations to the SUs) still work.
+
+> **Note**: users, roles, permissions and access logs are **not** migrated: they belong to the installation and hold the passwords.
+
+---
+
+## Graphviz Tab
+
+Graphviz configuration for generating Harris Matrix diagrams.
+
+| Field | Description |
+|-------|-------------|
+| **Graphviz Path** | Path to Graphviz installation (e.g., `/usr/bin/` on Linux) |
+| **Check Graphviz** | Verify Graphviz installation |
+
+### Installing Graphviz
+
+**Windows**: Download from [graphviz.org](https://graphviz.org/download/)
+
+**macOS**: `brew install graphviz`
+
+**Linux**: `sudo apt install graphviz`
+
+---
+
+## PostgreSQL Tab
+
+Advanced PostgreSQL server settings.
+
+| Field | Description |
+|-------|-------------|
+| **pg_dump path** | Path to pg_dump for backups |
+| **psql path** | Path to psql command |
+
+---
+
+## Help Tab
+
+Contains useful links and resources.
+
+| Resource | Description |
+|----------|-------------|
+| Video Tutorial | Link to YouTube video tutorials |
+| Online Documentation | https://pyarchinit.github.io/pyarchinit_doc/index.html |
+| Facebook | UnaQuantum page |
+
+---
+
+## FTP to Lizmap Tab
+
+Configuration for web publishing with Lizmap.
+
+| Field | Description |
+|-------|-------------|
+| **FTP Host** | FTP server address |
+| **FTP User** | FTP username |
+| **FTP Password** | FTP password |
+| **Remote Path** | Destination path on server |
+
+---
+
+## Paradata Workspace (PostgreSQL only)
+
+The **DB Sync tab** of the configuration window exposes a **Paradata Workspace** section that lets you customise the directory where `paradata_<site>.graphml` and `groups_<site>.graphml` files are stored when working against a PostgreSQL database.
+
+> **PostgreSQL only**: SQLite users are not affected. With SQLite, paradata files are still stored next to the `.sqlite` file (byte-identical legacy behaviour).
+
+### Default path
+
+Without any override, the resolved path is:
+
+```
+~/pyarchinit/pyarchinit_DB_folder/<host>_<port>_<dbname>/<site>/
+```
+
+Example: `~/pyarchinit/pyarchinit_DB_folder/localhost_5432_pyarchinit/Volterra/`
+
+### Customising the path
+
+- **Browse...** opens a file dialog to pick a directory. The path is persisted to QGIS QSettings immediately.
+- You can also **type** the path directly into the text field: the value is saved when the field loses focus (`editingFinished` signal). Leaving it empty removes the override.
+- **Reset** clears the field, removes the QSettings key, and falls back to the default path.
+
+### Resolution chain (who wins)
+
+The effective path follows a 3-tier fallback chain:
+
+1. **`PYARCHINIT_WORKSPACE_DIR` environment variable** (highest priority — useful for CI/test scripts).
+2. **QSettings `pyarchinit/paradata_workspace`** (UI override — this section).
+3. **Default** `~/pyarchinit/pyarchinit_DB_folder/`.
+
+Empty values are skipped: if `PYARCHINIT_WORKSPACE_DIR=""`, resolution falls through to tier 2; if QSettings is also empty, the default is used.
+
+### When it takes effect
+
+Changes are **immediate**: the next access to ParadataStore / GroupStore (e.g. saving paradata on a US record, or exporting a Matrix) uses the new path. **No QGIS restart is required.**
+
+### Use cases
+
+- **Shared network drive**: point the workspace at a network path (e.g. `/Volumes/team/pyarchinit_workspace`) to share paradata between users on a centralised PostgreSQL.
+- **Separate backups**: keep paradata files outside the home directory to ease dedicated backups.
+- **Isolated tests**: set `PYARCHINIT_WORKSPACE_DIR` in test scripts to avoid polluting the default workspace.
+
+---
+
+## Troubleshooting
+
+### Connection Failed
+
+**Causes**:
+- Incorrect credentials
+- Server not running
+- Firewall blocking connection
+
+**Solutions**:
+- Verify username and password
+- Check if PostgreSQL service is running
+- Check firewall rules
+
+### Database Not Found
+
+**Cause**: Database not yet installed
+
+**Solution**: Go to DB Installation tab and click Install Database
+
+---
+
+## Best Practices
+
+1. **Backup regularly**: Use the Backup & Restore function
+2. **Use PostgreSQL for teams**: Better multi-user support
+3. **Set correct paths**: Ensure all path settings point to valid directories
+4. **Test connection**: Always verify connection before starting work
+
+---
+
+*Last updated: January 2026*
+
+---
+
+## Interactive Animation
+
+Explore the interactive animation to better understand the installation and configuration process.
+
+[Open Installation Animation](../../animations/pyarchinit_installation_animation.html)
+
+Explore the interactive animation for remote storage management.
+
+[Open Remote Storage Animation](../../animations/pyarchinit_remote_storage_animation.html)

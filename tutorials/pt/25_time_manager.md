@@ -1,0 +1,286 @@
+# Tutorial 25: Time Manager (Controlador Temporal SIG)
+
+## Introducao
+
+O **Time Manager** (Controlador Temporal SIG) e uma ferramenta avancada para visualizar a sequencia estratigrafica ao longo do tempo. Permite "navegar" pelos niveis estratigraficos utilizando um controlo temporal, apresentando progressivamente as UE da mais antiga a mais recente (a formacao do sitio).
+
+### Funcionalidades Principais
+
+- Visualizacao progressiva dos niveis estratigraficos
+- Controlo por dial/barra deslizante
+- Modo cumulativo ou nivel individual
+- Geracao automatica de imagens/video
+- Integracao com Harris Matrix
+
+## Acesso
+
+### Pelo Menu
+**PyArchInit** > **Time Manager**
+
+### Pre-requisitos
+
+- Camada com campo `order_layer` (indice estratigrafico)
+- UE com order_layer preenchido
+- Camadas carregadas no QGIS
+
+## Interface
+
+### Painel Principal
+
+```
++--------------------------------------------------+
+|         Gestao Temporal SIG                       |
++--------------------------------------------------+
+| Camadas disponiveis:                              |
+| [ ] pyunitastratigrafiche                        |
+| [ ] pyunitastratigrafiche_usm                    |
+| [ ] outra_camada                                 |
++--------------------------------------------------+
+|              [Dial Circular]                      |
+|                   /  \                            |
+|                  /    \                            |
+|                 /______\                           |
+|                                                   |
+|         Nivel: [SpinBox: 0-N]                    |
++--------------------------------------------------+
+| [x] Modo Cumulativo (mostrar <= nivel)           |
++--------------------------------------------------+
+| [ ] Mostrar Matrix    [Parar] [Gerar Video]      |
++--------------------------------------------------+
+| [Pre-visualizacao Matrix/Imagem]                  |
++--------------------------------------------------+
+```
+
+### Controlos
+
+| Controlo | Funcao |
+|----------|--------|
+| Caixa de selecao da camada | Selecionar camadas a controlar |
+| Dial | Navegar entre niveis (rotacao) |
+| SpinBox | Entrada direta do nivel |
+| Modo Cumulativo | Mostrar todos os niveis ate ao selecionado |
+| Mostrar Matrix | Apresentar Harris Matrix sincronizada |
+
+## Campo order_layer
+
+### O Que e o order_layer?
+
+O campo `order_layer` define a ordem de apresentacao estratigrafica:
+- **0** = Nivel mais antigo (profundidade)
+- **N** = Nivel mais recente (superficie)
+
+E a convencao do botao **Ordem estratigrafica** com a caixa "Ordem: Antigo → Recente" ativa (predefinicao, ver Tutorial 03): se a ordenacao foi calculada ao contrario, o Time Manager e o mapa mostram a sequencia invertida.
+
+### Preencher o order_layer
+
+No Formulario UE, separador **Ajuda** > **Caixa de Ferramentas**, o botao **Ordem estratigrafica** calcula o `order_layer` a partir das relacoes estratigraficas (ver Tutorial 03); o valor da UE atual aparece no campo por baixo do botao. Regras:
+1. 0 para as UE mais antigas, valores crescentes em direcao as mais recentes (na superficie)
+2. UE contemporaneas podem ter o mesmo valor
+3. Seguir a sequencia da Matrix
+
+### Exemplo
+
+| UE | order_layer | Descricao |
+|----|-------------|-----------|
+| UE001 | 4 | Humus superficial |
+| UE002 | 3 | Camada de lavoura |
+| UE003 | 2 | Derrube |
+| UE004 | 1 | Piso de utilizacao |
+| UE005 | 0 | Fundacao |
+
+Desde a 5.13.19-alpha, as camadas UE e USM que o pyArchInit carrega no mapa (ver Tutorial 14, *Escolha do Estilo*) sao desenhadas pela mesma ordem usada pelo Time Manager: pela cronologia do periodo e depois pelo `order_layer` (0 = mais antiga), de modo que as unidades mais recentes ficam por cima.
+
+## Modos de Visualizacao
+
+### Modo de Nivel Individual
+
+Caixa de selecao **NAO** ativa:
+- Mostra APENAS as UE do nivel selecionado
+- Util para isolar camadas individuais
+- Visualizacao em "fatia"
+
+### Modo Cumulativo
+
+Caixa de selecao **ATIVA**:
+- Mostra todas as UE do nivel 0 (mais antigo) ate ao selecionado
+- Mostra a formacao do sitio, das UE mais antigas as mais recentes
+- Visualizacao mais realista
+
+## Integracao com Matrix
+
+### Visualizacao Sincronizada
+
+Com a caixa de selecao **"Mostrar Matrix"** ativa:
+- Harris Matrix aparece no painel
+- Atualiza em sincronia com o nivel
+- Destaca as UE do nivel atual
+
+### Geracao de Imagens
+
+O Time Manager pode gerar:
+- Captura de ecra para cada nivel
+- Sequencia de imagens
+- Video time-lapse
+
+## Geracao de Video/Imagem
+
+### Processo
+
+1. Selecionar camadas a incluir
+2. Configurar intervalo de niveis (min-max)
+3. Clicar em **"Gerar Video"**
+4. Aguardar processamento
+5. Saida na pasta designada
+
+### Resultado
+
+- Imagens PNG para cada nivel
+- Opcional: video MP4 compilado
+
+## Fluxo de Trabalho Tipico
+
+### 1. Preparacao
+
+```
+1. Abrir projeto QGIS com camadas de UE
+2. Verificar que o order_layer esta preenchido
+3. Abrir o Time Manager
+```
+
+### 2. Selecao de Camadas
+
+```
+1. Selecionar camadas a controlar
+2. Geralmente: pyunitastratigrafiche e/ou _usm
+```
+
+### 3. Navegacao
+
+```
+1. Utilizar dial ou spinbox
+2. Observar alteracao da visualizacao
+3. Ativar/desativar modo cumulativo
+```
+
+### 4. Documentacao
+
+```
+1. Ativar "Mostrar Matrix"
+2. Gerar capturas de ecra significativas
+3. Opcional: gerar video
+```
+
+## Modelos de Composicao
+
+### Carregamento de Modelos
+
+O Time Manager suporta modelos QGIS para:
+- Composicoes de impressao personalizadas
+- Cabecalhos e legendas
+- Formatos padrao
+
+### Modelos Disponiveis
+
+Na pasta `resources/templates/`:
+- Modelo base
+- Modelo com Matrix
+- Modelo para video
+
+## Boas Praticas
+
+### 1. order_layer
+
+- Preencher ANTES de utilizar o Time Manager
+- Utilizar valores consecutivos
+- UE contemporaneas = mesmo valor
+
+### 2. Visualizacao
+
+- Comecar pelo nivel 0 (mais antigo)
+- Prosseguir em ordem crescente
+- Utilizar modo cumulativo para apresentacoes
+
+### 3. Documentacao
+
+- Capturar ecras em niveis significativos
+- Documentar transicoes de fase
+- Gerar video para relatorios
+
+## Resolucao de Problemas
+
+### Camadas Nao Visiveis na Lista
+
+**Causa**: Camada sem campo order_layer
+
+**Solucao**:
+- Adicionar campo order_layer a camada
+- Preencher com valores adequados
+
+### Sem Alteracao Visual
+
+**Causas**:
+- order_layer nao preenchido
+- Filtro nao aplicado
+
+**Solucoes**:
+- Verificar valores do order_layer nas UE
+- Confirmar que a camada esta selecionada
+
+### Dial Nao Responde
+
+**Causa**: Nenhuma camada selecionada
+
+**Solucao**: Selecionar pelo menos uma camada da lista
+
+## Referencias
+
+### Ficheiros Fonte
+- `tabs/Gis_Time_controller.py` - Interface principal
+- `gui/ui/Gis_Time_controller.ui` - Disposicao da UI
+
+### Campo da Base de Dados
+- `us_table.order_layer` - Indice estratigrafico
+
+---
+
+## Tutorial em Video
+
+### Time Manager
+`[Placeholder: video_time_manager.mp4]`
+
+**Conteudos**:
+- Configuracao do order_layer
+- Navegacao temporal
+- Geracao de video
+- Integracao com Matrix
+
+**Duracao prevista**: 15-18 minutos
+
+---
+
+*Ultima atualizacao: janeiro de 2026*
+
+---
+
+## Animacao Interativa
+
+Explore a animacao interativa para saber mais sobre este topico.
+
+[Abrir Animacao Interativa](../../animations/pyarchinit_timemanager_animation.html)
+
+---
+
+## A matriz, a partir da 5.13.44
+
+A matriz do Time Manager ja nao passa pelo Graphviz. E desenhada pelo mesmo motor de composicao do painel **Ver a matriz**, dentro do QGIS e sem subprocessos.
+
+- **E imediata.** No sitio de exemplo (51 UE, 81 relacoes) o desenho custa alguns milissegundos em vez de cerca de tres decimos de segundo, e desapareceram os processos `dot` e `tred` que por vezes ficavam pendurados. Os periodos do sitio sao lidos **uma so vez**.
+- **No atlas a matriz e vetorial.** A imagem da prancha e um SVG de algumas dezenas de KB em vez de um JPEG de megabytes.
+- **E a mesma matriz** do painel Extended Matrix: mesmas faixas de periodo, mesma simbologia, mesma reducao de redundancias. As setas que **sobem** as faixas — onde a estratigrafia contradiz a cronologia — sao desenhadas a **vermelho**.
+- A matriz continua a conter apenas as UE visiveis na posicao atual do seletor.
+
+- As UE que **nao estao visiveis** na posicao atual mas que uma relacao menciona entram na mesma no desenho, **esbatidas**: sem elas a sequencia pareceria quebrada.
+
+> **Que modelo escolher.** No seletor cada modelo esta marcado: **✓** tem o titulo e a imagem da matriz, **•** so o mapa, **✗** nao tem mapa. Antes escolher um sem esses elementos fazia o gerador voltar atras sem dizer nada.
+
+> **Tornar apto qualquer modelo.** `scripts/prepare_atlas_templates.py`, executado com o Python do QGIS, escreve ao lado de cada modelo uma copia com o sufixo « + Time Manager» com o titulo e a imagem da matriz numa **pagina nova**. Os originais nao se tocam.

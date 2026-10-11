@@ -1,0 +1,486 @@
+# Tutorial 11: Matrix di Harris
+
+## Introduzione
+
+Il **Matrix di Harris** (o diagramma stratigrafico) e uno strumento fondamentale in archeologia per rappresentare graficamente le relazioni stratigrafiche tra le diverse Unita Stratigrafiche (US). PyArchInit genera automaticamente il Matrix di Harris a partire dai rapporti stratigrafici inseriti nelle schede US.
+
+### Cos'e il Matrix di Harris?
+
+Il Matrix di Harris e un diagramma che rappresenta:
+- La **sequenza temporale** delle US (dal piu recente in alto al piu antico in basso)
+- Le **relazioni fisiche** tra le US (copre/coperto da, taglia/tagliato da, si lega a)
+- La **periodizzazione** dello scavo (raggruppamento per periodi e fasi)
+
+### Tipi di Relazioni Rappresentate
+
+| Relazione | Significato | Rappresentazione |
+|-----------|-------------|------------------|
+| Copre/Covered by | Sovrapposizione fisica | Linea continua verso il basso |
+| Taglia/Cuts | Azione negativa (interfaccia) | Linea tratteggiata |
+| Si lega a/Same as | Contemporaneita | Linea orizzontale bidirezionale |
+| Riempie/Fills | Riempimento di taglio | Linea continua |
+| Si appoggia a/Abuts | Appoggio strutturale | Linea continua |
+
+## Accesso alla Funzione
+
+### Dal Menu Principale
+1. **PyArchInit** nella barra del menu
+2. Selezionare **Matrix di Harris**
+
+### Dalla Scheda US
+1. Aprire la Scheda US
+2. Tab **Map**
+3. Pulsante **"Esporta Matrix"** o **"View Matrix"**
+
+### Prerequisiti
+- Database connesso correttamente
+- US con rapporti stratigrafici compilati
+- Periodizzazione definita (opzionale ma consigliato)
+- Graphviz installato nel sistema
+
+## Configurazione del Matrix
+
+### Finestra di Impostazioni (Setting_Matrix)
+
+Prima della generazione, appare una finestra di configurazione:
+
+#### Tab Generale
+
+| Campo | Descrizione | Valore Consigliato |
+|-------|-------------|-------------------|
+| DPI | Risoluzione dell'immagine | 150-300 |
+| Mostra Periodi | Raggruppa US per periodo/fase | Si |
+| Mostra Legenda | Includi legenda nel grafico | Si |
+| PDF poster | Genera anche un PDF poster multi-pagina per stampare matrix più larghi di un foglio: i fogli si sovrappongono di 2 cm e ogni foglio riporta l'etichetta "foglio n/N - riga r/R, colonna c/C - A0 scala 1:x". Per i matrix molto grandi (quando il DPI del JPG deve essere ridotto) il poster viene prodotto comunque, anche se la casella non è spuntata | Si (per la stampa) |
+| Formato | Formato dei fogli del poster: A0, A1, A2, A3 | A0 |
+| Scala | Scala del poster: "Adatta all'altezza" (una fila di fogli, l'altezza del matrix riempie il foglio), "Adatta alla pagina" (un solo foglio con tutto il matrix), 1:1, 1:2, 1:3 (scala fissa, più fogli). Il disegno non viene mai ingrandito; l'orientamento (verticale/orizzontale) è scelto automaticamente per usare meno fogli | Adatta all'altezza |
+
+I controlli **PDF poster**, **Formato** e **Scala** si trovano sulla seconda riga della finestra.
+
+#### Tab Nodi "Ante/Post" (Relazioni Normali)
+
+| Parametro | Descrizione | Opzioni |
+|-----------|-------------|---------|
+| Forma nodo | Forma geometrica | box, ellipse, diamond |
+| Colore riempimento | Colore interno | white, lightblue, etc. |
+| Stile | Aspetto bordo | solid, dashed |
+| Spessore linea | Larghezza bordo | 0.5 - 2.0 |
+| Tipo freccia | Punta della freccia | normal, diamond, none |
+| Dimensione freccia | Grandezza punta | 0.5 - 1.5 |
+
+#### Tab Nodi "Negative" (Tagli)
+
+| Parametro | Descrizione | Opzioni |
+|-----------|-------------|---------|
+| Forma nodo | Forma geometrica | box, ellipse, diamond |
+| Colore riempimento | Colore distintivo | gray, lightcoral |
+| Stile linea | Aspetto connessione | dashed (tratteggiato) |
+
+#### Tab Nodi "Contemporaneo"
+
+| Parametro | Descrizione | Opzioni |
+|-----------|-------------|---------|
+| Forma nodo | Forma geometrica | box, ellipse |
+| Colore riempimento | Colore distintivo | lightyellow, white |
+| Stile linea | Aspetto connessione | solid |
+| Freccia | Tipo connessione | none (bidirezionale) |
+
+#### Tab Connessioni Speciali (">", ">>")
+
+Per relazioni stratigrafiche speciali o connessioni documentative:
+
+| Parametro | Descrizione |
+|-----------|-------------|
+| Forma | box, ellipse |
+| Colore | lightgreen, etc. |
+| Stile | solid, dashed |
+
+## Tipi di Export
+
+### 1. Export Matrix Standard
+
+Genera il matrix base con:
+- Tutti i rapporti stratigrafici
+- Raggruppamento per periodo/fase
+- Layout verticale (TB - Top to Bottom)
+
+**Output**: `pyarchinit_Matrix_folder/Harris_matrix.jpg`
+
+### 2. Export Matrix 2ED (Esteso)
+
+Versione estesa con:
+- Informazioni aggiuntive nei nodi (US + definizione + datazione)
+- Connessioni speciali (>, >>)
+- Export anche in formato GraphML
+
+**Output**: `pyarchinit_Matrix_folder/Harris_matrix2ED.jpg`
+
+### 3. View Matrix (Visualizzazione Rapida)
+
+Per visualizzazione veloce senza opzioni di configurazione:
+- Usa impostazioni predefinite
+- Generazione piu rapida
+- Ideale per controlli rapidi
+
+### 4. Vedi la matrice (Extended Matrix dentro QGIS)
+
+Dal menu **pyArchInit → Extended Matrix → Vedi la matrice…** la matrice di un sito viene disegnata in un pannello agganciato a destra della finestra di QGIS, senza passare da Graphviz:
+- una fascia orizzontale per ogni periodo/fase, la più recente in cima
+- ogni unità con la simbologia dell'Extended Matrix (rettangolo per una US, parallelogramma blu per una USVs, esagono verde per una USVn, ottagono oliva per un SF, rombo nero per una continuità)
+- rotella per lo zoom, doppio clic per rivedere tutto, clic su un'unità per leggerne la scheda
+- sotto la scheda, le **anteprime dei media** legati a quella US
+- **Zoom sulla geometria**: inquadra sulla mappa la pianta dell'unità, se è disegnata in un layer caricato
+- una freccia che **risale** le fasce è disegnata in **rosso**: lì la stratigrafia contraddice la cronologia (chi copre sta in un'epoca più antica di chi è coperto)
+- **Salva SVG…** / **Salva PNG…** per portare fuori il disegno
+
+Non serve EMStudio, non serve un nodo StratiGraph, non serve internet. Dettagli nel Tutorial 01, paragrafo «Vedere la matrice dentro QGIS».
+
+## Processo di Generazione
+
+### Step 1: Raccolta Dati
+
+Il sistema raccoglie automaticamente:
+```
+Per ogni US nel sito/area selezionato:
+  - Numero US
+  - Tipo unita (US/USM)
+  - Rapporti stratigrafici
+  - Periodo e fase iniziale
+  - Definizione interpretativa
+```
+
+### Step 2: Costruzione Grafo
+
+Creazione delle relazioni:
+```
+Sequenza (Ante/Post):
+  US1 -> US2 (US1 copre US2)
+
+Negativo (Tagli):
+  US3 -> US4 (US3 taglia US4)
+
+Contemporaneo:
+  US5 <-> US6 (US5 si lega a US6)
+```
+
+### Step 3: Clustering per Periodi
+
+Raggruppamento gerarchico:
+```
+Sito
+  └── Area
+      └── Periodo 1 : Fase 1 : "Eta Romana"
+          ├── US101
+          ├── US102
+          └── US103
+      └── Periodo 1 : Fase 2 : "Tardo Antico"
+          ├── US201
+          └── US202
+```
+
+### Step 4: Riduzione Transitiva (tred)
+
+Il comando `tred` di Graphviz rimuove le relazioni ridondanti:
+- Se US1 -> US2 e US2 -> US3, rimuove US1 -> US3
+- Semplifica il diagramma
+- Mantiene solo relazioni dirette
+
+### Step 5: Rendering Finale
+
+Generazione immagine con formati multipli:
+- DOT (sorgente Graphviz)
+- JPG (immagine compressa)
+- PNG (immagine lossless)
+
+## Interpretazione del Matrix
+
+### Lettura Verticale
+
+```
+     [US piu recenti]
+           ↓
+        US 001
+           ↓
+        US 002
+           ↓
+        US 003
+           ↓
+     [US piu antiche]
+```
+
+### Lettura dei Cluster
+
+I box colorati rappresentano periodi/fasi:
+- **Azzurro chiaro**: Cluster di periodo
+- **Giallo**: Cluster di fase
+- **Grigio**: Sfondo sito
+
+### Tipi di Connessioni
+
+```
+─────────→  Linea continua = Copre/Riempie/Si appoggia
+- - - - →  Linea tratteggiata = Taglia
+←────────→  Bidirezionale = Contemporaneo/Uguale a
+```
+
+### Colori dei Nodi
+
+| Colore | Significato Tipico |
+|--------|-------------------|
+| Bianco | US deposito normale |
+| Grigio | US negativa (taglio) |
+| Giallo | US contemporanee |
+| Azzurro | US con relazioni speciali |
+
+## Risoluzione Problemi
+
+### Errore: "Loop Detected"
+
+**Causa**: Esistono cicli nelle relazioni (A copre B, B copre A)
+
+**Soluzione**:
+1. Aprire la Scheda US
+2. Verificare i rapporti delle US indicate
+3. Correggere le relazioni circolari
+4. Rigenerare il matrix
+
+### Errore: "tred command not found"
+
+**Causa**: Graphviz non installato
+
+**Soluzione**:
+- **Windows**: Installare Graphviz da graphviz.org
+- **macOS**: `brew install graphviz`
+- **Linux**: `sudo apt install graphviz`
+
+### Matrix Non Generato
+
+**Possibili cause**:
+1. Nessun rapporto stratigrafico inserito
+2. US senza periodo/fase assegnato
+3. Problemi di permessi nella cartella di output
+
+**Verifica**:
+1. Controllare che le US abbiano rapporti
+2. Verificare la periodizzazione
+3. Controllare i permessi di `pyarchinit_Matrix_folder`
+
+### Matrix Troppo Grande
+
+**Problema**: Immagine illeggibile con molte US
+
+**Soluzioni**:
+1. Ridurre il DPI (100-150)
+2. Filtrare per area specifica
+3. Usare il View Matrix per singole aree
+4. Esportare in formato vettoriale (DOT) e aprire con yEd
+
+### Matrix di grandi dimensioni
+
+Con matrix molto grandi (es. 1300 US e circa 2000 rapporti) l'esportazione con connessioni ortogonali poteva richiedere più di 25 minuti e produrre un JPG vuoto (0 byte). Da questa release **Esporta Matrix** e **View Matrix** si adattano automaticamente:
+
+| Situazione | Cosa succede |
+|------------|--------------|
+| Più di **600** rapporti | Le connessioni passano automaticamente da ortogonali (`ortho`) a polilinee dritte con spaziatura più compatta: lo stesso matrix viene impaginato in circa un secondo. Sotto la soglia lo stile ortogonale resta invariato |
+| Immagine oltre il limite del renderer bitmap (32 767 px per lato) | Il DPI di JPG/PNG viene ridotto automaticamente (il valore impostato in Setting_Matrix è un massimo) e accanto all'immagine, in `pyarchinit_Matrix_folder`, vengono salvate le copie vettoriali `.svg` e `.pdf` (`Harris_matrix_tred.dot.svg/.pdf`; per View Matrix `Harris_matrix_viewtred.dot.svg/.pdf`) |
+| Avviso "Matrix molto grande: l'immagine JPG è stata generata a N dpi … usa i file .svg / .pdf" | Aprire il file `.svg` o `.pdf` (browser, Inkscape, visualizzatore PDF) per una versione leggibile e ingrandibile senza perdita di qualità |
+
+I file `.dot` vengono prodotti come prima.
+
+**Esportazione con periodizzazione** (checkbox periodi in Setting_Matrix):
+
+- L'export non si interrompe più con l'errore `Errore durante il rendering del file DOT: 'NoneType' object has no attribute 'write'`, che compariva quando Graphviz emetteva un avviso e QGIS non aveva la console Python aperta (tipico su Windows). Gli avvisi di Graphviz vengono ora scritti nella console Python / nel log di QGIS invece di bloccare l'esportazione.
+- Su DB grandi l'export con periodi è molto più veloce (lo stesso database da 1311 US è passato da circa 25–45 s e un DOT da 51 MB a circa 3 s) e ogni fase ottiene un proprio cluster invisibile, così nessuna fase viene ignorata silenziosamente da Graphviz.
+- Per matrix con periodi molto larghi il JPG può ora essere generato, se necessario, anche sotto i 12 dpi (per riferimento: il matrix da 1311 US con periodi esce a 49 dpi): è solo una panoramica; per la versione leggibile usare le copie `.svg` / `.pdf` salvate accanto.
+
+**Copie vettoriali e stampa del poster**:
+
+- Le copie `.pdf` / `.svg` restano ora sempre entro 200 pollici (14 400 pt) per lato, il limite oltre il quale Acrobat e Anteprima mostrano solo una parte della pagina: l'intero matrix è quindi visibile e ingrandibile (vettoriale, senza perdita di qualità). Sul database da 1311 US con periodi il PDF misura 14 400 × 2 591 pt.
+- Per stamparlo usare il PDF poster (checkbox **PDF poster** in Setting_Matrix): per lo stesso database, A0 con "Adatta all'altezza" produce 5 fogli A0 orizzontali in scala 1:3,4 (testo ≈ 4 pt: leggibile su plotter; usare A0 "1:2" o "1:1" per testo più grande e più fogli). Un singolo foglio A0 ("Adatta alla pagina") è solo una panoramica.
+
+### US Non Raggruppate per Periodo
+
+**Causa**: Manca la periodizzazione o non e abilitata
+
+**Soluzione**:
+1. Compilare la Scheda Periodizzazione
+2. Assegnare periodo/fase iniziale alle US
+3. Abilitare "Mostra Periodi" nelle impostazioni
+
+### Avviso "Periodizzazione: cronologia iniziale maggiore della finale"
+
+**Quando compare**: esportando con **Print Periodizzazione** attivo, se in almeno un periodo/fase la Cronologia Iniziale è maggiore della Cronologia Finale (es. `Periodo 6 Fase 1: 1650 → 1450`). L'export prosegue comunque.
+
+**Causa**: quasi sempre date a.C. inserite senza il segno meno (la convenzione di pyArchInit è a.C. = anni negativi). Il periodo viene ordinato come d.C.: l'Età del Bronzo finisce sopra le fasi romane e le etichette dei cluster riportano "1650 d.C." invece di "1650 a.C.".
+
+**Soluzione**:
+1. Aprire la Scheda Periodizzazione e correggere i periodi elencati nell'avviso inserendo gli anni a.C. come numeri negativi (es. `-1650` → `-1450`)
+2. Rigenerare il Matrix
+
+### Errore "list index out of range" esportando il matrix
+
+**Quando compariva**: premendo **Esporta matrice** (export standard oppure 2ED) su un database in cui i rapporti sono scritti nel **formato corto** — `[tipo, US]` invece di `[tipo, US, area, sito]`. Nel database di esempio distribuito col plugin tutte le voci sono in formato corto, quindi il matrix non si generava affatto.
+
+**Causa**: l'esportatore leggeva sempre la terza e la quarta casella di ogni rapporto, che nel formato corto non esistono.
+
+**Soluzione**: risolto da questa versione. Adesso vengono letti entrambi i formati, e una voce troncata o illeggibile viene saltata invece di far cadere tutta l'esportazione. Non serve correggere i dati: basta aggiornare il plugin e rigenerare il matrix.
+
+## Output e File Generati
+
+### Cartella di Output
+
+```
+~/pyarchinit/pyarchinit_Matrix_folder/
+├── Harris_matrix.dot           # Sorgente Graphviz
+├── Harris_matrix_tred.dot      # Dopo riduzione transitiva
+├── Harris_matrix_tred.dot.jpg  # Immagine finale JPG
+├── Harris_matrix_tred.dot.png  # Immagine finale PNG
+├── Harris_matrix_tred.dot.svg  # Vettoriale (solo matrix grandi)
+├── Harris_matrix_tred.dot.pdf  # Vettoriale (solo matrix grandi)
+├── Harris_matrix_poster_A0.pdf # PDF poster multi-pagina per la stampa
+├── Harris_matrix2ED.dot        # Versione estesa
+├── Harris_matrix2ED_graphml.dot # Per export GraphML
+└── matrix_error.txt            # Log errori
+```
+
+### Utilizzo dei File
+
+| File | Utilizzo |
+|------|----------|
+| *.jpg/*.png | Inserimento in relazioni |
+| *.dot | Modifica con editor Graphviz |
+| _graphml.dot | Import in yEd per editing avanzato |
+| *.svg/*.pdf | Versione vettoriale ingrandibile (matrix grandi) |
+| _poster_A0.pdf | PDF poster multi-pagina per la stampa; il nome segue il formato scelto (es. `_poster_A3.pdf`), per Export Matrix 2ED il prefisso è `Harris_matrix2ED` |
+
+## Best Practices
+
+### 1. Prima della Generazione
+
+- Verificare completezza rapporti stratigrafici
+- Controllare assenza di cicli
+- Assegnare periodo/fase a tutte le US
+- Compilare la definizione interpretativa
+
+### 2. Durante la Compilazione US
+
+- Inserire rapporti bidirezionali corretti
+- Usare terminologia consistente
+- Verificare area corretta nei rapporti
+
+### 3. Ottimizzazione Output
+
+- Per stampa: DPI 300
+- Per schermo: DPI 150
+- Per scavi complessi: suddividere per aree
+
+### 4. Controllo Qualita
+
+- Confrontare matrix con documentazione di scavo
+- Verificare sequenze logiche
+- Controllare raggruppamenti per periodo
+
+## Workflow Completo
+
+### 1. Preparazione Dati
+
+```
+1. Completare schede US con tutti i rapporti
+2. Compilare scheda Periodizzazione
+3. Assegnare periodo/fase alle US
+4. Verificare consistenza dati
+```
+
+### 2. Generazione Matrix
+
+```
+1. Menu PyArchInit → Matrix di Harris
+2. Configurare impostazioni (DPI, colori)
+3. Abilitare cluster per periodi
+4. Generare il matrix
+```
+
+### 3. Verifica e Correzione
+
+```
+1. Controllare il matrix generato
+2. Identificare eventuali errori
+3. Correggere rapporti nelle schede US
+4. Rigenerare se necessario
+```
+
+### 4. Utilizzo Finale
+
+```
+1. Inserire in relazione di scavo
+2. Esportare per pubblicazione
+3. Archiviare con documentazione
+```
+
+## Integrazione con Altri Strumenti
+
+### Export per yEd
+
+Il file `_graphml.dot` puo essere aperto in yEd per:
+- Editing manuale del layout
+- Aggiunta di annotazioni
+- Export in formati diversi
+
+### Export per s3egraph
+
+PyArchInit supporta l'export per il sistema s3egraph:
+- Formato compatibile
+- Mantiene relazioni stratigrafiche
+- Supporto per visualizzazione 3D
+
+## Riferimenti
+
+### File Sorgente
+- `tabs/Interactive_matrix.py` - Interfaccia interattiva
+- `modules/utility/pyarchinit_matrix_exp.py` - Classi HarrisMatrix e ViewHarrisMatrix
+
+### Database
+- `us_table` - Dati US e rapporti
+- `periodizzazione_table` - Periodi e fasi
+
+### Dipendenze
+- Graphviz (dot, tred)
+- Python graphviz library
+
+---
+
+## Video Tutorial
+
+### Matrix di Harris - Generazione Completa
+`[Placeholder: video_matrix_harris.mp4]`
+
+**Contenuti**:
+- Configurazione impostazioni
+- Generazione matrix
+- Interpretazione risultati
+- Risoluzione problemi comuni
+
+**Durata prevista**: 15-20 minuti
+
+### Matrix di Harris - Editing Avanzato con yEd
+`[Placeholder: video_matrix_yed.mp4]`
+
+**Contenuti**:
+- Export per yEd
+- Modifica layout
+- Aggiunta annotazioni
+- Re-export
+
+**Durata prevista**: 10-12 minuti
+
+---
+
+*Ultimo aggiornamento: Gennaio 2026*
+
+---
+
+## Animazione Interattiva
+
+Esplora l'animazione interattiva per approfondire questo argomento.
+
+[Apri Animazione Interattiva](../../animations/harris_matrix_animation.html)

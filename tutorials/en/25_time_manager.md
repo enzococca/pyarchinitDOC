@@ -1,0 +1,286 @@
+# Tutorial 25: Time Manager (GIS Time Controller)
+
+## Introduction
+
+The **Time Manager** (GIS Time Controller) is an advanced tool for visualizing stratigraphic sequence over time. It allows "navigating" through stratigraphic levels using a temporal control, progressively displaying SU from oldest to most recent (the formation of the site).
+
+### Main Features
+
+- Progressive visualization of stratigraphic levels
+- Control via dial/slider
+- Cumulative or single level mode
+- Automatic image/video generation
+- Integration with Harris Matrix
+
+## Access
+
+### From Menu
+**PyArchInit** → **Time Manager**
+
+### Prerequisites
+
+- Layer with `order_layer` field (stratigraphic index)
+- SU with order_layer filled in
+- Layers loaded in QGIS
+
+## Interface
+
+### Main Panel
+
+```
++--------------------------------------------------+
+|         GIS Time Management                       |
++--------------------------------------------------+
+| Available layers:                                 |
+| [ ] pyunitastratigrafiche                        |
+| [ ] pyunitastratigrafiche_usm                    |
+| [ ] other_layer                                  |
++--------------------------------------------------+
+|              [Circular Dial]                     |
+|                   /  \                           |
+|                  /    \                          |
+|                 /______\                         |
+|                                                  |
+|         Level: [SpinBox: 0-N]                   |
++--------------------------------------------------+
+| [x] Cumulative Mode (show <= level)             |
++--------------------------------------------------+
+| [ ] Show Matrix          [Stop] [Generate Video] |
++--------------------------------------------------+
+| [Matrix/Image Preview]                           |
++--------------------------------------------------+
+```
+
+### Controls
+
+| Control | Function |
+|---------|----------|
+| Layer Checkbox | Select layers to control |
+| Dial | Navigate between levels (rotation) |
+| SpinBox | Direct level input |
+| Cumulative Mode | Show all levels up to selected |
+| Show Matrix | Display synchronized Harris Matrix |
+
+## order_layer Field
+
+### What is order_layer?
+
+The `order_layer` field defines the stratigraphic display order:
+- **0** = Oldest level (deep)
+- **N** = Most recent level (surface)
+
+This is the convention of **Stratigraphic order** with "Order: Ancient → Recent" checked (the default, see Tutorial 03): if the ordering was calculated the other way round, the Time Manager and the map show the sequence upside down.
+
+### Filling order_layer
+
+In the SU Form, **Help** tab → **Tool Box**, the **Stratigraphic order** button calculates `order_layer` from the stratigraphic relationships (see Tutorial 03); the value of the current SU appears in the field below the button. Rules:
+1. 0 for the oldest SU, increasing values towards the most recent (at the surface)
+2. Contemporary SU can have the same value
+3. Follow the Matrix sequence
+
+### Example
+
+| SU | order_layer | Description |
+|----|-------------|-------------|
+| SU001 | 4 | Surface humus |
+| SU002 | 3 | Plowed layer |
+| SU003 | 2 | Collapse |
+| SU004 | 1 | Use floor |
+| SU005 | 0 | Foundation |
+
+Since 5.13.19-alpha the SU and USM layers that pyArchInit loads on the map (see Tutorial 14, *Style Choice*) are drawn in the same order the Time Manager uses: by period chronology, then by `order_layer` (0 = oldest), so the most recent units are on top.
+
+## Visualization Modes
+
+### Single Level Mode
+
+Checkbox **NOT** active:
+- Shows ONLY SU of selected level
+- Useful for isolating single layers
+- "Slice" visualization
+
+### Cumulative Mode
+
+Checkbox **ACTIVE**:
+- Shows all SU from level 0 (oldest) to the selected one
+- Shows the formation of the site, from the oldest SU to the most recent
+- More realistic visualization
+
+## Matrix Integration
+
+### Synchronized Visualization
+
+With **"Show Matrix"** checkbox active:
+- Harris Matrix appears in panel
+- Updates in sync with level
+- Highlights current level SU
+
+### Image Generation
+
+Time Manager can generate:
+- Screenshot for each level
+- Image sequence
+- Time-lapse video
+
+## Video/Image Generation
+
+### Process
+
+1. Select layers to include
+2. Configure level range (min-max)
+3. Click **"Generate Video"**
+4. Wait for processing
+5. Output in designated folder
+
+### Output
+
+- PNG images for each level
+- Optional: compiled MP4 video
+
+## Typical Workflow
+
+### 1. Preparation
+
+```
+1. Open QGIS project with SU layers
+2. Verify order_layer is filled in
+3. Open Time Manager
+```
+
+### 2. Layer Selection
+
+```
+1. Select layers to control
+2. Usually: pyunitastratigrafiche and/or _usm
+```
+
+### 3. Navigation
+
+```
+1. Use dial or spinbox
+2. Observe visualization change
+3. Enable/disable cumulative mode
+```
+
+### 4. Documentation
+
+```
+1. Enable "Show Matrix"
+2. Generate significant screenshots
+3. Optional: generate video
+```
+
+## Layout Templates
+
+### Template Loading
+
+Time Manager supports QGIS templates for:
+- Custom print layouts
+- Headers and legends
+- Standard formats
+
+### Available Templates
+
+In `resources/templates/` folder:
+- Base template
+- Template with Matrix
+- Template for video
+
+## Best Practices
+
+### 1. order_layer
+
+- Fill in BEFORE using Time Manager
+- Use consecutive values
+- Contemporary SU = same value
+
+### 2. Visualization
+
+- Start from level 0 (oldest)
+- Proceed in ascending order
+- Use cumulative mode for presentations
+
+### 3. Documentation
+
+- Capture screenshots at significant levels
+- Document phase transitions
+- Generate video for reports
+
+## Troubleshooting
+
+### Layers Not Visible in List
+
+**Cause**: Layer without order_layer field
+
+**Solution**:
+- Add order_layer field to layer
+- Populate with appropriate values
+
+### No Visual Change
+
+**Causes**:
+- order_layer not filled in
+- Filter not applied
+
+**Solutions**:
+- Verify order_layer values in SU
+- Check that layer is selected
+
+### Dial Not Responding
+
+**Cause**: No layer selected
+
+**Solution**: Select at least one layer from list
+
+## References
+
+### Source Files
+- `tabs/Gis_Time_controller.py` - Main interface
+- `gui/ui/Gis_Time_controller.ui` - UI layout
+
+### Database Field
+- `us_table.order_layer` - Stratigraphic index
+
+---
+
+## Video Tutorial
+
+### Time Manager
+`[Placeholder: video_time_manager.mp4]`
+
+**Contents**:
+- order_layer configuration
+- Temporal navigation
+- Video generation
+- Matrix integration
+
+**Expected duration**: 15-18 minutes
+
+---
+
+*Last updated: January 2026*
+
+---
+
+## Interactive Animation
+
+Explore the interactive animation to learn more about this topic.
+
+[Open Interactive Animation](../../animations/pyarchinit_timemanager_animation.html)
+
+---
+
+## The matrix, from 5.13.44
+
+The Time Manager's matrix no longer goes through Graphviz. It is drawn by the same layout engine as the **See the matrix** panel, inside QGIS and with no subprocesses.
+
+- **It is immediate.** On the sample site (51 SU, 81 relations) the drawing costs a few milliseconds instead of roughly three tenths of a second, and the `dot` and `tred` processes that occasionally hung are gone. The site's periods are read **once**: before, they were re-read with one query per area and per period, on every click of the dial.
+- **In the atlas the matrix is vector.** The picture placed in the sheet is an SVG of a few tens of KB instead of a JPEG of megabytes: it stays readable at any scale and the sheet weighs less.
+- **It is the same matrix** as the Extended Matrix panel: same period bands, same symbology, same redundancy reduction. Arrows that **climb** the bands — where stratigraphy contradicts chronology — are drawn in **red**.
+- The matrix still holds only the SU visible at the dial's current position.
+
+- Units that are **not visible** at the current position but are cited by a relationship still enter the drawing, **faded**: without them the sequence would look broken, and drawn like the others they would look as if they were on the map.
+
+> **Which template to pick.** In the chooser each template is marked: **✓** has the «Tavola N» title and the matrix picture (that is the Time Manager one, `layout_TimeManager`), **•** has only the map — sheets come out plainer but they come out — **✗** has no map and cannot be used. Picking one without those two items used to make the generator return without a word, and no sheet appeared.
+
+> **Making any template suitable.** Generic templates can be prepared: `scripts/prepare_atlas_templates.py`, run with QGIS's Python, writes beside each one a copy suffixed « + Time Manager» carrying the title and the matrix picture on a **new page**, so nothing already there is covered. The originals are untouched. Each level then produces two images: `Tavola_N.jpg` with the map and `Tavola_N_2.jpg` with the matrix.

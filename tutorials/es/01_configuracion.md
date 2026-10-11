@@ -1,0 +1,567 @@
+# PyArchInit - Guía de Configuración
+
+## Índice
+1. [Introducción](#introducción)
+2. [Acceso a la Configuración](#acceso-a-la-configuración)
+3. [Pestaña Parámetros de Conexión](#pestaña-parámetros-de-conexión)
+4. [Pestaña Instalación BD](#pestaña-instalación-bd)
+5. [Pestaña Herramientas de Importación](#pestaña-herramientas-de-importación)
+6. [Pestaña Graphviz](#pestaña-graphviz)
+7. [Pestaña PostgreSQL](#pestaña-postgresql)
+8. [Pestaña Ayuda](#pestaña-ayuda)
+9. [Pestaña FTP a Lizmap](#pestaña-ftp-a-lizmap)
+10. [Workspace de Paradatos (solo PostgreSQL)](#workspace-de-paradatos-solo-postgresql)
+
+---
+
+## Introducción
+
+La ventana de configuración de PyArchInit permite establecer todos los parámetros necesarios para el correcto funcionamiento del plugin. Antes de comenzar a documentar una excavación arqueológica, es necesario configurar correctamente la conexión a la base de datos y las rutas de los recursos.
+
+> **Video Tutorial**: [Insertar enlace video introducción configuración]
+
+---
+
+## Acceso a la Configuración
+
+Para acceder a la configuración:
+1. Abrir QGIS
+2. Menú **PyArchInit** → **Config**
+
+O desde la barra de herramientas de PyArchInit hacer clic en el icono **Ajustes**.
+
+![Acceso a la configuración](images/01_configuracion/01_menu_config.png)
+*Figura 1: Acceso a la ventana de configuración desde el menú PyArchInit*
+
+![Toolbar PyArchInit](images/01_configuracion/02_toolbar_config.png)
+*Figura 2: Icono configuración en la barra de herramientas*
+
+---
+
+## Pestaña Parámetros de Conexión
+
+Esta es la pestaña principal para configurar la conexión a la base de datos.
+
+![Pestaña Parámetros de Conexión](images/01_configuracion/03_tab_parametros_conexion.png)
+*Figura 3: Pestaña Parámetros de Conexión - Vista completa*
+
+### Sección DB Settings
+
+| Campo | Descripción |
+|-------|-------------|
+| **Database** | Seleccionar el tipo de base de datos: `sqlite` (local) o `postgres` (servidor) |
+| **Host** | Dirección del servidor PostgreSQL (ej. `localhost` o IP del servidor) |
+| **DBname** | Nombre de la base de datos (ej. `pyarchinit`) |
+| **Port** | Puerto de conexión (predeterminado: `5432` para PostgreSQL) |
+| **User** | Nombre de usuario para la conexión |
+| **Password** | Contraseña del usuario |
+| **SSL Mode** | Modo SSL para PostgreSQL: `allow`, `prefer`, `require`, `disable` |
+
+#### Elección de la Base de Datos
+
+**SQLite/Spatialite** (Recomendado para uso individual):
+- Base de datos local, no requiere servidor
+- Ideal para proyectos individuales o de pequeñas dimensiones
+- El archivo `.sqlite` se guarda en la carpeta `pyarchinit_DB_folder`
+
+**PostgreSQL/PostGIS** (Recomendado para equipos):
+- Base de datos en servidor, acceso multiusuario
+- Necesario tener PostgreSQL con extensión PostGIS instalado
+- Soporta gestión de usuarios y permisos
+- Ideal para proyectos grandes con múltiples operadores
+
+### Sección Path Settings
+
+| Campo | Descripción | Botón |
+|-------|-------------|-------|
+| **Thumbnail path** | Ruta donde guardar las miniaturas de las imágenes | `...` para explorar |
+| **Image resize** | Ruta para las imágenes redimensionadas | `...` para explorar |
+| **Logo path** | Ruta del logo personalizado para los informes | `...` para explorar |
+
+> **Al primer arranque las dos rutas se rellenan solas.** pyArchInit crea
+> `pyarchinit_Thumbnails_folder` (las miniaturas) y
+> `pyarchinit_Resize_folder` (las imágenes redimensionadas) dentro de la
+> carpeta de datos, escribe las dos rutas en los campos de arriba y dibuja
+> allí los medios de la base de datos de ejemplo: **tres por registro** en
+> UE, cerámica, materiales, tumbas, estructuras y UT. Son marcadores de
+> posición, y lo dicen en la propia imagen. **Si ya has rellenado los dos
+> campos no se tocan**, ni siquiera si apuntan a un `webdav://`.
+
+#### Rutas Remotas Soportadas
+
+PyArchInit soporta también almacenamiento remoto:
+- **Google Drive**: `gdrive://folder/path/`
+- **Dropbox**: `dropbox://folder/path/`
+- **Amazon S3**: `s3://bucket/path/`
+- **Cloudinary**: `cloudinary://cloud_name/folder/`
+- **WebDAV**: `webdav://server/path/`
+- **HTTP/HTTPS**: `https://server/path/`
+
+> **Configuración de medios en WebDAV.** Para usar un servidor WebDAV como almacenamiento de imágenes:
+>
+> 1. **Credenciales** — diálogo **Remote Storage Config**, pestaña **WebDAV**: introduce *Nombre de usuario* y *Contraseña*.
+> 2. **Verify SSL** (misma pestaña) — si el servidor utiliza un **certificado autofirmado** (típico de servidores en una dirección IP a secas o en un puerto HTTPS no estándar), establece **"Verify SSL" → No (Self-signed certificates)**: con la verificación activada contra un servidor autofirmado la conexión falla silenciosamente. Para servidores con un certificado válido (p. ej. Nextcloud/ownCloud) déjalo en **Yes (Verify certificates)**, que es el valor predeterminado.
+> 3. **Rutas** — en los campos **Thumbnail path** y **Thumbnail resize** usa el formato `webdav://server:port/folder/` (p. ej. `webdav://192.0.2.10:5006/pyarchinit_media/thumb_resize/`).
+> 4. **Reinicia QGIS** después de guardar para que la nueva configuración de almacenamiento surta efecto.
+
+### Carpeta de datos de pyArchInit 5 (`~/pyarchinit_5`)
+
+pyArchInit 5 almacena todos sus datos de trabajo — `config.cfg`, bases de datos, exportaciones, copias de seguridad, paradatos y la carpeta `bin/` con las herramientas de IA — en una carpeta dedicada en el directorio de inicio: **`~/pyarchinit_5/`**.
+
+Esta carpeta es independiente del pyArchInit clásico, que sigue usando **`~/pyarchinit/`**. Las dos versiones por tanto **no** comparten datos, de modo que es posible ejecutar pyArchInit 5 mientras la instalación anterior y sus bases de datos permanecen intactas.
+
+**Primer inicio — copia de los datos existentes.** La primera vez que pyArchInit 5 se inicia, si `~/pyarchinit_5` aún no existe pero se encuentra una instalación previa de `~/pyarchinit`, aparece un diálogo que pregunta si se desea copiar la configuración y las bases de datos a la nueva carpeta:
+
+- Elige **Sí** para copiar `pyarchinit_DB_folder` (es decir, `config.cfg` y las bases de datos SQLite) en `~/pyarchinit_5`, de modo que puedas seguir trabajando con tus datos existentes de inmediato.
+- La **carpeta `bin/` no se copia**, porque contiene assets de IA de gran tamaño (entornos virtuales de SAM y cerámica, modelos CLIP, índices FAISS, archivos de claves API). Vuelve a crearlos ejecutando de nuevo las funciones de IA correspondientes, o copia manualmente `~/pyarchinit/bin` en `~/pyarchinit_5/bin`.
+- Si eliges **No**, pyArchInit 5 simplemente crea una nueva estructura de carpetas vacía, como en una instalación limpia.
+
+> **Novedad 5.13.16-alpha — primer inicio más claro.**
+> - La pregunta "¿copiar la configuración y las bases de datos en la nueva carpeta `~/pyarchinit_5`?" ahora aparece siempre en primer plano, delante de cualquier ventana. Antes, sobre todo en Windows, podía quedar oculta detrás de QGIS o de la pantalla de inicio (splash) y el inicio parecía bloqueado. Responde **Sí** o **No** para continuar.
+> - Mientras se instalan los paquetes de Python que faltan, la pantalla de inicio de pyArchInit permanece en primer plano con una barra de progreso que muestra el paquete n de N, el porcentaje y el tiempo transcurrido. La instalación puede tardar varios minutos: no cierres QGIS. En Windows no se abre ninguna ventana de consola durante la instalación.
+
+> **Novedad 5.13.17-alpha — QGIS 4 y varias versiones de QGIS en el mismo ordenador.**
+> - Los paquetes de Python de pyArchInit se instalan con el Python del QGIS que estás usando (por ejemplo Python 3.12 en QGIS 4). Antes, con QGIS 3 y QGIS 4 instalados juntos en macOS, se instalaban para el Python de QGIS 3 y QGIS 4 se detenía con el error `No module named 'psycopg2._psycopg'`.
+> - Si la carpeta del plugin contiene paquetes instalados para otro Python (por ejemplo un perfil de QGIS 3 copiado en QGIS 4), al iniciarse pyArchInit los mueve a la carpeta `ext_libs_cp39` (el nombre indica la versión de Python) y reinstala los que necesita: la primera vez puede tardar algunos minutos, con el progreso en la pantalla de inicio (splash). El mensaje aparece en el panel de registro de QGIS, pestaña "PyArchInit".
+> - Las carpetas `ext_libs_cp…` se pueden eliminar. Si usas el mismo plugin desde dos versiones de QGIS, pyArchInit vuelve a poner en su sitio la carpeta correcta en lugar de reinstalar.
+
+**Ubicación personalizada (avanzado).** Para usar una carpeta de datos diferente, establece la variable de entorno `PYARCHINIT_HOME` antes de iniciar QGIS; cuando se establece, reemplaza la ubicación predeterminada `~/pyarchinit_5`.
+
+### Sección Experimental
+
+| Campo | Descripción |
+|-------|-------------|
+| **Experimental** | Activa funcionalidades experimentales (`Sí`/`No`) |
+
+### Sección Activación de Sitio
+
+| Campo | Descripción |
+|-------|-------------|
+| **Activar query de sitio** | Selecciona el sitio activo para filtrar los datos en las fichas |
+
+Esta opción es fundamental cuando se trabaja con varios sitios arqueológicos en la misma base de datos. Al seleccionar un sitio, todas las fichas mostrarán solo los datos relativos a ese sitio.
+
+### Botones de Acción
+
+| Botón | Función |
+|-------|---------|
+| **Guardar los parámetros** | Guarda todos los ajustes configurados |
+| **Actualizar BD** | Actualiza el esquema de la base de datos existente sin perder datos |
+
+### Funciones de Alineación de Base de Datos
+
+| Botón | Descripción |
+|-------|-------------|
+| **Alinear Postgres** | Alinea y actualiza la estructura de la base de datos PostgreSQL |
+| **Alinear Spatialite** | Alinea y actualiza la estructura de la base de datos SQLite |
+| **EPSG code** | Insertar el código EPSG del sistema de referencia de la base de datos |
+
+### Summary (Resumen)
+
+La sección Summary muestra un resumen de los ajustes actuales en formato HTML.
+
+---
+
+## Pestaña Instalación BD
+
+Esta pestaña permite crear una nueva base de datos desde cero.
+
+![Pestaña Instalación BD](images/01_configuracion/12_tab_instalacion_db.png)
+*Figura 12: Pestaña Instalación BD - Vista completa*
+
+### Instalar la base de datos (PostgreSQL/PostGIS)
+
+| Campo | Descripción |
+|-------|-------------|
+| **host** | Dirección del servidor (predeterminado: `localhost`) |
+| **port (5432)** | Puerto del servidor PostgreSQL |
+| **user** | Usuario con permisos de creación de base de datos (ej. `postgres`) |
+| **password** | Contraseña del usuario |
+| **db name** | Nombre de la nueva base de datos (predeterminado: `pyarchinit`) |
+| **Seleccionar SRID** | Sistema de referencia espacial (ej. `4326` para WGS84, `32632` para UTM 32N) |
+
+**Botón Instalar**: Crea la base de datos con todas las tablas necesarias.
+
+### Instalar la base de datos (SpatiaLite)
+
+| Campo | Descripción |
+|-------|-------------|
+| **db name** | Nombre del archivo de base de datos (predeterminado: `pyarchinit`) |
+| **Seleccionar SRID** | Sistema de referencia espacial |
+
+**Botón Instalar**: Crea la base de datos SQLite local.
+
+### SRID Comunes en España
+
+| SRID | Descripción |
+|------|-------------|
+| 4326 | WGS 84 (coordenadas geográficas) |
+| 25830 | ETRS89 / UTM zone 30N (Península) |
+| 25831 | ETRS89 / UTM zone 31N (Cataluña, Baleares) |
+| 25829 | ETRS89 / UTM zone 29N (Galicia, Portugal) |
+| 32628 | WGS 84 / UTM zone 28N (Canarias) |
+
+---
+
+## Pestaña Herramientas de Importación
+
+Esta pestaña permite importar datos de otras bases de datos o archivos CSV.
+
+### Sección Importación de Datos
+
+#### Base de Datos Origen (Recurso)
+
+| Campo | Descripción |
+|-------|-------------|
+| **Database** | Tipo de base de datos origen (`sqlite` o `postgres`) |
+| **Host/Port/Username/Password** | Credenciales para PostgreSQL origen |
+| **...** | Seleccionar archivo SQLite origen |
+
+#### Base de Datos Destino
+
+| Campo | Descripción |
+|-------|-------------|
+| **Database** | Tipo de base de datos destino |
+| **Host/Port/Username/Password** | Credenciales para PostgreSQL destino |
+| **...** | Seleccionar archivo SQLite destino |
+
+### Tablas Disponibles para Importación
+
+| Tabla | Descripción |
+|-------|-------------|
+| SITE | Sitios arqueológicos |
+| US | Unidades Estratigráficas |
+| PERIODIZZAZIONE | Periodización y fases |
+| INVENTARIO_MATERIALI | Inventario de materiales |
+| TMA | Tablas de Materiales Arqueológicos |
+| POTTERY | Cerámica |
+| STRUTTURA | Estructuras |
+| TOMBA | Tumbas |
+| SCHEDAIND | Fichas de individuos antropológicos |
+| ARCHEOZOOLOGY | Datos arqueozoológicos |
+| CAMPIONI | Muestras |
+| DOCUMENTAZIONE | Documentación |
+| MEDIA | Archivos multimedia |
+| UT | Unidades Topográficas |
+| ALL | Todas las tablas |
+
+### Opciones de Importación
+
+| Opción | Descripción |
+|--------|-------------|
+| **Replace** | Reemplaza los registros existentes |
+| **Ignore** | Ignora los duplicados |
+| **Abort** | Interrumpe en caso de error |
+| **Apply Constraints** | Aplica restricciones de unicidad al tesauro |
+
+### Botones
+
+| Botón | Función |
+|-------|---------|
+| **Import Table** | Importa los datos de la tabla seleccionada |
+| **Import Geometry** | Importa las geometrías seleccionadas |
+| **Convertir db a spatialite** | Convierte de PostgreSQL a SQLite |
+| **Convertir db a postgres** | Convierte de SQLite a PostgreSQL |
+
+---
+
+### Exportar un sitio a em.json (Extended Matrix)
+
+Desde el menú **pyArchInit → Extended Matrix → Esporta sito in em.json…** (Exportar sitio a em.json) un sitio entero pasa al formato de trabajo de la Extended Matrix, el que **EMStudio** abre de forma nativa.
+
+Qué esperar:
+
+- pyArchInit enumera los sitios de la base de datos: se elige **uno**;
+- el archivo nace en `pyarchinit_EM_folder`, dentro de la carpeta de datos del plugin, con el nombre del sitio (cualquier alfabeto: `Al-Khutm.em.json`, `Scavo_archeologico.em.json`);
+- antes de entregarlo, pyArchInit **vuelve a leer el archivo**: una exportación que no se relee idéntica no se entrega;
+- al final pregunta si se quiere **abrir en EMStudio enseguida**; si EMStudio no está instalado, pyArchInit indica dónde está el archivo y **ofrece instalarlo ahora** (véase el apartado siguiente).
+
+En el archivo está solo el sitio elegido, y cada unidad llega como lo que es:
+
+- **solo las filas de ese sitio**: en una base de datos con varios sitios, la documentación y los periodos de los demás sitios ya no entran en la exportación;
+- **cada unidad con el tipo que declara**: las unidades virtuales siguen siendo virtuales, los special finds y las continuidades siguen siendo ellos mismos, de modo que EMStudio dibuja el símbolo correcto en vez de convertir todo en un estrato;
+- **los paradatos viajan como paradatos**, no como unidades estratigráficas;
+- una **columna vacía** de la ficha ya no se convierte en una propiedad vacía del grafo.
+
+Lo que dibuja el panel **«Vedi la matrice»** es exactamente lo que hay en el archivo: echarle un vistazo es la manera más rápida de comprobar la exportación antes de mandarla a EMStudio o a una sala.
+
+> **Nota**: el GraphML sobrevive solo como **importación puntual desde yEd**; el formato para ver y validar la matriz es em.json.
+
+### Instalar EMStudio desde el menú
+
+**EMStudio** es el visor de la Extended Matrix: un programa aparte del proyecto Extended Matrix (licencia GPL-3). pyArchInit no lo incluye — lo **descarga y lo lanza**, cuando se le pide.
+
+Con **pyArchInit → Extended Matrix → Installa EMStudio…** (Instalar EMStudio):
+
+1. pyArchInit lee las releases oficiales de EMStudio y **elige el paquete para este ordenador** (macOS Apple Silicon, Windows, Linux);
+2. antes de descargar muestra una ventana con **versión, nombre del archivo, tamaño, dirección de descarga y carpeta de destino** — `<carpeta de datos de pyArchInit>/tools/EMStudio` — y espera un sí;
+3. terminada la descarga **verifica la huella sha256** declarada por la release: un archivo que no coincide no se instala;
+4. en macOS **quitar la cuarentena** forma parte de la instalación: la compilación no está firmada por Apple y sin este paso el sistema diría que la aplicación está "dañada";
+5. al final indica dónde se ha instalado. Si EMStudio ya estaba, pregunta si se quiere descargar de nuevo la última versión.
+
+Si la exportación a em.json no encuentra EMStudio, **propone instalarlo en el momento** y después abre el archivo.
+
+> **Límite conocido**: la release de hoy no publica paquete para los **Mac Intel**. En ese caso pyArchInit lo dice e indica la página de releases (github.com/ExtendedMatrix/EMStudio/releases), desde donde se descarga a mano.
+
+### Ver la matriz dentro de QGIS
+
+Desde el menú **pyArchInit → Extended Matrix → Vedi la matrice…** (Ver la matriz) la matriz de un sitio se dibuja en un **panel acoplado a la derecha** de la ventana de QGIS. No hace falta EMStudio, ni un nodo StratiGraph, ni iniciar sesión, ni internet: pyArchInit exporta el em.json del sitio a una carpeta temporal y lo dibuja.
+
+Qué esperar:
+
+- se elige el **sitio** de una lista; el panel se abre con la matriz ya ajustada a la ventana y, arriba, una línea que dice **cuántas unidades, cuántas épocas y cuántas relaciones** se han dibujado;
+- el dibujo tiene **una banda horizontal por cada periodo/fase**, la **más reciente arriba**, cada una con su nombre, sus años y su propio color;
+- cada unidad está en la banda del periodo en que nació, y dentro de la banda es la estratigrafía la que decide el nivel: **lo que cubre se dibuja encima de lo que está cubierto**;
+- cada unidad se dibuja con la **simbología de la Extended Matrix**, la de las reglas de s3dgraphy (véase la tabla);
+- la **rueda del ratón** acerca y aleja, un **doble clic** devuelve toda la matriz a la ventana (como el botón **Adatta** / Ajustar), un **clic sobre una unidad** muestra su ficha en el recuadro de la derecha: definición, interpretación, periodo y fase, datación, área, estructura;
+- bajo la ficha aparecen los **medios vinculados a esa UE**: las miniaturas de las fotos, con su nombre. Si las imágenes están en un almacén remoto las miniaturas no se descargan solas — un botón **Carica le anteprime** (cargar miniaturas) las pide, porque cada una es una petición de red;
+- el botón **Zoom sulla geometria** encuadra en el mapa la planta de la unidad. Se activa solo para las unidades que son filas de la ficha UE (un nodo de continuidad o un documento no tiene geometría), y busca entre las **capas ya cargadas**, en el orden de la leyenda, sin añadir ninguna. Si ninguna capa cargada lleva los campos para reconocer la unidad, o si la planta nunca se dibujó, el panel lo dice en vez de no hacer nada.
+
+| Unidad | Símbolo |
+|---|---|
+| UE — unidad estratigráfica | rectángulo |
+| USVs — unidad virtual estructural | paralelogramo azul |
+| USVn — unidad virtual no estructural | hexágono verde |
+| SF — hallazgo singular (special find) | octógono oliva |
+| BR / CON — continuidad | rombo negro |
+| Extractor | pentágono |
+| Combinador | hexágono discontinuo |
+| Documento | elipse |
+| Propiedad | círculo discontinuo |
+
+**Salva SVG…** (Guardar SVG) y **Salva PNG…** (Guardar PNG) guardan el dibujo donde se quiera. El **SVG es vectorial**: se abre en un navegador o en Inkscape, se amplía cuanto haga falta sin perder nitidez y se imprime a cualquier tamaño, pósteres incluidos.
+
+La misma matriz se abre también desde la ventana **«Export Extended Matrix»** de la ficha UE: el botón **«Vedi la matrice»**, junto a **«Apri in EMStudio»**, se activa tras una exportación em.json correcta y dibuja el archivo recién exportado.
+
+> **Nota**: en un sitio muy grande el panel lo dice por sí mismo, con un aviso en la barra de mensajes de QGIS, y aconseja **guardar el SVG y verlo fuera de QGIS**: recorrer en pantalla un dibujo de miles de unidades es lento.
+
+> **Nota**: la matriz se dibuja también cuando la excavación no está en orden. Las relaciones que apuntan a un elemento de paradata siguen en el dibujo, y las unidades cuyo nivel no se puede decidir porque las relaciones contienen un bucle se dibujan igualmente: el panel no rechaza una excavación real.
+
+### Entregar un sitio a una sala StratiGraph
+
+Desde **pyArchInit → Extended Matrix → Consegna sito alla stanza…** (Entregar sitio a la sala) las unidades estratigráficas de un sitio viajan a una **sala** de un nodo StratiGraph (REST, una entrega cada vez — no hace falta quedarse conectado).
+
+Qué esperar:
+
+- se elige el **sitio**, luego la ventana pide el **nodo** (p. ej. `http://127.0.0.1:8020`; para un nodo institucional `https://nodo.org/em` — escribir la raíz también funciona, `/em` se encuentra solo), la **sala** y, solo si el nodo lo exige, un **token** (mejor en la variable de entorno `STRATIGRAPH_TOKEN`: nunca se guarda);
+- el resultado es una frase: *"129 aplicadas de 129"* en la primera entrega; en la segunda *"44 aplicadas de 129, 85 ya presentes"* — **las repeticiones no duplican nada**: los nodos se fusionan, las aristas ya conocidas vuelven como "ya presentes";
+- las filas que no pueden convertirse en unidades de la sala (documentos, extractores, propiedades) se enumeran en *Mostrar detalles*, nunca se inventan;
+- **quien firma es quien entrega**: el autor lo escribe el nodo a partir de la identidad verificada, no el payload.
+
+Con **Extended Matrix → Apri il nodo (stanze)…** (Abrir el nodo (salas)) la sala se abre **dentro de pyArchInit** (panel lateral): se usa Qt WebEngine si el perfil de QGIS lo tiene, si no Qt WebKit, que QGIS 3 todavía incluye — así el panel se queda dentro de QGIS incluso donde falta WebEngine, y el navegador externo queda solo como último recurso. Con una sala configurada se abre directamente su página; sin ella se abre la puerta del nodo con todas las salas.
+
+---
+
+## Pestaña Graphviz
+
+Graphviz es necesario para generar los diagramas del Matrix de Harris.
+
+### Configuración
+
+| Campo | Descripción |
+|-------|-------------|
+| **Ruta bin** | Ruta a la carpeta `/bin` de Graphviz |
+| **...** | Explorar para seleccionar la carpeta |
+| **Guardar** | Guarda la ruta en la variable de entorno PATH |
+
+### Instalación de Graphviz
+
+**Windows**: Descargar de https://graphviz.org/download/ e instalar
+
+**macOS**:
+```bash
+brew install graphviz
+```
+
+**Linux (Ubuntu/Debian)**:
+```bash
+sudo apt-get install graphviz
+```
+
+Si Graphviz ya está instalado correctamente en el PATH del sistema, los campos estarán deshabilitados automáticamente.
+
+---
+
+## Pestaña PostgreSQL
+
+Configuración de la ruta de PostgreSQL para operaciones avanzadas.
+
+| Campo | Descripción |
+|-------|-------------|
+| **Ruta bin** | Ruta a la carpeta `/bin` de PostgreSQL |
+| **...** | Explorar para seleccionar la carpeta |
+| **Guardar** | Guarda la ruta en la variable de entorno PATH |
+
+Necesario para operaciones como dump/restore de la base de datos.
+
+---
+
+## Pestaña Ayuda
+
+Contiene recursos de ayuda y documentación.
+
+### Enlaces Útiles
+
+| Recurso | Descripción |
+|---------|-------------|
+| **Video Tutorial** | Enlace a los video tutoriales en YouTube |
+| **Documentación Online** | https://pyarchinit.github.io/pyarchinit_doc/index.html |
+| **Facebook** | Página UnaQuantum |
+
+---
+
+## Pestaña FTP a Lizmap
+
+Permite publicar los datos en un servidor Lizmap para la visualización web.
+
+### Parámetros de Conexión FTP
+
+| Campo | Descripción |
+|-------|-------------|
+| **ip address** | Dirección IP del servidor FTP |
+| **Port** | Puerto FTP (predeterminado: 21) |
+| **User** | Nombre de usuario FTP |
+| **Password** | Contraseña FTP |
+
+### Operaciones Disponibles
+
+| Botón | Función |
+|-------|---------|
+| **Connect** | Conectar al servidor FTP |
+| **Disconnect** | Desconectar del servidor |
+| **Change directory** | Cambiar directorio actual |
+| **Create Directory** | Crear un nuevo directorio |
+| **Upload file** | Subir un archivo al servidor |
+| **Download file** | Descargar un archivo del servidor |
+| **Delete file** | Eliminar un archivo |
+| **Delete directory** | Eliminar un directorio |
+
+---
+
+## Workspace de Paradatos (solo PostgreSQL)
+
+En la **Pestaña DB Sync** de la ventana de configuración se encuentra la sección **Paradata Workspace**, que permite personalizar el directorio donde se guardan los archivos `paradata_<sitio>.graphml` y `groups_<sitio>.graphml` cuando se trabaja con una base de datos PostgreSQL.
+
+> **Solo PostgreSQL**: los usuarios de SQLite no se ven afectados por esta opción. Con SQLite, los archivos de paradatos se siguen guardando junto al fichero `.sqlite` (comportamiento heredado byte-idéntico).
+
+### Ruta predeterminada
+
+Sin override, la ruta resuelta es:
+
+```
+~/pyarchinit/pyarchinit_DB_folder/<host>_<port>_<dbname>/<sitio>/
+```
+
+Ejemplo: `~/pyarchinit/pyarchinit_DB_folder/localhost_5432_pyarchinit/Volterra/`
+
+### Personalizar la ruta
+
+- **Examinar...** abre un diálogo de archivos para elegir un directorio. La ruta se guarda inmediatamente en las QSettings de QGIS.
+- También se puede **escribir** la ruta directamente en el campo de texto: el valor se persiste al salir del campo (señal `editingFinished`). Dejarlo vacío elimina el override.
+- **Restablecer** limpia el campo, elimina la clave de QSettings y vuelve a la ruta predeterminada.
+
+### Cadena de resolución (quién gana)
+
+La ruta efectiva sigue una cadena de fallback de 3 niveles:
+
+1. **Variable de entorno `PYARCHINIT_WORKSPACE_DIR`** (prioridad máxima — útil para scripts de CI/test).
+2. **QSettings `pyarchinit/paradata_workspace`** (override de UI — esta sección).
+3. **Predeterminado** `~/pyarchinit/pyarchinit_DB_folder/`.
+
+Los valores vacíos se omiten: si `PYARCHINIT_WORKSPACE_DIR=""`, la resolución pasa al nivel 2; si también las QSettings están vacías, se usa el predeterminado.
+
+### Cuándo surte efecto
+
+Los cambios son **inmediatos**: el siguiente acceso a ParadataStore / GroupStore (por ejemplo, guardar paradatos en una ficha US o exportar una Matrix) usa la nueva ruta. **No es necesario reiniciar QGIS.**
+
+### Casos de uso
+
+- **Unidad de red compartida**: apuntar el workspace a una ruta de red (p. ej. `/Volumes/team/pyarchinit_workspace`) para compartir paradatos entre usuarios sobre un PostgreSQL centralizado.
+- **Backup separado**: mantener los archivos de paradatos fuera del directorio de usuario para facilitar copias de seguridad dedicadas.
+- **Pruebas aisladas**: usar `PYARCHINIT_WORKSPACE_DIR` en scripts de test para no contaminar el workspace predeterminado.
+
+---
+
+## Funciones de Administrador (Solo PostgreSQL)
+
+Si se conecta como administrador, aparece una sección adicional:
+
+### Gestión de Usuarios y Permisos
+Permite crear, modificar y eliminar usuarios con diferentes niveles de acceso.
+
+### Monitor de Actividad en Tiempo Real
+Visualiza en tiempo real las actividades en la base de datos y los usuarios conectados.
+
+### Actualizar Esquema de Base de Datos
+Aplica actualizaciones al esquema sin perder datos.
+
+### Aplicar Sistema de Concurrencia
+Añade el sistema de control de concurrencia para evitar conflictos de modificación.
+
+---
+
+## Workflow Recomendado para Nuevo Proyecto
+
+1. **Abrir la Configuración** desde el menú PyArchInit
+
+2. **Elegir el tipo de base de datos** (SQLite para uso individual, PostgreSQL para equipos)
+
+3. **Pestaña Instalación BD**: Crear una nueva base de datos con el SRID apropiado
+
+4. **Pestaña Parámetros de Conexión**: Configurar los parámetros de conexión
+
+5. **Establecer las rutas** para thumbnail, resize y logo
+
+6. **Guardar los parámetros**
+
+7. **Probar la conexión** abriendo cualquier ficha (ej. Sitio)
+
+---
+
+## Resolución de Problemas Comunes
+
+### Error de conexión PostgreSQL
+
+- Verificar que el servidor PostgreSQL esté iniciado
+- Comprobar host, puerto y credenciales
+- Verificar que la extensión PostGIS esté instalada
+
+### Base de datos SQLite no encontrada
+- Verificar que el archivo exista en la carpeta `pyarchinit_DB_folder`
+- Comprobar los permisos de lectura/escritura
+
+### Graphviz no funciona
+- Verificar la instalación de Graphviz
+- Establecer manualmente la ruta en la pestaña Graphviz
+- Reiniciar QGIS después de la configuración
+
+### Imágenes no visualizadas
+- Verificar las rutas Thumbnail path e Image resize
+- Comprobar que las carpetas existan y sean accesibles
+
+---
+
+## Notas Técnicas
+
+- Los ajustes se guardan en las QgsSettings de QGIS
+- La base de datos predeterminada es `Home/pyarchinit/pyarchinit_DB_folder/pyarchinit_db.sqlite`
+- Los logs de debug se guardan en `[TEMP]/pyarchinit_debug.log`
+- La variable de entorno `PYARCHINIT_HOME` apunta a la carpeta `pyarchinit` instalada en el Home del usuario
+
+---
+
+*Documentación PyArchInit - Ficha Configuración*
+*Versión: 4.9.x*
+*Última actualización: Enero 2026*
+
+---
+
+## Animación Interactiva
+
+Explora la animación interactiva para comprender mejor el proceso de instalación y configuración.
+
+[Abrir Animación de Instalación](../../animations/pyarchinit_installation_animation.html)
+
+Explora la animación interactiva para la gestión del almacenamiento remoto.
+
+[Abrir Animación de Almacenamiento Remoto](../../animations/pyarchinit_remote_storage_animation.html)

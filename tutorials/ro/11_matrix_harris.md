@@ -1,0 +1,419 @@
+# Tutorial 11: Matricea Harris
+
+## Introducere
+
+**Matricea Harris** (sau diagrama stratigrafică) este un instrument fundamental în arheologie pentru reprezentarea grafică a relațiilor stratigrafice dintre diferitele Unități Stratigrafice (US). PyArchInit generează automat Matricea Harris din relațiile stratigrafice introduse în fișele US.
+
+### Ce este Matricea Harris?
+
+Matricea Harris este o diagramă care reprezintă:
+- **Secvența temporală** a US-urilor (de la cel mai recent în vârf la cel mai vechi în bază)
+- **Relațiile fizice** dintre US-uri (acoperă/acoperit de, taie/tăiat de, se leagă de)
+- **Periodizarea** săpăturii (grupare pe perioade și faze)
+
+### Tipuri de Relații Reprezentate
+
+| Relație | Semnificație | Reprezentare |
+|---------|-------------|--------------|
+| Acoperă/Acoperit de | Suprapunere fizică | Linie continuă descendentă |
+| Taie/Tăiat de | Acțiune negativă (interfață) | Linie punctată |
+| Se leagă de/Echivalent cu | Contemporaneitate | Linie bidirecțională orizontală |
+| Umple/Umplut de | Umplerea unei tăieturi | Linie continuă |
+| Se sprijină pe/Susține | Suport structural | Linie continuă |
+
+## Accesarea Funcției
+
+### Din Meniul Principal
+1. **PyArchInit** în bara de meniu
+2. Selectați **Matricea Harris**
+
+### Din Fișa US
+1. Deschideți Fișa US
+2. Tab-ul **Hartă**
+3. Butonul **„Export Matrice"** sau **„Vizualizare Matrice"**
+
+### Prerequisite
+- Bază de date conectată corect
+- US-uri cu relații stratigrafice completate
+- Periodizare definită (opțional dar recomandat)
+- Graphviz instalat pe sistem
+
+## Configurarea Matricei
+
+### Fereastra de Configurare (Setting_Matrix)
+
+Înaintea generării, apare o fereastră de configurare:
+
+#### Tab-ul General
+
+| Câmp | Descriere | Valoare Recomandată |
+|------|-----------|---------------------|
+| DPI | Rezoluția imaginii | 150-300 |
+| Afișare Perioade | Grupare US pe perioadă/fază | Da |
+| Afișare Legendă | Include legendă în diagramă | Da |
+| PDF poster | Generează și un PDF poster multi-pagină pentru tipărirea matricelor mai late decât o coală: colile se suprapun cu 2 cm și fiecare coală poartă eticheta "foglio n/N - riga r/R, colonna c/C - A0 scala 1:x" (coala n/N - rândul r/R, coloana c/C - A0 scara 1:x). Pentru matricele foarte mari (când DPI-ul JPG-ului trebuie redus) posterul este produs oricum, chiar dacă caseta nu este bifată | Da (pentru tipărire) |
+| Formato (Format) | Formatul colilor posterului: A0, A1, A2, A3 | A0 |
+| Scala (Scară) | Scara posterului: "Adatta all'altezza" (potrivire la înălțime: un singur rând de coli, înălțimea matricei umple coala), "Adatta alla pagina" (potrivire la pagină: o singură coală cu toată matricea), 1:1, 1:2, 1:3 (scară fixă, mai multe coli). Desenul nu este niciodată mărit; orientarea (portret/peisaj) este aleasă automat pentru a folosi mai puține coli | Adatta all'altezza |
+
+Controalele **PDF poster**, **Formato** și **Scala** se află pe al doilea rând al ferestrei (etichetele sunt în italiană în toate limbile interfeței).
+
+#### Tab-ul Noduri „Ante/Post" (Relații Normale)
+
+| Parametru | Descriere | Opțiuni |
+|-----------|-----------|---------|
+| Formă nod | Formă geometrică | box, ellipse, diamond |
+| Culoare umplere | Culoare internă | white, lightblue, etc. |
+| Stil | Aspect margine | solid, dashed |
+| Lățime linie | Grosime margine | 0.5 - 2.0 |
+| Tip săgeată | Cap de săgeată | normal, diamond, none |
+| Dimensiune săgeată | Dimensiune cap | 0.5 - 1.5 |
+
+#### Tab-ul Noduri „Negative" (Tăieturi)
+
+| Parametru | Descriere | Opțiuni |
+|-----------|-----------|---------|
+| Formă nod | Formă geometrică | box, ellipse, diamond |
+| Culoare umplere | Culoare distinctivă | gray, lightcoral |
+| Stil linie | Aspect conexiune | dashed |
+
+#### Tab-ul Noduri „Contemporane"
+
+| Parametru | Descriere | Opțiuni |
+|-----------|-----------|---------|
+| Formă nod | Formă geometrică | box, ellipse |
+| Culoare umplere | Culoare distinctivă | lightyellow, white |
+| Stil linie | Aspect conexiune | solid |
+| Săgeată | Tip conexiune | none (bidirecțional) |
+
+## Tipuri de Export
+
+### 1. Export Matrice Standard
+
+Generează matricea de bază cu:
+- Toate relațiile stratigrafice
+- Grupare pe perioade/faze
+- Aspect vertical (TB - De sus în jos)
+
+**Rezultat**: `pyarchinit_Matrix_folder/Harris_matrix.jpg`
+
+### 2. Export Matrice Extinsă (2ED)
+
+Versiune extinsă cu:
+- Informații suplimentare pe noduri (US + definiție + datare)
+- Conexiuni speciale (>, >>)
+- Export format GraphML
+
+**Rezultat**: `pyarchinit_Matrix_folder/Harris_matrix2ED.jpg`
+
+### 3. Vizualizare Matrice (Vizualizare Rapidă)
+
+Pentru vizualizare rapidă fără opțiuni de configurare:
+- Folosește setări implicite
+- Generare mai rapidă
+- Ideal pentru verificări rapide
+
+### 4. Vedi la matrice (Extended Matrix în QGIS)
+
+Din meniul **pyArchInit → Extended Matrix → Vedi la matrice…** (Vezi matricea) matricea unui sit este desenată într-un panou andocat în dreapta ferestrei QGIS, fără a trece prin Graphviz:
+- o bandă orizontală pentru fiecare perioadă/fază, cea mai recentă sus
+- fiecare unitate cu simbologia Extended Matrix (dreptunghi pentru o US, paralelogram albastru pentru o USVs, hexagon verde pentru o USVn, octogon oliv pentru un SF, romb negru pentru o continuitate)
+- rotița pentru zoom, dublu clic pentru a revedea totul, clic pe o unitate pentru a-i citi fișa
+- sub fisa, **miniaturile media** legate de acea US
+- **Zoom sulla geometria** (zoom pe geometrie): incadreaza pe harta planul unitatii, daca este desenat intr-un strat incarcat
+- o sageata care **urca** benzile este desenata cu **rosu**: acolo stratigrafia contrazice cronologia
+- **Salva SVG…** / **Salva PNG…** pentru a duce desenul în afară
+
+Nu e nevoie de EMStudio, nici de un nod StratiGraph, nici de internet. Detalii în Tutorialul 01, paragraful „Vizualizarea matricei in QGIS".
+
+## Procesul de Generare
+
+### Pasul 1: Colectarea Datelor
+
+Sistemul colectează automat:
+```
+Pentru fiecare US din situl/zona selectată:
+  - Număr US
+  - Tip unitate (US/USM)
+  - Relații stratigrafice
+  - Perioadă și fază inițială
+  - Definiție interpretativă
+```
+
+### Pasul 2: Construcția Grafului
+
+Crearea relațiilor:
+```
+Secvență (Ante/Post):
+  US1 -> US2 (US1 acoperă US2)
+
+Negativă (Tăieturi):
+  US3 -> US4 (US3 taie US4)
+
+Contemporană:
+  US5 <-> US6 (US5 se leagă de US6)
+```
+
+### Pasul 3: Gruparea pe Perioade
+
+Grupare ierarhică:
+```
+Sit
+  └── Zonă
+      └── Perioadă 1 : Fază 1 : „Epoca Romană"
+          ├── US101
+          ├── US102
+          └── US103
+      └── Perioadă 1 : Fază 2 : „Antichitatea Târzie"
+          ├── US201
+          └── US202
+```
+
+### Pasul 4: Reducerea Tranzitivă (tred)
+
+Comanda Graphviz `tred` elimină relațiile redundante:
+- Dacă US1 -> US2 și US2 -> US3, elimină US1 -> US3
+- Simplifică diagrama
+- Păstrează doar relațiile directe
+
+### Pasul 5: Redare Finală
+
+Generarea imaginii în multiple formate:
+- DOT (sursă Graphviz)
+- JPG (imagine comprimată)
+- PNG (imagine fără pierderi)
+
+## Interpretarea Matricei
+
+### Citire Verticală
+
+```
+     [US cel mai recent]
+           ↓
+        US 001
+           ↓
+        US 002
+           ↓
+        US 003
+           ↓
+     [US cel mai vechi]
+```
+
+### Citirea Clusterelor
+
+Casetele colorate reprezintă perioade/faze:
+- **Albastru deschis**: Cluster perioadă
+- **Galben**: Cluster fază
+- **Gri**: Fundalul sitului
+
+### Tipuri de Conexiuni
+
+```
+─────────→  Linie continuă = Acoperă/Umple/Se sprijină pe
+- - - - →  Linie punctată = Taie
+←────────→  Bidirecțional = Contemporan/Echivalent cu
+```
+
+### Culorile Nodurilor
+
+| Culoare | Semnificație Tipică |
+|---------|---------------------|
+| Alb | US depozit normal |
+| Gri | US negativă (tăietură) |
+| Galben | US contemporană |
+| Albastru | US cu relații speciale |
+
+## Depanare
+
+### Eroare: „Buclă Detectată"
+
+**Cauză**: Există cicluri în relații (A acoperă B, B acoperă A)
+
+**Soluție**:
+1. Deschideți Fișa US
+2. Verificați relațiile US-urilor indicate
+3. Corectați relațiile circulare
+4. Regenerați matricea
+
+### Eroare: „Comanda tred nu a fost găsită"
+
+**Cauză**: Graphviz nu este instalat
+
+**Soluție**:
+- **Windows**: Instalați Graphviz de la graphviz.org
+- **macOS**: `brew install graphviz`
+- **Linux**: `sudo apt install graphviz`
+
+### Matricea Nu Este Generată
+
+**Cauze posibile**:
+1. Nu sunt introduse relații stratigrafice
+2. US fără perioadă/fază atribuită
+3. Probleme de permisiuni în folderul de ieșire
+
+**Verificare**:
+1. Verificați că US-urile au relații
+2. Verificați periodizarea
+3. Verificați permisiunile pe `pyarchinit_Matrix_folder`
+
+### Matricea Prea Mare
+
+**Problemă**: Imagine ilizibilă cu multe US-uri
+
+**Soluții**:
+1. Reduceți DPI (100-150)
+2. Filtrați pe o zonă specifică
+3. Folosiți Vizualizare Matrice pentru zone individuale
+4. Exportați în format vectorial (DOT) și deschideți cu yEd
+
+### Matrice de Dimensiuni Mari
+
+Cu matrice foarte mari (de ex. 1300 US și circa 2000 de relații) exportul cu conexiuni ortogonale putea dura peste 25 de minute și producea un JPG gol (0 octeți). Din această versiune **Export Matrice** și **Vizualizare Matrice** se adaptează automat:
+
+| Situație | Ce se întâmplă |
+|----------|----------------|
+| Peste **600** de relații | Conexiunile trec automat de la ortogonale (`ortho`) la polilinii drepte cu spațiere mai compactă: aceeași matrice este paginată în aproximativ o secundă. Sub prag stilul ortogonal rămâne neschimbat |
+| Imagine care depășește limita renderer-ului bitmap (32 767 px pe latură) | DPI-ul pentru JPG/PNG este redus automat (valoarea setată în Setting_Matrix este un maxim) și lângă imagine, în `pyarchinit_Matrix_folder`, sunt salvate copiile vectoriale `.svg` și `.pdf` (`Harris_matrix_tred.dot.svg/.pdf`; pentru Vizualizare Matrice `Harris_matrix_viewtred.dot.svg/.pdf`) |
+| Dialog de informare „Matrix molto grande" (matrice foarte mare: JPG-ul a fost generat la N dpi, folosiți fișierele .svg / .pdf) | Deschideți fișierul `.svg` sau `.pdf` (browser, Inkscape, vizualizator PDF) pentru o versiune lizibilă și scalabilă fără pierdere de calitate |
+
+Fișierele `.dot` sunt produse ca înainte.
+
+**Export cu periodizare** (caseta perioade din Setting_Matrix):
+
+- Exportul nu se mai oprește cu eroarea `Errore durante il rendering del file DOT: 'NoneType' object has no attribute 'write'`, care apărea când Graphviz emitea un avertisment și QGIS nu avea consola Python deschisă (tipic pe Windows). Avertismentele Graphviz sunt acum scrise în consola Python / jurnalul QGIS în loc să întrerupă exportul.
+- Pe DB mari exportul cu perioade este mult mai rapid (aceeași bază de date cu 1311 US a trecut de la circa 25–45 s și un DOT de 51 MB la circa 3 s) și fiecare fază primește propriul cluster invizibil, astfel încât nicio fază nu este ignorată în tăcere de Graphviz.
+- Pentru matrice cu perioade foarte late JPG-ul poate fi generat acum chiar sub 12 dpi dacă este necesar (ca referință, matricea cu 1311 US și perioade iese la 49 dpi): este doar o privire de ansamblu; pentru versiunea lizibilă folosiți copiile `.svg` / `.pdf` salvate alături.
+
+**Copii vectoriale și tipărirea posterului**:
+
+- Copiile `.pdf` / `.svg` rămân acum întotdeauna în limita a 200 inch (14 400 pt) pe latură, limita dincolo de care Acrobat și Preview afișează doar o parte a paginii: întreaga matrice este astfel vizibilă și poate fi mărită (vectorial, fără pierdere de calitate). Pe baza de date cu 1311 US și perioade PDF-ul măsoară 14 400 × 2 591 pt.
+- Pentru tipărire folosiți PDF-ul poster (caseta **PDF poster** din Setting_Matrix): pentru aceeași bază de date, A0 cu "Adatta all'altezza" (potrivire la înălțime) dă 5 coli A0 în format peisaj la scara 1:3,4 (text ≈ 4 pt: lizibil pe un plotter; folosiți A0 "1:2" sau "1:1" pentru text mai mare și mai multe coli). O singură coală A0 ("Adatta alla pagina", potrivire la pagină) este doar o privire de ansamblu.
+
+### Avertisment „Periodizare: cronologie inițială mai mare decât cea finală"
+
+**Când apare**: la export cu **Print Periodizzazione** activ, dacă la cel puțin o perioadă/fază Cronologia Inițială este mai mare decât Cronologia Finală (ex. `Periodo 6 Fase 1: 1650 → 1450`). Exportul continuă oricum.
+
+**Cauză**: aproape întotdeauna date î.Hr. introduse fără semnul minus (convenția pyArchInit este î.Hr. = ani negativi). Perioada este ordonată ca d.Hr.: Epoca Bronzului ajunge deasupra fazelor romane, iar etichetele clusterelor afișează "1650 d.C." în loc de "1650 a.C.".
+
+**Soluție**:
+1. Deschideți Fișa de Periodizare și corectați perioadele listate în avertisment introducând anii î.Hr. ca numere negative (ex. `-1650` → `-1450`)
+2. Regenerați Matricea
+
+### Eroarea "list index out of range" la exportul matricei
+
+**Cand aparea**: la apasarea pe **Esporta matrice** (export standard sau 2ED) pe o baza de date in care rapoartele sunt scrise in **formatul scurt** — `[tip, US]` in loc de `[tip, US, zona, sit]`. In baza de date exemplu livrata cu pluginul toate intrarile sunt in format scurt, asa ca matricea nu se genera deloc.
+
+**Cauza**: exportatorul citea mereu a treia si a patra caseta a fiecarui raport, care in formatul scurt nu exista.
+
+**Soluţia**: rezolvat de la aceasta versiune. Acum se citesc ambele formate, iar o intrare trunchiata sau ilizibila este sarita in loc sa doboare tot exportul. Nu trebuie corectat nimic in date: actualizati pluginul si regenerati matricea.
+
+## Fișierele Generate și Ieșiri
+
+### Folderul de Ieșire
+
+```
+~/pyarchinit/pyarchinit_Matrix_folder/
+├── Harris_matrix.dot           # Sursă Graphviz
+├── Harris_matrix_tred.dot      # După reducerea tranzitivă
+├── Harris_matrix_tred.dot.jpg  # Imagine JPG finală
+├── Harris_matrix_tred.dot.png  # Imagine PNG finală
+├── Harris_matrix_tred.dot.svg  # Vectorial (doar matrice mari)
+├── Harris_matrix_tred.dot.pdf  # Vectorial (doar matrice mari)
+├── Harris_matrix_poster_A0.pdf # PDF poster multi-pagină pentru tipărire
+├── Harris_matrix2ED.dot        # Versiune extinsă
+├── Harris_matrix2ED_graphml.dot # Pentru export GraphML
+└── matrix_error.txt            # Jurnal erori
+```
+
+### Utilizarea Fișierelor
+
+| Fișier | Utilizare |
+|--------|-----------|
+| *.jpg/*.png | Inserare în rapoarte |
+| *.dot | Editare cu editor Graphviz |
+| _graphml.dot | Import în yEd pentru editare avansată |
+| *.svg/*.pdf | Versiune vectorială scalabilă (matrice mari) |
+| _poster_A0.pdf | PDF poster multi-pagină pentru tipărire; numele urmează formatul ales (de ex. `_poster_A3.pdf`), pentru Export Matrice 2ED prefixul este `Harris_matrix2ED` |
+
+## Bune Practici
+
+### 1. Înainte de Generare
+
+- Verificați completitudinea relațiilor stratigrafice
+- Verificați absența ciclurilor
+- Atribuiți perioadă/fază tuturor US-urilor
+- Completați definiția interpretativă
+
+### 2. În Timpul Compilării US
+
+- Introduceți relații bidirecționale corecte
+- Folosiți terminologie consistentă
+- Verificați zona corectă în relații
+
+### 3. Optimizarea Ieșirii
+
+- Pentru tipărire: DPI 300
+- Pentru ecran: DPI 150
+- Pentru săpături complexe: împărțiți pe zone
+
+### 4. Controlul Calității
+
+- Comparați matricea cu documentația de săpătură
+- Verificați secvențele logice
+- Verificați grupările pe perioade
+
+## Integrare cu Alte Instrumente
+
+### Export pentru yEd
+
+Fișierul `_graphml.dot` poate fi deschis în yEd pentru:
+- Editarea manuală a aspectului
+- Adăugarea de adnotări
+- Exportul în diferite formate
+
+### Export pentru s3egraph
+
+PyArchInit suportă exportul pentru sistemul s3egraph:
+- Format compatibil
+- Menține relațiile stratigrafice
+- Suport pentru vizualizare 3D
+
+## Referințe
+
+### Fișiere Sursă
+- `tabs/Interactive_matrix.py` - Interfață interactivă
+- `modules/utility/pyarchinit_matrix_exp.py` - Clasele HarrisMatrix și ViewHarrisMatrix
+
+### Baza de Date
+- `us_table` - Date și relații US
+- `periodizzazione_table` - Perioade și faze
+
+### Dependențe
+- Graphviz (dot, tred)
+- Biblioteca Python graphviz
+
+---
+
+## Tutorial Video
+
+### Matricea Harris - Generare Completă
+`[Substituent: video_matrix_harris.mp4]`
+
+**Conținut**:
+- Configurarea setărilor
+- Generarea matricei
+- Interpretarea rezultatelor
+- Rezolvarea problemelor frecvente
+
+**Durată estimată**: 15-20 minute
+
+---
+
+*Ultima actualizare: ianuarie 2026*
+
+---
+
+## Animație Interactivă
+
+Explorați animația interactivă pentru a afla mai multe despre acest subiect.
+
+[Deschideți Animația Interactivă](../../animations/harris_matrix_animation.html)

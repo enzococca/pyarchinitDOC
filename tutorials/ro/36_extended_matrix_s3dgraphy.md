@@ -1,0 +1,455 @@
+# Tutorial 36: Export Extended Matrix și Bridge s3dgraphy
+
+## Introducere
+
+Începând cu versiunea **5.2.0-alpha** PyArchInit integrează un **bridge bidirecțional** cu biblioteca **s3dgraphy** (modelul de date Extended Matrix al lui Emanuel Demetrescu). Bridge-ul permite:
+
+- **Exportarea** diagramei stratigrafice ca Extended Matrix în **em.json**, formatul pe care îl deschide EMStudio (vechiul export GraphML este retras)
+- **Re-importul** modificărilor făcute în yEd (mutarea UE între perioade/grupuri) actualizând baza de date SQL
+- **Atașarea paradatelor** (Author / License / Embargo) la nivelul sitului
+- **Gruparea** UE după dimensiune (struttura, area, attivita, settore, ambient, saggio, quad_par sau grupuri ad-hoc)
+
+Tag curent: `phase2-ai07-locationnodegroup-5.6.0-alpha` (2026-05-10).
+
+---
+
+## 1. Cerințe
+
+- Bază de date SQLite (PostgreSQL încă nesuportată)
+- **Migrarea Phase 1 node_uuid** aplicată automat la deschiderea bazei
+- **yEd Graph Editor** pentru vizualizarea ieșirii (https://www.yworks.com/products/yed)
+
+> ⚠️ Pentru baze pre-5.2.0-alpha migrarea poate necesita repornirea QGIS.
+
+---
+
+## 2. Export Extended Matrix (butonul verde)
+
+### 2.1 Deschiderea dialogului
+
+1. Deschide **Fișa UE** a sitului dorit
+2. Click pe butonul verde **"Esporta Extended Matrix"** (sub tab-ul Rapporti)
+
+### 2.2 Tab "Export"
+
+Fereastra spune în partea de sus la ce servește fiecare format. Conține:
+
+- **Formati** (Formate): **DOT (Graphviz) — matrice di Harris** și **em.json (Extended Matrix, per EMStudio)**, bifate din start, plus **Matrice per fasi** (matrice pe faze, analiză cronologică), opțională. GraphML nu se mai exportă: JSON-ul acestei ferestre **este em.json**, exact fișierul pe care îl produce meniul **Extended Matrix → Esporta sito in em.json…** — același proiector, aceeași simbologie.
+- **Opzioni** (Opțiuni): **Controlla la sequenza stratigrafica e segnala i problemi** (verifică secvența stratigrafică și semnalează problemele). Este singura opțiune rămasă, și acum este citită cu adevărat: fără bifă, verificarea nu se face. Cele două casete vechi care vorbeau cu yEd (sugestii de auto-layout, culori pe perioadă) au plecat împreună cu exportul GraphML.
+- **Extended Matrix**: patru butoane lângă export — **Apri in EMStudio** și **Vedi la matrice** (ambele se aprind după un export em.json reușit; al doilea desenează matricea în QGIS, fără EMStudio), **Consegna alla stanza…** și **Apri la stanza**. Sunt aceleași intrări din meniul pyArchInit, la îndemână.
+
+La apăsarea pe **Esporta** se cere **dosarul de destinație**.
+
+Autorii, licențele, embargourile și grupurile se gestionează în fereastra **"Manage paradata"** (§3).
+
+### 2.2.1 Sondaje: un singur fisier sau unul pe sondaj
+
+Un grup de trei alegeri, in aceeasi fereastra, decide **cum se imparte
+em.json** cand situl are mai multe sondaje:
+
+- **Automat**: un singur fisier daca situl are un sondaj, unul pe sondaj
+  daca are mai multe. Este alegerea de pornire.
+- **Un singur fisier**: tot situl intr-un graf, ca pana acum.
+- **Unul pe sondaj**: un fisier pentru fiecare sondaj. Relatiile care
+  **ies** din sondaj nu se pierd: rama in fisier ca legaturi intre grafuri
+  (`graph.links`), iar EMStudio le regaseste.
+
+Sondajul este campul **Saggio** din fisa US: unitatile care l-au lasat gol
+ajung intr-un fisier separat.
+
+### 2.3 Click pe "Esporta"
+
+Fișierele care se nasc, în funcție de formatele bifate:
+- `<sit>.em.json` — Extended Matrix, de deschis în EMStudio sau de livrat într-o cameră
+- `Extended_Matrix_<sit>[_<area>].dot` — Graphviz DOT, pentru matricea Harris clasică
+- `Extended_Matrix_<sit>[_<area>]_phased.json` — vizualizare per epocă
+
+> **Locurile nu intra in em.json.** Situl, aria si sectorul raman in fisa fiecarei unitati, dar nu mai calatoresc ca noduri de grup cu muchiile lor: cat timp fisierul contine chiar si o singura muchie `is_in_location`, vederea **Matrix** din EMStudio ingramadeste toate unitatile in prima banda in loc sa le distribuie pe epoci (masurat la 2026-10-08 cu EMStudio 1.6.0-dev.26, prin bisectie pe cinci fisiere). Nu se pierde nicio informatie — doar un mod de a o reprezenta.
+
+Rezumatul final listează fișierele și, pentru em.json, **câte noduri și câte muchii** au ieșit, cu eventualele avertismente.
+
+> **GraphML nu se mai exportă**: matricea se privește și se validează în EMStudio, care citește em.json. Rândurile temporale (swimlane) ale vechiului GraphML au plecat cu el. GraphML supraviețuiește doar la **intrare**, pentru fișierele desenate în yEd (§5).
+
+---
+
+## 3. Dialog "Manage paradata" (4 tab-uri)
+
+### 3.1 Acces
+Click pe butonul **"Manage paradata"** în fișa UE (lângă butonul verde Export).
+
+### 3.2 Cele 4 tab-uri
+
+| Tab | Conținut | Fișier generat |
+|---|---|---|
+| **Authors** | Adaugă autori (nume + ORCID + rol) | `paradata_<sit>.graphml` |
+| **Licenses** | Licență dataset (ex. CC-BY-NC-4.0 + URL) | idem |
+| **Embargoes** | Date embargo + motiv | idem |
+| **Groups** | Grupuri ad-hoc (nume + selecție UE membre) | `groups_<sit>.graphml` |
+
+Fișierele se salvează lângă DB SQLite și sunt **versionabile în Git**.
+
+---
+
+## 4. Stil vizual per dimensiune (5.5.1-alpha + 5.6.0-alpha)
+
+Fiecare dimensiune de grupare are o culoare distinctivă în GraphML:
+
+| Dimensiune | Fill (50% transparență) | Border |
+|---|---|---|
+| `area` | roz pastel `#FFE0E680` | `#C84A5F` |
+| `struttura` | portocaliu pastel `#FFE6CC80` | `#C66B33` |
+| `attivita` | galben pastel `#FFF5CC80` | `#A89A33` |
+| `settore` | verde pastel `#E6FFCC80` | `#6BC633` |
+| `ambient` | aqua pastel `#CCFFE680` | `#33A86B` |
+| `saggio` | azur pastel `#CCF5FF80` | `#3389A8` |
+| `quad_par` | violet pastel `#E0CCFF80` | `#6633C6` |
+| `adhoc` | gri pastel `#F5F5F580` | `#666666` |
+
+Începând cu 5.6.0-alpha, elementele `LocationNodeGroup` se disting prin `kind`:
+
+| `kind` | Fill (50% transparență) | Border |
+|---|---|---|
+| `toponym` | lavandă pastel `#E6E6FA80` | `#9370DB` |
+| `study` | fildeș pastel `#FFFFE080` | `#888888` |
+| `functional` | cyan pastel `#E0FFFF80` | `#008B8B` |
+
+Alpha 50% lasă vizibile swimlane-urile epocilor în spatele dreptunghiului grupului.
+
+### 4.1 Lanț toponim (5.6.0-alpha)
+
+Câmpurile `site_table.{nazione, regione, provincia, comune}` sunt emise automat ca un lanț recursiv de `LocationNodeGroup(kind="toponym")` (parent: nazione → regione → provincia → comune). Nivelurile administrative goale sunt sărite fără a întrerupe lanțul. O deduplicare cross-sit garantează că aceeași `comune` prezentă în 2 situri devine **un singur nod partajat** în GraphML.
+
+---
+
+## 4.2 Apartenență multidimensională (5.6.0-alpha)
+
+Începând cu 5.6.0-alpha o UE poate aparține **mai multor dimensiuni simultan** datorită modelului m:n cu flag-ul `is_primary`. Doar dimensiunea primară devine folderul yEd vizibil; celelalte apar ca **insigne inline** sub nodul UE și ca JSON în `<data key="s3d:other_locations">` pentru tool-urile downstream.
+
+Exemplu: o UE cu `struttura=basilica` și `area=B` (primar `struttura`) produce:
+- folder yEd "struttura: basilica" ca parent vizibil;
+- sub nodul UE, o insignă inline `also: B (study), TestCity (toponym)`;
+- în GraphML, atributul `s3d:other_locations` cu array JSON al apartenențelor secundare.
+
+Dimensiunea primară urmează o ordine predefinită, cu `struttura` pe primul loc; `toponym` nu este niciodată primar.
+
+---
+
+## 5. Round-trip (tab Import)
+
+> **Ce se poate importa**: tab-ul Import citește acum și **em.json** — cel de la EMStudio sau de la nodul StratiGraph — și alege cititorul după extensia fișierului; un `.graphml` de yEd rămâne acceptat pentru fișierele de dinainte. Procedura de mai jos, mutarea UE între grupuri, se referă la calea yEd/GraphML.
+
+Pentru a modifica baza SQL mutând UE între grupuri în GraphML:
+
+1. Deschide GraphML în **yEd**
+2. Trage o UE într-un alt grup, salvează
+3. Înapoi la dialog → tab **"Import"**
+4. **Bifează** checkbox-ul *"Update SQL on import (struttura/area/...)"*
+5. Încarcă GraphML modificat
+
+Sistemul rulează o tranzacție atomică: la eșec, **rollback complet** (DB rămâne nealterată). Grupurile `adhoc` nu scriu niciodată SQL — actualizează doar `groups_<sit>.graphml`.
+
+Începând cu 5.6.0-alpha walker-ul de import este **recursiv** și suportă foldere imbricate (de ex. lanț toponim `nazione > regione > provincia > comune > UE`). La detectarea ciclurilor în graful folderelor, este ridicată excepția `CycleDetectedError` și importul este abandonat cu rollback.
+
+---
+
+## 6. CLI (alternativă la dialog)
+
+Pentru scripts / batch:
+
+```bash
+# Export
+python scripts/s3dgraphy_sync.py export \
+    --db <path> --sito <name> --mapping pyarchinit_us_mapping \
+    --output <out.graphml> --group-by struttura
+
+# Listează grupuri ad-hoc
+python scripts/s3dgraphy_sync.py paradata list-groups \
+    --db <path> --sito <name>
+
+# Adaugă autor
+python scripts/s3dgraphy_sync.py paradata add-author \
+    --db <path> --sito <name> --name "Marco Pacifico" \
+    --orcid "0000-0002-1234-5678" --role curator
+```
+
+Exit codes: 0 = succes, 1 = eroare bridge, 2 = eroare argparse.
+
+---
+
+## 7. Rezolvarea problemelor
+
+| Simptom | Cauză | Soluție |
+|---|---|---|
+| "no such column: node_uuid" | Migrarea Phase 1 neexecutată | Repornește QGIS, redeschide DB |
+| GraphML gol | DB fără rapporti / filtru area prea strict | Verifică us_table.rapporti |
+| "rapporti trebuie să fie TEXT" | Ai introdus un număr ca integer | Câmpurile UE/Area sunt **TEXT**, nu integer |
+| Capitalizare greșită în rapporti | "copre" cu litere mici în DB | Folosește "Copre", "Coperto da" capitalizate |
+| `DeprecationWarning` pe fișier 5.5.x | Fișier legacy `ActivityNodeGroup + group_kind` | Projector-ul îl promovează în memorie la `LocationNodeGroup`. Reexportă pentru a migra fișierul pe disc. |
+| Rândurile swimlane-ului afișează un text foarte lung | Versiunile anterioare foloseau Descrizione din periodizare ca etichetă | Actualizează plugin-ul și reexportă, și/sau completează **Datazione estesa** cu un nume scurt |
+| Epocile din swimlane sunt în ordine greșită (ex. Bronz deasupra Antichității târzii) | Rândurile sunt ordonate după **Cronologia Inițială**; datele î.Hr. introduse ca numere pozitive (1650 în loc de -1650) sunt ordonate ca d.Hr. | În Fișa de Periodizare introdu anii î.Hr. ca numere negative și reexportă. Rezumatul exportului afișează acum un avertisment „⚠️ Periodizzazione: ..." cu lista perioadelor de corectat |
+
+---
+
+## 8. Documentație tehnică
+
+Pentru aprofundare arhitectură, decizii de design și roadmap:
+
+- Specs: `docs/superpowers/specs/2026-05-*-design.md`
+- Plans: `docs/superpowers/plans/2026-05-*.md`
+- Dev log: `docs/superpowers/dev-log/T5.4_PyArchInit_Dev_Log.md`
+
+Carry-over amânate:
+- **AI08-F3**: euristici auto-layout (bin-packing sub-grupuri) — încă amânat
+- **AI09**: TimeBranchNodeGroup mapping — viitor
+- **Phase 3**: SyncEngine + REST API — viitor
+- **Phase 4**: GraphDBBackend + SPARQL — viitor
+
+Livrate:
+- **AI07** (5.6.0-alpha, 2026-05-10): migrare `LocationNodeGroup` cu enum `kind` + lanț toponim + apartenențe multidimensionale
+- **AI08-F1** (fuzionat în AI07): nesting ierarhic nativ via `is_primary`
+
+---
+
+## 5. yEd-aware Import — importul de graphml editate extern (5.8.x)
+
+Începând cu **5.8.0-alpha** bridge-ul este **bidirecțional și pentru graphml-uri create direct în yEd** (adică fără să treci mai întâi printr-un export pyarchinit). Pyarchinit recunoaște automat graphml-urile „yEd-raw" — cele care nu au data keys `pyarchinit.*` — și le importă printr-un dispatch dedicat care mapează prefixul label-ului nodului → tip stratigrafic, recunoaște rândurile de TableNode ca perioade, parcurge group folders ca dimensiuni arheologice și lasă utilizatorul să aleagă o politică pentru edges care ating folders.
+
+### 5.1 Rollout în 6 etape
+
+| Etapă | Tag | Ce adaugă |
+|---|---|---|
+| **yE-A** | `yed-import-foundation-5.7.5-alpha` | `yed_detector.py` — flag de flavor `yed-raw` / `pyarchinit-projected` |
+| **yE-B** | `yed-import-classifier-5.7.6-alpha` | `yed_classifier.py` — enum `ClassificationKind` cu 13 valori (US/USV/SF/VSF/RSF/DOC/COMB/PROP/...) + regex order-sensitive |
+| **yE-C** | `yed-import-parsers-5.7.7-alpha` | `yed_table_parser.py` (PeriodCandidate din rândurile de TableNode) + `yed_group_walker.py` (FolderCandidate cu auto-dimension din prefixul label-ului: VA01→attivita / AR01→area / etc.) |
+| **yE-D** | `yed-import-pipeline-5.8.0-alpha` | `yed_import_pipeline.py` — orchestrator `import_yed_raw()` + 5 write functions + `FolderEdgePolicy` (SKIP/FAN_OUT/REPRESENTATIVE/SYNTHETIC) + paradata via `ParadataStore` + sentinel `_DryRunRollback` + DbHandle PG+SQLite |
+| **yE-E** | `yed-import-dialog-5.8.2-alpha` | `gui/yed_import_dialog.py` — `YedImportDialog(QWizard)` cu 5 pagini (classifier / periods / folders / policy / preview) + dataclass `YedOverrides` + persistență sidecar `<graphml>.yed_overrides.json` |
+| **yE-Closure** | `yed-import-closure-5.8.3-alpha` | Această documentație + dev-log + CHANGELOG. |
+
+### 5.2 Cum funcționează — flux utilizator
+
+1. **Deschide un graphml în QGIS prin meniul Import GraphML** (același path ca fluxul pyarchinit-projected existent).
+2. Pyarchinit detectează automat că este yEd-raw (fără keys `pyarchinit.*`) → face dispatch pe noul branch în loc să cadă pe path-ul legacy.
+3. Se deschide wizard-ul `YedImportDialog` cu **5 pagini**:
+   - **1/5 Classifier** — tabel cu un rând per leaf node. Fiecare rând arată `label` + `auto_kind` (de ex. `us_real` / `usv_virtual` / `property`) + un combobox de override `user_kind`. Butonul **Acceptă auto** resetează fiecare rând la `auto_kind` (șterge toate override-urile).
+   - **2/5 Periods** — un rând per TableNode-row parsat, coloane editabile `periodo` + `fase`. Datele (`datazione_iniziale`/`finale`) rămân goale: graphml-urile yEd-raw nu poartă date.
+   - **3/5 Folders** — un rând per group folder. Combobox de `dimension` (attivita / area / struttura / settore / ambient / saggio / quad_par / `skip` pentru excludere). `value` editabil (default = `auto_value` derivat din prefixul label-ului).
+   - **4/5 Rapporti policy** — 4 radio buttons pentru tratarea edges care ating folders:
+     - **SKIP** (default): aruncă edges folder-touching. Edges leaf-to-leaf trec intacte.
+     - **FAN_OUT**: o edge `folder_A → folder_B` se expandează la `N×M` perechi de leaves (produs cartezian al membrilor).
+     - **REPRESENTATIVE**: folosește primul membru al fiecărui folder ca proxy.
+     - **SYNTHETIC**: creează un rând us_table per folder (`unita_tipo='VA'` virtual activity) + reconectează edges prin aceste ancore.
+   - **5/5 Preview** — dry-run al `import_yed_raw(overrides=..., dry_run=True)`. Afișează counts (us / inv / period / paradata) **fără commit**. Click pe **Finish** confirmă, **Cancel** abandonează.
+4. La **Finish** wizard-ul salvează override-urile tale într-un **sidecar JSON** `<graphml>.yed_overrides.json` lângă fișier. Redeschiderea aceluiași graphml preîncarcă sidecar-ul, deci override-urile anterioare revin preaplicate.
+
+### 5.3 Rutarea destinațiilor
+
+Dispatch-ul folosește `_classify_destination` (în `yed_import_pipeline.py`) pentru a clasifica fiecare leaf:
+
+| ClassificationKind | Destinație | Notă |
+|---|---|---|
+| US_REAL | `us_table` (`unita_tipo='US'`) | din label `^US\d+` |
+| US_MASONRY | `us_table` (`unita_tipo='USM'`) | din `^USM|USR|USS` |
+| US_DOCUMENTARY | `us_table` (`unita_tipo='USD'`) | din `^USD\d+` |
+| USV_VIRTUAL | `us_table` (`unita_tipo='USV'`) | din `^USV\d+` |
+| USV_FORMAL | `us_table` (`unita_tipo` derivat din prefixul label-ului: USVs/USVn/USVc) | din `^USVs|USVn\d*$` |
+| **REUSED_SPECIAL_FIND** (RSF — **5.8.1**) | `us_table` (`unita_tipo='RSF'`) | din `^RSF\d+` (s3dgraphy 0.1.42, spolia) |
+| SPECIAL_FIND | `inventario_materiali_table` | din `^SF\d+` |
+| VIRTUAL_FIND | `paradata` (via `ParadataStore`) | din `^VSF\d+` |
+| DOCUMENT | `paradata` | din `^D\.\d+` |
+| COMBINER | `paradata` | din `^C\.\d+` |
+| PROPERTY | `paradata` | cuvânt-cheie în label (`material`/`position`/`width`/...) |
+
+**Decizie utilizator 2026-05-13**: USV* (virtuale) sunt „unità tipo" (rămân unități stratigrafice) și aparțin în `us_table`, nu în paradata. Doar DOC/COMB/PROP/VIRTUAL_FIND rămân în paradata.
+
+### 5.4 Sidecar JSON — schemă
+
+Versionat pentru forward-compat:
+
+```json
+{
+  "version": 1,
+  "saved_at": "2026-05-13T17:57:00+00:00",
+  "graphml_path": "/absolute/path/to/file.graphml",
+  "classifier": {
+    "n0::n0::n0": "us_real",
+    "n0::n0::n2": "us_real"
+  },
+  "periods": {
+    "p0": {"periodo": 5, "fase": 7}
+  },
+  "folders": {
+    "f0": {"dimension": "struttura", "value": "S01"}
+  },
+  "policy": "fan_out"
+}
+```
+
+Se persistă doar câmpurile MODIFICATE de utilizator (diff). Valorile `ClassificationKind` necunoscute (de ex. din release-uri viitoare s3dgraphy) sunt skip-uite tăcut la încărcare.
+
+### 5.5 CLI pentru ingest scripted
+
+Pentru CI / re-runs în batch:
+
+```bash
+python scripts/import_yed_graphml.py /path/to/file.graphml \
+    --site Al-Khutm \
+    --db /path/to/khutm2.sqlite \
+    --policy skip \
+    --overrides /path/to/file.graphml.yed_overrides.json \
+    --dry-run
+```
+
+Mutex `--db` / `--conn-str` pentru backend SQLite vs PostgreSQL. `--overrides` este opțional (fără overrides = defaults yE-D). `--auto-defaults` este un flag no-op forward-compat.
+
+### 5.6 Limite cunoscute
+
+- **Fără editare de date în wizard**: graphml-urile yEd-raw nu poartă `datazione_iniziale`/`datazione_finale`. Pagina Periods editează doar `periodo` + `fase` (targets FK).
+- **API ParadataStore parțial**: upstream s3dgraphy încă nu furnizează `add_virtual_us` / `add_document` / `add_combiner` / `add_property`. yE-D loghează „skip — method missing" pentru fiecare leaf paradata dar numără încercările în preview.
+- **PropertyNode → Path B (fără legătură US)**: nodurile PROPERTY se scriu fără US target. Wizard-ul emite un warning. Viitor: follow-up yE-Closure pentru a adăuga „assign target" în UI.
+- **Multi-DB**: sidecar-ul JSON este per graphml, nu per DB. Dacă imporți același graphml în DB-uri diferite, se reutilizează aceleași overrides pentru toate.
+
+### 5.7 Acoperire teste finală
+
+| Suite | Test | Acoperire |
+|---|---|---|
+| yE-A | `test_yed_detector.py` | detectare flavor |
+| yE-B | `test_yed_classifier.py` | 13 ClassificationKind + regex order-sensitive |
+| yE-C | `test_yed_table_parser.py` + `test_yed_group_walker.py` | parse PeriodCandidate + FolderCandidate |
+| yE-D | `test_yed_rapporti_policy.py` (7) + `test_yed_import_pipeline.py` (15) + `test_yed_pipeline_integration.py` (9 incl. 2 L1 overrides e2e) | politici + write functions + dispatch |
+| yE-E | `test_yed_import_dialog.py` (5 sidecar JSON) + `test_import_yed_graphml_cli.py` (3) | persistență sidecar + CLI |
+
+**Suite totală post-rollout**: 354 passed / 42 skipped (PG-L1 necesită psycopg2).
+
+### 5.8 Actualizare 5.8.5-alpha (yed-fastfix)
+
+Pachet de corecții comportamentale peste `5.8.3-alpha` care îmbunătățește calitatea re-exportului GraphML după un import yEd-aware. Modificări relevante pentru utilizatorul final:
+
+- **Paradata multi-folder**: label-urile DOC / Combinar / Extractor / property partajate între mai multe foldere yEd (de ex. `material` referențiat din VA01 + VA04 + VA05) generează acum UN rând în `us_table` PER apariție — vizibilitate multi-folder restabilită în GraphML-ul re-exportat. Compromis: dedup-ul după identitate (colapsarea `D.01` / `D.01-2` / `D.01bis` într-un singur rând) nu se mai aplică pentru a doua/a treia apariție.
+- **Rapporti reciproce**: fiecare edge yEd `a → b` scrie rapporto-ul direct pe rândul lui `a` ȘI inversul pe rândul lui `b` (`<<` / „Coperto da" / etc.). DOC-urile arată acum toate conexiunile extractor de intrare în formularul Scheda US.
+- **Strip al prefixului `us` numeric**: `US100` → `us='100'` `unita_tipo='US'` (înainte `us='US100'`). SF/VSF/RSF se scriu dual în `us_table` + `inventario_materiali`.
+- **Auto-fill periodo/fază**: apartenența unui rând TableNode yEd la o perioadă se propagă către `us_table.periodo_iniziale`/`fase_iniziale` + `periodizzazione.cont_per`.
+- **Classifier BPMN-aware**: `D.NN` (BPMN data-object) → `DocumentNode`, `D.NN.MM` (plain) → `ExtractorNode` — păstrează distincția semantică EM 1.5.
+- **Re-import idempotent**: re-rularea aceluiași import sare peste rândurile deja prezente; fără rollback pentru coliziune UNIQUE la pasul repetat.
+- **Paletă USV**: nodurile USV se randează acum cu paralelogramul albastru canonic EM (înainte dreptunghi cu bordură roșie).
+
+### 5.9 yE-F paradata multi-folder (5.9.0-alpha)
+
+Evoluție structurală a `yed-fastfix-5.8.5-alpha`: compromisul Bug R B1 (un rând `us_table` per apariție, cu `us='D.01_2'` / `us='D.01_3'`) a fost depășit. O frunză paradata (DOC / Combinar / Extractor / property) partajată între mai multe foldere yEd produce acum **un singur rând** în `us_table` per label canonic, iar apartenența multiplă este păstrată într-o nouă coloană `other_locations`.
+
+Modificări vizibile pentru utilizatorul final:
+
+1. **Widget nou „Alte activități" în fișa US/USM**: în tab-ul *Periodizzazione* apare un `QListWidget` etichetat „Alte activități" — vizibil **doar** când `unita_tipo` este o tipologie paradata (`DOC`, `Combinar`, `Extractor`, `property`). Utilizatorul poate selecta mai multe coduri de activitate; selecția este serializată ca listă JSON în noua coloană `other_locations`.
+2. **Element de meniu QGIS nou**: `Plugins → pyArchInit → Migrazioni → Aggiungi colonna other_locations (yE-F)`. Trebuie executat **o singură dată** pe fiecare DB preexistentă pentru a adăuga noua coloană (DB-urile create post-5.9 au deja coloana).
+3. **Import yEd-aware îmbunătățit**: o frunză paradata care apare în N foldere yEd generează acum **doar 1** rând `us_table` (nu N rânduri cu sufix `_2`/`_3` ca în 5.8.5). Primul folder întâlnit devine `attivita` principală; folderele secundare sunt listate în `other_locations`. La **export** se emit N copii vizuale yEd (una per folder), toate împărtășind același `node_uuid` canonic pentru a garanta identitatea round-trip.
+
+**Compatibilitate înapoi**: datele produse de Bug R B1 în 5.8.5-alpha (rânduri cu sufix `_2`/`_3`) rămân lizibile fără nicio conversie automată. Logica nouă se aplică noilor importuri; rândurile legacy continuă să se comporte ca înainte.
+
+Predecesor: vezi secțiunea 5.8 (`yed-fastfix-5.8.5-alpha`) pentru comportamentul înlocuit.
+
+---
+
+## 6. Generare continuitate (fișe CON)
+
+În panoul **„Verifica rapporti"** — disponibil ca tab în interiorul dialogului de import/export s3dgraphy — există butonul **„Genera continuità"** (etichetă păstrată în italiană ca în plugin). Pentru situl selectat curent, această funcție creează automat **fișele de continuitate** ale US/USM a căror viață se întinde pe mai mult de o perioadă.
+
+### 6.1 Ce face
+
+1. Scanează toate US/USM din sit la care **perioada inițială ≠ perioada finală** (adică a căror viață se întinde pe mai multe perioade).
+2. Pentru fiecare creează sau actualizează o fișă de continuitate denumită **`CON_<us>`** (de ex. `US5` → `CON_US5`).
+3. Fișa CON **moștenește** de la unitatea-mamă: situl, aria (plus ariile secundare), structura și întregul interval de perioade (inițială → finală). Descrierea ei este generată automat.
+4. Scrie o **relație de continuitate reciprocă** pe ambele părți: pe CON și pe unitatea-mamă.
+
+### 6.2 Idempotență
+
+Operația este **idempotentă**: rularea repetată nu duplică fișele existente — actualizează `CON_<us>` existente dacă datele unității-mamă s-au schimbat.
+
+### 6.3 Previzualizare (dry-run) și backup
+
+Înainte de scriere se afișează o **previzualizare dry-run** cu numărătorile: câte fișe trebuie **create**, **actualizate**, **neschimbate** și câte **orfane**. Modificările se aplică **doar după confirmare** (butonul „Genera"). La aplicare se face mai întâi un **backup al bazei de date** automat.
+
+O fișă CON este **orfană** atunci când unitatea ei mamă nu se mai întinde pe mai multe perioade (de ex. perioada inițială și cea finală au fost făcute egale). În mod implicit orfanele sunt doar **semnalate**; o **casetă de bifare** („Rimuovi anche le CON orfane") permite optarea pentru eliminarea lor.
+
+### 6.4 În exportul Extended Matrix
+
+Fișele `CON_<us>` generate astfel apar în exportul GraphML al Extended Matrix ca **elemente de continuitate**.
+
+---
+
+## 7. Verificarea paradoxurilor temporale (stratigrafice)
+
+În panoul **"Verifica rapporti"** (Verificarea relațiilor — o filă din dialogul de import/export s3dgraphy), verificarea semnalează acum și **paradoxurile temporale**: când perioada/faza atribuită unei unități contrazice stratigrafia observată. Stratigrafia este data de referință, prin urmare corecțiile automate mută **perioadele**, nu relațiile.
+
+### 7.1 Ce detectează
+- **Inversiune temporală**: două unități datate legate printr-o relație de ordine (de ex. US5 «acoperă» US7) în care unitatea mai recentă din stratigrafie se dovedește a fi în întregime mai **veche** ca perioadă.
+- **Contemporaneitate incoerentă**: unități declarate contemporane (egalitate fizică / legătură) dar cu intervale cronologice **disjuncte**.
+- **Neevaluabil**: relație de ordine în care cel puțin una dintre cele două unități nu are o perioadă databilă (doar semnalat, fără corecție).
+
+Notă privind limita: două perioade **adiacente care se ating** într-un singur punct cronologic sunt considerate suprapuse → **nu** constituie un paradox (prezumția de bună-credință).
+
+### 7.2 Corecție automată și sugestii
+- Când o singură mutare rezolvă conflictul, verificarea propune mutarea unității **mono-perioadă** aflate în conflict cu majoritatea vecinilor săi, alegând perioada cu mutarea minimă; pentru contemporaneitățile cu o unitate nedatabilă copiază perioada vecinului datat.
+- În cazurile ambigue — egalitate, unități **multi-perioadă** (de ex. fișe CON), nicio perioadă validă — nu corectează automat: oferă o **sugestie «ce + cum»** (de ex. «Mută US5 la o perioadă ≥ 3, sau US7 la o perioadă ≤ 1, sau verifică relația»).
+
+### 7.3 Previzualizare și backup
+- **Previzualizarea** arată modificările de perioadă propuse înainte de a le aplica.
+- Înainte de scrierea perioadelor se efectuează un **backup automat al bazei de date** (SQLite și PostgreSQL).
+- După aplicare, relansează verificarea pentru a controla eventualele paradoxuri reziduale.
+
+---
+
+## 8. Verificarea cronologiei (periodizare și fișe)
+
+În același panou **"Verifica rapporti"** (Verificarea relațiilor — o filă din dialogul de import/export s3dgraphy), începând cu versiunea 5.13.64-alpha verificarea găsește și corectează și probleme de **cronologie** ale sitului selectat. Verificarea paradoxurilor temporale (secțiunea 7) compară perioada unei unități cu stratigrafia; aceasta compară periodizarea cu ea însăși și cu fișele US care o copiază.
+
+### 8.1 Ce detectează
+
+Panoul grupează problemele pe tipuri. Alături de grupurile relațiilor apar patru grupuri noi:
+
+| Grup | Ce semnalează | Cum este tratat |
+|------|---------------|-----------------|
+| **Faze cu intervale suprapuse** | Două rânduri ale periodizării ale căror intervale de ani se intersectează | Manual: panoul propune îngustarea intervalelor doar dacă, după îngustare, rămâne un interval utilizabil |
+| **Datare a fișei dezaliniată** | Câmpul `datazione` al fișei US spune altceva decât `datazione_estesa` a perioadei/fazei sale | Automat: periodizarea este sursa, iar fișa este copia, deci copia este rescrisă din sursă. Un câmp gol se completează la fel. O US fără perioadă este sărită, pentru că nu există nimic de copiat |
+| **Periodizare cu începutul după sfârșit** | `cron_iniziale` mai mare decât `cron_finale` | Manual: sunt probabil date î.Hr. fără semnul minus — panoul propune rescrierea celor doi ani ca numere negative (`-1650` în loc de `1650`); dacă este însă o greșeală de tastare, inversează manual cele două valori |
+| **Fază fără ani** | O fază ai cărei ani lipsesc sau nu pot fi citiți | Doar semnalată: nu există nimic de la care să îi moștenească |
+
+Un exemplu pentru suprapuneri. Baza de date de exemplu are două și niciuna nu are propunere: cele două faze au intervale **identice**, iar orice îngustare ar face ca o fază să se termine înainte de a începe. Panoul doar o spune; decizia (unirea fazelor, corectarea anilor, lăsarea așa cum este) aparține arheologului.
+
+### 8.2 Corecție automată și sugestii
+
+**Corecții automate și propuneri.** Corecțiile automate sunt **deja bifate**; propunerile **nu**, și sunt aplicate doar dacă se bifează caseta. Înainte regula era alta: o problemă a cărei corecție cerea o decizie umană putea fi doar citită. Acum are o casetă, lăsată nebifată. Acest lucru este valabil și pentru cele două categorii mai vechi de relații care oferă o sugestie, adică contradicția directă și ciclul stratigrafic.
+
+Pentru a folosi panoul:
+
+1. Selectați în panou **situl** de verificat. Verificarea este **pe sit**: se uită doar la situl ales și corectează doar acel sit. Într-o bază de date cu zece situri acest lucru contează, pentru că aceleași numere de US există în toate.
+2. Citiți **linia de rezumat** de deasupra arborelui: spune câte probleme sunt, câte pot fi corectate automat și **câte sunt propunerile de bifat manual**.
+3. Deschideți grupurile și selectați o problemă pentru a-i citi detaliul în panoul de previzualizare.
+4. Verificați casetele. Corecțiile automate sunt deja bifate: debifați-le pe cele pe care nu doriți să le aplicați. Bifați propunerile cu care sunteți de acord.
+5. Aplicați corecțiile. Înainte de a scrie orice se creează o **copie de siguranță automată** (copie a fișierului SQLite sau `pg_dump` pentru PostgreSQL în `~/pyarchinit_5/pyarchinit_DB_folder/_pga_backups`); copia, care exista deja pentru corecțiile câmpurilor de perioadă, acoperă acum și corecțiile cronologice.
+6. Dacă rezultatul nu convinge, apăsați **Annulla ultimo fix** (anulează ultima corecție): anularea readuce și corecțiile scrise în tabela periodizării.
+
+### 8.3 Previzualizare și backup
+
+**Previzualizarea arată data calculată.** Pentru fiecare unitate citată de o problemă, panoul de previzualizare arată data ei calculată într-o linie ca aceasta:
+
+`US 4 · 1500–1549 · epoca · has_first_epoch → epoch_2_2`
+
+Linia indică, în ordine, intervalul de ani, regula care l-a produs și relația de-a lungul căreia a călătorit constrângerea, împreună cu nodul de la care provine. Când cele două capete ale intervalului vin pe drumuri diferite, fiecare capăt are eticheta lui (`inizio …` și `fine …`), astfel încât o dată nu este niciodată atribuită relației greșite. Astăzi, într-o bază de date normală, fiecare unitate își ia datele din propria perioadă, deci majoritatea liniilor vor spune `epoca`. Rostul liniei nu este să surprindă, ci să lase să se vadă **de unde vine** o dată.
+
+---
+
+## 9. Cum se citesc arcele matricei
+
+Unele alegeri din desenul matricei pot parea ciudate, dar nu sunt erori:
+
+- **O sageata nu trece niciodata pe sub un nod.** Cand coloana de sosire este ocupata, sageata intra in casuta **din lateral**: este normal.
+- **Egalitatea nu este o suprapunere.** O relatie «Uguale a» (Egal cu) sau «Si lega a» (Se leaga de) pune cele doua unitati pe **acelasi rand**, alaturate, unite prin **doua linii orizontale** (semnul egal) **fara varf de sageata**.
+- **Arcele redundante nu se deseneaza.** Daca US 1 acopera US 2 si US 2 acopera US 3, sageata de la 1 la 3 nu apare, pentru ca nu adauga nimic. In interiorul unui **ciclu**, in schimb, toate arcele raman, pentru ca un ciclu este o eroare care trebuie vazuta.
+
+---
+
+## Referințe
+
+- Issue upstream LocationNodeGroup: https://github.com/zalmoxes-laran/s3Dgraphy/issues/5
+- Repository pyarchinit: https://github.com/pyarchinit/pyarchinit
+- yEd Graph Editor: https://www.yworks.com/products/yed
+- s3dgraphy library: https://github.com/zalmoxes-laran/s3Dgraphy

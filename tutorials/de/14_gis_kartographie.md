@@ -1,0 +1,456 @@
+# Tutorial 14: GIS und Kartographie
+
+## Einführung
+
+PyArchInit ist tief in **QGIS** integriert und nutzt dessen vollständige GIS-Funktionalitäten für die räumliche Verwaltung archäologischer Daten. Dieses Tutorial behandelt die kartographische Integration, vordefinierte Layer und erweiterte Funktionen wie die **automatische SAM-Segmentierung**.
+
+### Haupt-GIS-Funktionen
+
+- SE-Visualisierung auf Karte
+- Vordefinierte Vektorlayer
+- Benutzerdefiniertes QML-Styling
+- GIS-Höhen und Messungen
+- Automatische Segmentierung (SAM)
+- Kartographischer Export
+
+## Vordefinierte PyArchInit-Layer
+
+### Hauptvektorlayer
+
+| Layer | Geometrie | Beschreibung |
+|-------|-----------|-------------|
+| `pyunitastratigrafiche` | MultiPolygon | Ablagerungs-SE |
+| `pyunitastratigrafiche_usm` | MultiPolygon | Mauerwerks-SE |
+| `pyarchinit_quote` | Point | Höhenpunkte |
+| `pyarchinit_siti` | Point | Fundortlokalisierung |
+| `pyarchinit_ripartizioni_spaziali` | Polygon | Grabungsareale |
+| `pyarchinit_strutture_ipotesi` | Polygon | Hypothetische Strukturen |
+| `pyarchinit_documentazione` | Point | Dokumentationsverweise |
+
+### SE-Layer-Attribute
+
+| Feld | Typ | Beschreibung |
+|------|-----|-------------|
+| `gid` | Integer | Eindeutige ID |
+| `scavo_s` | Text | Fundortname |
+| `area_s` | Text | Arealnummer |
+| `us_s` | Text | SE-Nummer |
+| `stratigraph_index_us` | Integer | Stratigraphischer Index |
+| `tipo_us_s` | Text | SE-Typ |
+| `rilievo_originale` | Text | Ursprungsvermessung |
+| `disegnatore` | Text | Vermessungsautor |
+| `data` | Date | Vermessungsdatum |
+
+## SE-Visualisierung auf Karte
+
+### Vom Tab "Karte" im SE-Formular
+
+1. Ein SE-Formular öffnen
+2. Tab **Karte** auswählen
+3. Verfügbare Funktionen:
+
+| Schaltfläche | Funktion |
+|--------------|----------|
+| SE anzeigen | Aktuelle SE auf Karte anzeigen |
+| Alle anzeigen | Alle SE des Areals anzeigen |
+| Neuer Datensatz | Neue Geometrie erstellen |
+| Schwenken zu | Karte auf SE zentrieren |
+
+### Visualisierung aus Suche
+
+1. SE-Suche durchführen
+2. Schaltfläche **"Datensatz anzeigen"** → zeigt einzelne an
+3. Schaltfläche **"Alle anzeigen"** → zeigt alle Ergebnisse an
+
+### Stilauswahl (SE und USM)
+
+Werden die SE oder die Mauerwerks-SE (USM) der Suchergebnisse auf die Karte geladen, erscheint das Fenster **Style Choice** ("How do you want to manage the layer style?"). Die Schaltflächen erscheinen auf Englisch:
+
+| Schaltfläche | Wirkung |
+|--------------|---------|
+| **Save new style** | Erstellt den Stil anhand des gewählten Feldes und speichert ihn unter einem Namen in der Datenbank |
+| **Load existing style** | Verwendet einen fertigen Stil, der aus einer Liste gewählt wird (siehe unten), als Vorlage und erstellt den Stil anhand des gewählten Feldes, ohne ihn in der Datenbank zu speichern |
+| **Use temporary style** | Erstellt den Stil anhand des gewählten Feldes, ohne ihn in der Datenbank zu speichern |
+| **Single symbol (outline only)** | Zeichnet nur die Umrisse der Geometrien, ohne Füllung |
+
+Seit 5.13.19-alpha öffnet **Load existing style** das Fenster **Existing style** ("Choose the style to use as a template:", auf Englisch) mit der Liste der verfügbaren Stile: die in der Datenbank gespeicherten Stile (*Database: Name*), die mit pyArchInit gelieferten QML-Stile (`us_*.qml`, aufgeführt als *pyArchInit: …*) und **Other QML file…**, um eine beliebige `.qml`-Datei auszuwählen. Der gewählte Stil wird in den Layer geladen (Beschriftungen, Transparenz und Mischmodus kommen mit) und dient als **Vorlage**: Nach der Wahl des Kategorisierungsfeldes behalten die Werte, die der Stil bereits enthält, seine Farbe und sein Symbol; die übrigen erhalten eine Kopie seines Symbols mit einer eigenen Farbe. Wird die Auswahl abgebrochen, funktioniert es wie **Use temporary style**. Vorher wurde nur unter den Stilen der Datenbank gesucht und, wenn keiner vorhanden war, direkt das Kategorisierungsfenster geöffnet.
+
+Bei **Save new style**, **Load existing style** und **Use temporary style** wird anschließend das Kategorisierungsfeld gewählt (Fenster **Kategorisierungsfeld auswählen**): **Stratigraphische Definition**, **SE Typ**, **Interpretative Definition** oder **Periode/Phase (cont_per)** (seit 5.13.19-alpha); jeder Wert des Feldes erhält eine eigene Farbe, die seit 5.13.19-alpha bei jedem Laden des Layers gleich bleibt. Bei **Periode/Phase (cont_per)** zeigt der Legendeneintrag jedes Codes auch die Datierung der Periode/Phase aus der Periodisierung. Es werden nur die im Layer vorhandenen Felder angeboten.
+
+**Zeichenreihenfolge.** Seit 5.13.19-alpha werden die Einheiten in der Reihenfolge gezeichnet, die der Time Manager verwendet: zuerst die ohne Periode, dann nach der Chronologie der Periode (aus der Periodisierung der Anfangsperiode/-phase der SE oder aus `cont_per`), dann nach `order_layer` (0 = älteste) und schließlich der Schnitt über seiner Verfüllung, sodass die jüngsten Einheiten oben liegen. Das gilt für alle Stiloptionen, auch für **Single symbol (outline only)**. Werden die Layer Periode für Periode geladen, wird der Stil nur einmal abgefragt und für alle Perioden verwendet.
+
+Seit 5.13.18-alpha wird der gewählte Stil (und das Kategorisierungsfeld) auch bei SQLite-Datenbanken berücksichtigt, sowohl für die SE als auch für die USM; vorher erschien die Karte immer mit einer Farbe pro SE.
+
+## Layer-Styling
+
+### QML-Dateien
+
+PyArchInit enthält vordefinierte Stile im QML-Format:
+```
+pyarchinit/styles/
+├── pyunitastratigrafiche.qml
+├── pyunitastratigrafiche_usm.qml
+├── pyarchinit_quote.qml
+└── ...
+```
+
+### Stil anwenden
+
+1. Layer in Legende auswählen
+2. Rechtsklick → **Eigenschaften**
+3. Tab **Stil**
+4. **Stil laden** → QML auswählen
+
+### Anpassung
+
+Stile können angepasst werden für:
+- Farben nach SE-Typ
+- Beschriftungen mit SE-Nummer
+- Transparenz
+- Rahmen und Füllungen
+
+## Höhen und Messungen
+
+### Höhen-Layer
+
+Der Layer `pyarchinit_quote` speichert:
+- X, Y-Koordinaten
+- Z-Höhe (absolut)
+- Höhenpunkttyp
+- Referenz-SE
+- Referenzareal
+
+### Automatische Höhenberechnung
+
+Vom SE-Formular werden Min/Max-Höhen berechnet:
+1. Abfrage der mit der SE verbundenen Höhenpunkte
+2. Extraktion von Minimal- und Maximalwert
+3. Anzeige im Bericht
+
+### Höheneingabe
+
+1. Höhen-Layer im Bearbeitungsmodus
+2. Punkt auf Karte zeichnen
+3. Attribute ausfüllen:
+   - `sito_q`
+   - `area_q`
+   - `us_q`
+   - `quota`
+   - `unita_misura_q`
+
+## Automatische SAM-Segmentierung
+
+### Was ist SAM?
+
+**SAM (Segment Anything Model)** ist ein von Meta entwickeltes KI-Modell zur automatischen Bildsegmentierung. PyArchInit integriert es für:
+- Automatische Digitalisierung von Steinen/Elementen
+- Orthofoto-Segmentierung
+- Beschleunigung der Vermessung
+
+### Zugriff auf die Funktion
+
+1. **PyArchInit** → **SAM Segmentation**
+2. Oder von der Toolbar: **SAM**-Symbol
+
+### SAM-Oberfläche
+
+```
++--------------------------------------------------+
+|        SAM Stone Segmentation                     |
++--------------------------------------------------+
+| Eingabe:                                          |
+|   Raster-Layer: [ComboBox Orthofoto]             |
++--------------------------------------------------+
+| Ziel-Layer:                                       |
+|   [o] pyunitastratigrafiche                      |
+|   [ ] pyunitastratigrafiche_usm                  |
++--------------------------------------------------+
+| Standard-Attribute:                               |
+|   Fundort (sito): [automatisches Feld]           |
+|   Areal: [Areal-Eingabe]                         |
+|   Stratigr. Index: [1-10]                        |
+|   SE-Typ: [Stein|Schicht|Anhäufung|Einschnitt]   |
++--------------------------------------------------+
+| Segmentierungsmodus:                              |
+|   [o] Automatisch (alle Steine erkennen)         |
+|   [ ] Klick-Modus (jeden Stein anklicken)        |
+|   [ ] Box-Modus (Rechteck zeichnen)              |
+|   [ ] Polygon-Modus (Freihand zeichnen)          |
+|   [ ] Von Layer (bestehendes Polygon nutzen)     |
++--------------------------------------------------+
+| Modell:                                           |
+|   [ComboBox Modell]                              |
+|   API-Key: [******]                              |
++--------------------------------------------------+
+|     [Segmentierung starten]  [Abbrechen]          |
++--------------------------------------------------+
+```
+
+### Segmentierungsmodi
+
+#### 1. Automatischer Modus
+- Segmentiert automatisch alle sichtbaren Objekte
+- Ideal für Bereiche mit vielen Steinen
+- Erfordert Orthofoto guter Qualität
+
+#### 2. Klick-Modus
+- Jedes zu segmentierende Objekt anklicken
+- Rechtsklick oder Enter zum Beenden
+- Escape zum Abbrechen
+- Präziser für bestimmte Objekte
+
+#### 3. Box-Modus
+- Rechteck über den Bereich zeichnen
+- Segmentiert nur den ausgewählten Bereich
+- Nützlich für begrenzte Zonen
+
+#### 4. Polygon-Modus
+- Freies Polygon zeichnen
+- Klick zum Hinzufügen von Eckpunkten
+- Rechtsklick zum Abschließen
+- Für unregelmäßige Bereiche
+
+#### 5. Von-Layer-Modus
+- Bestehendes Polygon als Maske verwenden
+- Polygon-Layer auswählen
+- Segmentiert nur innerhalb des Polygons
+
+### Verfügbare Modelle
+
+| Modell | Typ | Anforderungen | Qualität |
+|--------|-----|---------------|----------|
+| Replicate SAM-2 | Cloud API | API-Key | Ausgezeichnet |
+| Roboflow SAM-3 | Cloud API | API-Key | Ausgezeichnet + Text-Prompt |
+| SAM vit_b | Lokal | 375MB VRAM | Gut |
+| SAM vit_l | Lokal | 1.2GB VRAM | Sehr gut |
+| SAM vit_h | Lokal | 2.5GB VRAM | Ausgezeichnet |
+| OpenCV | Lokal | Keine | Basis |
+
+### SAM-3 mit Text-Prompt
+
+Die SAM-3-Version (Roboflow) unterstützt **Text-Prompts**:
+- "stones" - Steine
+- "pottery fragments" - Keramikfragmente
+- "bones" - Knochen
+- Jede Textbeschreibung
+
+### API-Konfiguration
+
+#### Replicate API (SAM-2)
+1. Auf [replicate.com](https://replicate.com) registrieren
+2. API-Key erhalten
+3. In Konfiguration eingeben
+
+#### Roboflow API (SAM-3)
+1. Auf [roboflow.com](https://roboflow.com) registrieren
+2. API-Key erhalten
+3. In Konfiguration eingeben
+
+### Lokale SAM-Installation
+
+Für lokale Nutzung ohne API:
+```bash
+# Virtuelle Umgebung erstellen
+cd ~/pyarchinit/bin
+python -m venv sam_venv
+
+# Umgebung aktivieren
+source sam_venv/bin/activate
+
+# Abhängigkeiten installieren
+pip install segment-anything torch torchvision
+
+# Modelle herunterladen (optional)
+# vit_b: https://dl.fbaipublicfiles.com/segment_anything/sam_vit_b_01ec64.pth
+# vit_l: https://dl.fbaipublicfiles.com/segment_anything/sam_vit_l_0b3195.pth
+# vit_h: https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth
+```
+
+### SAM-Arbeitsablauf
+
+1. **Vorbereitung**
+   - Orthofoto als Raster-Layer laden
+   - Bezugssystem überprüfen
+   - Ziel-Layer vorbereiten
+
+2. **Konfiguration**
+   - Eingabe-Raster auswählen
+   - Standard-Attribute einstellen
+   - Modus und Modell wählen
+
+3. **Ausführung**
+   - "Segmentierung starten" klicken
+   - Verarbeitung abwarten
+   - Ergebnisse überprüfen
+
+4. **Nachbearbeitung**
+   - Generierte Polygone kontrollieren
+   - SE-Nummern zuweisen
+   - Eventuelle Fehler korrigieren
+
+## Kartographische Integration
+
+### GIS-Datenexport
+
+Vom SE-Formular, Tab Karte:
+- **GeoPackage exportieren**: Layer als GPKG
+- **Shapefile exportieren**: Layer als SHP
+- **GeoJSON exportieren**: Layer als JSON
+
+### GIS-Datenimport
+
+Bestehende Geometrien importieren:
+1. Layer in QGIS laden
+2. Feature auswählen
+3. Import-Funktion verwenden
+
+### Geoprocessing
+
+Verfügbare räumliche Operationen:
+- Puffer
+- Verschneidung
+- Union
+- Differenz
+- Zentroide
+
+## Best Practices
+
+### 1. Orthofotos
+
+- Minimale Auflösung: 1-2 cm/Pixel
+- Format: Georeferenziertes GeoTIFF
+- Bezugssystem: Konsistent mit Projekt
+
+### 2. Digitalisierung
+
+- Snap für Präzision verwenden
+- Topologie überprüfen
+- Attributkonsistenz beibehalten
+
+### 3. SAM-Segmentierung
+
+- Orthofoto hoher Qualität
+- Gleichmäßige Beleuchtung
+- Angemessener Kontrast Objekte/Hintergrund
+- Nachprüfung immer erforderlich
+
+### 4. Layer-Organisation
+
+- Nach Typologie gruppieren
+- Konsistente Stile verwenden
+- Ordnung in Legende beibehalten
+
+## Problemlösung
+
+### Layer nicht angezeigt
+
+**Mögliche Ursachen**:
+- Falsche Ausdehnung
+- Verschiedenes Bezugssystem
+- Aktiver Filter
+
+**Lösungen**:
+- Auf Layer zoomen
+- KBS überprüfen
+- Filter entfernen
+
+### SAM funktioniert nicht
+
+**Mögliche Ursachen**:
+- API-Key ungültig
+- Raster nicht georeferenziert
+- Lokales Modell nicht installiert
+
+**Lösungen**:
+- API-Key überprüfen
+- Georeferenzierung kontrollieren
+- Modell installieren
+
+### Fehlerhafte Geometrien
+
+**Mögliche Ursachen**:
+- Digitalisierungsfehler
+- Problematischer Import
+
+**Lösungen**:
+- "Fix Geometries" verwenden
+- Element neu zeichnen
+
+### Layer geladen, aber Geometrien nicht sichtbar (SQLite)
+
+**Symptom**:
+- Ein pyArchInit-Layer einer SQLite/SpatiaLite-Datenbank (z. B. SE `pyunitastratigrafiche`, Mauer-SE, Funde, negative SE) wird geladen und die Attributtabelle zeigt die Datensätze, aber auf der Karte wird nichts gezeichnet und "Auf Layer zoomen" funktioniert nicht
+
+**Ursache**:
+- Der räumliche Index (R*Tree) des Layers wurde nicht gepflegt: seine Trigger gingen verloren, als eine Tabelle neu erstellt wurde (z. B. durch ältere Schema-Update-Skripte), oder Daten wurden unter Umgehung der Trigger importiert
+- QGIS wählt die zu zeichnenden Objekte über diesen Index aus, daher bleiben sie unsichtbar
+- Betroffen sind auch Datenbanken, die zwischen Oktober 2025 und September 2026 aus der SQLite-Vorlage erstellt wurden
+
+**Lösung (automatisch)**:
+- Beim Verbinden mit einer SQLite-Datenbank prüft pyArchInit alle räumlichen Indizes (wenige Augenblicke; bei einer intakten Datenbank wird nichts geschrieben) und baut beschädigte automatisch neu auf
+- Seit Version 5.13.16-alpha repariert dieselbe Prüfung auch die **räumlichen Views** (`pyarchinit_us_view`, `pyarchinit_quote_view`, Strukturen, Funde, die UT-Views usw.):
+  - jede View wird an die ROWID ihrer Geometrietabelle gebunden
+  - Registrierungen von Views, die nicht mehr existieren, werden entfernt
+  - fehlende Standard-Views werden neu erstellt
+  - die UT-Views werden als räumliche Views registriert
+  - Geometrietabellen ohne räumlichen Index erhalten einen: nötig, wenn dem mit QGIS gelieferten GDAL die SpatiaLite-Funktionen fehlen (z. B. QGIS unter macOS), wo diese Layer ohne Index nichts zeichneten
+- Bevor etwas geändert wird, wird EINE einzige Sicherungskopie neben der Datenbank gespeichert: `<datenbank>.sqlite.pre_spatial_index_repair_<datum-uhrzeit UTC>`
+- Das Ergebnis steht im QGIS-Protokollbedienfeld (Ansicht → Bedienfelder → Protokollmeldungen, Reiter "PyArchInit")
+
+**Vorgehen**:
+- Nichts manuell zu starten: die Prüfung läuft automatisch bei der ERSTEN Verbindung mit jeder Datenbank in jeder QGIS-Sitzung (also nach dem Plugin-Update oder nach einem Neustart von QGIS)
+- Waren die Layer bereits geladen, sie nach der Reparatur entfernen und erneut hinzufügen (oder das Projekt neu öffnen)
+- Meldet das Protokoll "PyArchInit", dass ein Index NICHT repariert werden konnte (z. B. SpatiaLite nicht ladbar), die Ursache beheben und QGIS neu starten: die Prüfung wird erst in einer neuen Sitzung wiederholt
+- Die Sicherungsdatei kann gelöscht werden, sobald die Layer überprüft sind
+- Um die Prüfung erneut auszuführen (z. B. nach dem Wiederherstellen einer Sicherung), QGIS neu starten
+- Hinweis: In `inventario_materiali_view` wird der Punkt des Fundorts für jeden Fund wiederholt, daher zeigt "Objekte abfragen" (Identify) auf diesem Punkt einen der Funde
+
+## Referenzen
+
+### Quelldateien
+- `modules/gis/pyarchinit_pyqgis.py` - GIS-Integration
+- `tabs/Sam_Segmentation_Dialog.py` - SAM-Dialog
+- `modules/gis/sam_map_tools.py` - SAM-Kartenwerkzeuge
+
+### Layer
+- `pyunitastratigrafiche` - Ablagerungs-SE
+- `pyunitastratigrafiche_usm` - Mauerwerks-SE
+- `pyarchinit_quote` - Höhen
+
+---
+
+## Video-Tutorial
+
+### GIS-Integration
+`[Platzhalter: video_gis_integration.mp4]`
+
+**Inhalte**:
+- Vordefinierte Layer
+- SE-Visualisierung
+- Styling und Beschriftungen
+- Kartographischer Export
+
+**Voraussichtliche Dauer**: 15-18 Minuten
+
+### SAM-Segmentierung
+`[Platzhalter: video_sam_segmentation.mp4]`
+
+**Inhalte**:
+- SAM-Konfiguration
+- Segmentierungsmodi
+- Nachbearbeitung
+- Best Practices
+
+**Voraussichtliche Dauer**: 12-15 Minuten
+
+---
+
+*Letzte Aktualisierung: Januar 2026*
+
+---
+
+## Interaktive Animation
+
+Erkunden Sie die interaktive Animation, um mehr über dieses Thema zu erfahren.
+
+[Interaktive Animation öffnen](../../animations/pyarchinit_image_classification_animation.html)

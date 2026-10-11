@@ -1,0 +1,1127 @@
+# PyArchInit - Scheda US/USM (Unita Stratigrafica)
+
+## Indice
+1. [Introduzione](#introduzione)
+2. [Concetti Fondamentali](#concetti-fondamentali)
+3. [Accesso alla Scheda](#accesso-alla-scheda)
+4. [Interfaccia Generale](#interfaccia-generale)
+5. [Campi Identificativi](#campi-identificativi)
+6. [Tab Localizzazione](#tab-localizzazione)
+7. [Tab Dati Descrittivi](#tab-dati-descrittivi)
+8. [Tab Periodizzazione](#tab-periodizzazione)
+9. [Tab Rapporti Stratigrafici](#tab-rapporti-stratigrafici)
+10. [Tab Dati Fisici](#tab-dati-fisici)
+11. [Tab Dati Schedatura](#tab-dati-schedatura)
+12. [Tab Misure US](#tab-misure-us)
+13. [Tab Documentazione](#tab-documentazione)
+14. [Tab Tecnica Edilizia USM](#tab-tecnica-edilizia-usm)
+15. [Tab Leganti USM](#tab-leganti-usm)
+16. [Tab Media](#tab-media)
+17. [Tab Help - Tool Box](#tab-help---tool-box)
+18. [Matrix di Harris](#matrix-di-harris)
+19. [Funzionalita GIS](#funzionalita-gis)
+20. [Esportazioni](#esportazioni)
+21. [Workflow Operativo](#workflow-operativo)
+22. [Risoluzione Problemi](#risoluzione-problemi)
+
+---
+
+## Introduzione
+
+La **Scheda US/USM** (Unita Stratigrafica / Unita Stratigrafica Muraria) e il cuore della documentazione archeologica in PyArchInit. Rappresenta lo strumento principale per registrare tutte le informazioni relative alle unita stratigrafiche individuate durante lo scavo.
+
+Questa scheda implementa i principi del **metodo stratigrafico** sviluppato da Edward C. Harris, permettendo di documentare:
+- Le caratteristiche fisiche di ogni strato
+- I rapporti stratigrafici tra le unita
+- La cronologia relativa e assoluta
+- La documentazione grafica e fotografica associata
+
+<!-- VIDEO: Introduzione alla Scheda US -->
+> **Video Tutorial**: [Inserire link video introduzione scheda US]
+
+---
+
+## Concetti Fondamentali
+
+### Cos'e un'Unita Stratigrafica (US)
+
+Un'**Unita Stratigrafica** e la piu piccola unita di scavo individuabile e distinguibile dalle altre. Puo essere:
+- **Strato**: deposito di terra con caratteristiche omogenee
+- **Interfaccia**: superficie di contatto tra strati (es. taglio di fossa)
+- **Elemento strutturale**: parte di una costruzione
+
+### Tipi di Unita
+
+| Tipo | Codice | Descrizione |
+|------|--------|-------------|
+| US | Unita Stratigrafica | Strato generico |
+| USM | Unita Stratigrafica Muraria | Elemento costruttivo murario |
+| USVA | Unita Stratigrafica Verticale A | Alzato verticale tipo A |
+| USVB | Unita Stratigrafica Verticale B | Alzato verticale tipo B |
+| USVC | Unita Stratigrafica Verticale C | Alzato verticale tipo C |
+| USD | Unita Stratigrafica di Demolizione | Strato di crollo/demolizione |
+| CON | Conci | Blocchi architettonici |
+| VSF | Virtual Stratigraphic Feature | Elemento virtuale |
+| SF | Stratigraphic Feature | Feature stratigrafica |
+| SUS | Sub-Unita Stratigrafica | Suddivisione di US |
+| DOC | Documentazione | Elemento documentario |
+
+### Rapporti Stratigrafici
+
+I rapporti stratigrafici definiscono le relazioni temporali tra le US:
+
+| Rapporto | Inverso | Significato |
+|----------|---------|-------------|
+| **Copre** | Coperto da | L'US si sovrappone fisicamente |
+| **Taglia** | Tagliato da | L'US interrompe/attraversa |
+| **Riempie** | Riempito da | L'US colma una cavita |
+| **Si appoggia a** | Gli si appoggia | Relazione di appoggio |
+
+<!-- IMMAGINE: Schema rapporti stratigrafici -->
+![Rapporti Stratigrafici](images/03_scheda_us/01_schema_rapporti.png)
+*Figura 1: Schema dei rapporti stratigrafici*
+
+---
+
+## Accesso alla Scheda
+
+Per accedere alla Scheda US:
+
+1. Menu **PyArchInit** → **Archaeological record management** → **SU/WSU**
+2. Oppure dalla toolbar PyArchInit, cliccare sull'icona **US/USM**
+
+<!-- IMMAGINE: Screenshot menu accesso -->
+![Accesso Scheda US](images/03_scheda_us/02_menu_scheda_us.png)
+*Figura 2: Accesso alla Scheda US dal menu*
+
+<!-- IMMAGINE: Screenshot toolbar -->
+![Toolbar US](images/03_scheda_us/03_toolbar_us.png)
+*Figura 3: Icona Scheda US nella toolbar*
+
+---
+
+## Interfaccia Generale
+
+La Scheda US e organizzata in diverse aree funzionali:
+
+<!-- IMMAGINE: Screenshot interfaccia completa con aree numerate -->
+![Interfaccia US](images/03_scheda_us/04_interfaccia_completa.png)
+*Figura 4: Interfaccia completa della Scheda US*
+
+### Aree Principali
+
+| # | Area | Descrizione |
+|---|------|-------------|
+| 1 | **Campi Identificativi** | Sito, Area, US, Tipo, Definizioni |
+| 2 | **Toolbar DBMS** | Navigazione, salvataggio, ricerca |
+| 3 | **Tab Dati** | Schede tematiche per i dati |
+| 4 | **Toolbar GIS** | Strumenti di visualizzazione mappa |
+| 5 | **Tab Tool Box** | Strumenti avanzati e Matrix |
+
+### Toolbar DBMS
+
+La toolbar DBMS e identica a quella della Scheda Sito con alcune funzionalita aggiuntive:
+
+<!-- IMMAGINE: Screenshot toolbar DBMS US -->
+![Toolbar DBMS](images/03_scheda_us/05_toolbar_dbms.png)
+*Figura 5: Toolbar DBMS della Scheda US*
+
+| Bottone | Funzione | Descrizione |
+|---------|----------|-------------|
+| **New record** | Nuovo | Crea una nuova scheda US |
+| **Save** | Salva | Salva le modifiche |
+| **Delete** | Elimina | Elimina la scheda corrente |
+| **View all** | Vedi tutti | Mostra i record del sito corrente |
+| **First/Prev/Next/Last** | Navigazione | Naviga tra i record |
+| **new search** | Ricerca | Avvia modalita ricerca |
+| **search !!!** | Esegui | Esegue la ricerca |
+| **Order by** | Ordina | Ordina i record |
+| **Report** | Stampa | Genera report PDF |
+| **Elenco US/Foto** | Lista | Genera elenchi |
+
+---
+
+## Campi Identificativi
+
+I campi identificativi sono sempre visibili nella parte superiore della scheda.
+
+<!-- IMMAGINE: Screenshot campi identificativi -->
+![Campi Identificativi](images/03_scheda_us/06_campi_identificativi.png)
+*Figura 6: Campi identificativi*
+
+### Campi Obbligatori
+
+| Campo | Descrizione | Formato |
+|-------|-------------|---------|
+| **Sito** | Nome del sito archeologico | Testo (da combobox) |
+| **Area** | Numero dell'area di scavo | Numero intero (1-20) |
+| **US/USM** | Numero dell'unita stratigrafica | Numero intero |
+| **Unita tipo** | Tipo di unita (US, USM, ecc.) | Selezione |
+
+### Campi Descrittivi
+
+| Campo | Descrizione |
+|-------|-------------|
+| **Definizione stratigrafica** | Classificazione stratigrafica (da thesaurus) |
+| **Definizione interpretativa** | Interpretazione funzionale (da thesaurus) |
+
+### Definizioni Stratigrafiche (Esempi)
+
+| Definizione | Descrizione |
+|-------------|-------------|
+| Strato | Deposito generico |
+| Riempimento | Materiale di colmatura |
+| Taglio | Interfaccia negativa |
+| Piano d'uso | Superficie di calpestio |
+| Crollo | Materiale di crollo |
+| Battuto | Pavimentazione in terra battuta |
+
+### Definizioni Interpretative (Esempi)
+
+| Definizione | Descrizione |
+|-------------|-------------|
+| Attivita' di cantiere | Fase costruttiva |
+| Abbandono | Fase di abbandono |
+| Pavimentazione | Piano pavimentale |
+| Muro | Struttura muraria |
+| Fossa | Escavazione intenzionale |
+| Livellamento | Strato di preparazione |
+
+---
+
+## Tab Localizzazione
+
+Contiene i dati di posizionamento all'interno dello scavo.
+
+<!-- IMMAGINE: Screenshot tab localizzazione -->
+![Tab Localizzazione](images/03_scheda_us/07_tab_localizzazione.png)
+*Figura 7: Tab Localizzazione*
+
+### Campi di Localizzazione
+
+| Campo | Descrizione | Note |
+|-------|-------------|------|
+| **Settore** | Settore di scavo | Lettere A-H o numeri 1-20 |
+| **Quadrato/Parete** | Riferimento spaziale | Per scavi a griglia |
+| **Ambiente** | Numero dell'ambiente | Per edifici/strutture |
+| **Saggio** | Numero del saggio | Per saggi di verifica |
+
+### Numeri di Catalogo
+
+| Campo | Descrizione |
+|-------|-------------|
+| **Nr. Cat. Generale** | Numero catalogo generale |
+| **Nr. Cat. Interno** | Numero catalogo interno |
+| **Nr. Cat. Internazionale** | Codice internazionale |
+
+---
+
+## Tab Dati Descrittivi
+
+Contiene la descrizione testuale dell'unita stratigrafica.
+
+<!-- IMMAGINE: Screenshot tab dati descrittivi -->
+![Tab Dati Descrittivi](images/03_scheda_us/08_tab_dati_descrittivi.png)
+*Figura 8: Tab Dati Descrittivi*
+
+### Campi Descrittivi
+
+| Campo | Descrizione | Suggerimenti |
+|-------|-------------|--------------|
+| **Descrizione** | Descrizione fisica dell'US | Colore, consistenza, composizione, limiti |
+| **Interpretazione** | Interpretazione funzionale | Funzione, formazione, significato |
+| **Elementi datanti** | Materiali per datazione | Ceramica, monete, oggetti datanti |
+| **Osservazioni** | Note aggiuntive | Dubbi, ipotesi, confronti |
+
+### Come Descrivere un'US
+
+**Descrizione fisica:**
+```
+Strato di terra argillosa, di colore marrone scuro (10YR 3/3),
+consistenza compatta, con inclusi di frammenti laterizi (2-5 cm),
+ciottoli calcarei (1-3 cm) e carbone. Limiti netti in alto,
+sfumati in basso. Spessore variabile 15-25 cm.
+```
+
+**Interpretazione:**
+```
+Strato di abbandono formatosi in seguito alla cessazione delle
+attivita nell'ambiente. La presenza di materiale edilizio
+frammentato suggerisce un crollo parziale delle strutture.
+```
+
+---
+
+## Tab Periodizzazione
+
+Gestisce la cronologia dell'unita stratigrafica.
+
+<!-- IMMAGINE: Screenshot tab periodizzazione -->
+![Tab Periodizzazione](images/03_scheda_us/09_tab_periodizzazione.png)
+*Figura 9: Tab Periodizzazione*
+
+### Periodizzazione Relativa
+
+| Campo | Descrizione |
+|-------|-------------|
+| **Periodo Iniziale** | Periodo di formazione |
+| **Fase Iniziale** | Fase di formazione |
+| **Periodo Finale** | Periodo di obliterazione |
+| **Fase Finale** | Fase di obliterazione |
+
+**Nota**: I periodi e le fasi devono essere prima creati nella **Scheda Periodizzazione**.
+
+### Cronologia Assoluta
+
+| Campo | Descrizione |
+|-------|-------------|
+| **Datazione** | Data assoluta o intervallo |
+| **Anno** | Anno di scavo |
+
+### Altri Campi
+
+| Campo | Descrizione | Valori |
+|-------|-------------|--------|
+| **Attivita** | Tipo di attivita | Testo libero |
+| **Struttura** | Codice struttura associata | Da Scheda Struttura |
+| **Scavato** | Stato di scavo | Si / No |
+| **Metodo di scavo** | Modalita di scavo | Meccanico / Stratigrafico |
+
+### Campo Struttura - Collegamento con Scheda Struttura
+
+Il campo **Struttura** permette di associare una o piu strutture all'unita stratigrafica corrente. E un campo a selezione multipla (checkbox).
+
+#### Come funziona la sincronizzazione
+
+1. **Prima** creare le strutture nella **Scheda Struttura**
+2. Nella Scheda Struttura compilare: **Sito** (stesso dell'US), **Sigla** (es. "MUR"), **Numero** (es. 1)
+3. Nella Scheda US, il campo Struttura mostrera le strutture disponibili nel formato `SIGLA-NUMERO`
+
+#### Selezionare strutture
+
+1. Cliccare sul campo **Struttura** per aprire il menu a tendina
+2. Spuntare le checkbox delle strutture da associare
+3. E possibile selezionare **piu strutture** contemporaneamente
+4. Salvare il record
+
+#### Rimuovere una singola struttura
+
+1. Cliccare sul campo **Struttura** per aprire il menu a tendina
+2. **Togliere la spunta** dalla checkbox della struttura da rimuovere
+3. Salvare il record
+
+#### Rimuovere tutte le strutture (Svuota campo)
+
+1. Fare **click destro** sul campo Struttura
+2. Selezionare "**Svuota campo Struttura**" dal menu contestuale
+3. Salvare il record per confermare la modifica
+
+> **Nota**: La funzione "Svuota campo" rimuove TUTTE le strutture associate. Per rimuoverne solo una, usare le checkbox.
+
+---
+
+## Tab Rapporti Stratigrafici
+
+**Questo e il tab piu importante della scheda US.** Definisce le relazioni stratigrafiche con le altre unita.
+
+<!-- IMMAGINE: Screenshot tab rapporti stratigrafici -->
+![Tab Rapporti](images/03_scheda_us/10_tab_rapporti.png)
+*Figura 10: Tab Rapporti Stratigrafici*
+
+<!-- VIDEO: Come inserire rapporti stratigrafici -->
+> **Video Tutorial**: [Inserire link video rapporti stratigrafici]
+
+### Struttura della Tabella Rapporti
+
+| Colonna | Descrizione |
+|---------|-------------|
+| **Sito** | Sito dell'US correlata |
+| **Area** | Area dell'US correlata |
+| **US** | Numero US correlata |
+| **Tipo di rapporto** | Tipo di relazione |
+
+### Tipi di Rapporto Disponibili
+
+| Italiano | English | Deutsch |
+|----------|---------|---------|
+| Copre | Covers | Liegt über |
+| Coperto da | Covered by | Liegt unter |
+| Taglia | Cuts | Schneidet |
+| Tagliato da | Cut by | Geschnitten von |
+| Riempie | Fills | Verfüllt |
+| Riempito da | Filled by | Verfüllt von |
+| Si appoggia a | Abuts | Stützt sich auf |
+| Gli si appoggia | Supports | Wird gestützt von |
+| Uguale a (=) | Same as | Gleich |
+| Anteriore (>>) | Earlier | Früher |
+| Posteriore (<<) | Later | Später |
+
+### Inserimento Rapporti
+
+1. Cliccare **+** per aggiungere una riga
+2. Inserire Sito, Area, US della US correlata
+3. Selezionare il tipo di rapporto
+4. Salvare
+
+<!-- IMMAGINE: Screenshot inserimento rapporto -->
+![Inserimento Rapporto](images/03_scheda_us/11_inserimento_rapporto.png)
+*Figura 11: Inserimento di un rapporto stratigrafico*
+
+### Bottoni Rapporti
+
+| Bottone | Funzione |
+|---------|----------|
+| **+** | Aggiungi riga |
+| **-** | Rimuovi riga |
+| **Insert or update inverse relat.** | Crea automaticamente il rapporto inverso |
+| **Vai all'US** | Naviga alla US selezionata |
+| **visualizza matrix** | Mostra il Matrix di Harris |
+| **Fix** | Correggi errori nei rapporti |
+
+### Anteprima della matrice: matrice sopra, pianta sotto
+
+Il bottone **visualizza matrix** del tab Rapporti apre un'anteprima in forma di **PNG** (non più il disegno Graphviz). Il file contiene due parti in un'unica immagine: in alto la **matrice di s3dgraphy**, in basso la **pianta** delle unità. L'immagine si adatta al contenuto e viene salvata **nella stessa cartella dell'esportazione**.
+
+L'anteprima rispetta il **filtro applicato**: se dopo una ricerca la scheda mostra soltanto le US da 1 a 10, nel disegno compaiono quelle e non l'intero sito. La pianta disegna le geometrie di `pyunitastratigrafiche`, `pyunitastratigrafiche_usm` e le quote.
+
+**Etichette della pianta.** Ogni unità porta il proprio numero **cerchiato**. Quando due etichette si coprirebbero, QGIS ne **sposta** una e traccia una **linea di richiamo** verso l'unità a cui appartiene, con la stessa convenzione dell'atlante del Time Manager. Il numero non sparisce mai: se non c'è un posto buono, viene messo in una posizione meno buona ma resta leggibile.
+
+### Rapporti Inversi Automatici
+
+Quando inserisci un rapporto, puoi creare automaticamente l'inverso:
+
+| Se inserisci | Viene creato |
+|--------------|--------------|
+| US 1 **copre** US 2 | US 2 **coperta da** US 1 |
+| US 1 **taglia** US 2 | US 2 **tagliata da** US 1 |
+| US 1 **riempie** US 2 | US 2 **riempita da** US 1 |
+
+### Controllo Rapporti
+
+Il bottone **Check rapporti** verifica la coerenza dei rapporti:
+- Rileva rapporti mancanti
+- Trova inconsistenze
+- Segnala errori logici
+
+<!-- IMMAGINE: Screenshot controllo rapporti -->
+![Controllo Rapporti](images/03_scheda_us/12_controllo_rapporti.png)
+*Figura 12: Risultato controllo rapporti*
+
+### Area e sito nei rapporti (Ctrl+U)
+
+Un rapporto si scrive su quattro colonne: **rapporto, US, area, sito**. Molte schede — quelle vecchie e quelle importate — hanno solo le prime due: nel database di esempio sono 1683 voci su 1871. Il bottone **Aggiorna Area/Sito nei rapporti** (scorciatoia **Ctrl+U**), nella tab Rapporti stratigrafici, riempie le due colonne mancanti su tutte le schede del sito in un colpo.
+
+L'area che scrive è quella **dell'unità collegata**, non quella della scheda:
+
+- se l'unità collegata esiste nell'area della scheda, è quella (su uno scavo a un'area sola è sempre così);
+- se esiste **solo** in un'altra area, scrive quell'altra: la US 60 dell'area 1 che «Copre 61», con la US 61 che sta solo nell'area 2, prende area 2;
+- un'area già scritta che nomina una scheda che esiste **non viene toccata**;
+- quando l'area non si può decidere — l'unità collegata esiste in più aree e nessuna è quella della scheda, oppure non esiste in nessuna area del sito — la colonna **resta vuota** e un avviso elenca le US da sistemare a mano. Nessuna area viene inventata.
+
+Le righe cominciate e non finite (il tipo di rapporto battuto e il numero di US ancora no) non vengono cancellate.
+
+### Righe vuote nei rapporti (riparazione)
+
+Nelle versioni precedenti (fino alla 4.9.9 e alle 5.x antecedenti ad agosto 2026) la tabella **Rapporti stratigrafici** del **primo record del DB** (di solito la US 1) poteva accumulare righe completamente vuote `['', '', '', '']`: a ogni apertura della scheda o salvataggio di un nuovo record la tabella non veniva svuotata del tutto prima del ricaricamento e le righe residue venivano salvate rispondendo **OK** a "Il record è stato modificato. Vuoi salvare?". Il numero di righe cresceva di circa tre volte a sessione (fino a decine di migliaia), rallentando molto l'apertura della scheda; i rapporti reali non andavano persi, ma finivano sepolti in fondo alla tabella. Da questa release il problema è risolto: la tabella viene svuotata completamente al ricaricamento, le righe tutte vuote non vengono mai salvate (nemmeno una riga aggiunta con **+** e lasciata in bianco).
+
+Per ripulire un DB già interessato usare la voce di menu dedicata:
+
+1. `Plugins → pyArchInit → Migrazioni → Ripara rapporti vuoti (righe ['', '', '', ''])`
+2. Il tool analizza il DB connesso in sola lettura e mostra un'**anteprima** con il numero di record e di righe vuote trovate (es. "US 1 rapporti: 78676 → 2 righe")
+3. Confermare: viene creato un **backup automatico** (copia del file SQLite accanto all'originale, oppure `pg_dump` per PostgreSQL in `~/pyarchinit_5/pyarchinit_DB_folder/_pga_backups`)
+4. Vengono rimosse **solo** le righe completamente vuote; al termine compare un riepilogo
+5. Riaprire la Scheda US per vedere i rapporti ripuliti
+
+Il tool è idempotente: se il DB è già pulito segnala "Rapporti già puliti". I rapporti compilati non vengono mai toccati e i record già inquinati si correggono da soli anche al successivo salvataggio dalla scheda.
+
+> **Utenti avanzati (CLI)**: `python3 scripts/migrations/2026_08_rapporti_blank_rows.py --dry-run --db <file.sqlite>` per l'anteprima, poi `--apply` per applicare (per PostgreSQL usare `--conn-str <postgresql://...>`).
+
+<!-- IMMAGINE: Anteprima riparazione rapporti vuoti -->
+![Ripara rapporti vuoti](images/03_scheda_us/34_ripara_rapporti_vuoti.png)
+*Figura 34: Anteprima della riparazione dei rapporti vuoti*
+
+### Codici USVA/USVB/USVC nei rapporti (allineamento del vocabolario)
+
+Il vocabolario delle unità verticali è stato riordinato: **USVA e USVB diventano USVs** (unità virtuale strutturale) e **USVC diventa USVn** (unità virtuale non strutturale). La voce di menu che fa la conversione esisteva già, ma correggeva solo il campo **Unità tipo**: nella tab **Rapporti stratigrafici** si continuava a leggere «USVA 104» accanto a un'unità che era già diventata una USVs.
+
+Da questa release la migrazione **riscrive anche i rapporti**:
+
+1. `Plugins → pyArchInit → Migrazioni → Allinea vocabolario US (USVA/USVB→USVs, USVC→USVn)`
+2. Scegliere il file del database (`.sqlite`)
+3. Compare un **piano**: quante unità per ciascun codice vecchio, quante voci da riscrivere nelle colonne `rapporti` e `rapporti2`, quante celle risultano illeggibili. La finestra dice a parole che la migrazione tocca il tipo dell'unità **e** i codici vecchi dentro i rapporti, e che le celle illeggibili restano intatte
+4. Confermare: prima di scrivere viene creato un **backup automatico** del database
+5. Riaprire la Scheda US: nei rapporti i codici sono allineati
+
+Il tool è idempotente: al secondo passaggio il piano è tutto a zero. Una cella di rapporti che non si riesce a leggere non viene riscritta a metà — resta com'è e viene contata a parte, così si sa quante sono e si possono controllare a mano.
+
+---
+
+## Tab Rapporti per Extended Matrix
+
+Tab dedicato alla gestione avanzata dei rapporti per l'Extended Matrix.
+
+<!-- IMMAGINE: Screenshot tab EM -->
+![Tab EM](images/03_scheda_us/13_tab_em.png)
+*Figura 13: Tab Rapporti per Extended Matrix*
+
+Questo tab permette di aggiungere informazioni supplementari per ogni rapporto:
+- Tipo di unita
+- Definizione interpretativa
+- Periodizzazione
+
+---
+
+## Tab Dati Fisici
+
+Descrive le caratteristiche fisiche dell'unita stratigrafica.
+
+<!-- IMMAGINE: Screenshot tab dati fisici -->
+![Tab Dati Fisici](images/03_scheda_us/14_tab_dati_fisici.png)
+*Figura 14: Tab Dati Fisici*
+
+### Caratteristiche Generali
+
+| Campo | Valori |
+|-------|--------|
+| **Colore** | Marrone, Giallo, Grigio, Nero, ecc. |
+| **Consistenza** | Argillosa, Compatta, Friabile, Sabbiosa |
+| **Formazione** | Artificiale, Naturale |
+| **Posizione** | - |
+| **Modo formazione** | Apporto, Sottrazione, Accumulo, Frana |
+| **Criteri distinzione** | Testo libero |
+
+### Tabelle Componenti
+
+| Tabella | Contenuto |
+|---------|-----------|
+| **Comp. organici** | Ossa, legno, carboni, semi, ecc. |
+| **Comp. inorganici** | Pietre, laterizi, ceramica, ecc. |
+| **Inclusi Artificiali** | Materiali antropici inclusi |
+
+Per ogni tabella:
+- **+** Aggiungi riga
+- **-** Rimuovi riga
+
+### Campionature
+
+| Campo | Valori |
+|-------|--------|
+| **Flottazione** | Si / No |
+| **Setacciatura** | Si / No |
+| **Affidabilita'** | Scarso, Buona, Discreta, Ottima |
+| **Stato conservazione** | Insufficiente, Scarso, Buono, Discreto, Ottimo |
+
+---
+
+## Tab Dati Schedatura
+
+Informazioni sulla compilazione della scheda.
+
+<!-- IMMAGINE: Screenshot tab dati schedatura -->
+![Tab Dati Schedatura](images/03_scheda_us/15_tab_schedatura.png)
+*Figura 15: Tab Dati Schedatura*
+
+### Ente e Responsabili
+
+| Campo | Descrizione |
+|-------|-------------|
+| **Ente Responsabile** | Ente che gestisce lo scavo |
+| **Soprintendenza** | SABAP di competenza |
+| **Responsabile scientifico** | Direttore dello scavo |
+| **Responsabile compilazione** | Chi ha compilato la scheda sul campo |
+| **Responsabile rielaborazione** | Chi ha rielaborato i dati |
+
+### Riferimenti
+
+| Campo | Descrizione |
+|-------|-------------|
+| **Ref. TM** | Riferimento scheda TM (Tabella Materiali) |
+| **Ref. RA** | Riferimento scheda RA (Reperti Archeologici) |
+| **Ref. Pottery** | Riferimento scheda Ceramica |
+
+### Date
+
+| Campo | Formato |
+|-------|---------|
+| **Data rilevazione** | GG/MM/AAAA |
+| **Data schedatura** | GG/MM/AAAA |
+| **Data rielaborazione** | GG/MM/AAAA |
+
+---
+
+## Tab Misure US
+
+Contiene tutte le misurazioni dell'unita stratigrafica.
+
+<!-- IMMAGINE: Screenshot tab misure -->
+![Tab Misure](images/03_scheda_us/16_tab_misure.png)
+*Figura 16: Tab Misure US*
+
+### Quote
+
+| Campo | Descrizione | Unita |
+|-------|-------------|-------|
+| **Quota assoluta** | Quota sul livello del mare | metri |
+| **Quota relativa** | Quota rispetto a punto di riferimento | metri |
+| **Quota max assoluta** | Quota massima assoluta | metri |
+| **Quota max relativa** | Quota massima relativa | metri |
+| **Quota min assoluta** | Quota minima assoluta | metri |
+| **Quota min relativa** | Quota minima relativa | metri |
+
+### Dimensioni
+
+| Campo | Descrizione | Unita |
+|-------|-------------|-------|
+| **Lunghezza max** | Lunghezza massima | metri |
+| **Larghezza media** | Larghezza media | metri |
+| **Altezza max** | Altezza massima | metri |
+| **Altezza min** | Altezza minima | metri |
+| **Spessore** | Spessore dello strato | metri |
+| **Profondita max** | Profondita massima | metri |
+| **Profondita min** | Profondita minima | metri |
+
+---
+
+## Tab Documentazione
+
+Gestisce i riferimenti alla documentazione grafica e fotografica.
+
+<!-- IMMAGINE: Screenshot tab documentazione -->
+![Tab Documentazione](images/03_scheda_us/17_tab_documentazione.png)
+*Figura 17: Tab Documentazione*
+
+### Tabella Documentazione
+
+| Colonna | Descrizione |
+|---------|-------------|
+| **Tipo documentazione** | Foto, Pianta, Sezione, Prospetto, ecc. |
+| **Riferimenti** | Numero/codice del documento |
+
+### Tipi di Documentazione
+
+| Tipo | Descrizione |
+|------|-------------|
+| Foto | Documentazione fotografica |
+| Pianta | Pianta di scavo |
+| Sezione | Sezione stratigrafica |
+| Prospetto | Prospetto murario |
+| Rilievo | Rilievo grafico |
+| 3D | Modello tridimensionale |
+
+### Bottoni
+
+| Bottone | Funzione |
+|---------|----------|
+| **inserisci riga** | Aggiunge riferimento |
+| **rimuovi riga** | Rimuove riferimento |
+| **Aggiorna doc** | Aggiorna dalla tabella documentazione |
+| **Visualizza documentazione** | Mostra i documenti associati |
+
+---
+
+## Tab Tecnica Edilizia USM
+
+Tab specifico per le Unita Stratigrafiche Murarie (USM).
+
+<!-- IMMAGINE: Screenshot tab tecnica edilizia -->
+![Tab Tecnica Edilizia](images/03_scheda_us/18_tab_tecnica_usm.png)
+*Figura 18: Tab Tecnica Edilizia USM*
+
+### Dati Specifici USM
+
+| Campo | Descrizione |
+|-------|-------------|
+| **Lunghezza USM** | Lunghezza della muratura (metri) |
+| **Altezza USM** | Altezza della muratura (metri) |
+| **Superficie analizzata** | Percentuale analizzata |
+| **Sezione muraria** | Tipo di sezione |
+| **Modulo** | Modulo costruttivo |
+| **Tipologia dell'opera** | Tipo di muratura |
+| **Orientamento** | Orientamento della struttura |
+| **Reimpiego** | Si / No |
+
+### Materiali e Tecniche
+
+| Sezione | Campi |
+|---------|-------|
+| **Laterizi** | Materiali, Lavorazione, Consistenza, Forma, Colore, Impasto, Posa in opera |
+| **Elementi Litici** | Materiali, Lavorazione, Consistenza, Forma, Colore, Taglio, Posa in opera |
+
+### Campioni
+
+| Campo | Descrizione |
+|-------|-------------|
+| **Campioni malta** | Riferimenti campioni di malta |
+| **Campioni mattone** | Riferimenti campioni di laterizi |
+| **Campioni pietra** | Riferimenti campioni litici |
+
+---
+
+## Tab Leganti USM
+
+Descrive le caratteristiche dei leganti (malta) nelle strutture murarie.
+
+<!-- IMMAGINE: Screenshot tab leganti -->
+![Tab Leganti](images/03_scheda_us/19_tab_leganti.png)
+*Figura 19: Tab Leganti USM*
+
+### Caratteristiche del Legante
+
+| Campo | Descrizione |
+|-------|-------------|
+| **Tipo legante** | Malta, Fango, Assente, ecc. |
+| **Consistenza** | Tenace, Friabile, ecc. |
+| **Colore** | Colore del legante |
+| **Rifinitura** | Tipo di rifinitura |
+| **Spessore legante** | Spessore in cm |
+
+### Composizione
+
+| Sezione | Descrizione |
+|---------|-------------|
+| **Aggregati** | Componenti grossolani |
+| **Inerti** | Componenti fini |
+| **Inclusi** | Materiali inclusi |
+
+---
+
+## Tab Media
+
+Visualizza le immagini associate all'unita stratigrafica.
+
+<!-- IMMAGINE: Screenshot tab media -->
+![Tab Media](images/03_scheda_us/20_tab_media.png)
+*Figura 20: Tab Media*
+
+### Lista US
+
+La tabella mostra tutte le US con le immagini associate:
+- Vai alla scheda
+- Checkbox per selezione multipla
+- Anteprima thumbnail
+
+### Bottoni
+
+| Bottone | Funzione |
+|---------|----------|
+| **Cerca immagini** | Ricerca immagini associate |
+| **Save** | Salva associazioni |
+| **Revert** | Annulla modifiche |
+
+---
+
+## Tab Help - Tool Box
+
+Contiene strumenti avanzati per il controllo e l'esportazione.
+
+<!-- IMMAGINE: Screenshot tab toolbox -->
+![Tab Tool Box](images/03_scheda_us/21_tab_toolbox.png)
+*Figura 21: Tab Tool Box*
+
+### Sistemi di Controllo
+
+| Strumento | Descrizione |
+|-----------|-------------|
+| **Check rapporti stratigrafici** | Verifica coerenza rapporti |
+| **Check, go!!!!** | Esegue il controllo |
+
+### Esportazione Matrix
+
+| Bottone | Output |
+|---------|--------|
+| **Esporta Matrix** | File DOT per Graphviz |
+| **Export Graphml** | File GraphML per yEd |
+| **Export to Extended Matrix** | Formato S3DGraphy |
+| **Interactive Matrix** | Visualizzazione interattiva |
+
+### Strumenti Aggiuntivi
+
+| Strumento | Descrizione |
+|-----------|-------------|
+| **Ordine stratigrafico** | Calcola sequenza stratigrafica |
+| **Crea Codice Periodo** | Genera codici periodo |
+| **csv2us** | Importa US da CSV |
+| **Graphml2csv** | Esporta GraphML in CSV |
+
+---
+
+## Ordinamento Stratigrafico (Order Layer)
+
+Il sistema di **Ordinamento Stratigrafico** calcola automaticamente la sequenza delle US basandosi sui rapporti stratigrafici inseriti. E un calcolo automatico che assegna un valore numerico progressivo a ogni US in base alla sua posizione nella sequenza stratigrafica.
+
+### Come funziona
+
+Il sistema analizza i rapporti stratigrafici (copre/coperto da, taglia/tagliato da, ecc.) e costruisce un grafo diretto. Poi calcola l'ordine topologico, assegnando:
+- **Livello 0**: US piu antiche (alla base della stratigrafia)
+- **Livello 1, 2, 3...**: US progressivamente piu recenti
+- **Livello N**: US piu recenti (in cima alla stratigrafia)
+
+### Requisiti per l'ordinamento
+
+1. **Rapporti completi**: Tutte le US devono avere i rapporti stratigrafici inseriti
+2. **Nessun paradosso**: Non devono esistere cicli nei rapporti (es. US1 copre US2 e US2 copre US1)
+3. **Rapporti inversi**: Tutti i rapporti devono avere il loro inverso
+
+### Come eseguire l'ordinamento
+
+1. Effettuare una **ricerca** per Sito e Area (il sistema lavora su singolo sito/area)
+2. Andare su **Tab Help** → **Tool Box**
+3. Cliccare **Ordine stratigrafico**
+4. Confermare l'operazione
+5. Attendere il completamento
+
+### Formato dell'ordinamento
+
+L'ordinamento e **sempre numerico sequenziale**:
+```
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13...
+```
+
+**Regole:**
+- I numeri sono **sempre consecutivi** (mai 1, 2, 5, 8 - sempre 1, 2, 3, 4)
+- Non ci sono salti nella sequenza
+- US allo stesso livello stratigrafico hanno lo stesso numero
+- L'ordine puo essere **inverso** (checkbox "Ordine: Antico → Recente"):
+  - **Attivo** (predefinito): 0 = piu antico, N = piu recente
+  - **Disattivo**: 0 = piu recente, N = piu antico
+
+### Campo Order Layer
+
+Il risultato viene salvato nel campo **Order Layer** (lineEditOrderLayer) di ogni US. Questo campo:
+- E **calcolato automaticamente** dal sistema
+- E **bloccato** nella scheda: lo scrive il pulsante **Ordine stratigrafico**
+- Viene usato per ordinare le US nella visualizzazione
+
+### Errori comuni
+
+| Errore | Causa | Soluzione |
+|--------|-------|-----------|
+| "Paradosso stratigrafico" | Ciclo nei rapporti | Verificare e correggere i rapporti |
+| "US mancanti" | US riferite ma non esistenti | Creare le US mancanti |
+| "Rapporto mancante" | Rapporto senza tipo o numero | Completare i rapporti |
+
+### Visualizzazione
+
+Una volta calcolato l'ordine, e possibile:
+- **Ordinare** i record per Order Layer
+- **Filtrare** per livelli specifici
+- **Esportare** il Matrix con i livelli
+
+### Funzioni GIS
+
+| Bottone | Funzione |
+|---------|----------|
+| **Disegna US** | Carica layer per disegno |
+| **Preview pianta US** | Anteprima sulla mappa |
+| **Apri schede US** | Apre schede selezionate |
+| **Pan** | Strumento panoramica |
+| **Mostra immagini** | Visualizza foto |
+
+### Esportazioni Tavole
+
+| Bottone | Output |
+|---------|--------|
+| **Esportazione Tavole** | Tavole di scavo |
+| **symbology** | Gestione simbologia |
+| **Open folder** | Apre cartella output |
+
+---
+
+## Matrix di Harris
+
+Il Matrix di Harris e una rappresentazione grafica delle relazioni stratigrafiche.
+
+<!-- IMMAGINE: Screenshot matrix harris -->
+![Matrix Harris](images/03_scheda_us/22_matrix_harris.png)
+*Figura 22: Esempio di Matrix di Harris*
+
+<!-- VIDEO: Generazione Matrix di Harris -->
+> **Video Tutorial**: [Inserire link video Matrix Harris]
+
+### Generazione Matrix
+
+1. Selezionare il sito e l'area
+2. Verificare che i rapporti siano corretti
+3. Andare su **Tab Help** → **Tool Box**
+4. Cliccare **Export Matrix**
+
+### Formati di Esportazione
+
+| Formato | Software | Uso |
+|---------|----------|-----|
+| DOT | Graphviz | Visualizzazione base |
+| GraphML | yEd, Gephi | Editing avanzato |
+| Extended Matrix | S3DGraphy | Visualizzazione 3D |
+| CSV | Excel | Analisi dati |
+
+### Extended Matrix
+
+L'Extended Matrix aggiunge informazioni supplementari:
+- Periodizzazione
+- Definizioni interpretative
+- Dati cronologici
+- Compatibilita con CIDOC-CRM
+
+<!-- IMMAGINE: Screenshot extended matrix -->
+![Extended Matrix](images/03_scheda_us/23_extended_matrix.png)
+*Figura 23: Dialog Extended Matrix*
+
+### Interactive Matrix
+
+Visualizzazione interattiva del Matrix:
+- Zoom e pan
+- Selezione nodi
+- Navigazione alle schede
+
+---
+
+## Funzionalita GIS
+
+La Scheda US e strettamente integrata con QGIS.
+
+<!-- IMMAGINE: Screenshot GIS integration -->
+![GIS Integration](images/03_scheda_us/24_gis_integration.png)
+*Figura 24: Integrazione GIS*
+
+### Toolbar GIS
+
+| Bottone | Funzione | Shortcut |
+|---------|----------|----------|
+| **GIS Viewer** | Carica layer US | Ctrl+G |
+| **Preview pianta US** | Anteprima geometria | Ctrl+G |
+| **Disegna US** | Attiva disegno | - |
+
+### Layer GIS Associati
+
+| Layer | Geometria | Descrizione |
+|-------|-----------|-------------|
+| PYUS | Poligono | Unita stratigrafiche |
+| PYUSM | Poligono | Unita murarie |
+| PYQUOTE | Punto | Quote |
+| PYQUOTEUSM | Punto | Quote USM |
+| PYUS_NEGATIVE | Poligono | US negative |
+
+### Visualizzazione Risultati Ricerca
+
+Quando la modalita GIS e attiva:
+- Le ricerche vengono visualizzate sulla mappa
+- I risultati sono evidenziati
+- Si puo navigare tra i risultati
+
+---
+
+## Esportazioni
+
+### Schede US PDF
+
+1. Cliccare **Report** nella toolbar
+2. Scegliere formato (PDF, Word)
+3. Selezionare le schede da esportare
+
+<!-- IMMAGINE: Screenshot esportazione PDF -->
+![Esportazione PDF](images/03_scheda_us/25_esportazione_pdf.png)
+*Figura 25: Opzioni esportazione PDF*
+
+### Elenchi
+
+| Tipo | Contenuto |
+|------|-----------|
+| **Elenco US** | Lista di tutte le US |
+| **Elenco Foto con Thumbnail** | Lista con anteprime |
+| **Elenco Foto senza Thumbnail** | Lista semplice |
+| **Schede US** | Schede complete |
+
+### Rapporti molto numerosi (allegato)
+
+Se una US ha centinaia di rapporti stratigrafici (es. uno strato tagliato da 500 fosse), in passato l'esportazione della scheda falliva con l'errore ReportLab `LayoutError ... too large on page`. Da questa release la scheda viene impaginata così:
+
+- ogni cella dei rapporti (Copre, Coperto da, Taglia, Tagliato da, Riempie, Riempito da, Si lega a, Uguale a, Si appoggia a, Gli si appoggia e le celle composite POSTERIORE A / ANTERIORE A) mostra al massimo **80** US, seguite da `… (+N, vedi allegato)`;
+- l'elenco completo viene stampato subito dopo la scheda nella tabella `ALLEGATO – RAPPORTI STRATIGRAFICI US <n> (elenco completo)`: una riga per tipo di rapporto, 60 US per riga, che prosegue su più pagine con l'etichetta `(segue)` nelle righe di continuazione;
+- le US con 80 o meno rapporti per tipo vengono stampate esattamente come prima, senza allegato;
+- nell'**Elenco US** ogni colonna dei rapporti è limitata a **40** US con `… (+N)`: l'elenco completo si trova nell'allegato della scheda.
+
+### Conversione Word
+
+Il bottone **Converti in Word** permette di:
+1. Selezionare un PDF
+2. Convertirlo in formato DOCX
+3. Editarlo in Word
+
+---
+
+## Workflow Operativo
+
+### Creare una Nuova US
+
+<!-- VIDEO: Workflow creazione US -->
+> **Video Tutorial**: [Inserire link video creazione US]
+
+#### Step 1: Aprire la Scheda
+<!-- IMMAGINE: Step 1 -->
+![Step 1](images/03_scheda_us/26_workflow_step1.png)
+
+#### Step 2: Cliccare New Record
+<!-- IMMAGINE: Step 2 -->
+![Step 2](images/03_scheda_us/27_workflow_step2.png)
+
+#### Step 3: Inserire Identificativi
+- Selezionare Sito
+- Inserire Area
+- Inserire numero US
+- Selezionare Tipo
+
+<!-- IMMAGINE: Step 3 -->
+![Step 3](images/03_scheda_us/28_workflow_step3.png)
+
+#### Step 4: Definizioni
+- Selezionare definizione stratigrafica
+- Selezionare definizione interpretativa
+
+<!-- IMMAGINE: Step 4 -->
+![Step 4](images/03_scheda_us/29_workflow_step4.png)
+
+#### Step 5: Descrizione
+- Compilare la descrizione fisica
+- Compilare l'interpretazione
+
+<!-- IMMAGINE: Step 5 -->
+![Step 5](images/03_scheda_us/30_workflow_step5.png)
+
+#### Step 6: Rapporti Stratigrafici
+- Inserire i rapporti con le altre US
+- Creare i rapporti inversi
+
+<!-- IMMAGINE: Step 6 -->
+![Step 6](images/03_scheda_us/31_workflow_step6.png)
+
+#### Step 7: Dati Fisici e Misure
+- Compilare caratteristiche fisiche
+- Inserire le misure
+
+<!-- IMMAGINE: Step 7 -->
+![Step 7](images/03_scheda_us/32_workflow_step7.png)
+
+#### Step 8: Salvare
+- Cliccare Save
+- Verificare il salvataggio
+
+<!-- IMMAGINE: Step 8 -->
+![Step 8](images/03_scheda_us/33_workflow_step8.png)
+
+### Generare il Matrix di Harris
+
+1. Verificare tutti i rapporti siano inseriti
+2. Eseguire il controllo rapporti
+3. Correggere eventuali errori
+4. Esportare il Matrix
+
+### Collegare Documentazione
+
+1. Creare prima le schede nella tabella Documentazione
+2. Nella scheda US, tab Documentazione
+3. Aggiungere i riferimenti
+4. Verificare con "Visualizza documentazione"
+
+---
+
+## Risoluzione Problemi
+
+### Errore nel salvataggio
+- Verificare che Sito, Area e US siano compilati
+- Verificare che la combinazione sia univoca
+
+### Rapporti non coerenti
+- Usare il controllo rapporti
+- Verificare i rapporti inversi
+- Correggere con il bottone Fix
+
+### Matrix non si genera
+- Verificare che Graphviz sia installato
+- Controllare il percorso nella configurazione
+- Verificare che ci siano rapporti
+
+### Layer GIS non si caricano
+- Verificare la connessione al database
+- Controllare che esistano geometrie
+- Verificare il sistema di riferimento
+
+### Immagini non visualizzate
+- Verificare i percorsi thumbnail
+- Controllare le associazioni media
+- Verificare permessi cartelle
+
+---
+
+## Note Tecniche
+
+### Database
+
+- **Tabella principale**: `us_table`
+- **Campi principali**: oltre 80 campi
+- **Chiave primaria**: `id_us`
+- **Chiave composita**: sito + area + us
+
+### Thesaurus
+
+I campi con thesaurus (definizioni) usano la tabella `pyarchinit_thesaurus_sigle`:
+- tipologia_sigla = '1.1' per definizione stratigrafica
+- tipologia_sigla = '1.2' per definizione interpretativa
+
+### Layer GIS
+
+| Layer | Tabella | Tipo |
+|-------|---------|------|
+| PYUS | pyarchinit_us_view | Poligono |
+| PYUSM | pyarchinit_usm_view | Poligono |
+| PYQUOTE | pyarchinit_quote_view | Punto |
+
+---
+
+## Lista Immagini da Inserire
+
+Per completare questa documentazione, inserire le seguenti immagini nella cartella `images/03_scheda_us/`:
+
+| # | Nome File | Descrizione |
+|---|-----------|-------------|
+| 01 | `01_schema_rapporti.png` | Schema rapporti stratigrafici |
+| 02 | `02_menu_scheda_us.png` | Menu accesso |
+| 03 | `03_toolbar_us.png` | Toolbar |
+| 04 | `04_interfaccia_completa.png` | Interfaccia con aree numerate |
+| 05 | `05_toolbar_dbms.png` | Toolbar DBMS |
+| 06 | `06_campi_identificativi.png` | Campi identificativi |
+| 07 | `07_tab_localizzazione.png` | Tab Localizzazione |
+| 08 | `08_tab_dati_descrittivi.png` | Tab Dati Descrittivi |
+| 09 | `09_tab_periodizzazione.png` | Tab Periodizzazione |
+| 10 | `10_tab_rapporti.png` | Tab Rapporti |
+| 11 | `11_inserimento_rapporto.png` | Inserimento rapporto |
+| 12 | `12_controllo_rapporti.png` | Controllo rapporti |
+| 13 | `13_tab_em.png` | Tab Extended Matrix |
+| 14 | `14_tab_dati_fisici.png` | Tab Dati Fisici |
+| 15 | `15_tab_schedatura.png` | Tab Schedatura |
+| 16 | `16_tab_misure.png` | Tab Misure |
+| 17 | `17_tab_documentazione.png` | Tab Documentazione |
+| 18 | `18_tab_tecnica_usm.png` | Tab Tecnica USM |
+| 19 | `19_tab_leganti.png` | Tab Leganti |
+| 20 | `20_tab_media.png` | Tab Media |
+| 21 | `21_tab_toolbox.png` | Tab Tool Box |
+| 22 | `22_matrix_harris.png` | Esempio Matrix |
+| 23 | `23_extended_matrix.png` | Dialog Extended Matrix |
+| 24 | `24_gis_integration.png` | Integrazione GIS |
+| 25 | `25_esportazione_pdf.png` | Esportazione PDF |
+| 26-33 | `26_workflow_step*.png` | Steps workflow |
+| 34 | `34_ripara_rapporti_vuoti.png` | Anteprima riparazione rapporti vuoti |
+
+## Lista Video da Inserire
+
+| Placeholder | Descrizione |
+|-------------|-------------|
+| Video introduzione scheda US | Panoramica completa |
+| Video rapporti stratigrafici | Come inserire rapporti |
+| Video Matrix Harris | Generazione e export |
+| Video creazione US | Workflow passo-passo |
+
+---
+
+*Documentazione PyArchInit - Scheda US/USM*
+*Versione: 4.9.x*
+*Ultimo aggiornamento: Gennaio 2026*

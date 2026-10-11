@@ -1,0 +1,514 @@
+# Tutorial 03 : Fiche US/USM (Unité Stratigraphique)
+
+## Introduction
+
+La **Fiche US/USM** (Unité Stratigraphique / Unité Stratigraphique Murale) est le cœur de la documentation archéologique dans PyArchInit. Elle représente l'outil principal pour enregistrer toutes les informations relatives aux unités stratigraphiques identifiées lors de la fouille.
+
+Cette fiche implémente les principes de la **méthode stratigraphique** développée par Edward C. Harris, permettant de documenter :
+- Les caractéristiques physiques de chaque couche
+- Les relations stratigraphiques entre les unités
+- La chronologie relative et absolue
+- La documentation graphique et photographique associée
+
+---
+
+## Concepts Fondamentaux
+
+### Qu'est-ce qu'une Unité Stratigraphique (US)
+
+Une **Unité Stratigraphique** est la plus petite unité de fouille identifiable et distinguable des autres. Elle peut être :
+- **Couche** : dépôt de terre avec caractéristiques homogènes
+- **Interface** : surface de contact entre couches (ex. creusement de fosse)
+- **Élément structural** : partie d'une construction
+
+### Types d'Unités
+
+| Type | Code | Description |
+|------|------|-------------|
+| US | Unité Stratigraphique | Couche générique |
+| USM | Unité Stratigraphique Murale | Élément construit mural |
+| USD | Unité Stratigraphique de Démolition | Couche d'effondrement |
+| SF | Stratigraphic Feature | Feature stratigraphique |
+| SUS | Sub-Unité Stratigraphique | Subdivision d'US |
+
+### Relations Stratigraphiques
+
+| Relation | Inverse | Signification |
+|----------|---------|---------------|
+| **Couvre** | Couvert par | L'US se superpose physiquement |
+| **Coupe** | Coupé par | L'US interrompt/traverse |
+| **Remplit** | Rempli par | L'US comble une cavité |
+| **S'appuie sur** | Lui s'appuie | Relation d'appui |
+
+---
+
+## Accès à la Fiche
+
+1. Menu **PyArchInit** → **Archaeological record management** → **SU/WSU**
+2. Ou depuis la barre d'outils PyArchInit, cliquer sur l'icône **US/USM**
+
+---
+
+## Interface Générale
+
+La Fiche US est organisée en plusieurs zones fonctionnelles :
+
+### Zones Principales
+
+| # | Zone | Description |
+|---|------|-------------|
+| 1 | **Champs Identificatifs** | Site, Zone, US, Type, Définitions |
+| 2 | **Toolbar DBMS** | Navigation, sauvegarde, recherche |
+| 3 | **Onglets Données** | Fiches thématiques pour les données |
+| 4 | **Toolbar GIS** | Outils de visualisation carte |
+| 5 | **Onglet Tool Box** | Outils avancés et Matrice |
+
+---
+
+## Champs Identificatifs
+
+### Champs Obligatoires
+
+| Champ | Description | Format |
+|-------|-------------|--------|
+| **Site** | Nom du site archéologique | Texte (depuis combobox) |
+| **Zone** | Numéro de la zone de fouille | Entier (1-20) |
+| **US/USM** | Numéro de l'unité stratigraphique | Entier |
+| **Type unité** | Type d'unité (US, USM, etc.) | Sélection |
+
+### Champs Descriptifs
+
+| Champ | Description |
+|-------|-------------|
+| **Définition stratigraphique** | Classification stratigraphique (depuis thésaurus) |
+| **Définition interprétative** | Interprétation fonctionnelle (depuis thésaurus) |
+
+---
+
+## Onglet Localisation
+
+| Champ | Description |
+|-------|-------------|
+| **Secteur** | Secteur de fouille |
+| **Carré/Paroi** | Référence spatiale |
+| **Pièce** | Numéro de la pièce |
+| **Sondage** | Numéro du sondage |
+
+---
+
+## Onglet Données Descriptives
+
+### Champs Descriptifs
+
+| Champ | Description | Suggestions |
+|-------|-------------|-------------|
+| **Description** | Description physique de l'US | Couleur, consistance, composition, limites |
+| **Interprétation** | Interprétation fonctionnelle | Fonction, formation, signification |
+| **Éléments datants** | Matériaux pour datation | Céramique, monnaies, objets datés |
+| **Observations** | Notes supplémentaires | Doutes, hypothèses, comparaisons |
+
+### Comment Décrire une US
+
+**Description physique :**
+```
+Couche de terre argileuse, de couleur brun foncé (10YR 3/3),
+consistance compacte, avec inclusions de fragments de tuiles (2-5 cm),
+galets calcaires (1-3 cm) et charbon. Limites nettes en haut,
+diffuses en bas. Épaisseur variable 15-25 cm.
+```
+
+**Interprétation :**
+```
+Couche d'abandon formée suite à la cessation des activités
+dans la pièce. La présence de matériaux de construction
+fragmentés suggère un effondrement partiel des structures.
+```
+
+---
+
+## Onglet Périodisation
+
+### Périodisation Relative
+
+| Champ | Description |
+|-------|-------------|
+| **Période Initiale** | Période de formation |
+| **Phase Initiale** | Phase de formation |
+| **Période Finale** | Période d'oblitération |
+| **Phase Finale** | Phase d'oblitération |
+
+### Chronologie Absolue
+
+| Champ | Description |
+|-------|-------------|
+| **Datation** | Date absolue ou intervalle |
+| **Année** | Année de fouille |
+
+### Champ Structure
+
+Le champ **Structure** (`comboBox_struttura`) est un champ à sélection multiple synchronisé avec la fiche Structure.
+
+**Caractéristiques importantes :**
+- Le champ affiche toutes les structures définies dans la fiche Structure pour le site actuel
+- Vous pouvez sélectionner plusieurs structures en cochant les cases correspondantes
+- Après sauvegarde, les données sont synchronisées entre US et Structure
+
+**Comment attribuer des structures :**
+1. Cliquer sur le champ Structure pour ouvrir le menu déroulant
+2. Sélectionner les structures souhaitées en cochant les cases
+3. Sauvegarder l'enregistrement
+
+**Comment supprimer toutes les structures :**
+1. **Clic droit** sur le champ Structure
+2. Sélectionner **"Vider le champ Structure"** dans le menu contextuel
+3. Toutes les sélections seront supprimées
+4. Sauvegarder l'enregistrement pour confirmer la modification
+
+> **Note** : Vider le champ supprime les sélections dans l'enregistrement actuel. Pour désélectionner uniquement certaines structures, décocher manuellement les cases dans le menu déroulant.
+
+### Champ Ordre de Couche
+
+Le champ **Ordre de Couche** (`order_layer`) définit la position de l'US dans la séquence stratigraphique. Il se trouve dans **Onglet Help** → **Tool Box**, sous le bouton **Ordre stratigraphique**.
+
+**Calcul automatique :**
+L'ordre de couche est calculé automatiquement à partir des relations stratigraphiques. Le système analyse les relations entre les US (couvre, couvert par, coupe, etc.), construit un graphe orienté et calcule l'ordre topologique, en attribuant :
+- **Niveau 0** : les US les plus anciennes (à la base de la stratigraphie)
+- **Niveau 1, 2, 3...** : des US progressivement plus récentes
+- **Niveau N** : les US les plus récentes (au sommet de la stratigraphie)
+
+**Prérequis :**
+1. **Relations complètes** : toutes les US doivent avoir leurs relations stratigraphiques saisies
+2. **Aucun paradoxe** : il ne doit pas y avoir de cycles dans les relations (ex. US 1 couvre US 2 et US 2 couvre US 1)
+3. **Relations inverses** : toutes les relations doivent avoir leur inverse
+
+**Comment lancer le calcul :**
+1. Effectuer une **recherche** par Site et Zone (le système travaille sur un seul site/zone)
+2. Aller dans **Onglet Help** → **Tool Box**
+3. Cliquer **Ordre stratigraphique**
+4. Confirmer l'opération
+5. Attendre la fin du calcul
+
+**Règles importantes :**
+- L'ordre est **toujours numérique et séquentiel** et commence à 0 : 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13...
+- **Aucun saut** : les numéros sont toujours consécutifs (jamais 0, 1, 4, 7 ; toujours 0, 1, 2, 3)
+- **Même niveau, même numéro** : les US d'un même niveau stratigraphique reçoivent le même numéro (les doublons sont donc normaux)
+- La case **"Ordre : Ancien → Récent"** fixe le sens :
+  - **Cochée** (par défaut) : 0 = la plus ancienne, N = la plus récente
+  - **Décochée** : 0 = la plus récente, N = la plus ancienne
+- Le champ est **bloqué** dans la fiche : c'est le bouton **Ordre stratigraphique** qui le remplit, il ne se saisit pas à la main
+
+**Exemple (case cochée) :**
+| US | Ordre de couche | Note |
+|----|-----------------|------|
+| US 1 | 3 | la plus récente |
+| US 2 | 2 | |
+| US 3 | 2 | même niveau que US 2 |
+| US 4 | 1 | |
+| US 5 | 0 | la plus ancienne |
+
+---
+
+## Onglet Relations Stratigraphiques
+
+**C'est l'onglet le plus important de la fiche US.** Il définit les relations stratigraphiques avec les autres unités.
+
+### Structure du Tableau Relations
+
+| Colonne | Description |
+|---------|-------------|
+| **Site** | Site de l'US corrélée |
+| **Zone** | Zone de l'US corrélée |
+| **US** | Numéro US corrélée |
+| **Type de relation** | Type de relation |
+
+### Types de Relations Disponibles
+
+| Français | Anglais | Allemand |
+|----------|---------|----------|
+| Couvre | Covers | Liegt über |
+| Couvert par | Covered by | Liegt unter |
+| Coupe | Cuts | Schneidet |
+| Coupé par | Cut by | Geschnitten von |
+| Remplit | Fills | Verfüllt |
+| Rempli par | Filled by | Verfüllt von |
+| S'appuie sur | Abuts | Stützt sich auf |
+| Lui s'appuie | Supports | Wird gestützt von |
+| Égal à (=) | Same as | Gleich |
+
+### Insertion des Relations
+
+1. Cliquer **+** pour ajouter une ligne
+2. Entrer Site, Zone, US de l'US corrélée
+3. Sélectionner le type de relation
+4. Sauvegarder
+
+### Aperçu de la matrice : matrice en haut, plan en bas
+
+Le bouton d'aperçu de la matrice de l'onglet Relations (« visualizza matrix » dans l'interface) ouvre un aperçu sous forme de **PNG** (ce n'est plus le dessin Graphviz). Le fichier contient deux parties dans une seule image : en haut la **matrice de s3dgraphy**, en bas le **plan** des unités. L'image s'adapte au contenu et est enregistrée **dans le même dossier que l'export**.
+
+L'aperçu respecte le **filtre appliqué** : si, après une recherche, la fiche n'affiche que les US 1 à 10, le dessin contient celles-ci et non tout le site. Le plan dessine les géométries de `pyunitastratigrafiche`, `pyunitastratigrafiche_usm` et les cotes.
+
+**Étiquettes du plan.** Chaque unité porte son propre numéro **entouré d'un cercle**. Quand deux étiquettes se chevaucheraient, QGIS en **déplace** une et trace une **ligne de rappel** vers l'unité à laquelle elle appartient, selon la même convention que l'atlas du Time Manager. Le numéro ne disparaît jamais : s'il n'y a pas de bonne place, il est mis à une position moins bonne mais reste lisible.
+
+### Relations Inverses Automatiques
+
+Lorsque vous insérez une relation, vous pouvez créer automatiquement l'inverse :
+
+| Si vous insérez | Est créé |
+|-----------------|----------|
+| US 1 **couvre** US 2 | US 2 **couverte par** US 1 |
+| US 1 **coupe** US 2 | US 2 **coupée par** US 1 |
+| US 1 **remplit** US 2 | US 2 **remplie par** US 1 |
+
+### Zone et site dans les relations (Ctrl+U)
+
+Une relation s'écrit sur quatre colonnes : **relation, US, zone, site**. Beaucoup de fiches — les anciennes et celles importées — n'ont que les deux premières : dans la base d'exemple ce sont 1683 entrées sur 1871. Le bouton **Mettre à jour Zone/Site dans les relations** (raccourci **Ctrl+U**), dans l'onglet Relations Stratigraphiques, remplit les deux colonnes manquantes sur toutes les fiches du site en une fois.
+
+La zone écrite est celle **de l'unité liée**, pas celle de la fiche :
+
+- si l'unité liée existe dans la zone de la fiche, c'est celle-là (sur un chantier à une seule zone, toujours) ;
+- si elle n'existe **que** dans une autre zone, c'est celle-là qui est écrite : l'US 60 de la zone 1 qui « Couvre 61 », avec l'US 61 qui ne se trouve que dans la zone 2, reçoit la zone 2 ;
+- une zone déjà écrite qui nomme une fiche existante **n'est pas touchée** ;
+- quand la zone ne peut pas être décidée — l'unité liée existe dans plusieurs zones et aucune n'est celle de la fiche, ou elle n'existe dans aucune zone du site — la colonne **reste vide** et un avertissement énumère les US à corriger à la main. Aucune zone n'est inventée.
+
+Les lignes commencées et non finies (le type de relation saisi et le numéro d'US pas encore) ne sont pas supprimées.
+
+### Lignes vides dans les relations (réparation)
+
+Dans les versions précédentes (jusqu'à la 4.9.9 et les 5.x antérieures à août 2026), le tableau **Relations stratigraphiques** du **premier enregistrement de la BD** (généralement l'US 1) pouvait accumuler des lignes entièrement vides `['', '', '', '']` : à chaque ouverture de la fiche ou enregistrement d'une nouvelle fiche, le tableau n'était pas complètement vidé avant le rechargement et les lignes résiduelles étaient enregistrées en répondant **OK** à « L'enregistrement a été modifié. Voulez-vous sauvegarder ? ». Le nombre de lignes triplait environ à chaque session (jusqu'à plusieurs dizaines de milliers), ce qui ralentissait fortement l'ouverture de la fiche ; les relations réelles n'étaient pas perdues, mais se retrouvaient enfouies à la fin du tableau. À partir de cette version, le problème est résolu : le tableau est entièrement vidé au rechargement et les lignes totalement vides ne sont jamais enregistrées (pas même une ligne ajoutée avec **+** et laissée vide).
+
+Pour nettoyer une BD déjà touchée, utilisez l'entrée de menu dédiée :
+
+1. `Plugins → pyArchInit → Migrazioni → Ripara rapporti vuoti (righe ['', '', '', ''])` (Migrations → Réparer les relations vides)
+2. L'outil analyse la BD connectée en lecture seule et affiche un **aperçu** avec le nombre d'enregistrements et de lignes vides trouvés (ex. « US 1 rapporti: 78676 → 2 righe »)
+3. Confirmez : une **sauvegarde automatique** est créée (copie du fichier SQLite à côté de l'original, ou `pg_dump` pour PostgreSQL dans `~/pyarchinit_5/pyarchinit_DB_folder/_pga_backups`)
+4. **Seules** les lignes entièrement vides sont supprimées ; un récapitulatif s'affiche à la fin
+5. Rouvrez la Fiche US pour voir les relations nettoyées
+
+L'outil est idempotent : si la BD est déjà propre, il indique « Rapporti già puliti » (relations déjà nettoyées). Les relations renseignées ne sont jamais touchées, et les enregistrements déjà pollués se corrigent aussi d'eux-mêmes lors de la prochaine sauvegarde depuis la fiche.
+
+> **Utilisateurs avancés (CLI)** : `python3 scripts/migrations/2026_08_rapporti_blank_rows.py --dry-run --db <fichier.sqlite>` pour l'aperçu, puis `--apply` pour appliquer (pour PostgreSQL, utilisez `--conn-str <postgresql://...>`).
+
+<!-- IMAGE : Aperçu de la réparation des relations vides -->
+![Réparer les relations vides](images/03_fiche_us/01_ripara_rapporti_vuoti.png)
+*Figure 1 : Aperçu de la réparation des relations vides*
+
+### Codes USVA/USVB/USVC dans les relations (alignement du vocabulaire)
+
+Le vocabulaire des unités verticales a été remis en ordre : **USVA et USVB deviennent USVs** (unité virtuelle structurelle) et **USVC devient USVn** (unité virtuelle non structurelle). L'entrée de menu qui fait la conversion existait déjà, mais elle ne corrigeait que le champ **Unità tipo** (type d'unité) : l'onglet **Rapporti stratigrafici** affichait toujours « USVA 104 » à côté d'une unité devenue une USVs.
+
+Depuis cette version, la migration **réécrit aussi les relations** :
+
+1. `Plugins → pyArchInit → Migrazioni → Allinea vocabolario US (USVA/USVB→USVs, USVC→USVn)` (Migrations → Aligner le vocabulaire US)
+2. Choisir le fichier de la base (`.sqlite`)
+3. Un **plan** apparaît : combien d'unités par ancien code, combien d'entrées à réécrire dans les colonnes `rapporti` et `rapporti2`, combien de cellules sont illisibles. La fenêtre dit en mots que la migration touche le type d'unité **et** les anciens codes à l'intérieur des relations, et que les cellules illisibles restent intactes
+4. Confirmer : avant toute écriture, une **sauvegarde automatique** de la base est créée
+5. Réouvrir la Fiche US : dans les relations, les codes sont alignés
+
+L'outil est idempotent : au deuxième passage, le plan est à zéro partout. Une cellule de relations qu'on n'arrive pas à lire n'est jamais réécrite à moitié — elle reste telle quelle et est comptée à part, pour qu'on sache combien il y en a et qu'on puisse les vérifier à la main.
+
+---
+
+## Onglet Données Physiques
+
+### Caractéristiques Générales
+
+| Champ | Valeurs |
+|-------|---------|
+| **Couleur** | Brun, Jaune, Gris, Noir, etc. |
+| **Consistance** | Argileuse, Compacte, Friable, Sableuse |
+| **Formation** | Artificielle, Naturelle |
+| **Mode de formation** | Apport, Soustraction, Accumulation |
+
+### Tableaux des Composants
+
+| Tableau | Contenu |
+|---------|---------|
+| **Comp. organiques** | Os, bois, charbons, graines, etc. |
+| **Comp. inorganiques** | Pierres, tuiles, céramique, etc. |
+| **Inclusions Artificielles** | Matériaux anthropiques inclus |
+
+---
+
+## Onglet Mesures US
+
+### Cotes
+
+| Champ | Description | Unité |
+|-------|-------------|-------|
+| **Cote absolue** | Cote par rapport au niveau de la mer | mètres |
+| **Cote relative** | Cote par rapport à un point de référence | mètres |
+| **Cote max absolue** | Cote maximale absolue | mètres |
+| **Cote min absolue** | Cote minimale absolue | mètres |
+
+### Dimensions
+
+| Champ | Description | Unité |
+|-------|-------------|-------|
+| **Longueur max** | Longueur maximale | mètres |
+| **Largeur moyenne** | Largeur moyenne | mètres |
+| **Épaisseur** | Épaisseur de la couche | mètres |
+| **Profondeur max** | Profondeur maximale | mètres |
+
+---
+
+## Onglet Documentation
+
+### Tableau Documentation
+
+| Colonne | Description |
+|---------|-------------|
+| **Type documentation** | Photo, Plan, Coupe, Élévation, etc. |
+| **Références** | Numéro/code du document |
+
+### Types de Documentation
+
+| Type | Description |
+|------|-------------|
+| Photo | Documentation photographique |
+| Plan | Plan de fouille |
+| Coupe | Coupe stratigraphique |
+| Élévation | Élévation murale |
+| Relevé | Relevé graphique |
+| 3D | Modèle tridimensionnel |
+
+---
+
+## Onglet Technique Constructive USM
+
+Onglet spécifique pour les Unités Stratigraphiques Murales (USM).
+
+### Données Spécifiques USM
+
+| Champ | Description |
+|-------|-------------|
+| **Longueur USM** | Longueur de la maçonnerie (mètres) |
+| **Hauteur USM** | Hauteur de la maçonnerie (mètres) |
+| **Surface analysée** | Pourcentage analysé |
+| **Section murale** | Type de section |
+| **Typologie de l'ouvrage** | Type de maçonnerie |
+| **Orientation** | Orientation de la structure |
+| **Remploi** | Oui / Non |
+
+---
+
+## Matrice de Harris
+
+La Matrice de Harris est une représentation graphique des relations stratigraphiques.
+
+### Génération de la Matrice
+
+1. Sélectionner le site et la zone
+2. Vérifier que les relations sont correctes
+3. Aller dans **Onglet Help** → **Tool Box**
+4. Cliquer **Export Matrix**
+
+### Formats d'Exportation
+
+| Format | Logiciel | Usage |
+|--------|----------|-------|
+| DOT | Graphviz | Visualisation de base |
+| GraphML | yEd, Gephi | Édition avancée |
+| Extended Matrix | S3DGraphy | Visualisation 3D |
+| CSV | Excel | Analyse de données |
+
+---
+
+## Fonctionnalités GIS
+
+La Fiche US est étroitement intégrée avec QGIS.
+
+### Couches GIS Associées
+
+| Couche | Géométrie | Description |
+|--------|-----------|-------------|
+| PYUS | Polygone | Unités stratigraphiques |
+| PYUSM | Polygone | Unités murales |
+| PYQUOTE | Point | Cotes |
+| PYQUOTEUSM | Point | Cotes USM |
+
+---
+
+## Exportations
+
+### Fiches US PDF
+
+1. Cliquer **Report** dans la toolbar
+2. Choisir le format (PDF, Word)
+3. Sélectionner les fiches à exporter
+
+### Listes
+
+| Type | Contenu |
+|------|---------|
+| **Liste US** | Liste de toutes les US |
+| **Liste Photos avec Miniatures** | Liste avec aperçus |
+| **Fiches US** | Fiches complètes |
+
+### Rapports très nombreux (annexe)
+
+Si une US possède des centaines de rapports stratigraphiques (par ex. une couche recoupée par 500 fosses), l'exportation de la fiche échouait auparavant avec l'erreur ReportLab `LayoutError ... too large on page`. À partir de cette version la fiche est mise en page ainsi :
+
+- chaque cellule de rapports (Couvre, Couvert par, Coupe, Coupé par, Remplit, Rempli par, Se lie à, Égal à, S'appuie à, Lui s'appuie, ainsi que les cellules composites POSTÉRIEUR À / ANTÉRIEUR À) affiche au maximum **80** US, suivies de `… (+N, voir annexe)` ;
+- la liste complète est imprimée juste après la fiche dans le tableau `ANNEXE – RAPPORTS STRATIGRAPHIQUES US <n> (liste complète)` : une ligne par type de rapport, 60 US par ligne, se poursuivant sur plusieurs pages avec l'étiquette `(cont.)` sur les lignes de continuation ;
+- les US ayant 80 rapports ou moins par type sont imprimées exactement comme avant, sans annexe ;
+- dans la **Liste US**, chaque colonne de rapports est limitée à **40** US avec `… (+N)` : la liste complète se trouve dans l'annexe de la fiche.
+
+---
+
+## Workflow Opérationnel
+
+### Créer une Nouvelle US
+
+1. **Ouvrir la Fiche**
+2. **Cliquer New Record**
+3. **Insérer les Identificatifs** - Site, Zone, numéro US, Type
+4. **Définitions** - stratigraphique et interprétative
+5. **Description** - physique et interprétation
+6. **Relations Stratigraphiques** - insérer les relations
+7. **Données Physiques et Mesures**
+8. **Sauvegarder**
+
+---
+
+## Résolution des Problèmes
+
+### Erreur lors de la sauvegarde
+- Vérifier que Site, Zone et US sont remplis
+- Vérifier que la combinaison est unique
+
+### Relations non cohérentes
+- Utiliser le contrôle des relations
+- Vérifier les relations inverses
+
+### La Matrice ne se génère pas
+- Vérifier que Graphviz est installé
+- Contrôler le chemin dans la configuration
+
+---
+
+## Notes Techniques
+
+- **Table principale** : `us_table`
+- **Clé primaire** : `id_us`
+- **Clé composée** : sito + area + us
+
+---
+
+## Vidéo Tutorial
+
+### Fiche US Complète
+`[Placeholder : video_fiche_us.mp4]`
+
+**Contenus** :
+- Création d'une US
+- Relations stratigraphiques
+- Génération de la Matrice de Harris
+- Export PDF
+
+**Durée prévue** : 20-25 minutes
+
+---
+
+*Dernière mise à jour : Janvier 2026*
+*PyArchInit - Système de Gestion des Données Archéologiques*

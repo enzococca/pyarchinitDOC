@@ -1,0 +1,110 @@
+# Configuration file for the Sphinx documentation builder.
+# PyArchInit Tutorial Documentation
+
+import os
+import sys
+from datetime import datetime
+
+# -- Project information -----------------------------------------------------
+project = 'PyArchInit Tutorials'
+copyright = f'{datetime.now().year}, PyArchInit Team'
+author = 'PyArchInit Team'
+version = '5.0'
+release = '5.0.0'
+
+# -- General configuration ---------------------------------------------------
+extensions = [
+    'myst_parser',
+]
+
+myst_enable_extensions = [
+    'colon_fence',
+    'deflist',
+]
+
+myst_heading_anchors = 3
+
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.md': 'markdown',
+}
+
+master_doc = 'index'
+templates_path = ['_templates']
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', '**/.DS_Store', 'README.md', '**/images/**']
+language = 'en'
+
+# -- Options for HTML output -------------------------------------------------
+# Il tema del sito pubblicato (`pyarchinitdoc.readthedocs.io`), con il
+# ripiego su quello di serie quando il pacchetto non c'è: chi costruisce
+# i tutorial in locale non deve installare niente per vederli.
+try:
+    import sphinx_rtd_theme  # noqa: F401
+    html_theme = 'sphinx_rtd_theme'
+except ImportError:
+    html_theme = 'alabaster'
+html_static_path = ['_static']
+html_title = 'pyArchInit — Tutorial'
+
+# -- Options for LaTeX/PDF output --------------------------------------------
+latex_engine = 'xelatex'
+
+latex_elements = {
+    'papersize': 'a4paper',
+    'pointsize': '11pt',
+    'fontpkg': r'''
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont{Times New Roman}
+\setsansfont{Helvetica}
+\setmonofont{Menlo}
+''',
+    'preamble': r'''
+\usepackage{longtable}
+\usepackage{booktabs}
+% Draft mode - shows filename boxes instead of loading images
+% This allows builds to succeed even when image files are missing
+\setkeys{Gin}{draft=true}
+''',
+    'figure_align': 'htbp',
+    'extraclassoptions': 'openany,oneside',
+    'fncychap': '',
+}
+
+latex_documents = [
+    ('it/index', 'PyArchInit_Tutorials_IT.tex', 'PyArchInit Tutorial - Italiano',
+     'PyArchInit Team', 'manual'),
+    ('en/index', 'PyArchInit_Tutorials_EN.tex', 'PyArchInit Tutorials - English',
+     'PyArchInit Team', 'manual'),
+    ('de/index', 'PyArchInit_Tutorials_DE.tex', 'PyArchInit Tutorials - Deutsch',
+     'PyArchInit Team', 'manual'),
+    ('fr/index', 'PyArchInit_Tutorials_FR.tex', 'PyArchInit Tutorials - Francais',
+     'PyArchInit Team', 'manual'),
+    ('es/index', 'PyArchInit_Tutorials_ES.tex', 'PyArchInit Tutorials - Espanol',
+     'PyArchInit Team', 'manual'),
+    ('ca/index', 'PyArchInit_Tutorials_CA.tex', 'PyArchInit Tutorials - Catala',
+     'PyArchInit Team', 'manual'),
+    ('ro/index', 'PyArchInit_Tutorials_RO.tex', 'PyArchInit Tutorials - Romana',
+     'PyArchInit Team', 'manual'),
+    ('pt/index', 'PyArchInit_Tutorials_PT.tex', 'PyArchInit Tutorials - Portugues',
+     'PyArchInit Team', 'manual'),
+    ('el/index', 'PyArchInit_Tutorials_EL.tex', 'PyArchInit Tutorials - Ellinika',
+     'PyArchInit Team', 'manual'),
+    ('ar/index', 'PyArchInit_Tutorials_AR.tex', 'PyArchInit Tutorials - Arabi',
+     'PyArchInit Team', 'manual'),
+]
+
+latex_logo = None
+latex_show_pagerefs = False
+latex_show_urls = 'footnote'
+
+# -- Options for EPUB output -------------------------------------------------
+epub_title = project
+epub_author = author
+epub_publisher = author
+epub_copyright = copyright
+epub_show_urls = 'footnote'
+
+# -- Additional settings -----------------------------------------------------
+suppress_warnings = ['myst.header', 'ref.myst', 'toc.secnum', 'image.not_readable']
+numfig = False
